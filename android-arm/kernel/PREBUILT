@@ -1,0 +1,11 @@
+To rebuild the emulator kernel:
+
+% git clone git://android.kernel.org/kernel/common.git kernel
+% cd kernel
+% export ARCH=arm
+% export CROSS_COMPILE=arm-eabi-
+% make goldfish_defconfig
+% make
+
+If kernel/common.git is mapped into your repo client, you can
+just built it from there instead of re-cloning it.
