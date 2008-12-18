@@ -1,5 +1,5 @@
 This is doc/gccinstall.info, produced by makeinfo version 4.8 from
-../../gcc-4.2.1/gcc/doc/install.texi.
+../../../toolchain/android-toolchain/gcc-4.2.1/gcc/doc/install.texi.
 
    Copyright (C) 1988, 1989, 1992, 1993, 1994, 1995, 1996, 1997, 1998,
 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006 Free Software
@@ -4023,88 +4023,88 @@ Concept Index
 
 
 Tag Table:
-Node: Top1910
-Node: Installing GCC2468
-Node: Prerequisites3983
-Node: Downloading the source11303
-Node: Configuration12937
-Ref: with-gnu-as25471
-Ref: with-as26701
-Ref: with-gnu-ld28114
-Node: Building56419
-Node: Testing67432
-Node: Final install75294
-Node: Binaries80341
-Node: Specific82205
-Ref: alpha-x-x82711
-Ref: alpha-dec-osf83200
-Ref: alphaev5-cray-unicosmk86777
-Ref: arc-x-elf87697
-Ref: arm-x-elf87797
-Ref: xscale-x-x87818
-Ref: arm-x-coff88054
-Ref: arm-x-aout88256
-Ref: avr88378
-Ref: bfin89062
-Ref: c4x89304
-Ref: cris89902
-Ref: crx90884
-Ref: dos91547
-Ref: x-x-freebsd91870
-Ref: h8300-hms94253
-Ref: hppa-hp-hpux94605
-Ref: hppa-hp-hpux1097093
-Ref: hppa-hp-hpux1198150
-Ref: x-x-linux-gnu105018
-Ref: ix86-x-linuxaout105210
-Ref: ix86-x-linux105369
-Ref: ix86-x-sco32v5105682
-Ref: ix86-x-solaris210107851
-Ref: ix86-x-udk108237
-Ref: ia64-x-linux109590
-Ref: ia64-x-hpux110360
-Ref: x-ibm-aix110915
-Ref: iq2000-x-elf116898
-Ref: m32c-x-elf117038
-Ref: m32r-x-elf117140
-Ref: m6811-elf117242
-Ref: m6812-elf117392
-Ref: m68k-hp-hpux117542
-Ref: mips-x-x119281
-Ref: mips-sgi-irix5121435
-Ref: mips-sgi-irix6122383
-Ref: powerpc-x-x125293
-Ref: powerpc-x-darwin125438
-Ref: powerpc-x-elf126029
-Ref: powerpc-x-linux-gnu126148
-Ref: powerpc-x-netbsd126250
-Ref: powerpc-x-eabisim126446
-Ref: powerpc-x-eabi126572
-Ref: powerpcle-x-elf126648
-Ref: powerpcle-x-eabisim126778
-Ref: powerpcle-x-eabi126911
-Ref: s390-x-linux126994
-Ref: s390x-x-linux127066
-Ref: s390x-ibm-tpf127153
-Ref: x-x-solaris2127284
-Ref: sparc-sun-solaris2131312
-Ref: sparc-sun-solaris27134476
-Ref: sparc-x-linux136940
-Ref: sparc64-x-solaris2137165
-Ref: sparcv9-x-solaris2137810
-Ref: x-x-sysv137895
-Ref: vax-dec-ultrix138856
-Ref: x-x-vxworks139008
-Ref: x86-64-x-x140530
-Ref: xtensa-x-elf140858
-Ref: xtensa-x-linux141527
-Ref: windows141865
-Ref: os2142119
-Ref: older142310
-Ref: elf144427
-Node: Old144685
-Node: Configurations147822
-Node: GNU Free Documentation License151804
-Node: Concept Index174220
+Node: Top1941
+Node: Installing GCC2499
+Node: Prerequisites4014
+Node: Downloading the source11334
+Node: Configuration12968
+Ref: with-gnu-as25502
+Ref: with-as26732
+Ref: with-gnu-ld28145
+Node: Building56450
+Node: Testing67463
+Node: Final install75325
+Node: Binaries80372
+Node: Specific82236
+Ref: alpha-x-x82742
+Ref: alpha-dec-osf83231
+Ref: alphaev5-cray-unicosmk86808
+Ref: arc-x-elf87728
+Ref: arm-x-elf87828
+Ref: xscale-x-x87849
+Ref: arm-x-coff88085
+Ref: arm-x-aout88287
+Ref: avr88409
+Ref: bfin89093
+Ref: c4x89335
+Ref: cris89933
+Ref: crx90915
+Ref: dos91578
+Ref: x-x-freebsd91901
+Ref: h8300-hms94284
+Ref: hppa-hp-hpux94636
+Ref: hppa-hp-hpux1097124
+Ref: hppa-hp-hpux1198181
+Ref: x-x-linux-gnu105049
+Ref: ix86-x-linuxaout105241
+Ref: ix86-x-linux105400
+Ref: ix86-x-sco32v5105713
+Ref: ix86-x-solaris210107882
+Ref: ix86-x-udk108268
+Ref: ia64-x-linux109621
+Ref: ia64-x-hpux110391
+Ref: x-ibm-aix110946
+Ref: iq2000-x-elf116929
+Ref: m32c-x-elf117069
+Ref: m32r-x-elf117171
+Ref: m6811-elf117273
+Ref: m6812-elf117423
+Ref: m68k-hp-hpux117573
+Ref: mips-x-x119312
+Ref: mips-sgi-irix5121466
+Ref: mips-sgi-irix6122414
+Ref: powerpc-x-x125324
+Ref: powerpc-x-darwin125469
+Ref: powerpc-x-elf126060
+Ref: powerpc-x-linux-gnu126179
+Ref: powerpc-x-netbsd126281
+Ref: powerpc-x-eabisim126477
+Ref: powerpc-x-eabi126603
+Ref: powerpcle-x-elf126679
+Ref: powerpcle-x-eabisim126809
+Ref: powerpcle-x-eabi126942
+Ref: s390-x-linux127025
+Ref: s390x-x-linux127097
+Ref: s390x-ibm-tpf127184
+Ref: x-x-solaris2127315
+Ref: sparc-sun-solaris2131343
+Ref: sparc-sun-solaris27134507
+Ref: sparc-x-linux136971
+Ref: sparc64-x-solaris2137196
+Ref: sparcv9-x-solaris2137841
+Ref: x-x-sysv137926
+Ref: vax-dec-ultrix138887
+Ref: x-x-vxworks139039
+Ref: x86-64-x-x140561
+Ref: xtensa-x-elf140889
+Ref: xtensa-x-linux141558
+Ref: windows141896
+Ref: os2142150
+Ref: older142341
+Ref: elf144458
+Node: Old144716
+Node: Configurations147853
+Node: GNU Free Documentation License151835
+Node: Concept Index174251
 
 End Tag Table

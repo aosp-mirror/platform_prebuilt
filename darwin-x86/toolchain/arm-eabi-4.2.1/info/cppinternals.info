@@ -1,5 +1,5 @@
 This is doc/cppinternals.info, produced by makeinfo version 4.8 from
-../../gcc-4.2.1/gcc/doc/cppinternals.texi.
+../../../toolchain/android-toolchain/gcc-4.2.1/gcc/doc/cppinternals.texi.
 
 INFO-DIR-SECTION Software development
 START-INFO-DIR-ENTRY
@@ -1019,17 +1019,17 @@ Concept Index
 
 
 Tag Table:
-Node: Top951
-Node: Conventions2636
-Node: Lexer3578
-Ref: Invalid identifiers11491
-Ref: Lexing a line13440
-Node: Hash Nodes18213
-Node: Macro Expansion21092
-Node: Token Spacing30039
-Node: Line Numbering35899
-Node: Guard Macros39984
-Node: Files44775
-Node: Concept Index48241
+Node: Top982
+Node: Conventions2667
+Node: Lexer3609
+Ref: Invalid identifiers11522
+Ref: Lexing a line13471
+Node: Hash Nodes18244
+Node: Macro Expansion21123
+Node: Token Spacing30070
+Node: Line Numbering35930
+Node: Guard Macros40015
+Node: Files44806
+Node: Concept Index48272
 
 End Tag Table

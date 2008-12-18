@@ -1,5 +1,5 @@
-This is .././ld/ld.info, produced by makeinfo version 4.8 from
-.././ld/ld.texinfo.
+This is ld.info, produced by makeinfo version 4.8 from
+../../../toolchain/android-toolchain/binutils-2.17/ld/ld.texinfo.
 
 START-INFO-DIR-ENTRY
 * Ld: (ld).                       The GNU linker.
@@ -6110,8 +6110,8 @@ Index
 * -F:                                    Options.            (line  226)
 * -f:                                    Options.            (line  205)
 * -fini:                                 Options.            (line  250)
-* -G:                                    Options.            (line  259)
 * -g:                                    Options.            (line  256)
+* -G:                                    Options.            (line  259)
 * -hNAME:                                Options.            (line  267)
 * -i:                                    Options.            (line  276)
 * -IFILE:                                Options.            (line  765)
@@ -6121,8 +6121,8 @@ Index
 * -M:                                    Options.            (line  347)
 * -m EMULATION:                          Options.            (line  337)
 * -Map:                                  Options.            (line  800)
-* -N:                                    Options.            (line  389)
 * -n:                                    Options.            (line  384)
+* -N:                                    Options.            (line  389)
 * -non_shared:                           Options.            (line  679)
 * -nostdlib:                             Options.            (line  876)
 * -O LEVEL:                              Options.            (line  410)
@@ -6149,8 +6149,8 @@ Index
 * -Ur:                                   Options.            (line  488)
 * -V:                                    Options.            (line  507)
 * -v:                                    Options.            (line  507)
-* -X:                                    Options.            (line  517)
 * -x:                                    Options.            (line  513)
+* -X:                                    Options.            (line  517)
 * -Y PATH:                               Options.            (line  531)
 * -y SYMBOL:                             Options.            (line  522)
 * -z defs:                               Options.            (line  811)
@@ -6220,16 +6220,16 @@ Index
 * combining symbols, warnings on:        Options.            (line 1138)
 * command files:                         Scripts.            (line    6)
 * command line:                          Options.            (line    6)
-* common allocation:                     Options.            (line  149)
+* common allocation:                     Options.            (line  723)
 * common allocation in linker script:    Miscellaneous Commands.
                                                              (line   20)
 * common symbol placement:               Input Section Common.
                                                              (line    6)
 * compatibility, MRI:                    Options.            (line  139)
 * constants in linker scripts:           Constants.          (line    6)
+* constructors:                          Options.            (line  488)
 * CONSTRUCTORS:                          Output Section Keywords.
                                                              (line   19)
-* constructors:                          Options.            (line  488)
 * constructors, arranging in link:       Output Section Keywords.
                                                              (line   19)
 * crash of linker:                       Bug Criteria.       (line    9)
@@ -6258,7 +6258,7 @@ Index
 * discarding sections:                   Output Section Discarding.
                                                              (line    6)
 * discontinuous memory:                  MEMORY.             (line    6)
-* DLLs, creating:                        Options.            (line 1376)
+* DLLs, creating:                        Options.            (line 1470)
 * DLLs, linking to:                      Options.            (line 1501)
 * dot:                                   Location Counter.   (line    6)
 * dot inside sections:                   Location Counter.   (line   34)
@@ -6306,8 +6306,8 @@ Index
 * forcing the creation of dynamic sections: Options.         (line  424)
 * FORMAT (MRI):                          MRI.                (line   66)
 * functions in expressions:              Builtin Functions.  (line    6)
-* garbage collection <1>:                Input Section Keep. (line    6)
-* garbage collection:                    Options.            (line  784)
+* garbage collection <1>:                Options.            (line  784)
+* garbage collection:                    Input Section Keep. (line    6)
 * generating optimized output:           Options.            (line  410)
 * GNU linker:                            Overview.           (line    6)
 * GNUTARGET:                             Environment.        (line    9)
@@ -6448,7 +6448,7 @@ Index
 * overlays:                              Overlay Description.
                                                              (line    6)
 * partial link:                          Options.            (line  428)
-* PHDRS:                                 PHDRS.              (line    6)
+* PHDRS:                                 PHDRS.              (line   61)
 * position independent executables:      Options.            (line  897)
 * PowerPC ELF32 options:                 PowerPC ELF32.      (line   13)
 * PowerPC GOT:                           PowerPC ELF32.      (line   23)
@@ -6611,81 +6611,81 @@ Index
 
 
 Tag Table:
-Node: Top347
-Node: Overview1109
-Node: Invocation2223
-Node: Options2631
-Node: Environment77286
-Node: Scripts79046
-Node: Basic Script Concepts80780
-Node: Script Format83487
-Node: Simple Example84350
-Node: Simple Commands87446
-Node: Entry Point87897
-Node: File Commands88656
-Node: Format Commands92522
-Node: Miscellaneous Commands94488
-Node: Assignments96718
-Node: Simple Assignments97209
-Node: PROVIDE98945
-Node: PROVIDE_HIDDEN100150
-Node: Source Code Reference100394
-Node: SECTIONS103974
-Node: Output Section Description105865
-Node: Output Section Name106918
-Node: Output Section Address107794
-Node: Input Section109443
-Node: Input Section Basics110244
-Node: Input Section Wildcards112596
-Node: Input Section Common117329
-Node: Input Section Keep118811
-Node: Input Section Example119301
-Node: Output Section Data120269
-Node: Output Section Keywords123046
-Node: Output Section Discarding126615
-Node: Output Section Attributes127571
-Node: Output Section Type128575
-Node: Output Section LMA129729
-Node: Forced Output Alignment132000
-Node: Forced Input Alignment132268
-Node: Output Section Region132653
-Node: Output Section Phdr133083
-Node: Output Section Fill133747
-Node: Overlay Description134889
-Node: MEMORY139137
-Node: PHDRS143337
-Node: VERSION148376
-Node: Expressions156167
-Node: Constants157045
-Node: Symbols157606
-Node: Orphan Sections158344
-Node: Location Counter159107
-Node: Operators163411
-Node: Evaluation164333
-Node: Expression Section165697
-Node: Builtin Functions167186
-Node: Implicit Linker Scripts174678
-Node: Machine Dependent175453
-Node: H8/300176314
-Node: i960177939
-Node: ARM179624
-Node: HPPA ELF32182540
-Node: MMIX184163
-Node: MSP430185380
-Node: PowerPC ELF32186428
-Node: PowerPC64 ELF64188719
-Node: TI COFF193133
-Node: WIN32193665
-Node: Xtensa211739
-Node: BFD214861
-Node: BFD outline216316
-Node: BFD information loss217602
-Node: Canonical format220119
-Node: Reporting Bugs224476
-Node: Bug Criteria225170
-Node: Bug Reporting225869
-Node: MRI232894
-Node: GNU Free Documentation License237537
-Node: Index257251
+Node: Top385
+Node: Overview1147
+Node: Invocation2261
+Node: Options2669
+Node: Environment77324
+Node: Scripts79084
+Node: Basic Script Concepts80818
+Node: Script Format83525
+Node: Simple Example84388
+Node: Simple Commands87484
+Node: Entry Point87935
+Node: File Commands88694
+Node: Format Commands92560
+Node: Miscellaneous Commands94526
+Node: Assignments96756
+Node: Simple Assignments97247
+Node: PROVIDE98983
+Node: PROVIDE_HIDDEN100188
+Node: Source Code Reference100432
+Node: SECTIONS104012
+Node: Output Section Description105903
+Node: Output Section Name106956
+Node: Output Section Address107832
+Node: Input Section109481
+Node: Input Section Basics110282
+Node: Input Section Wildcards112634
+Node: Input Section Common117367
+Node: Input Section Keep118849
+Node: Input Section Example119339
+Node: Output Section Data120307
+Node: Output Section Keywords123084
+Node: Output Section Discarding126653
+Node: Output Section Attributes127609
+Node: Output Section Type128613
+Node: Output Section LMA129767
+Node: Forced Output Alignment132038
+Node: Forced Input Alignment132306
+Node: Output Section Region132691
+Node: Output Section Phdr133121
+Node: Output Section Fill133785
+Node: Overlay Description134927
+Node: MEMORY139175
+Node: PHDRS143375
+Node: VERSION148414
+Node: Expressions156205
+Node: Constants157083
+Node: Symbols157644
+Node: Orphan Sections158382
+Node: Location Counter159145
+Node: Operators163449
+Node: Evaluation164371
+Node: Expression Section165735
+Node: Builtin Functions167224
+Node: Implicit Linker Scripts174716
+Node: Machine Dependent175491
+Node: H8/300176352
+Node: i960177977
+Node: ARM179662
+Node: HPPA ELF32182578
+Node: MMIX184201
+Node: MSP430185418
+Node: PowerPC ELF32186466
+Node: PowerPC64 ELF64188757
+Node: TI COFF193171
+Node: WIN32193703
+Node: Xtensa211777
+Node: BFD214899
+Node: BFD outline216354
+Node: BFD information loss217640
+Node: Canonical format220157
+Node: Reporting Bugs224514
+Node: Bug Criteria225208
+Node: Bug Reporting225907
+Node: MRI232932
+Node: GNU Free Documentation License237575
+Node: Index257289
 
 End Tag Table
