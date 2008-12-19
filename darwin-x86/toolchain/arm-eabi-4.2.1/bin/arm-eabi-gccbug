@@ -345,12 +345,12 @@ SEND-PR: support             I need help with gcc.
 `[ -n "$ARCH" ] && echo Architecture: $ARCH`
 `[ -n "$MACHINE" ] && echo Machine: $MACHINE`
 	$ENVIRONMENT_C
-host: i386-apple-darwin8.11.1
-build: i386-apple-darwin8.11.1
+host: i386-apple-darwin9.4.0
+build: i386-apple-darwin9.4.0
 target: arm-unknown-eabi
 __EOF__
       cat >> $file << \__EOF__
-configured with: ../gcc-4.2.1/configure --prefix=/usr/local/armdev/toolchain-eabi-4.2.1 --target=arm-eabi --enable-languages=c,c++ --enable-threads --disable-nls --disable-libmudflap --with-float=soft --with-fpu=vfp --with-arch=armv5te --enable-target-optspace --with-abi=aapcs
+configured with: ../../toolchain/android-toolchain/gcc-4.2.1/configure --prefix=/usr/local/armdev/toolchain-eabi-4.2.1 --program-transform-name=s,^,arm-eabi-, --prefix=/usr/local/armdev/toolchain-eabi-4.2.1 --target=arm-eabi --host=i386-apple-darwin9.4.0 --build=i386-apple-darwin9.4.0 --enable-languages=c,c++ --disable-libstdc__-v3 --disable-libssp --enable-threads --disable-nls --disable-libmudflap --with-float=soft --with-fpu=vfp --with-arch=armv5te --enable-target-optspace --with-abi=aapcs
 __EOF__
       cat >> $file << __EOF__
 >Description:
