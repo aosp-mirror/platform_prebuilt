@@ -1,0 +1,2 @@
+libqemu-audio.a can be rebuilt using the
+external/qemu/distrib/update-audio.sh tool.
