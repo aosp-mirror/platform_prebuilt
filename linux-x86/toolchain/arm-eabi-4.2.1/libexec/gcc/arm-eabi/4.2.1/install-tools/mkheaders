@@ -54,7 +54,7 @@ if [ x$1 != x ] ; then
   prefix=$1
   shift
 else
-  prefix=/disk2/dougkwan/android-4/arm-eabi-4.2.1
+  prefix=/android/mathias/armdev/toolchain-eabi-4.2.1
 fi
 
 # Allow for alternate isysroot in which to find headers
