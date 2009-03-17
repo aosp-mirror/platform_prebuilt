@@ -32,4 +32,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/Volumes/sources/android/device/prebuilt/darwin-x86/sdl/lib'
+libdir='/Volumes/Android/cupcake/prebuilt/darwin-x86/sdl/lib'

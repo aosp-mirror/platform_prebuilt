@@ -32,4 +32,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/opt/android/main/device/prebuilt/Linux/sdl/lib'
+libdir='/opt/digit/cupcake/android/prebuilt/linux-x86/sdl/lib'
