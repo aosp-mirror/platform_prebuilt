@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+<title>Inferiors - Debugging with GDB</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Debugging with GDB">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Running.html#Running" title="Running">
+<link rel="prev" href="Kill-Process.html#Kill-Process" title="Kill Process">
+<link rel="next" href="Threads.html#Threads" title="Threads">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+<link rel="stylesheet" type="text/css" href="../cs.css">
+</head>
+<body>
+<div class="node">
+<a name="Inferiors"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Threads.html#Threads">Threads</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Kill-Process.html#Kill-Process">Kill Process</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Running.html#Running">Running</a>
+<hr>
+</div>
+
+<h3 class="section">4.9 Debugging Multiple Inferiors</h3>
+
+<p>Some <span class="sc">gdb</span> targets are able to run multiple processes created
+from a single executable.  This can happen, for instance, with an
+embedded system reporting back several processes via the remote
+protocol.
+
+   <p><a name="index-inferior-137"></a><span class="sc">gdb</span> represents the state of each program execution with an
+object called an <dfn>inferior</dfn>.  An inferior typically corresponds to
+a process, but is more general and applies also to targets that do not
+have processes.  Inferiors may be created before a process runs, and
+may (in future) be retained after a process exits.  Each run of an
+executable creates a new inferior, as does each attachment to an
+existing process.  Inferiors have unique identifiers that are
+different from process ids, and may optionally be named as well. 
+Usually each inferior will also have its own distinct address space,
+although some embedded targets may have several inferiors running in
+different parts of a single space.
+
+   <p>Each inferior may in turn have multiple threads running in it.
+
+   <p>To find out what inferiors exist at any moment, use <code>info inferiors</code>:
+
+     
+<a name="index-info-inferiors-138"></a>
+<dl><dt><code>info inferiors</code><dd>Print a list of all inferiors currently being managed by <span class="sc">gdb</span>.
+
+     <p><a name="index-set-print-inferior_002devents-139"></a><a name="index-print-messages-on-inferior-start-and-exit-140"></a><br><dt><code>set print inferior-events</code><dt><code>set print inferior-events on</code><dt><code>set print inferior-events off</code><dd>The <code>set print inferior-events</code> command allows you to enable or
+disable printing of messages when <span class="sc">gdb</span> notices that new
+inferiors have started or that inferiors have exited or have been
+detached.  By default, these messages will not be printed.
+
+     <p><a name="index-show-print-inferior_002devents-141"></a><br><dt><code>show print inferior-events</code><dd>Show whether messages will be printed when <span class="sc">gdb</span> detects that
+inferiors have started, exited or have been detached. 
+</dl>
+
+   </body></html>
+

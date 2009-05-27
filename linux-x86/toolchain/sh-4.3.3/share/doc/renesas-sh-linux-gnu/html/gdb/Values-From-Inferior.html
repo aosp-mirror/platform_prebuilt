@@ -1,0 +1,81 @@
+<html lang="en">
+<head>
+<title>Values From Inferior - Debugging with GDB</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="Debugging with GDB">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Python-API.html#Python-API" title="Python API">
+<link rel="prev" href="Exception-Handling.html#Exception-Handling" title="Exception Handling">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+<link rel="stylesheet" type="text/css" href="../cs.css">
+</head>
+<body>
+<div class="node">
+<a name="Values-From-Inferior"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Exception-Handling.html#Exception-Handling">Exception Handling</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Python-API.html#Python-API">Python API</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">22.2.2.3 Values From Inferior</h5>
+
+<p><a name="index-values-from-inferior_002c-with-Python-1433"></a><a name="index-python_002c-working-with-values-from-inferior-1434"></a>
+<a name="index-g_t_0040code_007bgdb_002eValue_007d-1435"></a><span class="sc">gdb</span> provides values it obtains from the inferior program in
+an object of type <code>gdb.Value</code>.  <span class="sc">gdb</span> uses this object
+for its internal bookkeeping of the inferior's values, and for
+fetching values when necessary.
+
+   <p>Inferior values that are simple scalars can be used directly in
+Python expressions that are valid for the value's data type.  Here's
+an example for an integer or floating-point value <code>some_val</code>:
+
+<pre class="smallexample">     bar = some_val + 2
+</pre>
+   <p class="noindent">As result of this, <code>bar</code> will also be a <code>gdb.Value</code> object
+whose values are of the same type as those of <code>some_val</code>.
+
+   <p>Inferior values that are structures or instances of some class can
+be accessed using the Python <dfn>dictionary syntax</dfn>.  For example, if
+<code>some_val</code> is a <code>gdb.Value</code> instance holding a structure, you
+can access its <code>foo</code> element with:
+
+<pre class="smallexample">     bar = some_val['foo']
+</pre>
+   <p>Again, <code>bar</code> will also be a <code>gdb.Value</code> object.
+
+   <p>For pointer data types, <code>gdb.Value</code> provides a method for
+dereferencing the pointer to obtain the object it points to.
+
+<div class="defun">
+&mdash; Method on Value: <b>dereference</b><var><a name="index-dereference-on-Value-1436"></a></var><br>
+<blockquote><p>This method returns a new <code>gdb.Value</code> object whose contents is
+the object pointed to by the pointer.  For example, if <code>foo</code> is
+a C pointer to an <code>int</code>, declared in your C program as
+
+     <pre class="smallexample">          int *foo;
+</pre>
+        <p class="noindent">then you can use the corresponding <code>gdb.Value</code> to access what
+<code>foo</code> points to like this:
+
+     <pre class="smallexample">          bar = foo.dereference ()
+</pre>
+        <p>The result <code>bar</code> will be a <code>gdb.Value</code> object holding the
+value pointed to by <code>foo</code>. 
+</p></blockquote></div>
+
+   </body></html>
+

@@ -1,0 +1,92 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Using GDB Server for Debugging</title><link rel="stylesheet" href="cs.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="index.html" title="Sourcery G++ Lite"><link rel="up" href="chap-release.html" title="Chapter 3. Sourcery G++ Lite for SuperH GNU/Linux"><link rel="prev" href="included-libraries.html" title="Using Sourcery G++ Lite on GNU/Linux Targets"><link rel="next" href="ch03s05.html" title="Sourcery G++ Lite Release Notes"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Using GDB Server for Debugging</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="included-libraries.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Sourcery G++ Lite for SuperH GNU/Linux</th><td width="20%" align="right"> <a accesskey="n" href="ch03s05.html">Next</a></td></tr></table><hr></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id277098"></a>Using GDB Server for Debugging</h2></div></div></div><p>
+The GDB server utility provided with Sourcery G++ Lite can be used to debug 
+a GNU/Linux application.  While Sourcery G++ runs on your host system, 
+<span class="command"><strong>gdbserver</strong></span> and the target application 
+run on your target system. Even though Sourcery G++ and your application 
+run on different systems, the debugging experience when using 
+<span class="command"><strong>gdbserver</strong></span> is very similar to debugging a native application.
+</p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="sec-running-gdbserver"></a>Running GDB Server</h3></div></div></div><p>
+  The GDB server executables are included in the sysroot in ABI-specific
+  subdirectories of 
+  <code class="filename"><em class="replaceable"><code>sysroot</code></em>/usr</code>.  Use the
+  executable from the sysroot and library subdirectory 
+  that match your program.  
+  See <a class="xref" href="chap-release.html#sec-multilibs" title="Library Configurations">the section called &#8220;Library Configurations&#8221;</a> for details.
+  </p><p>
+  You must copy the sysroot to your target system as described 
+  in <a class="xref" href="included-libraries.html#sec-installing-sysroot" title="Installing the Sysroot">the section called &#8220;Installing the Sysroot&#8221;</a>.
+  You must also copy the executable you want to debug to your target system.
+  </p><p>
+  If you have installed the sysroot in the root directory of the filesystem
+  on the target, you can invoke <span class="command"><strong>gdbserver</strong></span> as:
+
+  </p><pre class="screen">&gt; gdbserver :10000 <em class="replaceable"><code>program arg1 arg2 ...</code></em></pre><p>
+
+  where <em class="replaceable"><code>program</code></em> is the path to the program you
+  want to debug and <em class="replaceable"><code>arg1 arg2 ...</code></em> are the arguments
+  you want to pass to it.  The <code class="literal">:10000</code> argument indicates
+  that <span class="command"><strong>gdbserver</strong></span> should listen for connections from GDB
+  on port 10000.
+  
+  You can use a different port, if you prefer.
+  </p><p>
+  If you have installed the sysroot in an alternate directory, invoking
+  <span class="command"><strong>gdbserver</strong></span> becomes more complicated.  You must build
+  your application using the link-time options to specify the location of
+  the sysroot, as described in <a class="xref" href="included-libraries.html#sec-linker-sysroot" title="Using Linker Options to Specify the Sysroot Location">the section called &#8220;Using Linker Options to Specify the Sysroot Location&#8221;</a>.  You
+  must also invoke <span class="command"><strong>gdbserver</strong></span> itself using the dynamic
+  linker provided in the Sourcery G++ sysroot, as described in
+  <a class="xref" href="included-libraries.html#sec-runtime-sysroot" title="Specifying the Sysroot Location at Runtime">the section called &#8220;Specifying the Sysroot Location at Runtime&#8221;</a>.  In other words, the command to
+  invoke <span class="command"><strong>gdbserver</strong></span> in this case would be similar to:
+
+  </p><pre class="screen">&gt; <em class="replaceable"><code>sysroot</code></em>/lib/ld-linux.so.2 \
+  --library-path <em class="replaceable"><code>sysroot</code></em>/lib:<em class="replaceable"><code>sysroot</code></em>/usr/lib \
+  <em class="replaceable"><code>sysroot</code></em>/usr/lib/bin/gdbserver :10000 <em class="replaceable"><code>program arg1 arg2 ...</code></em></pre><p>
+  </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id277256"></a>Connecting to GDB Server from the Debugger</h3></div></div></div><p>
+  You can connect to GDB server by using the following command from 
+  within GDB:
+
+  </p><pre class="screen">(gdb) target remote <em class="replaceable"><code>target</code></em>:10000</pre><p>
+
+  where <em class="replaceable"><code>target</code></em> is the host name or IP address 
+  of your target system.
+  </p><p>
+  When your program exits, <span class="command"><strong>gdbserver</strong></span> exits too.
+  If you want to debug the program again, you must restart 
+  <span class="command"><strong>gdbserver</strong></span> on the target.
+  Then, in GDB, reissue the <code class="literal">target</code> command shown above.
+  </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="sec-gdb-sysroot"></a>Setting the Sysroot in the Debugger</h3></div></div></div><p>
+  In order to debug shared libraries, GDB needs to map
+  the pathnames of shared libraries on the target to the pathnames of
+  equivalent files on the host system.  Debugging of multi-threaded
+  applications also depends on correctly locating copies of the 
+  libraries provided in the sysroot on the host system.
+  </p><p>
+  In some situations, the target pathnames are valid on the host system.
+  
+  Otherwise, you must tell GDB how to map target pathnames onto the
+  equivalent host pathnames.
+  </p><p>
+  In the general case, there are two GDB commands required to set up the
+  mapping:
+
+  </p><pre class="screen">(gdb) set sysroot-on-target <em class="replaceable"><code>target-pathname</code></em>
+(gdb) set sysroot <em class="replaceable"><code>host-pathname</code></em></pre><p>
+
+  This causes GDB to replace all instances of the
+  <em class="replaceable"><code>target-pathname</code></em> prefix in shared library
+  pathnames reported by the target with 
+  <em class="replaceable"><code>host-pathname</code></em> to get the location of the
+  equivalent library on the host.
+  </p><p>
+  If you have installed the sysroot in the root filesystem on the target,
+  you can omit the <span class="command"><strong>set sysroot-on-target</strong></span> command, and
+  use only <span class="command"><strong>set sysroot</strong></span> to specify the location on the
+  host system.
+  </p><p>
+  Refer to <a class="xref" href="included-libraries.html#sec-installing-sysroot" title="Installing the Sysroot">the section called &#8220;Installing the Sysroot&#8221;</a> for more information
+  about installing the sysroot on the target.
+  Note that if you have installed a stripped copy of the provided libraries 
+  on the target, you should give GDB the location of an unstripped 
+  copy on the host.
+  </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="included-libraries.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="chap-release.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s05.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Using Sourcery G++ Lite on GNU/Linux Targets </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Sourcery G++ Lite Release Notes</td></tr></table></div></body></html>

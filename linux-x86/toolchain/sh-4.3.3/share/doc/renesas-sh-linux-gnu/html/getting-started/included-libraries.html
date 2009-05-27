@@ -1,0 +1,179 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Using Sourcery G++ Lite on GNU/Linux Targets</title><link rel="stylesheet" href="cs.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="index.html" title="Sourcery G++ Lite"><link rel="up" href="chap-release.html" title="Chapter 3. Sourcery G++ Lite for SuperH GNU/Linux"><link rel="prev" href="sec-kernel-version.html" title="Target Kernel Requirements"><link rel="next" href="ch03s04.html" title="Using GDB Server for Debugging"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Using Sourcery G++ Lite on GNU/Linux Targets</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="sec-kernel-version.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Sourcery G++ Lite for SuperH GNU/Linux</th><td width="20%" align="right"> <a accesskey="n" href="ch03s04.html">Next</a></td></tr></table><hr></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="included-libraries"></a>Using Sourcery G++ Lite on GNU/Linux Targets</h2></div></div></div><p>
+In order to run and debug programs produced by Sourcery G++ on a GNU/Linux
+target, you must install runtime support files on the target.  You may also
+need to set appropriate build options so that your executables can find
+the correct dynamic linker and libraries at runtime.
+
+</p><p>
+The runtime support files, referred to as the <em class="firstterm">sysroot</em>,
+are found in the <code class="filename">sh-linux-gnu/libc</code> directory of your
+Sourcery G++ Lite installation.  The sysroot consists of the contents of the 
+<code class="filename">etc</code>, <code class="filename">lib</code>, <code class="filename">sbin</code>, 
+and <code class="filename">usr</code> directories.  There may be other
+directories in <code class="filename">sh-linux-gnu/libc</code> that contain 
+additional sysroots customized for particular combinations of 
+command-line compiler flags, or <em class="firstterm">multilibs</em>.
+Refer to <a class="xref" href="chap-release.html#sec-multilibs" title="Library Configurations">the section called &#8220;Library Configurations&#8221;</a> for a list of the included multilibs
+in this version of Sourcery G++ Lite.
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note for Windows Host Users</h3><p>
+   The sysroots provided in Windows host packages for Sourcery G++ are not 
+   directly usable on the Linux target because of differences between the
+   Windows and Linux file systems.
+   Some files that are hard links, or copies, in the sysroot 
+   as installed on the Windows file system should be symbolic links 
+   on the Linux target.  
+   Additionally, some files in the sysroot which should be marked 
+   executable on the Linux target are not marked executable on Windows.
+   If you intend to use the sysroot provided with Sourcery G++ on a 
+   Windows host system as the basis for your Linux target filesystem, 
+   you must correct these issues after copying the sysroot to the target.
+   If you are a Professional Edition customer and need assistance with
+   these modifications, please contact CodeSourcery's support team.
+ </p></div><p>
+There are three choices for installing the sysroot on the target:
+</p><div class="itemizedlist"><ul type="disc"><li><p>
+    You can install the files in the filesystem root, replacing the
+    system-provided files.  All applications automatically use the
+    Sourcery G++ libraries.  This method is primarily useful when you are
+    building a GNU/Linux system from scratch.  Otherwise, overwriting your
+    existing C library may break other applications on your system, or cause
+    it to fail to boot.
+  </p></li><li><p>
+    You can install the sysroot in an alternate location and build your
+    application with the <code class="option">-rpath</code> and 
+    <code class="option">--dynamic-linker</code> linker options to specify the sysroot
+    location.
+  </p></li><li><p>
+    You can install the sysroot in an alternate location and explicitly
+    invoke your application through the dynamic linker to specify the
+    sysroot location.
+    If you are just getting started with Sourcery G++ Lite, this may be the easiest
+    way to get your application running, but this method does not support use
+    of the debugger.
+    <span>
+      In addition, this method only works with programs linked with 
+      the GNU C Library (glibc), not uClibc.
+    </span>
+  </p></li></ul></div><p>
+Setting the environment variable <code class="envar">LD_LIBRARY_PATH</code> 
+on the target is not sufficient, since executables produced by Sourcery G++
+depend on the Sourcery G++ dynamic linker included in the sysroot as well 
+as the Sourcery G++ runtime libraries.
+</p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="sec-installing-sysroot"></a>Installing the Sysroot</h3></div></div></div><p>
+If you are modifying an existing system, rather than creating a new
+system from scratch, you should place the sysroot files in a new directory,
+rather than in the root directory of your target system.
+</p><p>
+If you choose to overwrite your existing C library, you may not be
+able to boot your system.  You should back up your existing system
+before overwriting the C library and ensure that you can restore the
+backup even with your system offline. 
+</p><p>
+When running Sourcery G++ on a GNU/Linux host,
+you have the alternative of installing the sysroot on the
+target at the same pathname where it is installed on the host system.
+One way to accomplish this is to NFS-mount the installation directory
+on both machines in the same location, rather than to copy files.
+</p><p>
+In many cases, you do not need to copy all of the files in the sysroot.
+For example, the <code class="filename">usr/include</code> subdirectory contains 
+files that are only needed if you will actually be running the compiler 
+on your target system.  You do not need these files for non-native compilers.
+You also do not need any <code class="filename">.o</code> or <code class="filename">.a</code>
+files; these are used by the compiler when linking programs, but are not 
+needed to run programs.  You should definitely copy all 
+<code class="filename">.so</code> files and the executable files in
+<code class="filename">usr/bin</code> and <code class="filename">sbin</code>.
+</p><p>
+You need to install the sysroot(s) corresponding to 
+the compiler options you are using for your applications.  The tables in
+<a class="xref" href="chap-release.html#sec-multilibs" title="Library Configurations">the section called &#8220;Library Configurations&#8221;</a> tell you which sysroot directories correspond
+to which compiler options.  If you are unsure what sysroot is being referenced
+when you build your program, you can
+identify the sysroot by adding <code class="option">-v</code> to your compiler
+command-line options, and looking at the <code class="option">--sysroot=</code> pathname
+in the compiler output.  
+
+</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="sec-linker-sysroot"></a>Using Linker Options to Specify the Sysroot Location</h3></div></div></div><p>
+If you have installed the sysroot on the target in a location other than
+the file system root, you can use the <code class="option">-rpath</code> and
+<code class="option">--dynamic-linker</code> linker options to specify the sysroot
+location.
+</p><p>
+If you are using Sourcery G++ from the command line, follow these steps:
+</p><div class="orderedlist"><ol type="1"><li><p>
+  First find the correct sysroot directory, dynamic linker, and library
+  subdirectory for your
+  selected multilib.  Refer to <a class="xref" href="chap-release.html#sec-multilibs" title="Library Configurations">the section called &#8220;Library Configurations&#8221;</a>.
+  In the following steps,
+  <em class="replaceable"><code>sysroot</code></em> is the absolute path to the
+  sysroot directory on the target corresponding to your selected multilib.
+  For the default multilib, the dynamic linker path relative to the sysroot is
+  <code class="filename">lib/ld-linux.so.2</code>, and the library subdirectory is
+  <code class="filename">lib</code>.
+  This is used in the example below.
+  </p></li><li><p>
+  When invoking <span class="command"><strong>sh-linux-gnu-gcc</strong></span> to link your executable,
+  include the command-line options:
+
+  </p><pre class="screen">-Wl,-rpath=<em class="replaceable"><code>sysroot</code></em>/lib:<em class="replaceable"><code>sysroot</code></em>/usr/lib \
+-Wl,--dynamic-linker=<em class="replaceable"><code>sysroot</code></em>/lib/ld-linux.so.2</pre><p>
+
+  where <em class="replaceable"><code>sysroot</code></em> is the absolute path to the
+  sysroot directory on the target corresponding to your selected multilib.
+  </p></li><li><p>
+  Copy the executable to the target and execute it normally.
+  </p></li></ol></div><p>
+Note that if you specify an incorrect path for 
+<code class="option">--dynamic-linker</code>, the common failure mode seen when running
+your application on the target is similar to
+</p><pre class="screen">&gt; ./factorial
+./factorial: No such file or directory</pre><p>
+
+or
+
+</p><pre class="screen">&gt; ./factorial
+./factorial: bad ELF interpreter: No such file or directory</pre><p>
+
+This can be quite confusing since it appears from the error message 
+as if it is the  <code class="filename">./factorial</code> executable that is 
+missing rather than the dynamic linker it references.
+</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="sec-runtime-sysroot"></a>Specifying the Sysroot Location at Runtime</h3></div></div></div><p>
+You can invoke the Sourcery G++ dynamic linker on the target to run your 
+application without having to compile it with specific linker options.  
+<span>
+  Note that this method of specifying the sysroot is specific to the
+  GNU C Library (glibc) and does not work if you have linked your application
+  with uClibc instead.
+</span>
+</p><p>
+To do this, follow these steps:
+</p><div class="orderedlist"><ol type="1"><li><p>
+  Build your application on the host, without any additional linker options,
+  and copy the executable to your target system.
+  </p></li><li><p>
+  Find the correct sysroot directory, dynamic linker, and library
+  subdirectory for your
+  selected multilib.  Refer to <a class="xref" href="chap-release.html#sec-multilibs" title="Library Configurations">the section called &#8220;Library Configurations&#8221;</a>.
+  In the following steps,
+  <em class="replaceable"><code>sysroot</code></em> is the absolute path to the
+  sysroot directory on the target corresponding to your selected multilib.
+  For the default multilib, the dynamic linker is
+  <code class="filename">lib/ld-linux.so.2</code>, and the library subdirectory is
+  <code class="filename">lib</code>.
+  This is used in the example below.
+  </p></li><li><p>
+  On the target system, invoke the dynamic linker with your executable as:
+
+  </p><pre class="screen">&gt; <em class="replaceable"><code>sysroot</code></em>/lib/ld-linux.so.2 \
+  --library-path <em class="replaceable"><code>sysroot</code></em>/lib:<em class="replaceable"><code>sysroot</code></em>/usr/lib \
+  <em class="replaceable"><code>/path/to/your-executable</code></em></pre><p>
+
+  where <em class="replaceable"><code>sysroot</code></em> is the absolute path to the
+  sysroot directory on the target corresponding to your selected
+  multilib.
+  </p><p>Invoking the linker in this manner requires that
+  you provide either an absolute pathname to your executable, or a relative
+  pathname prefixed with <code class="filename">./</code>.  Specifying only the name
+  of a file in the current directory does not work.
+  </p></li></ol></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="sec-kernel-version.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="chap-release.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s04.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Target Kernel Requirements </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Using GDB Server for Debugging</td></tr></table></div></body></html>
