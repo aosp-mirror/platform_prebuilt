@@ -1,4 +1,4 @@
-This is gdbint.info, produced by makeinfo version 4.8 from
+This is gdbint.info, produced by makeinfo version 4.11 from
 ../../../../../gdb-6.6/gdb/doc/gdbint.texinfo.
 
 INFO-DIR-SECTION Software development
@@ -841,7 +841,7 @@ previously available.  This new interface needed to be strongly typed,
 easy to extend, and versatile enough to be used as the standard
 interface when adding new notifications.
 
-   See *Note GDB Observers:: for a brief description of the observers
+   See *note GDB Observers:: for a brief description of the observers
 currently implemented in GDB. The rationale for the current
 implementation is also briefly discussed.
 
@@ -1811,7 +1811,7 @@ The IBM RS/6000 running AIX uses an object file format called XCOFF.
 The COFF sections, symbols, and line numbers are used, but debugging
 symbols are `dbx'-style stabs whose strings are located in the `.debug'
 section (rather than the string table).  For more information, see
-*Note Top: (stabs)Top.
+*note Top: (stabs)Top.
 
    The shared library scheme has a clean interface for figuring out what
 shared libraries are in use, but the catch is that everything which
@@ -2642,7 +2642,7 @@ pointers, GDB might show the following behavior:
 
 _Maintainer note: This section is pretty much obsolete.  The
 functionality described here has largely been replaced by
-pseudo-registers and the mechanisms described in *Note Using Different
+pseudo-registers and the mechanisms described in *note Using Different
 Register and Memory Data Representations: Target Architecture
 Definition.  See also Bug Tracking Database
 (http://www.gnu.org/software/gdb/bugs/) and ARI Index
@@ -3229,7 +3229,7 @@ machine.
 
 `I386_USE_GENERIC_WATCHPOINTS'
      An x86-based target can define this to use the generic x86
-     watchpoint support; see *Note I386_USE_GENERIC_WATCHPOINTS:
+     watchpoint support; see *note I386_USE_GENERIC_WATCHPOINTS:
      Algorithms.
 
 `SYMBOLS_CAN_START_WITH_DOLLAR'
@@ -3582,7 +3582,7 @@ machine.
      Define this to increase ADDR so that it meets the alignment
      requirements for the processor's stack.
 
-     Unlike *Note frame_align::, this function always adjusts ADDR
+     Unlike *note frame_align::, this function always adjusts ADDR
      upwards.
 
      By default, no stack alignment is performed.
@@ -4232,7 +4232,7 @@ the same.  These macros should be defined (or left undefined) in
 
 `I386_USE_GENERIC_WATCHPOINTS'
      An x86-based machine can define this to use the generic x86
-     watchpoint support; see *Note I386_USE_GENERIC_WATCHPOINTS:
+     watchpoint support; see *note I386_USE_GENERIC_WATCHPOINTS:
      Algorithms.
 
 `KERNEL_U_ADDR'
@@ -7768,54 +7768,54 @@ Index
 
 
 Tag Table:
-Node: Top919
-Node: Requirements1758
-Node: Overall Structure3246
-Node: Algorithms8179
-Node: User Interface37887
-Ref: User Interface-Footnote-161664
-Ref: User Interface-Footnote-261713
-Node: libgdb61948
-Node: Symbol Handling65908
-Node: Language Support81008
-Node: Host Definition86409
-Node: Target Architecture Definition93766
-Ref: BREAKPOINT_FROM_PC121388
-Ref: DEPRECATED_EXTRACT_STRUCT_VALUE_ADDRESS127556
-Ref: frame_align128388
-Ref: DEPRECATED_FRAME_SAVED_PC130767
-Ref: unwind_pc130953
-Ref: unwind_sp131506
-Ref: stabs_argument_has_addr143969
-Ref: push_dummy_call144743
-Ref: push_dummy_code145329
-Ref: DEPRECATED_REG_STRUCT_HAS_ADDR146174
-Ref: SAVE_DUMMY_FRAME_TOS146408
-Ref: gdbarch_return_value147027
-Ref: DEPRECATED_STACK_ALIGN150312
-Ref: TARGET_WRITE_PC152939
-Ref: TARGET_READ_SP152973
-Ref: unwind_dummy_id154646
-Ref: Target Architecture Definition-Footnote-1163199
-Ref: Target Architecture Definition-Footnote-2163442
-Node: Target Vector Definition163561
-Node: Managing Execution State164104
-Node: Existing Targets165917
-Node: Native Debugging168238
-Node: Support Libraries178677
-Node: Coding190083
-Node: Porting GDB215802
-Node: Versions and Branches217711
-Ref: Tags223670
-Ref: experimental branch tags224001
-Node: Start of New Year Procedure224733
-Node: Releasing GDB225731
-Node: Testsuite244075
-Node: Hints251028
-Node: Getting Started251350
-Node: Debugging GDB255493
-Node: GDB Observers260855
-Node: GNU Free Documentation License265220
-Node: Index287664
+Node: Top920
+Node: Requirements1759
+Node: Overall Structure3247
+Node: Algorithms8180
+Node: User Interface37888
+Ref: User Interface-Footnote-161665
+Ref: User Interface-Footnote-261714
+Node: libgdb61949
+Node: Symbol Handling65909
+Node: Language Support81009
+Node: Host Definition86410
+Node: Target Architecture Definition93767
+Ref: BREAKPOINT_FROM_PC121389
+Ref: DEPRECATED_EXTRACT_STRUCT_VALUE_ADDRESS127557
+Ref: frame_align128389
+Ref: DEPRECATED_FRAME_SAVED_PC130768
+Ref: unwind_pc130954
+Ref: unwind_sp131507
+Ref: stabs_argument_has_addr143970
+Ref: push_dummy_call144744
+Ref: push_dummy_code145330
+Ref: DEPRECATED_REG_STRUCT_HAS_ADDR146175
+Ref: SAVE_DUMMY_FRAME_TOS146409
+Ref: gdbarch_return_value147028
+Ref: DEPRECATED_STACK_ALIGN150313
+Ref: TARGET_WRITE_PC152940
+Ref: TARGET_READ_SP152974
+Ref: unwind_dummy_id154647
+Ref: Target Architecture Definition-Footnote-1163200
+Ref: Target Architecture Definition-Footnote-2163443
+Node: Target Vector Definition163562
+Node: Managing Execution State164105
+Node: Existing Targets165918
+Node: Native Debugging168239
+Node: Support Libraries178678
+Node: Coding190084
+Node: Porting GDB215803
+Node: Versions and Branches217712
+Ref: Tags223671
+Ref: experimental branch tags224002
+Node: Start of New Year Procedure224734
+Node: Releasing GDB225732
+Node: Testsuite244076
+Node: Hints251029
+Node: Getting Started251351
+Node: Debugging GDB255494
+Node: GDB Observers260856
+Node: GNU Free Documentation License265221
+Node: Index287665
 
 End Tag Table
