@@ -1,5 +1,5 @@
 This is binutils.info, produced by makeinfo version 4.8 from
-binutils.texi.
+/home/jingyu/projects/gcc/android-toolchain/binutils-2.19/binutils/doc/binutils.texi.
 
    Copyright (C) 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999,
 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 Free Software
@@ -44,7 +44,7 @@ Introduction
 ************
 
 This brief manual contains documentation for the GNU binary utilities
-(GNU Binutils) version 2.18.90:
+(GNU Binutils) version 2.19:
 
    This document is distributed under the terms of the GNU Free
 Documentation License.  A copy of the license is included in the
@@ -4230,34 +4230,34 @@ Binutils Index
 
 
 Tag Table:
-Node: Top1923
-Node: ar3557
-Node: ar cmdline6344
-Node: ar scripts14724
-Node: nm20412
-Node: objcopy28917
-Node: objdump54369
-Node: ranlib72909
-Node: size73730
-Node: strings76735
-Node: strip79187
-Node: c++filt85138
-Ref: c++filt-Footnote-190085
-Node: addr2line90191
-Node: nlmconv93462
-Node: windmc96068
-Node: windres99715
-Node: dlltool105742
-Node: def file format116579
-Node: readelf118317
-Node: Common Options123871
-Node: Selecting the Target System124911
-Node: Target Selection125843
-Node: Architecture Selection127825
-Node: Reporting Bugs128653
-Node: Bug Criteria129432
-Node: Bug Reporting129985
-Node: GNU Free Documentation License136855
-Node: Binutils Index159299
+Node: Top1994
+Node: ar3625
+Node: ar cmdline6412
+Node: ar scripts14792
+Node: nm20480
+Node: objcopy28985
+Node: objdump54437
+Node: ranlib72977
+Node: size73798
+Node: strings76803
+Node: strip79255
+Node: c++filt85206
+Ref: c++filt-Footnote-190153
+Node: addr2line90259
+Node: nlmconv93530
+Node: windmc96136
+Node: windres99783
+Node: dlltool105810
+Node: def file format116647
+Node: readelf118385
+Node: Common Options123939
+Node: Selecting the Target System124979
+Node: Target Selection125911
+Node: Architecture Selection127893
+Node: Reporting Bugs128721
+Node: Bug Criteria129500
+Node: Bug Reporting130053
+Node: GNU Free Documentation License136923
+Node: Binutils Index159367
 
 End Tag Table

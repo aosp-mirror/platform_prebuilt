@@ -1,5 +1,5 @@
 This is configure.info, produced by makeinfo version 4.8 from
-.././etc/configure.texi.
+/home/jingyu/projects/gcc/android-toolchain/gdb-6.6/etc/configure.texi.
 
 INFO-DIR-SECTION GNU admin
 START-INFO-DIR-ENTRY
@@ -2710,64 +2710,64 @@ Index
 
 
 Tag Table:
-Node: Top978
-Node: Introduction1506
-Node: Goals2588
-Node: Tools3312
-Node: History4306
-Node: Building7304
-Node: Getting Started10567
-Node: Write configure.in11080
-Node: Write Makefile.am18331
-Node: Write acconfig.h21508
-Node: Generate files23045
-Node: Getting Started Example25011
-Node: Getting Started Example 125766
-Node: Getting Started Example 227687
-Node: Getting Started Example 330682
-Node: Generate Files in Example33046
-Node: Files34136
-Node: Developer Files34747
-Node: Developer Files Picture35127
-Node: Written Developer Files36415
-Node: Generated Developer Files38967
-Node: Build Files42111
-Node: Build Files Picture42772
-Node: Build Files Description43536
-Node: Support Files45542
-Node: Configuration Names48424
-Node: Configuration Name Definition48924
-Node: Using Configuration Names51247
-Node: Cross Compilation Tools53217
-Node: Cross Compilation Concepts53908
-Node: Host and Target54876
-Node: Using the Host Type56377
-Node: Specifying the Target57726
-Node: Using the Target Type58515
-Node: Cross Tools in the Cygnus Tree61946
-Node: Host and Target Libraries63003
-Node: Target Library Configure Scripts66752
-Node: Make Targets in Cygnus Tree69844
-Node: Target libiberty71192
-Node: Canadian Cross72579
-Node: Canadian Cross Example73420
-Node: Canadian Cross Concepts74539
-Node: Build Cross Host Tools76051
-Node: Build and Host Options77003
-Node: CCross not in Cygnus Tree78789
-Node: CCross in Cygnus Tree79767
-Node: Standard Cygnus CCross80188
-Node: Cross Cygnus CCross81552
-Node: Supporting Canadian Cross84352
-Node: CCross in Configure84967
-Node: CCross in Make88135
-Node: Cygnus Configure89738
-Node: Cygnus Configure Basics90573
-Node: Cygnus Configure in C++ Libraries95251
-Node: Multilibs96258
-Node: Multilibs in gcc97303
-Node: Multilibs in Target Libraries98381
-Node: FAQ102572
-Node: Index106672
+Node: Top1025
+Node: Introduction1553
+Node: Goals2635
+Node: Tools3359
+Node: History4353
+Node: Building7351
+Node: Getting Started10614
+Node: Write configure.in11127
+Node: Write Makefile.am18378
+Node: Write acconfig.h21555
+Node: Generate files23092
+Node: Getting Started Example25058
+Node: Getting Started Example 125813
+Node: Getting Started Example 227734
+Node: Getting Started Example 330729
+Node: Generate Files in Example33093
+Node: Files34183
+Node: Developer Files34794
+Node: Developer Files Picture35174
+Node: Written Developer Files36462
+Node: Generated Developer Files39014
+Node: Build Files42158
+Node: Build Files Picture42819
+Node: Build Files Description43583
+Node: Support Files45589
+Node: Configuration Names48471
+Node: Configuration Name Definition48971
+Node: Using Configuration Names51294
+Node: Cross Compilation Tools53264
+Node: Cross Compilation Concepts53955
+Node: Host and Target54923
+Node: Using the Host Type56424
+Node: Specifying the Target57773
+Node: Using the Target Type58562
+Node: Cross Tools in the Cygnus Tree61993
+Node: Host and Target Libraries63050
+Node: Target Library Configure Scripts66799
+Node: Make Targets in Cygnus Tree69891
+Node: Target libiberty71239
+Node: Canadian Cross72626
+Node: Canadian Cross Example73467
+Node: Canadian Cross Concepts74586
+Node: Build Cross Host Tools76098
+Node: Build and Host Options77050
+Node: CCross not in Cygnus Tree78836
+Node: CCross in Cygnus Tree79814
+Node: Standard Cygnus CCross80235
+Node: Cross Cygnus CCross81599
+Node: Supporting Canadian Cross84399
+Node: CCross in Configure85014
+Node: CCross in Make88182
+Node: Cygnus Configure89785
+Node: Cygnus Configure Basics90620
+Node: Cygnus Configure in C++ Libraries95298
+Node: Multilibs96305
+Node: Multilibs in gcc97350
+Node: Multilibs in Target Libraries98428
+Node: FAQ102619
+Node: Index106719
 
 End Tag Table
