@@ -895,6 +895,20 @@ extern DECLSPEC void  SDL_WM_GetPos(int  *px, int  *py);
  */
 extern DECLSPEC int   SDL_WM_IsFullyVisible( int  recenter );
 
+/*
+ * Get the resolution of the main monitor in DPIs, if available.
+ * Return 0 on success, or -1 if the data is not available
+ */
+extern DECLSPEC int   SDL_WM_GetMonitorDPI( int  *xDpi, int  *yDpi );
+
+/*
+ * Get the coordinates of the monitor in virtual desktop space.
+ * In the case of multi-monitor systems, returns the rectangle of
+ * the 'nearest' monitor relative to the main SDL_window.
+ * Returns 0 on success, or -1 if the data is not available.
+ */
+extern DECLSPEC int   SDL_WM_GetMonitorRect( SDL_Rect  *rect );
+
 /* Not in public API at the moment - do not use! */
 extern DECLSPEC int SDLCALL SDL_SoftStretch(SDL_Surface *src, SDL_Rect *srcrect,
                                     SDL_Surface *dst, SDL_Rect *dstrect);
