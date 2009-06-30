@@ -20,6 +20,13 @@ along with GCC; see the file COPYING3.  If not see
 #ifndef GCC_PLUGIN_H
 #define GCC_PLUGIN_H
 
+#ifndef IN_GCC
+#define IN_GCC
+#endif
+
+#include "config.h"
+#include "system.h"
+
 /* Event names.  Keep in sync with plugin_event_name[].  */
 enum plugin_event
 {
@@ -28,7 +35,12 @@ enum plugin_event
   PLUGIN_FINISH_UNIT,           /* Useful for summary processing.  */
   PLUGIN_CXX_CP_PRE_GENERICIZE, /* Allows to see low level AST in C++ FE.  */
   PLUGIN_FINISH,                /* Called before GCC exits.  */
-  PLUGIN_INFO,                  /* Information about the plugin */
+  PLUGIN_INFO,                  /* Information about the plugin. */
+  PLUGIN_GGC_START,		/* Called at start of GCC Garbage Collection. */
+  PLUGIN_GGC_MARKING,		/* Extend the GGC marking. */
+  PLUGIN_GGC_END,		/* Called at end of GGC. */
+  PLUGIN_REGISTER_GGC_ROOTS,	/* Register an extra GGC root table. */
+  PLUGIN_ATTRIBUTES,            /* Called during attribute registration.  */
   PLUGIN_EVENT_LAST             /* Dummy event used for indexing callback
                                    array.  */
 };
@@ -78,6 +90,20 @@ struct plugin_gcc_version
   const char *configuration_arguments;
 };
 
+/* Object that keeps track of the plugin name and its arguments. */
+struct plugin_name_args
+{
+  char *base_name;              /* Short name of the plugin (filename without
+                                   .so suffix). */
+  const char *full_name;        /* Path to the plugin as specified with
+                                   -fplugin=. */
+  int argc;                     /* Number of arguments specified with
+                                   -fplugin-arg-... */
+  struct plugin_argument *argv; /* Array of ARGC key-value pairs. */
+  const char *version;          /* Version string provided by plugin. */
+  const char *help;             /* Help string provided by plugin. */
+};
+
 /* The default version check. Compares every field in VERSION. */
 
 extern bool plugin_default_version_check (struct plugin_gcc_version *,
@@ -87,21 +113,18 @@ extern bool plugin_default_version_check (struct plugin_gcc_version *,
    should define this as an externally-visible function with name
    "plugin_init."
 
-   PLUGIN_NAME - name of the plugin (useful for error reporting)
-   VERSION     - the plugin_gcc_version symbol of the plugin itself.
-   ARGC        - the size of the ARGV array
-   ARGV        - an array of key-value argument pair
+   PLUGIN_INFO - plugin invocation information.
+   VERSION     - the plugin_gcc_version symbol of GCC.
 
    Returns 0 if initialization finishes successfully.  */
 
-typedef int (*plugin_init_func) (const char *plugin_name,
-                                 struct plugin_gcc_version *version,
-                                 int argc, struct plugin_argument *argv);
+typedef int (*plugin_init_func) (struct plugin_name_args *plugin_info,
+                                 struct plugin_gcc_version *version);
 
 /* Declaration for "plugin_init" function so that it doesn't need to be
    duplicated in every plugin.  */
-extern int plugin_init (const char *, struct plugin_gcc_version *version,
-			int, struct plugin_argument *);
+extern int plugin_init (struct plugin_name_args *plugin_info,
+                        struct plugin_gcc_version *version);
 
 /* Function type for a plugin callback routine.
 
@@ -116,7 +139,13 @@ typedef void (*plugin_callback_func) (void *gcc_data, void *user_data);
    PLUGIN_NAME - display name for this plugin
    EVENT       - which event the callback is for
    CALLBACK    - the callback to be called at the event
-   USER_DATA   - plugin-provided data   */
+   USER_DATA   - plugin-provided data.
+*/
+
+/* This is also called without a callback routine for the
+   PLUGIN_PASS_MANAGER_SETUP, PLUGIN_INFO, PLUGIN_REGISTER_GGC_ROOTS
+   pseudo-events, with a specific user_data.
+  */
 
 extern void register_callback (const char *plugin_name,
                                enum plugin_event event,

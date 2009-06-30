@@ -344,7 +344,7 @@ in the following sections.
 \&\-fcheck\-data\-deps \-fconserve\-stack \-fcprop\-registers \-fcrossjumping 
 \&\-fcse\-follow\-jumps \-fcse\-skip\-blocks \-fcx\-fortran\-rules \-fcx\-limited\-range 
 \&\-fdata\-sections \-fdce \-fdce 
-\&\-fdelayed\-branch \-fdelete\-null\-pointer\-checks \-fdse \-fdse 
+\&\-fdelayed\-branch \-fdelete\-null\-pointer\-checks \-fdse \-fdse \-fdyn\-ipa 
 \&\-fearly\-inlining \-fexpensive\-optimizations \-ffast\-math 
 \&\-ffinite\-math\-only \-ffloat\-store \-fforward\-propagate 
 \&\-ffunction\-sections \-fgcse \-fgcse\-after\-reload \-fgcse\-las \-fgcse\-lm 
@@ -585,9 +585,9 @@ in the following sections.
 \&\-maes \-mpclmul 
 \&\-msse4a \-m3dnow \-mpopcnt \-mabm \-msse5 
 \&\-mthreads  \-mno\-align\-stringops  \-minline\-all\-stringops 
-\&\-minline\-stringops\-dynamically \-mstringop\-strategy=\fR\fIalg\fR 
-\&\fB\-mpush\-args  \-maccumulate\-outgoing\-args  \-m128bit\-long\-double 
-\&\-m96bit\-long\-double  \-mregparm=\fR\fInum\fR  \fB\-msseregparm 
+\&\-minline\-stringops\-dynamically \-minline\-compares 
+\&\-mstringop\-strategy=\fR\fIalg\fR \fB\-mpush\-args  \-maccumulate\-outgoing\-args 
+\&\-m128bit\-long\-double \-m96bit\-long\-double \-mregparm=\fR\fInum\fR \fB\-msseregparm 
 \&\-mveclibabi=\fR\fItype\fR \fB\-mpc32 \-mpc64 \-mpc80 \-mstackrealign 
 \&\-momit\-leaf\-frame\-pointer  \-mno\-red\-zone \-mno\-tls\-direct\-seg\-refs 
 \&\-mcmodel=\fR\fIcode-model\fR 
@@ -6144,7 +6144,7 @@ Enable profile feedback directed optimizations, and optimizations
 generally profitable only with profile feedback available.
 .Sp
 The following options are enabled: \f(CW\*(C`\-fbranch\-probabilities\*(C'\fR, \f(CW\*(C`\-fvpt\*(C'\fR,
-\&\f(CW\*(C`\-funroll\-loops\*(C'\fR, \f(CW\*(C`\-fpeel\-loops\*(C'\fR, \f(CW\*(C`\-ftracer\*(C'\fR
+\&\f(CW\*(C`\-funroll\-loops\*(C'\fR, \f(CW\*(C`\-fpeel\-loops\*(C'\fR
 .Sp
 By default, \s-1GCC\s0 emits an error message if the feedback profiles do not
 match the source code.  This error can be turned into a warning by using
@@ -6153,6 +6153,14 @@ code.
 .Sp
 If \fIpath\fR is specified, \s-1GCC\s0 will look at the \fIpath\fR to find
 the profile feedback data files. See \fB\-fprofile\-dir\fR.
+.IP "\fB\-fdyn\-ipa\fR" 4
+.IX Item "-fdyn-ipa"
+Perform dynamic inter-procedural analysis. This is used in conjunction with
+the \fB\-fprofile\-generate\fR and \fB\-fprofile\-use\fR options.
+During the \fB\-fprofile\-generate\fR phase, this flag turns on some additional
+instrumentation code that enables dynamic call-graph analysis.
+During the \fB\-fprofile\-use\fR phase, this flag enables cross-module
+optimizations such as inlining.
 .PP
 The following options control compiler behavior regarding floating
 point arithmetic.  These options trade off between speed and
@@ -6616,9 +6624,19 @@ The default value is 450.
 When you use \fB\-finline\-functions\fR (included in \fB\-O3\fR),
 a lot of functions that would otherwise not be considered for inlining
 by the compiler will be investigated.  To those functions, a different
-(more restrictive) limit compared to functions declared inline can
+(potentially more restrictive) limit compared to functions declared inline can
 be applied.
-The default value is 90.
+The default value is 450.
+.IP "\fBinline-limit-increase-with-profile\fR" 4
+.IX Item "inline-limit-increase-with-profile"
+When profile information is available, such as when compiling
+with \fB\-fprofile\-use\fR, the maximum function size
+limits \fB\-\-param max-inline-insns-single\fR
+and \fB\-\-param max-inline-insns-auto\fR are increased by this percentage
+amount.  Profile information increases the selectivity and quality of the
+inlining decisions, so having a larger set of candidate functions available
+for inlining can improve performance.
+The default value is 100.
 .IP "\fBlarge-function-insns\fR" 4
 .IX Item "large-function-insns"
 The limit specifying really large functions.  For functions larger than this
@@ -10647,6 +10665,11 @@ and memset for short lengths.
 .IX Item "-minline-stringops-dynamically"
 For string operation of unknown size, inline runtime checks so for small
 blocks inline code is used, while for large blocks library call is used.
+.IP "\fB\-minline\-compares\fR" 4
+.IX Item "-minline-compares"
+This option enables \s-1GCC\s0 to inline calls to memcmp and strcmp.  The
+inlined version does a byte-by-byte comparion using a repeat string
+operation prefix.
 .IP "\fB\-mstringop\-strategy=\fR\fIalg\fR" 4
 .IX Item "-mstringop-strategy=alg"
 Overwrite internal decision heuristic about particular algorithm to inline
