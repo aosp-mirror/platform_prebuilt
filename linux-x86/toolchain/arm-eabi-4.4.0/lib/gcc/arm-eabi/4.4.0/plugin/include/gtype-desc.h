@@ -1,5 +1,5 @@
 /* Type information for GCC.
-   Copyright (C) 2004, 2007, 2009 Free Software Foundation, Inc.
+   Copyright (C) 2004, 2007 Free Software Foundation, Inc.
 
 This file is part of GCC.
 
@@ -24,7 +24,6 @@ enum gt_types_enum {
  gt_ggc_e_15interface_tuple, 
  gt_ggc_e_16volatilized_type, 
  gt_ggc_e_17string_descriptor, 
- gt_ggc_e_22VEC_c_saved_builtin_gc, 
  gt_ggc_e_7c_scope, 
  gt_ggc_e_9c_binding, 
  gt_ggc_e_8c_parser, 
@@ -37,7 +36,6 @@ enum gt_types_enum {
  gt_ggc_e_3JCF, 
  gt_ggc_e_17module_htab_entry, 
  gt_ggc_e_13binding_level, 
- gt_ggc_e_20VEC_saved_builtin_gc, 
  gt_ggc_e_9opt_stack, 
  gt_ggc_e_16def_pragma_macro, 
  gt_ggc_e_22def_pragma_macro_value, 
@@ -84,7 +82,6 @@ enum gt_types_enum {
  gt_ggc_e_15throw_stmt_node, 
  gt_ggc_e_16VEC_eh_region_gc, 
  gt_ggc_e_9eh_region, 
- gt_ggc_e_18saved_module_scope, 
  gt_ggc_e_16var_loc_list_def, 
  gt_ggc_e_12var_loc_node, 
  gt_ggc_e_16limbo_die_struct, 
@@ -106,11 +103,10 @@ enum gt_types_enum {
  gt_ggc_e_8typeinfo, 
  gt_ggc_e_22VEC_alias_set_entry_gc, 
  gt_ggc_e_15alias_set_entry, 
- gt_ggc_e_10cgraph_sym, 
- gt_ggc_e_15cgraph_mod_info, 
  gt_ggc_e_15cgraph_asm_node, 
  gt_ggc_e_12varpool_node, 
  gt_ggc_e_11cgraph_edge, 
+ gt_ggc_e_11cgraph_node, 
  gt_ggc_e_18VEC_basic_block_gc, 
  gt_ggc_e_14gimple_bb_info, 
  gt_ggc_e_11rtl_bb_info, 
@@ -158,7 +154,6 @@ enum gt_types_enum {
  gt_ggc_e_12object_block, 
  gt_ggc_e_9reg_attrs, 
  gt_ggc_e_9mem_attrs, 
- gt_ggc_e_11cgraph_node, 
  gt_ggc_e_14bitmap_obstack, 
  gt_ggc_e_18bitmap_element_def, 
  gt_ggc_e_16machine_function, 
@@ -191,6 +186,7 @@ enum gt_types_enum {
  gt_e_P12tree_int_map4htab, 
  gt_e_IP9tree_node12splay_tree_s, 
  gt_e_P9tree_nodeP9tree_node12splay_tree_s, 
+ gt_e_P12varpool_node4htab, 
  gt_e_P13scev_info_str4htab, 
  gt_e_P23constant_descriptor_rtx4htab, 
  gt_e_P24constant_descriptor_tree4htab, 
@@ -205,9 +201,6 @@ enum gt_types_enum {
  gt_e_P9reg_attrs4htab, 
  gt_e_P9mem_attrs4htab, 
  gt_e_P7rtx_def4htab, 
- gt_e_P12varpool_node4htab, 
- gt_e_P10cgraph_sym4htab, 
- gt_e_P18saved_module_scope4htab, 
  gt_e_SP9tree_node12splay_tree_s, 
  gt_e_P16var_loc_list_def4htab, 
  gt_e_P10die_struct4htab, 
@@ -215,7 +208,6 @@ enum gt_types_enum {
  gt_e_P20indirect_string_node4htab, 
  gt_e_P11cgraph_node4htab, 
  gt_e_II12splay_tree_s, 
- gt_e_P15cgraph_mod_info4htab, 
  gt_e_P11cgraph_edge4htab, 
  gt_e_P9loop_exit4htab, 
  gt_e_P9tree_node4htab, 
@@ -236,10 +228,6 @@ extern void gt_ggc_mx_volatilized_type (void *);
   if (X != NULL) gt_ggc_mx_string_descriptor (X);\
   } while (0)
 extern void gt_ggc_mx_string_descriptor (void *);
-#define gt_ggc_m_22VEC_c_saved_builtin_gc(X) do { \
-  if (X != NULL) gt_ggc_mx_VEC_c_saved_builtin_gc (X);\
-  } while (0)
-extern void gt_ggc_mx_VEC_c_saved_builtin_gc (void *);
 #define gt_ggc_m_7c_scope(X) do { \
   if (X != NULL) gt_ggc_mx_c_scope (X);\
   } while (0)
@@ -288,10 +276,6 @@ extern void gt_ggc_mx_module_htab_entry (void *);
   if (X != NULL) gt_ggc_mx_binding_level (X);\
   } while (0)
 extern void gt_ggc_mx_binding_level (void *);
-#define gt_ggc_m_20VEC_saved_builtin_gc(X) do { \
-  if (X != NULL) gt_ggc_mx_VEC_saved_builtin_gc (X);\
-  } while (0)
-extern void gt_ggc_mx_VEC_saved_builtin_gc (void *);
 #define gt_ggc_m_9opt_stack(X) do { \
   if (X != NULL) gt_ggc_mx_opt_stack (X);\
   } while (0)
@@ -476,10 +460,6 @@ extern void gt_ggc_mx_VEC_eh_region_gc (void *);
   if (X != NULL) gt_ggc_mx_eh_region (X);\
   } while (0)
 extern void gt_ggc_mx_eh_region (void *);
-#define gt_ggc_m_18saved_module_scope(X) do { \
-  if (X != NULL) gt_ggc_mx_saved_module_scope (X);\
-  } while (0)
-extern void gt_ggc_mx_saved_module_scope (void *);
 #define gt_ggc_m_16var_loc_list_def(X) do { \
   if (X != NULL) gt_ggc_mx_var_loc_list_def (X);\
   } while (0)
@@ -564,14 +544,6 @@ extern void gt_ggc_mx_VEC_alias_set_entry_gc (void *);
   if (X != NULL) gt_ggc_mx_alias_set_entry (X);\
   } while (0)
 extern void gt_ggc_mx_alias_set_entry (void *);
-#define gt_ggc_m_10cgraph_sym(X) do { \
-  if (X != NULL) gt_ggc_mx_cgraph_sym (X);\
-  } while (0)
-extern void gt_ggc_mx_cgraph_sym (void *);
-#define gt_ggc_m_15cgraph_mod_info(X) do { \
-  if (X != NULL) gt_ggc_mx_cgraph_mod_info (X);\
-  } while (0)
-extern void gt_ggc_mx_cgraph_mod_info (void *);
 #define gt_ggc_m_15cgraph_asm_node(X) do { \
   if (X != NULL) gt_ggc_mx_cgraph_asm_node (X);\
   } while (0)
@@ -584,6 +556,10 @@ extern void gt_ggc_mx_varpool_node (void *);
   if (X != NULL) gt_ggc_mx_cgraph_edge (X);\
   } while (0)
 extern void gt_ggc_mx_cgraph_edge (void *);
+#define gt_ggc_m_11cgraph_node(X) do { \
+  if (X != NULL) gt_ggc_mx_cgraph_node (X);\
+  } while (0)
+extern void gt_ggc_mx_cgraph_node (void *);
 #define gt_ggc_m_18VEC_basic_block_gc(X) do { \
   if (X != NULL) gt_ggc_mx_VEC_basic_block_gc (X);\
   } while (0)
@@ -772,10 +748,6 @@ extern void gt_ggc_mx_reg_attrs (void *);
   if (X != NULL) gt_ggc_mx_mem_attrs (X);\
   } while (0)
 extern void gt_ggc_mx_mem_attrs (void *);
-#define gt_ggc_m_11cgraph_node(X) do { \
-  if (X != NULL) gt_ggc_mx_cgraph_node (X);\
-  } while (0)
-extern void gt_ggc_mx_cgraph_node (void *);
 #define gt_ggc_m_14bitmap_obstack(X) do { \
   if (X != NULL) gt_ggc_mx_bitmap_obstack (X);\
   } while (0)
@@ -853,6 +825,7 @@ extern void gt_ggc_m_P17named_label_entry4htab (void *);
 extern void gt_ggc_m_P12tree_int_map4htab (void *);
 extern void gt_ggc_m_IP9tree_node12splay_tree_s (void *);
 extern void gt_ggc_m_P9tree_nodeP9tree_node12splay_tree_s (void *);
+extern void gt_ggc_m_P12varpool_node4htab (void *);
 extern void gt_ggc_m_P13scev_info_str4htab (void *);
 extern void gt_ggc_m_P23constant_descriptor_rtx4htab (void *);
 extern void gt_ggc_m_P24constant_descriptor_tree4htab (void *);
@@ -867,9 +840,6 @@ extern void gt_ggc_m_P15throw_stmt_node4htab (void *);
 extern void gt_ggc_m_P9reg_attrs4htab (void *);
 extern void gt_ggc_m_P9mem_attrs4htab (void *);
 extern void gt_ggc_m_P7rtx_def4htab (void *);
-extern void gt_ggc_m_P12varpool_node4htab (void *);
-extern void gt_ggc_m_P10cgraph_sym4htab (void *);
-extern void gt_ggc_m_P18saved_module_scope4htab (void *);
 extern void gt_ggc_m_SP9tree_node12splay_tree_s (void *);
 extern void gt_ggc_m_P16var_loc_list_def4htab (void *);
 extern void gt_ggc_m_P10die_struct4htab (void *);
@@ -877,7 +847,6 @@ extern void gt_ggc_m_P15dwarf_file_data4htab (void *);
 extern void gt_ggc_m_P20indirect_string_node4htab (void *);
 extern void gt_ggc_m_P11cgraph_node4htab (void *);
 extern void gt_ggc_m_II12splay_tree_s (void *);
-extern void gt_ggc_m_P15cgraph_mod_info4htab (void *);
 extern void gt_ggc_m_P11cgraph_edge4htab (void *);
 extern void gt_ggc_m_P9loop_exit4htab (void *);
 extern void gt_ggc_m_P9tree_node4htab (void *);
@@ -896,10 +865,6 @@ extern void gt_pch_nx_volatilized_type (void *);
   if (X != NULL) gt_pch_nx_string_descriptor (X);\
   } while (0)
 extern void gt_pch_nx_string_descriptor (void *);
-#define gt_pch_n_22VEC_c_saved_builtin_gc(X) do { \
-  if (X != NULL) gt_pch_nx_VEC_c_saved_builtin_gc (X);\
-  } while (0)
-extern void gt_pch_nx_VEC_c_saved_builtin_gc (void *);
 #define gt_pch_n_7c_scope(X) do { \
   if (X != NULL) gt_pch_nx_c_scope (X);\
   } while (0)
@@ -948,10 +913,6 @@ extern void gt_pch_nx_module_htab_entry (void *);
   if (X != NULL) gt_pch_nx_binding_level (X);\
   } while (0)
 extern void gt_pch_nx_binding_level (void *);
-#define gt_pch_n_20VEC_saved_builtin_gc(X) do { \
-  if (X != NULL) gt_pch_nx_VEC_saved_builtin_gc (X);\
-  } while (0)
-extern void gt_pch_nx_VEC_saved_builtin_gc (void *);
 #define gt_pch_n_9opt_stack(X) do { \
   if (X != NULL) gt_pch_nx_opt_stack (X);\
   } while (0)
@@ -1136,10 +1097,6 @@ extern void gt_pch_nx_VEC_eh_region_gc (void *);
   if (X != NULL) gt_pch_nx_eh_region (X);\
   } while (0)
 extern void gt_pch_nx_eh_region (void *);
-#define gt_pch_n_18saved_module_scope(X) do { \
-  if (X != NULL) gt_pch_nx_saved_module_scope (X);\
-  } while (0)
-extern void gt_pch_nx_saved_module_scope (void *);
 #define gt_pch_n_16var_loc_list_def(X) do { \
   if (X != NULL) gt_pch_nx_var_loc_list_def (X);\
   } while (0)
@@ -1224,14 +1181,6 @@ extern void gt_pch_nx_VEC_alias_set_entry_gc (void *);
   if (X != NULL) gt_pch_nx_alias_set_entry (X);\
   } while (0)
 extern void gt_pch_nx_alias_set_entry (void *);
-#define gt_pch_n_10cgraph_sym(X) do { \
-  if (X != NULL) gt_pch_nx_cgraph_sym (X);\
-  } while (0)
-extern void gt_pch_nx_cgraph_sym (void *);
-#define gt_pch_n_15cgraph_mod_info(X) do { \
-  if (X != NULL) gt_pch_nx_cgraph_mod_info (X);\
-  } while (0)
-extern void gt_pch_nx_cgraph_mod_info (void *);
 #define gt_pch_n_15cgraph_asm_node(X) do { \
   if (X != NULL) gt_pch_nx_cgraph_asm_node (X);\
   } while (0)
@@ -1244,6 +1193,10 @@ extern void gt_pch_nx_varpool_node (void *);
   if (X != NULL) gt_pch_nx_cgraph_edge (X);\
   } while (0)
 extern void gt_pch_nx_cgraph_edge (void *);
+#define gt_pch_n_11cgraph_node(X) do { \
+  if (X != NULL) gt_pch_nx_cgraph_node (X);\
+  } while (0)
+extern void gt_pch_nx_cgraph_node (void *);
 #define gt_pch_n_18VEC_basic_block_gc(X) do { \
   if (X != NULL) gt_pch_nx_VEC_basic_block_gc (X);\
   } while (0)
@@ -1432,10 +1385,6 @@ extern void gt_pch_nx_reg_attrs (void *);
   if (X != NULL) gt_pch_nx_mem_attrs (X);\
   } while (0)
 extern void gt_pch_nx_mem_attrs (void *);
-#define gt_pch_n_11cgraph_node(X) do { \
-  if (X != NULL) gt_pch_nx_cgraph_node (X);\
-  } while (0)
-extern void gt_pch_nx_cgraph_node (void *);
 #define gt_pch_n_14bitmap_obstack(X) do { \
   if (X != NULL) gt_pch_nx_bitmap_obstack (X);\
   } while (0)
@@ -1513,6 +1462,7 @@ extern void gt_pch_n_P17named_label_entry4htab (void *);
 extern void gt_pch_n_P12tree_int_map4htab (void *);
 extern void gt_pch_n_IP9tree_node12splay_tree_s (void *);
 extern void gt_pch_n_P9tree_nodeP9tree_node12splay_tree_s (void *);
+extern void gt_pch_n_P12varpool_node4htab (void *);
 extern void gt_pch_n_P13scev_info_str4htab (void *);
 extern void gt_pch_n_P23constant_descriptor_rtx4htab (void *);
 extern void gt_pch_n_P24constant_descriptor_tree4htab (void *);
@@ -1527,9 +1477,6 @@ extern void gt_pch_n_P15throw_stmt_node4htab (void *);
 extern void gt_pch_n_P9reg_attrs4htab (void *);
 extern void gt_pch_n_P9mem_attrs4htab (void *);
 extern void gt_pch_n_P7rtx_def4htab (void *);
-extern void gt_pch_n_P12varpool_node4htab (void *);
-extern void gt_pch_n_P10cgraph_sym4htab (void *);
-extern void gt_pch_n_P18saved_module_scope4htab (void *);
 extern void gt_pch_n_SP9tree_node12splay_tree_s (void *);
 extern void gt_pch_n_P16var_loc_list_def4htab (void *);
 extern void gt_pch_n_P10die_struct4htab (void *);
@@ -1537,7 +1484,6 @@ extern void gt_pch_n_P15dwarf_file_data4htab (void *);
 extern void gt_pch_n_P20indirect_string_node4htab (void *);
 extern void gt_pch_n_P11cgraph_node4htab (void *);
 extern void gt_pch_n_II12splay_tree_s (void *);
-extern void gt_pch_n_P15cgraph_mod_info4htab (void *);
 extern void gt_pch_n_P11cgraph_edge4htab (void *);
 extern void gt_pch_n_P9loop_exit4htab (void *);
 extern void gt_pch_n_P9tree_node4htab (void *);
@@ -1549,8 +1495,6 @@ extern void gt_pch_p_15interface_tuple
 extern void gt_pch_p_16volatilized_type
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_17string_descriptor
-    (void *, void *, gt_pointer_operator, void *);
-extern void gt_pch_p_22VEC_c_saved_builtin_gc
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_7c_scope
     (void *, void *, gt_pointer_operator, void *);
@@ -1575,8 +1519,6 @@ extern void gt_pch_p_3JCF
 extern void gt_pch_p_17module_htab_entry
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_13binding_level
-    (void *, void *, gt_pointer_operator, void *);
-extern void gt_pch_p_20VEC_saved_builtin_gc
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_9opt_stack
     (void *, void *, gt_pointer_operator, void *);
@@ -1670,8 +1612,6 @@ extern void gt_pch_p_16VEC_eh_region_gc
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_9eh_region
     (void *, void *, gt_pointer_operator, void *);
-extern void gt_pch_p_18saved_module_scope
-    (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_16var_loc_list_def
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_12var_loc_node
@@ -1714,15 +1654,13 @@ extern void gt_pch_p_22VEC_alias_set_entry_gc
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_15alias_set_entry
     (void *, void *, gt_pointer_operator, void *);
-extern void gt_pch_p_10cgraph_sym
-    (void *, void *, gt_pointer_operator, void *);
-extern void gt_pch_p_15cgraph_mod_info
-    (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_15cgraph_asm_node
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_12varpool_node
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_11cgraph_edge
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_11cgraph_node
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_18VEC_basic_block_gc
     (void *, void *, gt_pointer_operator, void *);
@@ -1818,8 +1756,6 @@ extern void gt_pch_p_9reg_attrs
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_9mem_attrs
     (void *, void *, gt_pointer_operator, void *);
-extern void gt_pch_p_11cgraph_node
-    (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_14bitmap_obstack
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_18bitmap_element_def
@@ -1883,6 +1819,8 @@ extern void gt_pch_p_IP9tree_node12splay_tree_s
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_P9tree_nodeP9tree_node12splay_tree_s
     (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_P12varpool_node4htab
+    (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_P13scev_info_str4htab
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_P23constant_descriptor_rtx4htab
@@ -1911,12 +1849,6 @@ extern void gt_pch_p_P9mem_attrs4htab
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_P7rtx_def4htab
     (void *, void *, gt_pointer_operator, void *);
-extern void gt_pch_p_P12varpool_node4htab
-    (void *, void *, gt_pointer_operator, void *);
-extern void gt_pch_p_P10cgraph_sym4htab
-    (void *, void *, gt_pointer_operator, void *);
-extern void gt_pch_p_P18saved_module_scope4htab
-    (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_SP9tree_node12splay_tree_s
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_P16var_loc_list_def4htab
@@ -1930,8 +1862,6 @@ extern void gt_pch_p_P20indirect_string_node4htab
 extern void gt_pch_p_P11cgraph_node4htab
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_II12splay_tree_s
-    (void *, void *, gt_pointer_operator, void *);
-extern void gt_pch_p_P15cgraph_mod_info4htab
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_P11cgraph_edge4htab
     (void *, void *, gt_pointer_operator, void *);

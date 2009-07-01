@@ -21,7 +21,6 @@ along with GCC; see the file COPYING3.  If not see
 #ifndef GCC_TOPLEV_H
 #define GCC_TOPLEV_H
 #include "input.h"
-#include "l-ipo.h"
 
 /* If non-NULL, return one past-the-end of the matching SUBPART of
    the WHOLE string.  */

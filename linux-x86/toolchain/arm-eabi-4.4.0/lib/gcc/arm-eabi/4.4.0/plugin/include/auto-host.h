@@ -852,12 +852,6 @@
 #endif
 
 
-/* Define if your assembler supports the .loc discriminator sub-directive. */
-#ifndef USED_FOR_TARGET
-/* #undef HAVE_GAS_DISCRIMINATOR */
-#endif
-
-
 /* Define if your assembler uses the new HImode fild and fist notation. */
 #ifndef USED_FOR_TARGET
 /* #undef HAVE_GAS_FILDS_FISTS */

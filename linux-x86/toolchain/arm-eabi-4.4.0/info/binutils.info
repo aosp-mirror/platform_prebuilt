@@ -1,5 +1,5 @@
 This is binutils.info, produced by makeinfo version 4.8 from
-../../../../toolchain/android-toolchain/binutils-2.19/binutils/doc/binutils.texi.
+/home/jingyu/projects/gcc/android-toolchain/binutils-2.19/binutils/doc/binutils.texi.
 
    Copyright (C) 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999,
 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 Free Software
@@ -4230,34 +4230,34 @@ Binutils Index
 
 
 Tag Table:
-Node: Top1990
-Node: ar3621
-Node: ar cmdline6408
-Node: ar scripts14788
-Node: nm20476
-Node: objcopy28981
-Node: objdump54433
-Node: ranlib72973
-Node: size73794
-Node: strings76799
-Node: strip79251
-Node: c++filt85202
-Ref: c++filt-Footnote-190149
-Node: addr2line90255
-Node: nlmconv93526
-Node: windmc96132
-Node: windres99779
-Node: dlltool105806
-Node: def file format116643
-Node: readelf118381
-Node: Common Options123935
-Node: Selecting the Target System124975
-Node: Target Selection125907
-Node: Architecture Selection127889
-Node: Reporting Bugs128717
-Node: Bug Criteria129496
-Node: Bug Reporting130049
-Node: GNU Free Documentation License136919
-Node: Binutils Index159363
+Node: Top1994
+Node: ar3625
+Node: ar cmdline6412
+Node: ar scripts14792
+Node: nm20480
+Node: objcopy28985
+Node: objdump54437
+Node: ranlib72977
+Node: size73798
+Node: strings76803
+Node: strip79255
+Node: c++filt85206
+Ref: c++filt-Footnote-190153
+Node: addr2line90259
+Node: nlmconv93530
+Node: windmc96136
+Node: windres99783
+Node: dlltool105810
+Node: def file format116647
+Node: readelf118385
+Node: Common Options123939
+Node: Selecting the Target System124979
+Node: Target Selection125911
+Node: Architecture Selection127893
+Node: Reporting Bugs128721
+Node: Bug Criteria129500
+Node: Bug Reporting130053
+Node: GNU Free Documentation License136923
+Node: Binutils Index159367
 
 End Tag Table

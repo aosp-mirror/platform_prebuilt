@@ -1,5 +1,5 @@
 This is annotate.info, produced by makeinfo version 4.8 from
-../../../../toolchain/android-toolchain/gdb-6.6/gdb/doc/annotate.texinfo.
+/home/jingyu/projects/gcc/android-toolchain/gdb-6.6/gdb/doc/annotate.texinfo.
 
 INFO-DIR-SECTION Software development
 START-INFO-DIR-ENTRY
@@ -1089,20 +1089,20 @@ permit their use in free software.
 
 
 Tag Table:
-Node: Top803
-Node: Annotations Overview1902
-Node: Limitations3701
-Node: Migrating to GDB/MI6286
-Node: Server Prefix6669
-Node: Value Annotations7315
-Node: Frame Annotations10485
-Node: Displays14384
-Node: Prompting15415
-Node: Errors16918
-Node: Breakpoint Info17808
-Node: Invalidation19033
-Node: Annotations for Running19512
-Node: Source Annotations21025
-Node: GNU Free Documentation License21982
+Node: Top807
+Node: Annotations Overview1906
+Node: Limitations3705
+Node: Migrating to GDB/MI6290
+Node: Server Prefix6673
+Node: Value Annotations7319
+Node: Frame Annotations10489
+Node: Displays14388
+Node: Prompting15419
+Node: Errors16922
+Node: Breakpoint Info17812
+Node: Invalidation19037
+Node: Annotations for Running19516
+Node: Source Annotations21029
+Node: GNU Free Documentation License21986
 
 End Tag Table
