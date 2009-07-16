@@ -1,5 +1,5 @@
 This is doc/gccinstall.info, produced by makeinfo version 4.8 from
-../../../toolchain/android-toolchain/gcc-4.4.0/gcc/doc/install.texi.
+/home/dougkwan/android-tool-src/toolchain/android-toolchain/gcc-4.4.0/gcc/doc/install.texi.
 
    Copyright (C) 1988, 1989, 1992, 1993, 1994, 1995, 1996, 1997, 1998,
 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 Free
@@ -4183,84 +4183,84 @@ Concept Index
 
 
 Tag Table:
-Node: Top1965
-Node: Installing GCC2523
-Node: Prerequisites4038
-Node: Downloading the source13043
-Node: Configuration14964
-Ref: with-gnu-as29540
-Ref: with-as30438
-Ref: with-gnu-ld31851
-Node: Building69404
-Node: Testing81347
-Node: Final install89127
-Node: Binaries94357
-Node: Specific96330
-Ref: alpha-x-x96836
-Ref: alpha-dec-osf97325
-Ref: arc-x-elf100448
-Ref: arm-x-elf100548
-Ref: arm-x-coff100768
-Ref: arm-x-aout100970
-Ref: avr101092
-Ref: bfin101776
-Ref: cris102018
-Ref: crx102834
-Ref: dos103497
-Ref: x-x-freebsd103820
-Ref: h8300-hms106203
-Ref: hppa-hp-hpux106555
-Ref: hppa-hp-hpux10108926
-Ref: hppa-hp-hpux11109559
-Ref: x-x-linux-gnu115218
-Ref: ix86-x-linux115411
-Ref: ix86-x-solaris210115724
-Ref: ia64-x-linux116110
-Ref: ia64-x-hpux116880
-Ref: x-ibm-aix117435
-Ref: iq2000-x-elf123418
-Ref: m32c-x-elf123558
-Ref: m32r-x-elf123660
-Ref: m6811-elf123762
-Ref: m6812-elf123912
-Ref: m68k-x-x124062
-Ref: m68k-x-uclinux125067
-Ref: mips-x-x125430
-Ref: mips-sgi-irix5128107
-Ref: mips-sgi-irix6129055
-Ref: powerpc-x-x131862
-Ref: powerpc-x-darwin132067
-Ref: powerpc-x-elf132614
-Ref: powerpc-x-linux-gnu132699
-Ref: powerpc-x-netbsd132794
-Ref: powerpc-x-eabisim132882
-Ref: powerpc-x-eabi133008
-Ref: powerpcle-x-elf133084
-Ref: powerpcle-x-eabisim133176
-Ref: powerpcle-x-eabi133309
-Ref: s390-x-linux133392
-Ref: s390x-x-linux133464
-Ref: s390x-ibm-tpf133551
-Ref: x-x-solaris2133682
-Ref: sparc-sun-solaris2137559
-Ref: sparc-sun-solaris27140280
-Ref: sparc-x-linux142744
-Ref: sparc64-x-solaris2142969
-Ref: sparcv9-x-solaris2143614
-Ref: x-x-vxworks143699
-Ref: x86-64-x-x145221
-Ref: xtensa-x-elf145549
-Ref: xtensa-x-linux146220
-Ref: windows146561
-Ref: x-x-cygwin148516
-Ref: x-x-interix148786
-Ref: x-x-mingw32149152
-Ref: os2149378
-Ref: older149569
-Ref: elf151686
-Node: Old151944
-Node: Configurations155081
-Node: GNU Free Documentation License159063
-Node: Concept Index181479
+Node: Top1988
+Node: Installing GCC2546
+Node: Prerequisites4061
+Node: Downloading the source13066
+Node: Configuration14987
+Ref: with-gnu-as29563
+Ref: with-as30461
+Ref: with-gnu-ld31874
+Node: Building69427
+Node: Testing81370
+Node: Final install89150
+Node: Binaries94380
+Node: Specific96353
+Ref: alpha-x-x96859
+Ref: alpha-dec-osf97348
+Ref: arc-x-elf100471
+Ref: arm-x-elf100571
+Ref: arm-x-coff100791
+Ref: arm-x-aout100993
+Ref: avr101115
+Ref: bfin101799
+Ref: cris102041
+Ref: crx102857
+Ref: dos103520
+Ref: x-x-freebsd103843
+Ref: h8300-hms106226
+Ref: hppa-hp-hpux106578
+Ref: hppa-hp-hpux10108949
+Ref: hppa-hp-hpux11109582
+Ref: x-x-linux-gnu115241
+Ref: ix86-x-linux115434
+Ref: ix86-x-solaris210115747
+Ref: ia64-x-linux116133
+Ref: ia64-x-hpux116903
+Ref: x-ibm-aix117458
+Ref: iq2000-x-elf123441
+Ref: m32c-x-elf123581
+Ref: m32r-x-elf123683
+Ref: m6811-elf123785
+Ref: m6812-elf123935
+Ref: m68k-x-x124085
+Ref: m68k-x-uclinux125090
+Ref: mips-x-x125453
+Ref: mips-sgi-irix5128130
+Ref: mips-sgi-irix6129078
+Ref: powerpc-x-x131885
+Ref: powerpc-x-darwin132090
+Ref: powerpc-x-elf132637
+Ref: powerpc-x-linux-gnu132722
+Ref: powerpc-x-netbsd132817
+Ref: powerpc-x-eabisim132905
+Ref: powerpc-x-eabi133031
+Ref: powerpcle-x-elf133107
+Ref: powerpcle-x-eabisim133199
+Ref: powerpcle-x-eabi133332
+Ref: s390-x-linux133415
+Ref: s390x-x-linux133487
+Ref: s390x-ibm-tpf133574
+Ref: x-x-solaris2133705
+Ref: sparc-sun-solaris2137582
+Ref: sparc-sun-solaris27140303
+Ref: sparc-x-linux142767
+Ref: sparc64-x-solaris2142992
+Ref: sparcv9-x-solaris2143637
+Ref: x-x-vxworks143722
+Ref: x86-64-x-x145244
+Ref: xtensa-x-elf145572
+Ref: xtensa-x-linux146243
+Ref: windows146584
+Ref: x-x-cygwin148539
+Ref: x-x-interix148809
+Ref: x-x-mingw32149175
+Ref: os2149401
+Ref: older149592
+Ref: elf151709
+Node: Old151967
+Node: Configurations155104
+Node: GNU Free Documentation License159086
+Node: Concept Index181502
 
 End Tag Table

@@ -501,6 +501,12 @@ struct function GTY(())
      pointer.  */
   tree nonlocal_goto_save_area;
 
+  /* Function's module id.  */
+  unsigned module_id;
+
+  /* Function sequence number for profiling, debugging, etc.  */
+  int funcdef_no;
+
   /* List of function local variables, functions, types and constants.  */
   tree local_decls;
 
@@ -517,9 +523,6 @@ struct function GTY(())
 
   /* Last statement uid.  */
   int last_stmt_uid;
-
-  /* Function sequence number for profiling, debugging, etc.  */
-  int funcdef_no;
 
   /* Line number of the start of the function for debugging purposes.  */
   location_t function_start_locus;
@@ -601,6 +604,32 @@ struct function GTY(())
      function.  */
   unsigned int is_thunk : 1;
 };
+
+/* The bit width of function id in the global function id used
+   in LIPO.  */
+#define FUNC_ID_WIDTH HOST_BITS_PER_WIDEST_INT / 2
+/* The mask to extract function id from the global function id.  */
+#define FUNC_ID_MASK ((1ll << FUNC_ID_WIDTH) - 1)
+/* Macro to extract module id from global function id GID.  */
+#define EXTRACT_MODULE_ID_FROM_GLOBAL_ID(gid) (unsigned)(((gid) >>\
+                                        FUNC_ID_WIDTH) & FUNC_ID_MASK)
+/* Macro to extract function id from global function id GID.  */
+#define EXTRACT_FUNC_ID_FROM_GLOBAL_ID(gid) (unsigned)((gid) & FUNC_ID_MASK)
+/* Macro to generate a global function id from module id M and
+   function id F.  */
+#define GEN_FUNC_GLOBAL_ID(m,f) ((((HOST_WIDEST_INT) (m)) << FUNC_ID_WIDTH)\
+                                 | (f))
+/* Access macro for module_id field of function FUNC.  */
+#define FUNC_DECL_MODULE_ID(func) ((func)->module_id)
+/* Access macro for funcdef_no field of function FUNC.  */
+#define FUNC_DECL_FUNC_ID(func)   ((func)->funcdef_no + 1)
+/* Macro to compute global function id for FUNC.  */
+#define FUNC_DECL_GLOBAL_ID(func) \
+  GEN_FUNC_GLOBAL_ID (FUNC_DECL_MODULE_ID (func), FUNC_DECL_FUNC_ID (func))
+/* 32 bit wide unique id used for asm label (limit: 30k modules,
+   128k funcs per module.  */
+#define FUNC_LABEL_ID(func) ((FUNC_DECL_MODULE_ID (func) << 17) +\
+                             (func)->funcdef_no)
 
 /* If va_list_[gf]pr_size is set to this, it means we don't know how
    many units need to be saved.  */
@@ -687,4 +716,8 @@ extern bool reference_callee_copied (CUMULATIVE_ARGS *, enum machine_mode,
 extern void used_types_insert (tree);
 
 extern int get_next_funcdef_no (void);
+extern int get_current_funcdef_no (void);
+
+extern void reset_funcdef_no (void);
+extern void set_funcdef_no (int);
 #endif  /* GCC_FUNCTION_H */

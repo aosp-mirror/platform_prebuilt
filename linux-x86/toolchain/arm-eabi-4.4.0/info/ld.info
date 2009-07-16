@@ -1,5 +1,5 @@
 This is ld.info, produced by makeinfo version 4.8 from
-../../../../android-toolchain/binutils-2.19/ld/ld.texinfo.
+/home/dougkwan/android-tool-src/toolchain/android-toolchain/binutils-2.19/ld/ld.texinfo.
 
 START-INFO-DIR-ENTRY
 * Ld: (ld).                       The GNU linker.
@@ -4542,6 +4542,15 @@ relative `bal' and `cal' instructions, respectively.  `ld' also turns
 target subroutine is a leaf routine (that is, the target subroutine does
 not itself call any subroutines).
 
+   The `--fix-cortex-a8' switch enables a link-time workaround for an
+erratum in certain Cortex-A8 processors.  The workaround is enabled by
+default if you are targeting the ARM v7-A architecture profile.  It can
+be enabled otherwise by specifying `--fix-cortex-a8', or disabled
+unconditionally by specifying `--no-fix-cortex-a8'.
+
+   The erratum only affects Thumb-2 code.  Please contact ARM for
+further details.
+
 
 File: ld.info,  Node: M68HC11/68HC12,  Next: PowerPC ELF32,  Prev: MSP430,  Up: Machine Dependent
 
@@ -4717,7 +4726,7 @@ where they should be placed.
 
    The value of `N', the parameter to the `--stub-group-size=' option
 controls where the stub groups are placed.  If it is negative then all
-stubs are placed before the first branch that needs them.  If it is
+stubs are placed after the first branch that needs them.  If it is
 positive then the stubs can be placed either before or after the
 branches that need them.  If the value of `N' is 1 (either +1 or -1)
 then the linker will choose exactly where to place groups of stubs,
@@ -6464,6 +6473,7 @@ LD Index
 * --fatal-warnings:                      Options.            (line  837)
 * --file-alignment:                      Options.            (line 1533)
 * --filter:                              Options.            (line  228)
+* --fix-cortex-a8:                       i960.               (line   39)
 * --fix-v4bx:                            ARM.                (line   44)
 * --fix-v4bx-interworking:               ARM.                (line   57)
 * --force-dynamic:                       Options.            (line  434)
@@ -6504,6 +6514,7 @@ LD Index
 * --no-dotsyms:                          PowerPC64 ELF64.    (line   33)
 * --no-enum-size-warning:                ARM.                (line  106)
 * --no-fatal-warnings:                   Options.            (line  837)
+* --no-fix-cortex-a8:                    i960.               (line   39)
 * --no-gc-sections:                      Options.            (line  852)
 * --no-keep-memory:                      Options.            (line  895)
 * --no-multi-toc:                        PowerPC64 ELF64.    (line   74)
@@ -6734,6 +6745,7 @@ LD Index
 * constructors:                          Options.            (line  511)
 * constructors, arranging in link:       Output Section Keywords.
                                                              (line   19)
+* Cortex-A8 erratum workaround:          i960.               (line   39)
 * crash of linker:                       Bug Criteria.       (line    9)
 * CREATE_OBJECT_SYMBOLS:                 Output Section Keywords.
                                                              (line    9)
@@ -7135,84 +7147,84 @@ LD Index
 
 
 Tag Table:
-Node: Top794
-Node: Overview1565
-Node: Invocation2679
-Node: Options3087
-Node: Environment85552
-Node: Scripts87312
-Node: Basic Script Concepts89046
-Node: Script Format91753
-Node: Simple Example92616
-Node: Simple Commands95712
-Node: Entry Point96163
-Node: File Commands96922
-Node: Format Commands100923
-Node: Miscellaneous Commands102889
-Node: Assignments106268
-Node: Simple Assignments106759
-Node: PROVIDE108495
-Node: PROVIDE_HIDDEN109700
-Node: Source Code Reference109944
-Node: SECTIONS113524
-Node: Output Section Description115415
-Node: Output Section Name116468
-Node: Output Section Address117344
-Node: Input Section118993
-Node: Input Section Basics119794
-Node: Input Section Wildcards123012
-Node: Input Section Common127745
-Node: Input Section Keep129227
-Node: Input Section Example129717
-Node: Output Section Data130685
-Node: Output Section Keywords133462
-Node: Output Section Discarding137031
-Node: Output Section Attributes138212
-Node: Output Section Type139216
-Node: Output Section LMA140370
-Node: Forced Output Alignment142883
-Node: Forced Input Alignment143151
-Node: Output Section Region143536
-Node: Output Section Phdr143966
-Node: Output Section Fill144630
-Node: Overlay Description145772
-Node: MEMORY150075
-Node: PHDRS154275
-Node: VERSION159314
-Node: Expressions167106
-Node: Constants167984
-Node: Symbols168545
-Node: Orphan Sections169283
-Node: Location Counter170447
-Node: Operators174883
-Node: Evaluation175805
-Node: Expression Section177169
-Node: Builtin Functions178658
-Node: Implicit Linker Scripts186625
-Node: Machine Dependent187400
-Node: H8/300188416
-Node: i960190041
-Node: M68HC11/68HC12191726
-Node: ARM193180
-Node: HPPA ELF32200430
-Node: M68K202053
-Node: MMIX202962
-Node: MSP430204127
-Node: PowerPC ELF32205176
-Node: PowerPC64 ELF64207790
-Node: SPU ELF212206
-Node: TI COFF214838
-Node: WIN32215364
-Node: Xtensa233721
-Node: BFD236843
-Node: BFD outline238298
-Node: BFD information loss239584
-Node: Canonical format242101
-Node: Reporting Bugs246458
-Node: Bug Criteria247152
-Node: Bug Reporting247851
-Node: MRI254890
-Node: GNU Free Documentation License259533
-Node: LD Index279250
+Node: Top824
+Node: Overview1595
+Node: Invocation2709
+Node: Options3117
+Node: Environment85582
+Node: Scripts87342
+Node: Basic Script Concepts89076
+Node: Script Format91783
+Node: Simple Example92646
+Node: Simple Commands95742
+Node: Entry Point96193
+Node: File Commands96952
+Node: Format Commands100953
+Node: Miscellaneous Commands102919
+Node: Assignments106298
+Node: Simple Assignments106789
+Node: PROVIDE108525
+Node: PROVIDE_HIDDEN109730
+Node: Source Code Reference109974
+Node: SECTIONS113554
+Node: Output Section Description115445
+Node: Output Section Name116498
+Node: Output Section Address117374
+Node: Input Section119023
+Node: Input Section Basics119824
+Node: Input Section Wildcards123042
+Node: Input Section Common127775
+Node: Input Section Keep129257
+Node: Input Section Example129747
+Node: Output Section Data130715
+Node: Output Section Keywords133492
+Node: Output Section Discarding137061
+Node: Output Section Attributes138242
+Node: Output Section Type139246
+Node: Output Section LMA140400
+Node: Forced Output Alignment142913
+Node: Forced Input Alignment143181
+Node: Output Section Region143566
+Node: Output Section Phdr143996
+Node: Output Section Fill144660
+Node: Overlay Description145802
+Node: MEMORY150105
+Node: PHDRS154305
+Node: VERSION159344
+Node: Expressions167136
+Node: Constants168014
+Node: Symbols168575
+Node: Orphan Sections169313
+Node: Location Counter170477
+Node: Operators174913
+Node: Evaluation175835
+Node: Expression Section177199
+Node: Builtin Functions178688
+Node: Implicit Linker Scripts186655
+Node: Machine Dependent187430
+Node: H8/300188446
+Node: i960190071
+Node: M68HC11/68HC12192172
+Node: ARM193626
+Node: HPPA ELF32200875
+Node: M68K202498
+Node: MMIX203407
+Node: MSP430204572
+Node: PowerPC ELF32205621
+Node: PowerPC64 ELF64208235
+Node: SPU ELF212651
+Node: TI COFF215283
+Node: WIN32215809
+Node: Xtensa234166
+Node: BFD237288
+Node: BFD outline238743
+Node: BFD information loss240029
+Node: Canonical format242546
+Node: Reporting Bugs246903
+Node: Bug Criteria247597
+Node: Bug Reporting248296
+Node: MRI255335
+Node: GNU Free Documentation License259978
+Node: LD Index279695
 
 End Tag Table

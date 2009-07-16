@@ -268,6 +268,7 @@ extern int flag_reorder_blocks_and_partition;
 extern int flag_reorder_functions;
 extern int flag_rerun_cse_after_loop;
 extern int flag_resched_modulo_sched;
+extern int flag_dyn_ipa;
 extern int flag_rounding_math;
 extern int flag_rtl_seqabstr;
 extern int flag_sample_profile;
@@ -352,6 +353,7 @@ extern int flag_value_profile_transformations;
 extern int flag_web;
 extern int flag_whole_program;
 extern int flag_wrapv;
+extern int flag_zee;
 extern int flag_zero_initialized_in_bss;
 extern const char *target_abi_name;
 extern int fix_cm3_ldrd;
@@ -1159,6 +1161,7 @@ enum opt_code
   OPT_frerun_cse_after_loop,                 /* -frerun-cse-after-loop */
   OPT_frerun_loop_opt,                       /* -frerun-loop-opt */
   OPT_freschedule_modulo_scheduled_loops,    /* -freschedule-modulo-scheduled-loops */
+  OPT_fripa,                                 /* -fripa */
   OPT_frounding_math,                        /* -frounding-math */
   OPT_frtl_abstract_sequences,               /* -frtl-abstract-sequences */
   OPT_frtti,                                 /* -frtti */
@@ -1293,6 +1296,7 @@ enum opt_code
   OPT_fworking_directory,                    /* -fworking-directory */
   OPT_fwrapv,                                /* -fwrapv */
   OPT_fxref,                                 /* -fxref */
+  OPT_fzee,                                  /* -fzee */
   OPT_fzero_initialized_in_bss,              /* -fzero-initialized-in-bss */
   OPT_fzero_link,                            /* -fzero-link */
   OPT_g,                                     /* -g */
