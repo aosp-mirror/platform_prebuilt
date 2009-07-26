@@ -54,7 +54,7 @@ if [ x$1 != x ] ; then
   prefix=$1
   shift
 else
-  prefix=/home/bccheng/local/Toolchain/toolchain/android-toolchain/gcc-4.3.1-install
+  prefix=/disk2/dougkwan/android-3/arm-eabi-4.3.1
 fi
 
 # Allow for alternate isysroot in which to find headers

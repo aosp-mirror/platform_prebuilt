@@ -9,14 +9,12 @@ libdir=${exec_prefix}/lib
 #usage="\
 #Usage: sdl-config [--prefix[=DIR]] [--exec-prefix[=DIR]] [--version] [--cflags] [--libs]"
 usage="\
-Usage: sdl-config [--prefix[=DIR]] [--exec-prefix[=DIR]] [--version] [--cflags] [--libs] [--static-libs] [--ldflags]"
+Usage: sdl-config [--prefix[=DIR]] [--exec-prefix[=DIR]] [--version] [--cflags] [--libs] [--static-libs]"
 
 if test $# -eq 0; then
       echo "${usage}" 1>&2
       exit 1
 fi
-
-LDFLAGS="-luser32 -lgdi32 -lwinmm"
 
 while test $# -gt 0; do
   case "$1" in
@@ -48,14 +46,11 @@ while test $# -gt 0; do
       echo -I${prefix}/include/SDL -D_GNU_SOURCE=1 -Dmain=SDL_main
       ;;
 #    --libs)
-#      echo -L${exec_prefix}/lib  -lmingw32 -lSDLmain -lSDL  -mwindows
+#      echo -L${exec_prefix}/lib @SDL_RLD_FLAGS@ @SDL_LIBS@
 #      ;;
 #    --static-libs)
     --libs|--static-libs)
-      echo ${libdir}/libSDLmain.a ${libdir}/libSDL.a $LDFLAGS
-      ;;
-    --ldflags)
-      echo $LDFLAGS
+      echo ${libdir}/libSDLmain.a ${libdir}/libSDL.a -luser32 -lgdi32 -lwinmm
       ;;
     *)
       echo "${usage}" 1>&2

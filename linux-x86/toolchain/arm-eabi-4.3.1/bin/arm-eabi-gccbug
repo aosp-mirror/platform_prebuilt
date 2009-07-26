@@ -349,7 +349,7 @@ build: x86_64-unknown-linux-gnu
 target: arm-unknown-eabi
 __EOF__
       cat >> $file << \__EOF__
-configured with: ../../gcc-4.3.1/configure --with-gcc-version=4.3.1 --prefix=/home/bccheng/local/Toolchain/toolchain/android-toolchain/gcc-4.3.1-install --with-arch=armv5te --program-transform-name='s,^,arm-eabi-,' --prefix=/home/bccheng/local/Toolchain/toolchain/android-toolchain/gcc-4.3.1-install --target=arm-eabi --host=x86_64-unknown-linux-gnu --build=x86_64-unknown-linux-gnu --enable-languages=c,c++ --with-gmp=/home/bccheng/local/Toolchain/toolchain/android-toolchain/gcc-4.3.1-obj/temp-install --with-mpfr=/home/bccheng/local/Toolchain/toolchain/android-toolchain/gcc-4.3.1-obj/temp-install --disable-libstdc__-v3 --disable-libssp --enable-threads --disable-nls --disable-libmudflap --disable-libgomp
+configured with: ../../toolchain/android-toolchain/gcc-4.3.1/configure --prefix=/disk2/dougkwan/android-3/arm-eabi-4.3.1 --target=arm-eabi --host=x86_64-unknown-linux-gnu --build=x86_64-unknown-linux-gnu --enable-languages=c,c++ --with-gmp=/disk2/dougkwan/android-3/obj/temp-install --with-mpfr=/disk2/dougkwan/android-3/obj/temp-install --disable-libssp --enable-threads --disable-nls --disable-libmudflap --disable-libgomp --disable-libstdc__-v3 --disable-sjlj-exceptions --disable-shared --with-float=soft --with-fpu=vfp --with-arch=armv5te --enable-target-optspace --with-abi=aapcs --prefix=/disk2/dougkwan/android-3/arm-eabi-4.3.1 --with-sysroot=/disk2/dougkwan/android-3/arm-eabi-4.3.1/sysroot --with-gcc-version=4.3.1 --with-binutils-version=2.19 --program-transform-name='s,^,arm-eabi-,'
 __EOF__
       cat >> $file << __EOF__
 >Description:

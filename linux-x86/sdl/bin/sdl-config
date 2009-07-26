@@ -46,11 +46,11 @@ while test $# -gt 0; do
       echo -I${prefix}/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT
       ;;
 #    --libs)
-#      echo -L${exec_prefix}/lib  -lSDL  -lpthread
+#      echo -L${exec_prefix}/lib @SDL_RLD_FLAGS@ @SDL_LIBS@
 #      ;;
 #    --static-libs)
     --libs|--static-libs)
-      echo ${libdir}/libSDLmain.a ${libdir}/libSDL.a  -lm -ldl -lpthread
+      echo ${libdir}/libSDLmain.a ${libdir}/libSDL.a -lm -ldl -lpthread -lrt
       ;;
     *)
       echo "${usage}" 1>&2

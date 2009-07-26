@@ -46,11 +46,11 @@ while test $# -gt 0; do
       echo -I${prefix}/include/SDL -D_GNU_SOURCE=1 -D_THREAD_SAFE
       ;;
 #    --libs)
-#      echo -L${exec_prefix}/lib  -lSDLmain -lSDL   -Wl,-framework,Cocoa
+#      echo -L${exec_prefix}/lib @SDL_RLD_FLAGS@ @SDL_LIBS@
 #      ;;
 #    --static-libs)
     --libs|--static-libs)
-      echo ${libdir}/libSDLmain.a ${libdir}/libSDL.a  -Wl,-framework,OpenGL  -Wl,-framework,Cocoa -Wl,-framework,QuickTime -Wl,-framework,ApplicationServices -Wl,-framework,Carbon -Wl,-framework,AudioToolbox -Wl,-framework,AudioUnit -Wl,-framework,IOKit
+      echo ${libdir}/libSDLmain.a ${libdir}/libSDL.a -Wl,-framework,OpenGL -Wl,-framework,Cocoa -Wl,-framework,QuickTime -Wl,-framework,ApplicationServices -Wl,-framework,Carbon -Wl,-framework,AudioToolbox -Wl,-framework,AudioUnit -Wl,-framework,IOKit
       ;;
     *)
       echo "${usage}" 1>&2
