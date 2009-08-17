@@ -249,6 +249,7 @@ extern int flag_pcc_struct_return;
 extern int flag_peel_loops;
 extern int flag_no_peephole;
 extern int flag_peephole2;
+extern int flag_pessimistic_inline_stack_limit;
 extern int post_ipa_mem_report;
 extern int pre_ipa_mem_report;
 extern int flag_predictive_commoning;
@@ -270,7 +271,6 @@ extern int flag_rerun_cse_after_loop;
 extern int flag_resched_modulo_sched;
 extern int flag_dyn_ipa;
 extern int flag_rounding_math;
-extern int flag_rtl_seqabstr;
 extern int flag_sample_profile;
 extern int flag_schedule_interblock;
 extern int flag_schedule_speculative;
@@ -447,6 +447,7 @@ struct cl_optimization GTY(())
   unsigned char flag_peel_loops;
   unsigned char flag_no_peephole;
   unsigned char flag_peephole2;
+  unsigned char flag_pessimistic_inline_stack_limit;
   unsigned char flag_predictive_commoning;
   unsigned char flag_prefetch_loop_arrays;
   unsigned char flag_profile_dump;
@@ -458,7 +459,6 @@ struct cl_optimization GTY(())
   unsigned char flag_rerun_cse_after_loop;
   unsigned char flag_resched_modulo_sched;
   unsigned char flag_rounding_math;
-  unsigned char flag_rtl_seqabstr;
   unsigned char flag_sample_profile;
   unsigned char flag_schedule_interblock;
   unsigned char flag_schedule_speculative;
@@ -1121,6 +1121,7 @@ enum opt_code
   OPT_fpeephole,                             /* -fpeephole */
   OPT_fpeephole2,                            /* -fpeephole2 */
   OPT_fpermissive,                           /* -fpermissive */
+  OPT_fpessimistic_inline_stack_limit,       /* -fpessimistic-inline-stack-limit */
   OPT_fpic,                                  /* -fpic */
   OPT_fpie,                                  /* -fpie */
   OPT_fplugin_arg_,                          /* -fplugin-arg- */
@@ -1163,7 +1164,6 @@ enum opt_code
   OPT_freschedule_modulo_scheduled_loops,    /* -freschedule-modulo-scheduled-loops */
   OPT_fripa,                                 /* -fripa */
   OPT_frounding_math,                        /* -frounding-math */
-  OPT_frtl_abstract_sequences,               /* -frtl-abstract-sequences */
   OPT_frtti,                                 /* -frtti */
   OPT_fsample_profile,                       /* -fsample-profile */
   OPT_fsample_profile_,                      /* -fsample-profile= */

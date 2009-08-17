@@ -1,5 +1,5 @@
 This is doc/cpp.info, produced by makeinfo version 4.8 from
-/home/dougkwan/android-tool-src/toolchain/android-toolchain/gcc-4.4.0/gcc/doc/cpp.texi.
+../../../../toolchain/android-toolchain/gcc-4.4.0/gcc/doc/cpp.texi.
 
    Copyright (C) 1987, 1989, 1991, 1992, 1993, 1994, 1995, 1996, 1997,
 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 Free
@@ -5273,79 +5273,79 @@ Concept Index
 
 
 Tag Table:
-Node: Top1140
-Node: Overview3854
-Node: Character sets6675
-Ref: Character sets-Footnote-18858
-Node: Initial processing9039
-Ref: trigraphs10598
-Node: Tokenization14800
-Ref: Tokenization-Footnote-121936
-Node: The preprocessing language22047
-Node: Header Files24925
-Node: Include Syntax26841
-Node: Include Operation28478
-Node: Search Path30326
-Node: Once-Only Headers33516
-Node: Alternatives to Wrapper #ifndef35175
-Node: Computed Includes36918
-Node: Wrapper Headers40076
-Node: System Headers42502
-Node: Macros44552
-Node: Object-like Macros45693
-Node: Function-like Macros49283
-Node: Macro Arguments50899
-Node: Stringification55044
-Node: Concatenation58250
-Node: Variadic Macros61358
-Node: Predefined Macros66145
-Node: Standard Predefined Macros66733
-Node: Common Predefined Macros72669
-Node: System-specific Predefined Macros85579
-Node: C++ Named Operators87600
-Node: Undefining and Redefining Macros88564
-Node: Directives Within Macro Arguments90668
-Node: Macro Pitfalls92216
-Node: Misnesting92749
-Node: Operator Precedence Problems93861
-Node: Swallowing the Semicolon95727
-Node: Duplication of Side Effects97750
-Node: Self-Referential Macros99933
-Node: Argument Prescan102342
-Node: Newlines in Arguments106096
-Node: Conditionals107047
-Node: Conditional Uses108877
-Node: Conditional Syntax110235
-Node: Ifdef110555
-Node: If113716
-Node: Defined116020
-Node: Else117303
-Node: Elif117873
-Node: Deleted Code119162
-Node: Diagnostics120409
-Node: Line Control122026
-Node: Pragmas125830
-Node: Other Directives130100
-Node: Preprocessor Output131207
-Node: Traditional Mode134408
-Node: Traditional lexical analysis135466
-Node: Traditional macros137969
-Node: Traditional miscellany141771
-Node: Traditional warnings142768
-Node: Implementation Details144965
-Node: Implementation-defined behavior145586
-Ref: Identifier characters146338
-Node: Implementation limits149413
-Node: Obsolete Features152087
-Node: Differences from previous versions154924
-Node: Invocation159132
-Ref: Wtrigraphs163584
-Ref: dashMF168359
-Ref: fdollars-in-identifiers177742
-Node: Environment Variables185905
-Node: GNU Free Documentation License188871
-Node: Index of Directives211304
-Node: Option Index213238
-Node: Concept Index219422
+Node: Top1120
+Node: Overview3834
+Node: Character sets6655
+Ref: Character sets-Footnote-18838
+Node: Initial processing9019
+Ref: trigraphs10578
+Node: Tokenization14780
+Ref: Tokenization-Footnote-121916
+Node: The preprocessing language22027
+Node: Header Files24905
+Node: Include Syntax26821
+Node: Include Operation28458
+Node: Search Path30306
+Node: Once-Only Headers33496
+Node: Alternatives to Wrapper #ifndef35155
+Node: Computed Includes36898
+Node: Wrapper Headers40056
+Node: System Headers42482
+Node: Macros44532
+Node: Object-like Macros45673
+Node: Function-like Macros49263
+Node: Macro Arguments50879
+Node: Stringification55024
+Node: Concatenation58230
+Node: Variadic Macros61338
+Node: Predefined Macros66125
+Node: Standard Predefined Macros66713
+Node: Common Predefined Macros72649
+Node: System-specific Predefined Macros85559
+Node: C++ Named Operators87580
+Node: Undefining and Redefining Macros88544
+Node: Directives Within Macro Arguments90648
+Node: Macro Pitfalls92196
+Node: Misnesting92729
+Node: Operator Precedence Problems93841
+Node: Swallowing the Semicolon95707
+Node: Duplication of Side Effects97730
+Node: Self-Referential Macros99913
+Node: Argument Prescan102322
+Node: Newlines in Arguments106076
+Node: Conditionals107027
+Node: Conditional Uses108857
+Node: Conditional Syntax110215
+Node: Ifdef110535
+Node: If113696
+Node: Defined116000
+Node: Else117283
+Node: Elif117853
+Node: Deleted Code119142
+Node: Diagnostics120389
+Node: Line Control122006
+Node: Pragmas125810
+Node: Other Directives130080
+Node: Preprocessor Output131187
+Node: Traditional Mode134388
+Node: Traditional lexical analysis135446
+Node: Traditional macros137949
+Node: Traditional miscellany141751
+Node: Traditional warnings142748
+Node: Implementation Details144945
+Node: Implementation-defined behavior145566
+Ref: Identifier characters146318
+Node: Implementation limits149393
+Node: Obsolete Features152067
+Node: Differences from previous versions154904
+Node: Invocation159112
+Ref: Wtrigraphs163564
+Ref: dashMF168339
+Ref: fdollars-in-identifiers177722
+Node: Environment Variables185885
+Node: GNU Free Documentation License188851
+Node: Index of Directives211284
+Node: Option Index213218
+Node: Concept Index219402
 
 End Tag Table

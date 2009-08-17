@@ -53,7 +53,7 @@ if [ x$1 != x ] ; then
   prefix=$1
   shift
 else
-  prefix=/Volumes/android/toolbuild/arm-eabi-4.4.0
+  prefix=/usr/local
 fi
 
 # Allow for alternate isysroot in which to find headers

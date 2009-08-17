@@ -187,7 +187,8 @@ Here is a summary of all the options, grouped by type.  Explanations are
 in the following sections.
 .IP "\fIOverall Options\fR" 4
 .IX Item "Overall Options"
-\&\fB\-c  \-S  \-E  \-o\fR \fIfile\fR  \fB\-combine  \-pipe  \-pass\-exit\-codes  
+\&\fB\-c  \-S  \-E  \-o\fR \fIfile\fR  \fB\-combine  \-no\-canonical\-prefixes  
+\&\-pipe  \-pass\-exit\-codes  
 \&\-x\fR \fIlanguage\fR  \fB\-v  \-###  \-\-help\fR[\fB=\fR\fIclass\fR[\fB,...\fR]]  \fB\-\-target\-help  
 \&\-\-version \-wrapper@\fR\fIfile\fR \fB\-fplugin=\fR\fIfile\fR \fB\-fplugin\-arg\-\fR\fIname\fR\fB=\fR\fIarg\fR
 .IP "\fIC Language Options\fR" 4
@@ -372,7 +373,7 @@ in the following sections.
 \&\-freciprocal\-math \-fregmove \-frename\-registers \-freorder\-blocks 
 \&\-freorder\-blocks\-and\-partition \-freorder\-functions 
 \&\-frerun\-cse\-after\-loop \-freschedule\-modulo\-scheduled\-loops 
-\&\-frounding\-math \-frtl\-abstract\-sequences \-fsched2\-use\-superblocks 
+\&\-frounding\-math \-fsched2\-use\-superblocks 
 \&\-fsched2\-use\-traces \-fsched\-spec\-load \-fsched\-spec\-load\-dangerous 
 \&\-fsched\-stalled\-insns\-dep[=\fR\fIn\fR\fB] \-fsched\-stalled\-insns[=\fR\fIn\fR\fB] 
 \&\-fschedule\-insns \-fschedule\-insns2 \-fsection\-anchors \-fsee 
@@ -1275,6 +1276,11 @@ by \fB\-O3\fR by using:
 \&        diff /tmp/O2\-opts /tmp/O3\-opts | grep enabled
 .Ve
 .RE
+.IP "\fB\-no\-canonical\-prefixes\fR" 4
+.IX Item "-no-canonical-prefixes"
+Do not expand any symbolic links, resolve references to \fB/../\fR
+or \fB/./\fR, or make the path absolute when generating a relative
+prefix.
 .IP "\fB\-\-version\fR" 4
 .IX Item "--version"
 Display the version number and copyrights of the invoked \s-1GCC\s0.
@@ -6303,13 +6309,6 @@ disable all \s-1GCC\s0 optimizations that are affected by rounding mode.
 Future versions of \s-1GCC\s0 may provide finer control of this setting
 using C99's \f(CW\*(C`FENV_ACCESS\*(C'\fR pragma.  This command line option
 will be used to specify the default state for \f(CW\*(C`FENV_ACCESS\*(C'\fR.
-.IP "\fB\-frtl\-abstract\-sequences\fR" 4
-.IX Item "-frtl-abstract-sequences"
-It is a size optimization method. This option is to find identical
-sequences of code, which can be turned into pseudo-procedures  and
-then  replace  all  occurrences with  calls to  the  newly created
-subroutine. It is kind of an opposite of \fB\-finline\-functions\fR.
-This optimization runs at \s-1RTL\s0 level.
 .IP "\fB\-fsignaling\-nans\fR" 4
 .IX Item "-fsignaling-nans"
 Compile code assuming that \s-1IEEE\s0 signaling NaNs may generate user-visible

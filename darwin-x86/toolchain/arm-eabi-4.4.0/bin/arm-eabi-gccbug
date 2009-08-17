@@ -344,12 +344,12 @@ SEND-PR: support             I need help with gcc.
 `[ -n "$ARCH" ] && echo Architecture: $ARCH`
 `[ -n "$MACHINE" ] && echo Machine: $MACHINE`
 	$ENVIRONMENT_C
-host: i386-apple-darwin9.7.0
-build: i386-apple-darwin9.7.0
+host: i686-apple-darwin
+build: i686-apple-darwin
 target: arm-unknown-eabi
 __EOF__
       cat >> $file << \__EOF__
-configured with: /home/dougkwan/android-tool-src/toolchain/android-toolchain/gcc-4.4.0/configure --prefix=/Volumes/android/toolbuild/arm-eabi-4.4.0 --target=arm-eabi --host=i386-apple-darwin9.7.0 --build=i386-apple-darwin9.7.0 --enable-languages=c,c++ --with-gmp=/Volumes/android/toolbuild/obj/temp-install --with-mpfr=/Volumes/android/toolbuild/obj/temp-install --disable-libssp --enable-threads --disable-nls --disable-libmudflap --disable-libgomp --disable-libstdc__-v3 --disable-sjlj-exceptions --disable-shared --with-float=soft --with-fpu=vfp --with-arch=armv5te --enable-target-optspace --with-abi=aapcs --with-gcc-version=4.4.0 --with-binutils-version=2.19 --with-arch=armv5te --prefix=/Volumes/android/toolbuild/arm-eabi-4.4.0 --with-sysroot=/Volumes/android/toolbuild/arm-eabi-4.4.0/sysroot --with-gdb-version=6.6 --with-gmp-version=4.2.4 --with-mpfr-version=2.4.1 --program-transform-name='s,^,arm-eabi-,'
+configured with: ../../../toolchain/android-toolchain/gcc-4.4.0/configure --prefix=/usr/local --target=arm-eabi --host=i686-apple-darwin --build=i686-apple-darwin --enable-languages=c,c++ --with-gmp=/Volumes/project-jingyu/toolchain-build/obj/temp-install --with-mpfr=/Volumes/project-jingyu/toolchain-build/obj/temp-install --disable-libssp --enable-threads --disable-nls --disable-libmudflap --disable-libgomp --disable-libstdc__-v3 --disable-sjlj-exceptions --disable-shared --disable-tls --with-float=soft --with-fpu=vfp --with-arch=armv5te --enable-target-optspace --with-abi=aapcs --with-gcc-version=4.4.0 --with-binutils-version=2.19 --with-arch=armv5te --with-gmp-version=4.2.4 --with-mpfr-version=2.4.1 --with-gdb-version=6.6 --with-multilib-list=mthumb-interwork,mandroid --with-sysroot=/Volumes/project-jingyu/cupcake_rel_root --program-transform-name='s,^,arm-eabi-,'
 __EOF__
       cat >> $file << __EOF__
 >Description:
