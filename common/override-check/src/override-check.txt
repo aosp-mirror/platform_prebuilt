@@ -1,0 +1,5 @@
+ERROR:   N.b OVERRIDES INTERFACE com.tomgibara.test.override.B
+ERROR:   M.b OVERRIDES INTERFACE com.tomgibara.test.override.B
+ERROR:   I.J.i OVERRIDES INTERFACE com.tomgibara.test.override.I
+ERROR:   F.onClick OVERRIDES INTERFACE android.view.View.OnClickListener
+ERROR:   A.b OVERRIDES INTERFACE com.tomgibara.test.override.B
