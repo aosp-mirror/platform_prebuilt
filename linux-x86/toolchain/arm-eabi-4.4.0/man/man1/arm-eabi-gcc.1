@@ -187,7 +187,8 @@ Here is a summary of all the options, grouped by type.  Explanations are
 in the following sections.
 .IP "\fIOverall Options\fR" 4
 .IX Item "Overall Options"
-\&\fB\-c  \-S  \-E  \-o\fR \fIfile\fR  \fB\-combine  \-pipe  \-pass\-exit\-codes  
+\&\fB\-c  \-S  \-E  \-o\fR \fIfile\fR  \fB\-combine  \-no\-canonical\-prefixes  
+\&\-pipe  \-pass\-exit\-codes  
 \&\-x\fR \fIlanguage\fR  \fB\-v  \-###  \-\-help\fR[\fB=\fR\fIclass\fR[\fB,...\fR]]  \fB\-\-target\-help  
 \&\-\-version \-wrapper@\fR\fIfile\fR \fB\-fplugin=\fR\fIfile\fR \fB\-fplugin\-arg\-\fR\fIname\fR\fB=\fR\fIarg\fR
 .IP "\fIC Language Options\fR" 4
@@ -344,7 +345,7 @@ in the following sections.
 \&\-fcheck\-data\-deps \-fconserve\-stack \-fcprop\-registers \-fcrossjumping 
 \&\-fcse\-follow\-jumps \-fcse\-skip\-blocks \-fcx\-fortran\-rules \-fcx\-limited\-range 
 \&\-fdata\-sections \-fdce \-fdce 
-\&\-fdelayed\-branch \-fdelete\-null\-pointer\-checks \-fdse \-fdse 
+\&\-fdelayed\-branch \-fdelete\-null\-pointer\-checks \-fdse \-fdse \-fdyn\-ipa 
 \&\-fearly\-inlining \-fexpensive\-optimizations \-ffast\-math 
 \&\-ffinite\-math\-only \-ffloat\-store \-fforward\-propagate 
 \&\-ffunction\-sections \-fgcse \-fgcse\-after\-reload \-fgcse\-las \-fgcse\-lm 
@@ -372,7 +373,7 @@ in the following sections.
 \&\-freciprocal\-math \-fregmove \-frename\-registers \-freorder\-blocks 
 \&\-freorder\-blocks\-and\-partition \-freorder\-functions 
 \&\-frerun\-cse\-after\-loop \-freschedule\-modulo\-scheduled\-loops 
-\&\-frounding\-math \-frtl\-abstract\-sequences \-fsched2\-use\-superblocks 
+\&\-frounding\-math \-fsched2\-use\-superblocks 
 \&\-fsched2\-use\-traces \-fsched\-spec\-load \-fsched\-spec\-load\-dangerous 
 \&\-fsched\-stalled\-insns\-dep[=\fR\fIn\fR\fB] \-fsched\-stalled\-insns[=\fR\fIn\fR\fB] 
 \&\-fschedule\-insns \-fschedule\-insns2 \-fsection\-anchors \-fsee 
@@ -585,9 +586,9 @@ in the following sections.
 \&\-maes \-mpclmul 
 \&\-msse4a \-m3dnow \-mpopcnt \-mabm \-msse5 
 \&\-mthreads  \-mno\-align\-stringops  \-minline\-all\-stringops 
-\&\-minline\-stringops\-dynamically \-mstringop\-strategy=\fR\fIalg\fR 
-\&\fB\-mpush\-args  \-maccumulate\-outgoing\-args  \-m128bit\-long\-double 
-\&\-m96bit\-long\-double  \-mregparm=\fR\fInum\fR  \fB\-msseregparm 
+\&\-minline\-stringops\-dynamically \-minline\-compares 
+\&\-mstringop\-strategy=\fR\fIalg\fR \fB\-mpush\-args  \-maccumulate\-outgoing\-args 
+\&\-m128bit\-long\-double \-m96bit\-long\-double \-mregparm=\fR\fInum\fR \fB\-msseregparm 
 \&\-mveclibabi=\fR\fItype\fR \fB\-mpc32 \-mpc64 \-mpc80 \-mstackrealign 
 \&\-momit\-leaf\-frame\-pointer  \-mno\-red\-zone \-mno\-tls\-direct\-seg\-refs 
 \&\-mcmodel=\fR\fIcode-model\fR 
@@ -1275,6 +1276,11 @@ by \fB\-O3\fR by using:
 \&        diff /tmp/O2\-opts /tmp/O3\-opts | grep enabled
 .Ve
 .RE
+.IP "\fB\-no\-canonical\-prefixes\fR" 4
+.IX Item "-no-canonical-prefixes"
+Do not expand any symbolic links, resolve references to \fB/../\fR
+or \fB/./\fR, or make the path absolute when generating a relative
+prefix.
 .IP "\fB\-\-version\fR" 4
 .IX Item "--version"
 Display the version number and copyrights of the invoked \s-1GCC\s0.
@@ -6144,7 +6150,7 @@ Enable profile feedback directed optimizations, and optimizations
 generally profitable only with profile feedback available.
 .Sp
 The following options are enabled: \f(CW\*(C`\-fbranch\-probabilities\*(C'\fR, \f(CW\*(C`\-fvpt\*(C'\fR,
-\&\f(CW\*(C`\-funroll\-loops\*(C'\fR, \f(CW\*(C`\-fpeel\-loops\*(C'\fR, \f(CW\*(C`\-ftracer\*(C'\fR
+\&\f(CW\*(C`\-funroll\-loops\*(C'\fR, \f(CW\*(C`\-fpeel\-loops\*(C'\fR
 .Sp
 By default, \s-1GCC\s0 emits an error message if the feedback profiles do not
 match the source code.  This error can be turned into a warning by using
@@ -6153,6 +6159,14 @@ code.
 .Sp
 If \fIpath\fR is specified, \s-1GCC\s0 will look at the \fIpath\fR to find
 the profile feedback data files. See \fB\-fprofile\-dir\fR.
+.IP "\fB\-fdyn\-ipa\fR" 4
+.IX Item "-fdyn-ipa"
+Perform dynamic inter-procedural analysis. This is used in conjunction with
+the \fB\-fprofile\-generate\fR and \fB\-fprofile\-use\fR options.
+During the \fB\-fprofile\-generate\fR phase, this flag turns on some additional
+instrumentation code that enables dynamic call-graph analysis.
+During the \fB\-fprofile\-use\fR phase, this flag enables cross-module
+optimizations such as inlining.
 .PP
 The following options control compiler behavior regarding floating
 point arithmetic.  These options trade off between speed and
@@ -6295,13 +6309,6 @@ disable all \s-1GCC\s0 optimizations that are affected by rounding mode.
 Future versions of \s-1GCC\s0 may provide finer control of this setting
 using C99's \f(CW\*(C`FENV_ACCESS\*(C'\fR pragma.  This command line option
 will be used to specify the default state for \f(CW\*(C`FENV_ACCESS\*(C'\fR.
-.IP "\fB\-frtl\-abstract\-sequences\fR" 4
-.IX Item "-frtl-abstract-sequences"
-It is a size optimization method. This option is to find identical
-sequences of code, which can be turned into pseudo-procedures  and
-then  replace  all  occurrences with  calls to  the  newly created
-subroutine. It is kind of an opposite of \fB\-finline\-functions\fR.
-This optimization runs at \s-1RTL\s0 level.
 .IP "\fB\-fsignaling\-nans\fR" 4
 .IX Item "-fsignaling-nans"
 Compile code assuming that \s-1IEEE\s0 signaling NaNs may generate user-visible
@@ -6616,9 +6623,19 @@ The default value is 450.
 When you use \fB\-finline\-functions\fR (included in \fB\-O3\fR),
 a lot of functions that would otherwise not be considered for inlining
 by the compiler will be investigated.  To those functions, a different
-(more restrictive) limit compared to functions declared inline can
+(potentially more restrictive) limit compared to functions declared inline can
 be applied.
-The default value is 90.
+The default value is 450.
+.IP "\fBinline-limit-increase-with-profile\fR" 4
+.IX Item "inline-limit-increase-with-profile"
+When profile information is available, such as when compiling
+with \fB\-fprofile\-use\fR, the maximum function size
+limits \fB\-\-param max-inline-insns-single\fR
+and \fB\-\-param max-inline-insns-auto\fR are increased by this percentage
+amount.  Profile information increases the selectivity and quality of the
+inlining decisions, so having a larger set of candidate functions available
+for inlining can improve performance.
+The default value is 100.
 .IP "\fBlarge-function-insns\fR" 4
 .IX Item "large-function-insns"
 The limit specifying really large functions.  For functions larger than this
@@ -6739,10 +6756,36 @@ the loop code is peeled.
 The maximum number of peelings of a single loop.
 .IP "\fBmax-completely-peeled-insns\fR" 4
 .IX Item "max-completely-peeled-insns"
+.PD 0
+.IP "\fBmax-completely-peeled-insns-feedback\fR" 4
+.IX Item "max-completely-peeled-insns-feedback"
+.PD
 The maximum number of insns of a completely peeled loop.
+.Sp
+The \fBmax-completely-peeled-insns-feedback\fR is used only when profile
+feedback is available and the loop is hot. Because of the real profiles, this
+value may set to be larger for hot loops.
+.IP "\fBmax-once-peeled-insns\fR" 4
+.IX Item "max-once-peeled-insns"
+.PD 0
+.IP "\fBmax-once-peeled-insns-feedback\fR" 4
+.IX Item "max-once-peeled-insns-feedback"
+.PD
+The maximum number of insns of a peeled loop that rolls only once.
+The \fBmax-once-peeled-insns-feedback\fR  is used only when profile feedback
+is available and the loop is hot. Because of the real profiles, this value
+may set to be larger for hot loops.
 .IP "\fBmax-completely-peel-times\fR" 4
 .IX Item "max-completely-peel-times"
+.PD 0
+.IP "\fBmax-completely-peel-times-feedback\fR" 4
+.IX Item "max-completely-peel-times-feedback"
+.PD
 The maximum number of iterations of a loop to be suitable for complete peeling.
+.Sp
+The \fBmax-completely-peel-times-feedback\fR is used only when profile feedback
+is available and the loop is hot. Because of the real profiles, this value may
+set to be larger for hot loops.
 .IP "\fBmax-unswitch-insns\fR" 4
 .IX Item "max-unswitch-insns"
 The maximum number of insns of an unswitched loop.
@@ -10647,6 +10690,11 @@ and memset for short lengths.
 .IX Item "-minline-stringops-dynamically"
 For string operation of unknown size, inline runtime checks so for small
 blocks inline code is used, while for large blocks library call is used.
+.IP "\fB\-minline\-compares\fR" 4
+.IX Item "-minline-compares"
+This option enables \s-1GCC\s0 to inline calls to memcmp and strcmp.  The
+inlined version does a byte-by-byte comparion using a repeat string
+operation prefix.
 .IP "\fB\-mstringop\-strategy=\fR\fIalg\fR" 4
 .IX Item "-mstringop-strategy=alg"
 Overwrite internal decision heuristic about particular algorithm to inline
