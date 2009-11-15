@@ -253,6 +253,9 @@ struct basic_block_def GTY((chain_next ("%h.next_bb"), chain_prev ("%h.prev_bb")
   /* Expected frequency.  Normalized to be in range 0 to BB_FREQ_MAX.  */
   int frequency;
 
+  /* The discriminator for this block.  */
+  int discriminator;
+
   /* Various flags.  See BB_* below.  */
   int flags;
 };
@@ -835,6 +838,7 @@ extern void compute_available (sbitmap *, sbitmap *, sbitmap *, sbitmap *);
 
 /* In predict.c */
 extern bool maybe_hot_bb_p (const_basic_block);
+extern bool maybe_hot_bb_for_func_p (struct function *, const_basic_block);
 extern bool maybe_hot_edge_p (edge);
 extern bool probably_never_executed_bb_p (const_basic_block);
 extern bool optimize_bb_for_size_p (const_basic_block);

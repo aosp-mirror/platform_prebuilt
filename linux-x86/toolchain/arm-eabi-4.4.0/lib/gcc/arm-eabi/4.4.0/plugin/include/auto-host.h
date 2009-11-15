@@ -387,7 +387,7 @@
 
 /* Define if your assembler supports thread-local storage. */
 #ifndef USED_FOR_TARGET
-#define HAVE_AS_TLS 1
+/* #undef HAVE_AS_TLS */
 #endif
 
 
@@ -849,6 +849,12 @@
 /* Define 0/1 if your assembler supports .cfi_personality. */
 #ifndef USED_FOR_TARGET
 #define HAVE_GAS_CFI_PERSONALITY_DIRECTIVE 1
+#endif
+
+
+/* Define if your assembler supports the .loc discriminator sub-directive. */
+#ifndef USED_FOR_TARGET
+/* #undef HAVE_GAS_DISCRIMINATOR */
 #endif
 
 
