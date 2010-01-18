@@ -272,7 +272,7 @@ in the following sections.
 \&\-Wparentheses  \-Wpedantic\-ms\-format \-Wno\-pedantic\-ms\-format 
 \&\-Wpointer\-arith  \-Wno\-pointer\-to\-int\-cast 
 \&\-Wredundant\-decls 
-\&\-Wreturn\-type  \-Wsequence\-point  \-Wshadow 
+\&\-Wreturn\-type  \-Wripa\-opt\-mismatch  \-Wsequence\-point  \-Wshadow 
 \&\-Wsign\-compare  \-Wsign\-conversion  \-Wstack\-protector 
 \&\-Wstrict\-aliasing \-Wstrict\-aliasing=n 
 \&\-Wstrict\-overflow \-Wstrict\-overflow=\fR\fIn\fR 
@@ -321,12 +321,13 @@ in the following sections.
 \&\fB\-fdump\-tree\-storeccp\fR[\fB\-\fR\fIn\fR] 
 \&\fB\-feliminate\-dwarf2\-dups \-feliminate\-unused\-debug\-types 
 \&\-feliminate\-unused\-debug\-symbols \-femit\-class\-debug\-always 
+\&\-fenable\-icf\-debug 
 \&\-fmem\-report \-fpre\-ipa\-mem\-report \-fpost\-ipa\-mem\-report \-fprofile\-arcs 
 \&\-frandom\-seed=\fR\fIstring\fR \fB\-fsched\-verbose=\fR\fIn\fR 
 \&\fB\-fsel\-sched\-verbose \-fsel\-sched\-dump\-cfg \-fsel\-sched\-pipelining\-verbose 
 \&\-ftest\-coverage  \-ftime\-report \-fvar\-tracking 
 \&\-g  \-g\fR\fIlevel\fR  \fB\-gcoff \-gdwarf\-2 
-\&\-ggdb  \-gstabs  \-gstabs+  \-gvms  \-gxcoff  \-gxcoff+ 
+\&\-ggdb  \-gmlt  \-gstabs  \-gstabs+  \-gvms  \-gxcoff  \-gxcoff+ 
 \&\-fno\-merge\-debug\-strings \-fno\-dwarf2\-cfi\-asm 
 \&\-fdebug\-prefix\-map=\fR\fIold\fR\fB=\fR\fInew\fR 
 \&\fB\-femit\-struct\-debug\-baseonly \-femit\-struct\-debug\-reduced 
@@ -345,7 +346,7 @@ in the following sections.
 \&\-fcheck\-data\-deps \-fconserve\-stack \-fcprop\-registers \-fcrossjumping 
 \&\-fcse\-follow\-jumps \-fcse\-skip\-blocks \-fcx\-fortran\-rules \-fcx\-limited\-range 
 \&\-fdata\-sections \-fdce \-fdce 
-\&\-fdelayed\-branch \-fdelete\-null\-pointer\-checks \-fdse \-fdse \-fdyn\-ipa 
+\&\-fdelayed\-branch \-fdelete\-null\-pointer\-checks \-fdse \-fdse 
 \&\-fearly\-inlining \-fexpensive\-optimizations \-ffast\-math 
 \&\-ffinite\-math\-only \-ffloat\-store \-fforward\-propagate 
 \&\-ffunction\-sections \-fgcse \-fgcse\-after\-reload \-fgcse\-las \-fgcse\-lm 
@@ -373,7 +374,8 @@ in the following sections.
 \&\-freciprocal\-math \-fregmove \-frename\-registers \-freorder\-blocks 
 \&\-freorder\-blocks\-and\-partition \-freorder\-functions 
 \&\-frerun\-cse\-after\-loop \-freschedule\-modulo\-scheduled\-loops 
-\&\-frounding\-math \-fsched2\-use\-superblocks 
+\&\-fripa \-fripa\-disallow\-opt\-mismatch \-fripa\-verbose \-frounding\-math 
+\&\-fsample\-profile \-fsample\-profile\-aggregate\-using \-fsched2\-use\-superblocks 
 \&\-fsched2\-use\-traces \-fsched\-spec\-load \-fsched\-spec\-load\-dangerous 
 \&\-fsched\-stalled\-insns\-dep[=\fR\fIn\fR\fB] \-fsched\-stalled\-insns[=\fR\fIn\fR\fB] 
 \&\-fschedule\-insns \-fschedule\-insns2 \-fsection\-anchors \-fsee 
@@ -387,6 +389,7 @@ in the following sections.
 \&\-ftree\-dominator\-opts \-ftree\-dse \-ftree\-fre \-ftree\-loop\-im 
 \&\-ftree\-loop\-distribution 
 \&\-ftree\-loop\-ivcanon \-ftree\-loop\-linear \-ftree\-loop\-optimize 
+\&\-ftree\-lr\-shrinking 
 \&\-ftree\-parallelize\-loops=\fR\fIn\fR \fB\-ftree\-pre \-ftree\-reassoc 
 \&\-ftree\-sink \-ftree\-sra \-ftree\-switch\-conversion 
 \&\-ftree\-ter \-ftree\-vect\-loop\-version \-ftree\-vectorize \-ftree\-vrp 
@@ -2577,6 +2580,7 @@ Options\fR and \fBObjective-C and Objective\-\*(C+ Dialect Options\fR.
 \&\-Wpointer\-sign  
 \&\-Wreorder   
 \&\-Wreturn\-type  
+\&\-Wripa\-opt\-mismatch 
 \&\-Wsequence\-point  
 \&\-Wsign\-compare\fR (only in \*(C+)  
 \&\fB\-Wstrict\-aliasing  
@@ -2902,6 +2906,14 @@ expression in a function whose return-type is \f(CW\*(C`void\*(C'\fR.
 For \*(C+, a function without return type always produces a diagnostic
 message, even when \fB\-Wno\-return\-type\fR is specified.  The only
 exceptions are \fBmain\fR and functions defined in system headers.
+.Sp
+This warning is enabled by \fB\-Wall\fR.
+.IP "\fB\-Wripa\-opt\-mismatch\fR" 4
+.IX Item "-Wripa-opt-mismatch"
+When doing an \s-1FDO\s0 build with \fB\-fprofile\-use\fR and \fB\-fripa\fR,
+warn if importing an axuiliary module that was built with a different
+\&\s-1GCC\s0 command line during the profile-generate phase than the primary
+module.
 .Sp
 This warning is enabled by \fB\-Wall\fR.
 .IP "\fB\-Wswitch\fR" 4
@@ -3890,6 +3902,10 @@ different from version 2), and it would have been too confusing.  That
 debug format is long obsolete, but the option cannot be changed now.
 Instead use an additional \fB\-g\fR\fIlevel\fR option to change the
 debug level for \s-1DWARF2\s0.
+.IP "\fB\-gmlt\fR" 4
+.IX Item "-gmlt"
+Produce a minimal line table, with level 1 debugging information plus
+information about inlined functions and line numbers.
 .IP "\fB\-feliminate\-dwarf2\-dups\fR" 4
 .IX Item "-feliminate-dwarf2-dups"
 Compress \s-1DWARF2\s0 debugging information by eliminating duplicated
@@ -3967,6 +3983,10 @@ You may need to experiment to determine the best settings for your application.
 The default is \fB\-femit\-struct\-debug\-detailed=all\fR.
 .Sp
 This option works only with \s-1DWARF\s0 2.
+.IP "\fB\-fenable\-icf\-debug\fR" 4
+.IX Item "-fenable-icf-debug"
+Generate additional debug information to support identical code folding (\s-1ICF\s0).
+This option only works with \s-1DWARF\s0 version 2 or higher.
 .IP "\fB\-fno\-merge\-debug\-strings\fR" 4
 .IX Item "-fno-merge-debug-strings"
 Direct the linker to not merge together strings in the debugging
@@ -5588,6 +5608,10 @@ Perform loop header copying on trees.  This is beneficial since it increases
 effectiveness of code motion optimizations.  It also saves one jump.  This flag
 is enabled by default at \fB\-O\fR and higher.  It is not enabled
 for \fB\-Os\fR, since it usually increases code size.
+.IP "\fB\-ftree\-lr\-shrinking\fR" 4
+.IX Item "-ftree-lr-shrinking"
+Enable live range shrinking optimization on trees. This optimization is used
+to help reducing register pressure.
 .IP "\fB\-ftree\-loop\-optimize\fR" 4
 .IX Item "-ftree-loop-optimize"
 Perform loop optimizations on trees.  This flag is enabled by default
@@ -6159,14 +6183,37 @@ code.
 .Sp
 If \fIpath\fR is specified, \s-1GCC\s0 will look at the \fIpath\fR to find
 the profile feedback data files. See \fB\-fprofile\-dir\fR.
-.IP "\fB\-fdyn\-ipa\fR" 4
-.IX Item "-fdyn-ipa"
+.IP "\fB\-fripa\fR" 4
+.IX Item "-fripa"
 Perform dynamic inter-procedural analysis. This is used in conjunction with
 the \fB\-fprofile\-generate\fR and \fB\-fprofile\-use\fR options.
 During the \fB\-fprofile\-generate\fR phase, this flag turns on some additional
 instrumentation code that enables dynamic call-graph analysis.
 During the \fB\-fprofile\-use\fR phase, this flag enables cross-module
 optimizations such as inlining.
+.IP "\fB\-fripa\-disallow\-opt\-mismatch\fR" 4
+.IX Item "-fripa-disallow-opt-mismatch"
+Don't import an auxiliary module, if the \s-1GCC\s0 command line options used for this
+auxiliary module during the profile-generate stage were different from those used
+for the primary module. Note that any mismatches in warning-related options are
+ignored for this comparison.
+.IP "\fB\-fripa\-verbose\fR" 4
+.IX Item "-fripa-verbose"
+Enable printing of verbose information about dynamic inter-procedural optimizations.
+This is used in conjunction with the \fB\-fripa\fR.
+.IP "\fB\-fsample\-profile\fR" 4
+.IX Item "-fsample-profile"
+.PD 0
+.IP "\fB\-fsample\-profile=\fR\fIpath\fR" 4
+.IX Item "-fsample-profile=path"
+.PD
+Enable profile feedback directed optimizations using profiles obtained
+via sampling, and optimizations generally profitable only with profile
+feedback available.
+.IP "\fB\-fsample\-profile\-aggregate\-using=\fR\fImethod\fR" 4
+.IX Item "-fsample-profile-aggregate-using=method"
+Select the method for (average or maximum) for converting
+instruction-level profiles into basic block level profiles.
 .PP
 The following options control compiler behavior regarding floating
 point arithmetic.  These options trade off between speed and
@@ -7185,6 +7232,29 @@ number of available registers, live range shrinking optimization is enabled.
 .IX Item "reg-pressure-min-tree"
 The minimal size (number of leaves) of a tree to be reshaped in the Live
 Range Shrinking optimization. 
+.IP "\fBmin-mcf-cancel-iters\fR" 4
+.IX Item "min-mcf-cancel-iters"
+The minimum number of iterations of negative cycle cancellation during
+\&\s-1MCF\s0 profile correction before early termination.  This parameter is
+only useful when using \fB\-fprofile\-correction\fR.
+.IP "\fBsamplefdo-mcf-high-confidence-cost-mult\fR" 4
+.IX Item "samplefdo-mcf-high-confidence-cost-mult"
+Multiply the cost used by \s-1MCF\s0 during profile correction by this factor
+for all input profile data that is determined to be high confidence.
+This parameter is only useful when using \fB\-fsample\-profile\fR and
+\&\fB\-fprofile\-correction\fR.
+.IP "\fBsamplefdo-use-discrim\fR" 4
+.IX Item "samplefdo-use-discrim"
+When attributing samples to the \s-1CFG\s0, use discriminators to identify
+which \s-1CFG\s0 nodes correspond to which samples.  This parameter is only
+useful when using \fB\-fsample\-profile\fR.
+.IP "\fBsamplefdo-large-block-thresh\fR" 4
+.IX Item "samplefdo-large-block-thresh"
+Consider a basic block large if it has more than this many gimple
+statements in it.  If a block is large and has no profile samples
+attributed to it, it will be assigned a weight of 0 with high
+confidence.  This parameter is only useful when using
+\&\fB\-fsample\-profile\fR.
 .RE
 .RS 4
 .RE

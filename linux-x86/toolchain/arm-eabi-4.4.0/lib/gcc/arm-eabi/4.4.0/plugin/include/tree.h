@@ -1930,6 +1930,7 @@ struct phi_arg_d GTY(())
      pointer arithmetic with it.  See phi_arg_index_from_use.  */
   struct ssa_use_operand_d imm_use;
   tree def;
+  location_t locus;
 };
 
 
@@ -5243,6 +5244,11 @@ struct tree_priority_map GTY(())
 #define tree_priority_map_hash tree_map_base_hash
 #define tree_priority_map_marked_p tree_map_base_marked_p
 
+/* In tree-cfg.c.  */
+extern location_t min_discriminator_location;
+extern location_t map_discriminator_location (location_t);
+extern int get_discriminator_from_locus (location_t);
+
 /* In tree-ssa-address.c.  */
 extern tree tree_mem_ref_addr (tree, tree);
 extern void copy_mem_ref_info (tree, tree);
@@ -5262,6 +5268,9 @@ extern unsigned HOST_WIDE_INT highest_pow2_factor (const_tree);
 /* In tree-inline.c.  */
 
 void init_inline_once (void);
+
+/* In ipa-reference.c.  Used for parsing attributes of asm code.  */
+extern GTY(()) tree memory_identifier_string;
 
 /* Compute the number of operands in an expression node NODE.  For 
    tcc_vl_exp nodes like CALL_EXPRs, this is stored in the node itself,

@@ -40,6 +40,7 @@ extern int warn_format_nonliteral;
 extern int warn_format_security;
 extern int warn_format_y2k;
 extern int warn_format_zero_length;
+extern int warn_icf;
 extern int warn_ignored_qualifiers;
 extern int warn_implicit_function_declaration;
 extern int warn_implicit_int;
@@ -85,6 +86,7 @@ extern int warn_redundant_decls;
 extern int flag_redundant;
 extern int warn_reorder;
 extern int warn_return_type;
+extern int warn_ripa_opt_mismatch;
 extern int warn_selector;
 extern int warn_sequence_point;
 extern int warn_shadow;
@@ -171,6 +173,7 @@ extern int flag_debug_only_used_symbols;
 extern int flag_eliminate_unused_debug_types;
 extern int flag_emit_class_debug_always;
 extern int flag_emit_class_files;
+extern int flag_enable_icf_debug;
 extern int flag_exceptions;
 extern int flag_expensive_optimizations;
 extern int flag_filelist_file;
@@ -221,6 +224,7 @@ extern int flag_jump_tables;
 extern int flag_keep_inline_functions;
 extern int flag_keep_static_consts;
 extern int flag_leading_underscore;
+extern int flag_limit_hot_components;
 extern int flag_loop_block;
 extern int flag_loop_interchange;
 extern int flag_loop_strip_mine;
@@ -270,6 +274,8 @@ extern int flag_reorder_functions;
 extern int flag_rerun_cse_after_loop;
 extern int flag_resched_modulo_sched;
 extern int flag_dyn_ipa;
+extern int flag_ripa_disallow_opt_mismatch;
+extern int flag_ripa_verbose;
 extern int flag_rounding_math;
 extern int flag_sample_profile;
 extern int flag_schedule_interblock;
@@ -298,6 +304,7 @@ extern int flag_split_wide_types;
 extern int flag_stack_protect;
 extern int flag_store_check;
 extern int flag_strict_aliasing;
+extern int flag_strict_enum_precision;
 extern int flag_strict_overflow;
 extern int flag_syntax_only;
 extern int flag_test_coverage;
@@ -322,6 +329,7 @@ extern int flag_tree_loop_im;
 extern int flag_tree_loop_ivcanon;
 extern int flag_tree_loop_linear;
 extern int flag_tree_loop_optimize;
+extern int flag_tree_lr_shrinking;
 extern int flag_tree_live_range_split;
 extern int flag_tree_parallelize_loops;
 extern int flag_tree_pre;
@@ -432,6 +440,7 @@ struct cl_optimization GTY(())
   unsigned char flag_ipa_type_escape;
   unsigned char flag_ivopts;
   unsigned char flag_jump_tables;
+  unsigned char flag_limit_hot_components;
   unsigned char flag_loop_block;
   unsigned char flag_loop_interchange;
   unsigned char flag_loop_strip_mine;
@@ -480,6 +489,7 @@ struct cl_optimization GTY(())
   unsigned char flag_split_ivs_in_unroller;
   unsigned char flag_split_wide_types;
   unsigned char flag_strict_aliasing;
+  unsigned char flag_strict_enum_precision;
   unsigned char flag_thread_jumps;
   unsigned char flag_toplevel_reorder;
   unsigned char flag_trapping_math;
@@ -499,6 +509,7 @@ struct cl_optimization GTY(())
   unsigned char flag_tree_loop_ivcanon;
   unsigned char flag_tree_loop_linear;
   unsigned char flag_tree_loop_optimize;
+  unsigned char flag_tree_lr_shrinking;
   unsigned char flag_tree_live_range_split;
   unsigned char flag_tree_pre;
   unsigned char flag_tree_reassoc;
@@ -709,6 +720,7 @@ enum opt_code
   OPT_Wformat_,                              /* -Wformat= */
   OPT_Wframe_larger_than_,                   /* -Wframe-larger-than= */
   OPT_Whiding,                               /* -Whiding */
+  OPT_Wicf,                                  /* -Wicf */
   OPT_Wignored_qualifiers,                   /* -Wignored-qualifiers */
   OPT_Wimplicit,                             /* -Wimplicit */
   OPT_Wimplicit_function_declaration,        /* -Wimplicit-function-declaration */
@@ -779,6 +791,7 @@ enum opt_code
   OPT_Wredundant_modifiers,                  /* -Wredundant-modifiers */
   OPT_Wreorder,                              /* -Wreorder */
   OPT_Wreturn_type,                          /* -Wreturn-type */
+  OPT_Wripa_opt_mismatch,                    /* -Wripa-opt-mismatch */
   OPT_Wselector,                             /* -Wselector */
   OPT_Wsequence_point,                       /* -Wsequence-point */
   OPT_Wserial,                               /* -Wserial */
@@ -969,6 +982,7 @@ enum opt_code
   OPT_femit_struct_debug_reduced,            /* -femit-struct-debug-reduced */
   OPT_fenable_assertions,                    /* -fenable-assertions */
   OPT_fenable_assertions_,                   /* -fenable-assertions= */
+  OPT_fenable_icf_debug,                     /* -fenable-icf-debug */
   OPT_fencoding_,                            /* -fencoding= */
   OPT_fenforce_eh_specs,                     /* -fenforce-eh-specs */
   OPT_fenum_int_equiv,                       /* -fenum-int-equiv */
@@ -1040,6 +1054,7 @@ enum opt_code
   OPT_finline_functions_called_once,         /* -finline-functions-called-once */
   OPT_finline_limit_,                        /* -finline-limit- */
   OPT_finline_limit_eq,                        /* -finline-limit= */
+  OPT_finline_plan_,                         /* -finline-plan- */
   OPT_finline_small_functions,               /* -finline-small-functions */
   OPT_finput_charset_,                       /* -finput-charset= */
   OPT_finstrument_functions,                 /* -finstrument-functions */
@@ -1068,6 +1083,7 @@ enum opt_code
   OPT_flabels_ok,                            /* -flabels-ok */
   OPT_flax_vector_conversions,               /* -flax-vector-conversions */
   OPT_fleading_underscore,                   /* -fleading-underscore */
+  OPT_flimit_hot_components,                 /* -flimit-hot-components */
   OPT_floop_block,                           /* -floop-block */
   OPT_floop_interchange,                     /* -floop-interchange */
   OPT_floop_optimize,                        /* -floop-optimize */
@@ -1163,9 +1179,12 @@ enum opt_code
   OPT_frerun_loop_opt,                       /* -frerun-loop-opt */
   OPT_freschedule_modulo_scheduled_loops,    /* -freschedule-modulo-scheduled-loops */
   OPT_fripa,                                 /* -fripa */
+  OPT_fripa_disallow_opt_mismatch,           /* -fripa-disallow-opt-mismatch */
+  OPT_fripa_verbose,                         /* -fripa-verbose */
   OPT_frounding_math,                        /* -frounding-math */
   OPT_frtti,                                 /* -frtti */
   OPT_fsample_profile,                       /* -fsample-profile */
+  OPT_fsample_profile_aggregate_using_,      /* -fsample-profile-aggregate-using= */
   OPT_fsample_profile_,                      /* -fsample-profile= */
   OPT_fsaw_java_file,                        /* -fsaw-java-file */
   OPT_fsched_interblock,                     /* -fsched-interblock */
@@ -1215,6 +1234,7 @@ enum opt_code
   OPT_fstore_check,                          /* -fstore-check */
   OPT_fstrength_reduce,                      /* -fstrength-reduce */
   OPT_fstrict_aliasing,                      /* -fstrict-aliasing */
+  OPT_fstrict_enum_precision,                /* -fstrict-enum-precision */
   OPT_fstrict_overflow,                      /* -fstrict-overflow */
   OPT_fstrict_prototype,                     /* -fstrict-prototype */
   OPT_fsyntax_only,                          /* -fsyntax-only */
@@ -1247,6 +1267,7 @@ enum opt_code
   OPT_ftree_loop_ivcanon,                    /* -ftree-loop-ivcanon */
   OPT_ftree_loop_linear,                     /* -ftree-loop-linear */
   OPT_ftree_loop_optimize,                   /* -ftree-loop-optimize */
+  OPT_ftree_lr_shrinking,                    /* -ftree-lr-shrinking */
   OPT_ftree_lrs,                             /* -ftree-lrs */
   OPT_ftree_parallelize_loops_,              /* -ftree-parallelize-loops= */
   OPT_ftree_pre,                             /* -ftree-pre */
@@ -1307,6 +1328,7 @@ enum opt_code
   OPT_gdwarf_4,                              /* -gdwarf-4 */
   OPT_gen_decls,                             /* -gen-decls */
   OPT_ggdb,                                  /* -ggdb */
+  OPT_gmlt,                                  /* -gmlt */
   OPT_gnat,                                  /* -gnat */
   OPT_gnatO,                                 /* -gnatO */
   OPT_gstabs,                                /* -gstabs */

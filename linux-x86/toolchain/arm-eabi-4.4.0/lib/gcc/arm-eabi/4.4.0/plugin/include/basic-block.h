@@ -216,6 +216,13 @@ struct rtl_bb_info;
    basic block even though these insns can follow or precede insns in
    basic blocks.  */
 
+enum sample_profile_confidence
+{
+  LOW_CONFIDENCE = 0,
+  NORMAL_CONFIDENCE,
+  HIGH_CONFIDENCE
+};
+
 /* Basic block information indexed by block number.  */
 struct basic_block_def GTY((chain_next ("%h.next_bb"), chain_prev ("%h.prev_bb")))
 {
@@ -244,6 +251,9 @@ struct basic_block_def GTY((chain_next ("%h.next_bb"), chain_prev ("%h.prev_bb")
   /* Expected number of executions: calculated in profile.c.  */
   gcov_type count;
 
+  /* Confidence level for the profile */
+  enum sample_profile_confidence confidence;
+
   /* The index of this block.  */
   int index;
 
@@ -252,9 +262,6 @@ struct basic_block_def GTY((chain_next ("%h.next_bb"), chain_prev ("%h.prev_bb")
 
   /* Expected frequency.  Normalized to be in range 0 to BB_FREQ_MAX.  */
   int frequency;
-
-  /* The discriminator for this block.  */
-  int discriminator;
 
   /* Various flags.  See BB_* below.  */
   int flags;

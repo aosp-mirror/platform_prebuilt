@@ -1,5 +1,5 @@
 This is standards.info, produced by makeinfo version 4.8 from
-../../../../android-toolchain/binutils-2.19/etc/standards.texi.
+/home/jingyu/projects/gcc/android-toolchain/binutils-2.19/etc/standards.texi.
 
 INFO-DIR-SECTION GNU organization
 START-INFO-DIR-ENTRY
@@ -5504,73 +5504,73 @@ Index
 
 
 Tag Table:
-Node: Top843
-Node: Preface2099
-Node: Legal Issues4214
-Node: Reading Non-Free Code4684
-Node: Contributions6414
-Node: Trademarks8652
-Node: Design Advice10287
-Node: Source Language10879
-Node: Compatibility12891
-Node: Using Extensions14519
-Node: Standard C16095
-Node: Conditional Compilation18498
-Node: Program Behavior19896
-Node: Non-GNU Standards20952
-Node: Semantics23233
-Node: Libraries27952
-Node: Errors29197
-Node: User Interfaces31690
-Node: Graphical Interfaces33295
-Node: Command-Line Interfaces34331
-Node: --version36363
-Node: --help42256
-Node: Option Table42810
-Node: Memory Usage57751
-Node: File Usage58782
-Node: Writing C59532
-Node: Formatting60504
-Node: Comments64793
-Node: Syntactic Conventions68345
-Node: Names71807
-Node: System Portability74019
-Node: CPU Portability76909
-Node: System Functions80821
-Node: Internationalization86018
-Node: Character Set90012
-Node: Quote Characters90825
-Node: Mmap92345
-Node: Documentation93053
-Node: GNU Manuals94159
-Node: Doc Strings and Manuals99897
-Node: Manual Structure Details101450
-Node: License for Manuals102868
-Node: Manual Credits103842
-Node: Printed Manuals104235
-Node: NEWS File104921
-Node: Change Logs105599
-Node: Change Log Concepts106353
-Node: Style of Change Logs108442
-Node: Simple Changes110942
-Node: Conditional Changes112384
-Node: Indicating the Part Changed113806
-Node: Man Pages114333
-Node: Reading other Manuals116645
-Node: Managing Releases117436
-Node: Configuration118217
-Node: Makefile Conventions125937
-Node: Makefile Basics126819
-Node: Utilities in Makefiles129993
-Node: Command Variables132138
-Node: DESTDIR135360
-Node: Directory Variables137509
-Node: Standard Targets152002
-Ref: Standard Targets-Footnote-1165517
-Node: Install Command Categories165617
-Node: Releases170150
-Node: References174077
-Node: GNU Free Documentation License179572
-Node: Index202004
+Node: Top857
+Node: Preface2113
+Node: Legal Issues4228
+Node: Reading Non-Free Code4698
+Node: Contributions6428
+Node: Trademarks8666
+Node: Design Advice10301
+Node: Source Language10893
+Node: Compatibility12905
+Node: Using Extensions14533
+Node: Standard C16109
+Node: Conditional Compilation18512
+Node: Program Behavior19910
+Node: Non-GNU Standards20966
+Node: Semantics23247
+Node: Libraries27966
+Node: Errors29211
+Node: User Interfaces31704
+Node: Graphical Interfaces33309
+Node: Command-Line Interfaces34345
+Node: --version36377
+Node: --help42270
+Node: Option Table42824
+Node: Memory Usage57765
+Node: File Usage58796
+Node: Writing C59546
+Node: Formatting60518
+Node: Comments64807
+Node: Syntactic Conventions68359
+Node: Names71821
+Node: System Portability74033
+Node: CPU Portability76923
+Node: System Functions80835
+Node: Internationalization86032
+Node: Character Set90026
+Node: Quote Characters90839
+Node: Mmap92359
+Node: Documentation93067
+Node: GNU Manuals94173
+Node: Doc Strings and Manuals99911
+Node: Manual Structure Details101464
+Node: License for Manuals102882
+Node: Manual Credits103856
+Node: Printed Manuals104249
+Node: NEWS File104935
+Node: Change Logs105613
+Node: Change Log Concepts106367
+Node: Style of Change Logs108456
+Node: Simple Changes110956
+Node: Conditional Changes112398
+Node: Indicating the Part Changed113820
+Node: Man Pages114347
+Node: Reading other Manuals116659
+Node: Managing Releases117450
+Node: Configuration118231
+Node: Makefile Conventions125951
+Node: Makefile Basics126833
+Node: Utilities in Makefiles130007
+Node: Command Variables132152
+Node: DESTDIR135374
+Node: Directory Variables137523
+Node: Standard Targets152016
+Ref: Standard Targets-Footnote-1165531
+Node: Install Command Categories165631
+Node: Releases170164
+Node: References174091
+Node: GNU Free Documentation License179586
+Node: Index202018
 
 End Tag Table

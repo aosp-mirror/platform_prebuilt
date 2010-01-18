@@ -508,10 +508,26 @@ varpool_next_static_initializer (struct varpool_node *node)
         (node) = varpool_next_static_initializer (node))
 
 /* In ipa-inline.c  */
+
+/* Contains list of user-specified files containing inlining decisions
+   for particular inlining passes.  */
+
+struct inline_plan_file
+{
+  char *pass_name;
+  char *filename;
+  struct inline_plan_file *next;
+};
+extern struct inline_plan_file *inline_plan_files;
+
 void cgraph_clone_inlined_nodes (struct cgraph_edge *, bool, bool);
 bool cgraph_default_inline_p (struct cgraph_node *, const char **);
 unsigned int compute_inline_parameters (struct cgraph_node *);
 
+void compute_hot_components (void);
+void free_hot_components (void);
+void dump_hot_components (FILE *);
+void verify_hot_components (void);
 
 /* Create a new static variable of type TYPE.  */
 tree add_new_static_var (tree type);

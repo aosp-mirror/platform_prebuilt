@@ -1709,7 +1709,7 @@ bootstrapped, you can use `CFLAGS_FOR_TARGET' to modify their
 compilation flags, as for non-bootstrapped target libraries.  Again, if
 the native compiler miscompiles the stage1 compiler, you may need to
 work around this by avoiding non-working parts of the stage1 compiler.
-Use `STAGE1_LIBCFLAGS' to this end.
+Use `STAGE1_TFLAGS' to this end.
 
    If you used the flag `--enable-languages=...' to restrict the
 compilers to be built, only those you've actually enabled will be
@@ -1731,6 +1731,25 @@ are building on: for example, you could build a
 `powerpc-unknown-linux-gnu' toolchain on a
 `powerpc64-unknown-linux-gnu' host.  In this case, pass
 `--enable-bootstrap' to the configure script.
+
+   `BUILD_CONFIG' can be used to bring in additional customization to
+the build.  It can be set to a whitespace-separated list of names.  For
+each such `NAME', top-level `config/`NAME'.mk' will be included by the
+top-level `Makefile', bringing in any settings it contains.  Some
+examples are:
+
+`bootstrap-O1'
+     Removes any `-O'-started option from `BOOT_CFLAGS', and adds `-O1'
+     to it.  `BUILD_CONFIG=bootstrap-O1' is equivalent to
+     `BOOT_CFLAGS='-g -O1''.
+
+`bootstrap-O3'
+     Analogous to `bootstrap-O1'.
+
+`bootstrap-debug'
+     Builds stage2 without debug information, and uses
+     `contrib/compare-debug' to compare object files.
+
 
 5.2 Building a cross compiler
 =============================
@@ -4192,75 +4211,75 @@ Ref: with-gnu-as29555
 Ref: with-as30453
 Ref: with-gnu-ld31866
 Node: Building69419
-Node: Testing81362
-Node: Final install89142
-Node: Binaries94372
-Node: Specific96345
-Ref: alpha-x-x96851
-Ref: alpha-dec-osf97340
-Ref: arc-x-elf100463
-Ref: arm-x-elf100563
-Ref: arm-x-coff100783
-Ref: arm-x-aout100985
-Ref: avr101107
-Ref: bfin101791
-Ref: cris102033
-Ref: crx102849
-Ref: dos103512
-Ref: x-x-freebsd103835
-Ref: h8300-hms106218
-Ref: hppa-hp-hpux106570
-Ref: hppa-hp-hpux10108941
-Ref: hppa-hp-hpux11109574
-Ref: x-x-linux-gnu115233
-Ref: ix86-x-linux115426
-Ref: ix86-x-solaris210115739
-Ref: ia64-x-linux116125
-Ref: ia64-x-hpux116895
-Ref: x-ibm-aix117450
-Ref: iq2000-x-elf123433
-Ref: m32c-x-elf123573
-Ref: m32r-x-elf123675
-Ref: m6811-elf123777
-Ref: m6812-elf123927
-Ref: m68k-x-x124077
-Ref: m68k-x-uclinux125082
-Ref: mips-x-x125445
-Ref: mips-sgi-irix5128122
-Ref: mips-sgi-irix6129070
-Ref: powerpc-x-x131877
-Ref: powerpc-x-darwin132082
-Ref: powerpc-x-elf132629
-Ref: powerpc-x-linux-gnu132714
-Ref: powerpc-x-netbsd132809
-Ref: powerpc-x-eabisim132897
-Ref: powerpc-x-eabi133023
-Ref: powerpcle-x-elf133099
-Ref: powerpcle-x-eabisim133191
-Ref: powerpcle-x-eabi133324
-Ref: s390-x-linux133407
-Ref: s390x-x-linux133479
-Ref: s390x-ibm-tpf133566
-Ref: x-x-solaris2133697
-Ref: sparc-sun-solaris2137574
-Ref: sparc-sun-solaris27140295
-Ref: sparc-x-linux142759
-Ref: sparc64-x-solaris2142984
-Ref: sparcv9-x-solaris2143629
-Ref: x-x-vxworks143714
-Ref: x86-64-x-x145236
-Ref: xtensa-x-elf145564
-Ref: xtensa-x-linux146235
-Ref: windows146576
-Ref: x-x-cygwin148531
-Ref: x-x-interix148801
-Ref: x-x-mingw32149167
-Ref: os2149393
-Ref: older149584
-Ref: elf151701
-Node: Old151959
-Node: Configurations155096
-Node: GNU Free Documentation License159078
-Node: Concept Index181494
+Node: Testing82007
+Node: Final install89787
+Node: Binaries95017
+Node: Specific96990
+Ref: alpha-x-x97496
+Ref: alpha-dec-osf97985
+Ref: arc-x-elf101108
+Ref: arm-x-elf101208
+Ref: arm-x-coff101428
+Ref: arm-x-aout101630
+Ref: avr101752
+Ref: bfin102436
+Ref: cris102678
+Ref: crx103494
+Ref: dos104157
+Ref: x-x-freebsd104480
+Ref: h8300-hms106863
+Ref: hppa-hp-hpux107215
+Ref: hppa-hp-hpux10109586
+Ref: hppa-hp-hpux11110219
+Ref: x-x-linux-gnu115878
+Ref: ix86-x-linux116071
+Ref: ix86-x-solaris210116384
+Ref: ia64-x-linux116770
+Ref: ia64-x-hpux117540
+Ref: x-ibm-aix118095
+Ref: iq2000-x-elf124078
+Ref: m32c-x-elf124218
+Ref: m32r-x-elf124320
+Ref: m6811-elf124422
+Ref: m6812-elf124572
+Ref: m68k-x-x124722
+Ref: m68k-x-uclinux125727
+Ref: mips-x-x126090
+Ref: mips-sgi-irix5128767
+Ref: mips-sgi-irix6129715
+Ref: powerpc-x-x132522
+Ref: powerpc-x-darwin132727
+Ref: powerpc-x-elf133274
+Ref: powerpc-x-linux-gnu133359
+Ref: powerpc-x-netbsd133454
+Ref: powerpc-x-eabisim133542
+Ref: powerpc-x-eabi133668
+Ref: powerpcle-x-elf133744
+Ref: powerpcle-x-eabisim133836
+Ref: powerpcle-x-eabi133969
+Ref: s390-x-linux134052
+Ref: s390x-x-linux134124
+Ref: s390x-ibm-tpf134211
+Ref: x-x-solaris2134342
+Ref: sparc-sun-solaris2138219
+Ref: sparc-sun-solaris27140940
+Ref: sparc-x-linux143404
+Ref: sparc64-x-solaris2143629
+Ref: sparcv9-x-solaris2144274
+Ref: x-x-vxworks144359
+Ref: x86-64-x-x145881
+Ref: xtensa-x-elf146209
+Ref: xtensa-x-linux146880
+Ref: windows147221
+Ref: x-x-cygwin149176
+Ref: x-x-interix149446
+Ref: x-x-mingw32149812
+Ref: os2150038
+Ref: older150229
+Ref: elf152346
+Node: Old152604
+Node: Configurations155741
+Node: GNU Free Documentation License159723
+Node: Concept Index182139
 
 End Tag Table

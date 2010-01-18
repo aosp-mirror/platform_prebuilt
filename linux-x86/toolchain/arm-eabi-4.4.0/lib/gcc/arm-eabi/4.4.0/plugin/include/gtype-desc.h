@@ -85,6 +85,9 @@ enum gt_types_enum {
  gt_ggc_e_16VEC_eh_region_gc, 
  gt_ggc_e_9eh_region, 
  gt_ggc_e_18saved_module_scope, 
+ gt_ggc_e_10vcall_insn, 
+ gt_ggc_e_18VEC_vcall_entry_gc, 
+ gt_ggc_e_18VEC_dcall_entry_gc, 
  gt_ggc_e_16var_loc_list_def, 
  gt_ggc_e_12var_loc_node, 
  gt_ggc_e_16limbo_die_struct, 
@@ -209,6 +212,7 @@ enum gt_types_enum {
  gt_e_P10cgraph_sym4htab, 
  gt_e_P18saved_module_scope4htab, 
  gt_e_SP9tree_node12splay_tree_s, 
+ gt_e_P10vcall_insn4htab, 
  gt_e_P16var_loc_list_def4htab, 
  gt_e_P10die_struct4htab, 
  gt_e_P15dwarf_file_data4htab, 
@@ -480,6 +484,18 @@ extern void gt_ggc_mx_eh_region (void *);
   if (X != NULL) gt_ggc_mx_saved_module_scope (X);\
   } while (0)
 extern void gt_ggc_mx_saved_module_scope (void *);
+#define gt_ggc_m_10vcall_insn(X) do { \
+  if (X != NULL) gt_ggc_mx_vcall_insn (X);\
+  } while (0)
+extern void gt_ggc_mx_vcall_insn (void *);
+#define gt_ggc_m_18VEC_vcall_entry_gc(X) do { \
+  if (X != NULL) gt_ggc_mx_VEC_vcall_entry_gc (X);\
+  } while (0)
+extern void gt_ggc_mx_VEC_vcall_entry_gc (void *);
+#define gt_ggc_m_18VEC_dcall_entry_gc(X) do { \
+  if (X != NULL) gt_ggc_mx_VEC_dcall_entry_gc (X);\
+  } while (0)
+extern void gt_ggc_mx_VEC_dcall_entry_gc (void *);
 #define gt_ggc_m_16var_loc_list_def(X) do { \
   if (X != NULL) gt_ggc_mx_var_loc_list_def (X);\
   } while (0)
@@ -871,6 +887,7 @@ extern void gt_ggc_m_P12varpool_node4htab (void *);
 extern void gt_ggc_m_P10cgraph_sym4htab (void *);
 extern void gt_ggc_m_P18saved_module_scope4htab (void *);
 extern void gt_ggc_m_SP9tree_node12splay_tree_s (void *);
+extern void gt_ggc_m_P10vcall_insn4htab (void *);
 extern void gt_ggc_m_P16var_loc_list_def4htab (void *);
 extern void gt_ggc_m_P10die_struct4htab (void *);
 extern void gt_ggc_m_P15dwarf_file_data4htab (void *);
@@ -1140,6 +1157,18 @@ extern void gt_pch_nx_eh_region (void *);
   if (X != NULL) gt_pch_nx_saved_module_scope (X);\
   } while (0)
 extern void gt_pch_nx_saved_module_scope (void *);
+#define gt_pch_n_10vcall_insn(X) do { \
+  if (X != NULL) gt_pch_nx_vcall_insn (X);\
+  } while (0)
+extern void gt_pch_nx_vcall_insn (void *);
+#define gt_pch_n_18VEC_vcall_entry_gc(X) do { \
+  if (X != NULL) gt_pch_nx_VEC_vcall_entry_gc (X);\
+  } while (0)
+extern void gt_pch_nx_VEC_vcall_entry_gc (void *);
+#define gt_pch_n_18VEC_dcall_entry_gc(X) do { \
+  if (X != NULL) gt_pch_nx_VEC_dcall_entry_gc (X);\
+  } while (0)
+extern void gt_pch_nx_VEC_dcall_entry_gc (void *);
 #define gt_pch_n_16var_loc_list_def(X) do { \
   if (X != NULL) gt_pch_nx_var_loc_list_def (X);\
   } while (0)
@@ -1531,6 +1560,7 @@ extern void gt_pch_n_P12varpool_node4htab (void *);
 extern void gt_pch_n_P10cgraph_sym4htab (void *);
 extern void gt_pch_n_P18saved_module_scope4htab (void *);
 extern void gt_pch_n_SP9tree_node12splay_tree_s (void *);
+extern void gt_pch_n_P10vcall_insn4htab (void *);
 extern void gt_pch_n_P16var_loc_list_def4htab (void *);
 extern void gt_pch_n_P10die_struct4htab (void *);
 extern void gt_pch_n_P15dwarf_file_data4htab (void *);
@@ -1671,6 +1701,12 @@ extern void gt_pch_p_16VEC_eh_region_gc
 extern void gt_pch_p_9eh_region
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_18saved_module_scope
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_10vcall_insn
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_18VEC_vcall_entry_gc
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_18VEC_dcall_entry_gc
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_16var_loc_list_def
     (void *, void *, gt_pointer_operator, void *);
@@ -1918,6 +1954,8 @@ extern void gt_pch_p_P10cgraph_sym4htab
 extern void gt_pch_p_P18saved_module_scope4htab
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_SP9tree_node12splay_tree_s
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_P10vcall_insn4htab
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_P16var_loc_list_def4htab
     (void *, void *, gt_pointer_operator, void *);

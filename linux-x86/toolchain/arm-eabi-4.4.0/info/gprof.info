@@ -1,5 +1,5 @@
 This is gprof.info, produced by makeinfo version 4.8 from
-../../../../android-toolchain/binutils-2.19/gprof/gprof.texi.
+/home/jingyu/projects/gcc/android-toolchain/binutils-2.19/gprof/gprof.texi.
 
 START-INFO-DIR-ENTRY
 * gprof: (gprof).                Profiling your program's execution
@@ -2307,35 +2307,35 @@ permit their use in free software.
 
 
 Tag Table:
-Node: Top769
-Node: Introduction2080
-Node: Compiling4572
-Node: Executing8043
-Node: Invoking10831
-Node: Output Options12246
-Node: Analysis Options19335
-Node: Miscellaneous Options22736
-Node: Deprecated Options23991
-Node: Symspecs26070
-Node: Output27896
-Node: Flat Profile28936
-Node: Call Graph33889
-Node: Primary37121
-Node: Callers39709
-Node: Subroutines41826
-Node: Cycles43667
-Node: Line-by-line50444
-Node: Annotated Source54517
-Node: Inaccuracy57516
-Node: Sampling Error57774
-Node: Assumptions60344
-Node: How do I?61814
-Node: Incompatibilities63368
-Node: Details64862
-Node: Implementation65255
-Node: File Format71152
-Node: Internals75442
-Node: Debugging83937
-Node: GNU Free Documentation License85538
+Node: Top783
+Node: Introduction2094
+Node: Compiling4586
+Node: Executing8057
+Node: Invoking10845
+Node: Output Options12260
+Node: Analysis Options19349
+Node: Miscellaneous Options22750
+Node: Deprecated Options24005
+Node: Symspecs26084
+Node: Output27910
+Node: Flat Profile28950
+Node: Call Graph33903
+Node: Primary37135
+Node: Callers39723
+Node: Subroutines41840
+Node: Cycles43681
+Node: Line-by-line50458
+Node: Annotated Source54531
+Node: Inaccuracy57530
+Node: Sampling Error57788
+Node: Assumptions60358
+Node: How do I?61828
+Node: Incompatibilities63382
+Node: Details64876
+Node: Implementation65269
+Node: File Format71166
+Node: Internals75456
+Node: Debugging83951
+Node: GNU Free Documentation License85552
 
 End Tag Table

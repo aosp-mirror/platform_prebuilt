@@ -1,5 +1,5 @@
 This is gdbint.info, produced by makeinfo version 4.8 from
-../../../../../android-toolchain/gdb-6.6/gdb/doc/gdbint.texinfo.
+/home/jingyu/projects/gcc/android-toolchain/gdb-6.6/gdb/doc/gdbint.texinfo.
 
 INFO-DIR-SECTION Software development
 START-INFO-DIR-ENTRY
@@ -7768,54 +7768,54 @@ Index
 
 
 Tag Table:
-Node: Top937
-Node: Requirements1776
-Node: Overall Structure3264
-Node: Algorithms8197
-Node: User Interface37905
-Ref: User Interface-Footnote-161682
-Ref: User Interface-Footnote-261731
-Node: libgdb61966
-Node: Symbol Handling65926
-Node: Language Support81026
-Node: Host Definition86427
-Node: Target Architecture Definition93784
-Ref: BREAKPOINT_FROM_PC121406
-Ref: DEPRECATED_EXTRACT_STRUCT_VALUE_ADDRESS127574
-Ref: frame_align128406
-Ref: DEPRECATED_FRAME_SAVED_PC130785
-Ref: unwind_pc130971
-Ref: unwind_sp131524
-Ref: stabs_argument_has_addr143987
-Ref: push_dummy_call144761
-Ref: push_dummy_code145347
-Ref: DEPRECATED_REG_STRUCT_HAS_ADDR146192
-Ref: SAVE_DUMMY_FRAME_TOS146426
-Ref: gdbarch_return_value147045
-Ref: DEPRECATED_STACK_ALIGN150330
-Ref: TARGET_WRITE_PC152957
-Ref: TARGET_READ_SP152991
-Ref: unwind_dummy_id154664
-Ref: Target Architecture Definition-Footnote-1163217
-Ref: Target Architecture Definition-Footnote-2163460
-Node: Target Vector Definition163579
-Node: Managing Execution State164122
-Node: Existing Targets165935
-Node: Native Debugging168256
-Node: Support Libraries178695
-Node: Coding190101
-Node: Porting GDB215820
-Node: Versions and Branches217729
-Ref: Tags223688
-Ref: experimental branch tags224019
-Node: Start of New Year Procedure224751
-Node: Releasing GDB225749
-Node: Testsuite244093
-Node: Hints251046
-Node: Getting Started251368
-Node: Debugging GDB255511
-Node: GDB Observers260873
-Node: GNU Free Documentation License265238
-Node: Index287682
+Node: Top948
+Node: Requirements1787
+Node: Overall Structure3275
+Node: Algorithms8208
+Node: User Interface37916
+Ref: User Interface-Footnote-161693
+Ref: User Interface-Footnote-261742
+Node: libgdb61977
+Node: Symbol Handling65937
+Node: Language Support81037
+Node: Host Definition86438
+Node: Target Architecture Definition93795
+Ref: BREAKPOINT_FROM_PC121417
+Ref: DEPRECATED_EXTRACT_STRUCT_VALUE_ADDRESS127585
+Ref: frame_align128417
+Ref: DEPRECATED_FRAME_SAVED_PC130796
+Ref: unwind_pc130982
+Ref: unwind_sp131535
+Ref: stabs_argument_has_addr143998
+Ref: push_dummy_call144772
+Ref: push_dummy_code145358
+Ref: DEPRECATED_REG_STRUCT_HAS_ADDR146203
+Ref: SAVE_DUMMY_FRAME_TOS146437
+Ref: gdbarch_return_value147056
+Ref: DEPRECATED_STACK_ALIGN150341
+Ref: TARGET_WRITE_PC152968
+Ref: TARGET_READ_SP153002
+Ref: unwind_dummy_id154675
+Ref: Target Architecture Definition-Footnote-1163228
+Ref: Target Architecture Definition-Footnote-2163471
+Node: Target Vector Definition163590
+Node: Managing Execution State164133
+Node: Existing Targets165946
+Node: Native Debugging168267
+Node: Support Libraries178706
+Node: Coding190112
+Node: Porting GDB215831
+Node: Versions and Branches217740
+Ref: Tags223699
+Ref: experimental branch tags224030
+Node: Start of New Year Procedure224762
+Node: Releasing GDB225760
+Node: Testsuite244104
+Node: Hints251057
+Node: Getting Started251379
+Node: Debugging GDB255522
+Node: GDB Observers260884
+Node: GNU Free Documentation License265249
+Node: Index287693
 
 End Tag Table

@@ -3184,8 +3184,6 @@ directive is a synonym for `#ident'.
 official GNU extensions either.  What historical information we have
 been able to find, suggests they originated with System V.
 
-   Both `#ident' and `#sccs' are deprecated extensions.
-
    The "null directive" consists of a `#' followed by a newline, with
 only whitespace (including comments) in between.  A null directive is
 understood as a preprocessing directive but has no effect on the
@@ -5211,7 +5209,7 @@ Concept Index
 * named operators:                       C++ Named Operators. (line   6)
 * newlines in macro arguments:           Newlines in Arguments.
                                                               (line   6)
-* null directive:                        Other Directives.    (line  17)
+* null directive:                        Other Directives.    (line  15)
 * numbers:                               Tokenization.        (line  61)
 * object-like macro:                     Object-like Macros.  (line   6)
 * options:                               Invocation.          (line  38)
@@ -5326,26 +5324,26 @@ Node: Diagnostics120401
 Node: Line Control122018
 Node: Pragmas125822
 Node: Other Directives130092
-Node: Preprocessor Output131199
-Node: Traditional Mode134400
-Node: Traditional lexical analysis135458
-Node: Traditional macros137961
-Node: Traditional miscellany141763
-Node: Traditional warnings142760
-Node: Implementation Details144957
-Node: Implementation-defined behavior145578
-Ref: Identifier characters146330
-Node: Implementation limits149405
-Node: Obsolete Features152079
-Node: Differences from previous versions154916
-Node: Invocation159124
-Ref: Wtrigraphs163576
-Ref: dashMF168351
-Ref: fdollars-in-identifiers177734
-Node: Environment Variables185897
-Node: GNU Free Documentation License188863
-Node: Index of Directives211296
-Node: Option Index213230
-Node: Concept Index219414
+Node: Preprocessor Output131142
+Node: Traditional Mode134343
+Node: Traditional lexical analysis135401
+Node: Traditional macros137904
+Node: Traditional miscellany141706
+Node: Traditional warnings142703
+Node: Implementation Details144900
+Node: Implementation-defined behavior145521
+Ref: Identifier characters146273
+Node: Implementation limits149348
+Node: Obsolete Features152022
+Node: Differences from previous versions154859
+Node: Invocation159067
+Ref: Wtrigraphs163519
+Ref: dashMF168294
+Ref: fdollars-in-identifiers177677
+Node: Environment Variables185840
+Node: GNU Free Documentation License188806
+Node: Index of Directives211239
+Node: Option Index213173
+Node: Concept Index219357
 
 End Tag Table
