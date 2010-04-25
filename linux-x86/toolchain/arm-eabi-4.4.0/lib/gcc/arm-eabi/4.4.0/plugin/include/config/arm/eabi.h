@@ -128,3 +128,6 @@
 #define ENDFILE_SPEC \
 "%{mandroid: %(endfile_android) ;" \
 "          : %(endfile_default)}"
+
+#undef NEED_INDICATE_EXEC_STACK
+#define NEED_INDICATE_EXEC_STACK  1

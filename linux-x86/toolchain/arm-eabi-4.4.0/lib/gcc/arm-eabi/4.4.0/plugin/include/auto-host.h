@@ -228,7 +228,7 @@
 /* Define if your assembler supports dwarf2 .file/.loc directives, and
    preserves file table indices exactly as given. */
 #ifndef USED_FOR_TARGET
-/* #undef HAVE_AS_DWARF2_DEBUG_LINE */
+#define HAVE_AS_DWARF2_DEBUG_LINE 1
 #endif
 
 
@@ -1070,7 +1070,7 @@
 /* Define if your linker links a mix of read-only and read-write sections into
    a read-write section. */
 #ifndef USED_FOR_TARGET
-/* #undef HAVE_LD_RO_RW_SECTION_MIXING */
+#define HAVE_LD_RO_RW_SECTION_MIXING 1
 #endif
 
 
