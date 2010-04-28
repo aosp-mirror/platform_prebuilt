@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAx3///wg\u003d",
+        "filename": "android-x86/kernel/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000888
+      },
+      "writtenOn": "2010-04-28T02:51:09Z",
+      "side": 1,
+      "message": "needs file guard to be generic_x86 only.",
+      "revId": "71c442b7e3056682a05f4afc2b4db80e7a266550",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
