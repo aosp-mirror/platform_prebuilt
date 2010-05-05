@@ -1,0 +1,7 @@
+The file 'kernel' gets copied to the generic_x86 image. Replace it with
+the kernel from which you wish to boot. The same kernel is used for the
+installer_dvi image as well as for the boot kernel.
+
+The file 'kernel_config_VirtualBox' is a .config file for the Android
+2.6.32 kernel tree that can boot and run fairly well using VirtualBox.
+
