@@ -396,7 +396,7 @@ in the following sections.
 \&\-funit\-at\-a\-time \-funroll\-all\-loops \-funroll\-loops 
 \&\-funsafe\-loop\-optimizations \-funsafe\-math\-optimizations \-funswitch\-loops 
 \&\-fvariable\-expansion\-in\-unroller \-fvect\-cost\-model \-fvpt \-fweb 
-\&\-fwhole\-program 
+\&\-fwhole\-program \-fuse\-ld 
 \&\-\-param\fR \fIname\fR\fB=\fR\fIvalue\fR
 \&\fB\-O  \-O0  \-O1  \-O2  \-O3  \-Os\fR
 .IP "\fIPreprocessor Options\fR" 4
@@ -6127,6 +6127,16 @@ programs since the functions and variables become local for the whole combined
 compilation unit, not for the single source file itself.
 .Sp
 This option is not supported for Fortran programs.
+.IP "\fB\-fuse\-ld=gold\fR" 4
+.IX Item "-fuse-ld=gold"
+Use the \fBld.gold\fR linker instead of the default linker.
+This option is only necessary if \s-1GCC\s0 has been configured with
+\&\fB\-\-enable\-gold=both\fR or \fB\-\-enable\-gold=both/ld\fR.
+.IP "\fB\-fuse\-ld=bfd\fR" 4
+.IX Item "-fuse-ld=bfd"
+Use the \fBld.bfd\fR linker instead of the default linker.
+This option is only necessary if \s-1GCC\s0 has been configured with
+\&\fB\-\-enable\-gold=both/gold\fR.
 .IP "\fB\-fcprop\-registers\fR" 4
 .IX Item "-fcprop-registers"
 After register allocation and post-register allocation instruction splitting,

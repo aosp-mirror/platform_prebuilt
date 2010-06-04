@@ -1298,6 +1298,7 @@ enum opt_code
   OPT_fuse_cxa_atexit,                       /* -fuse-cxa-atexit */
   OPT_fuse_cxa_get_exception_ptr,            /* -fuse-cxa-get-exception-ptr */
   OPT_fuse_divide_subroutine,                /* -fuse-divide-subroutine */
+  OPT_fuse_ld_,                              /* -fuse-ld= */
   OPT_fvar_tracking,                         /* -fvar-tracking */
   OPT_fvar_tracking_uninit,                  /* -fvar-tracking-uninit */
   OPT_fvariable_expansion_in_unroller,       /* -fvariable-expansion-in-unroller */

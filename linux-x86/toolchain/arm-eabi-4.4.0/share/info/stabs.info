@@ -1,4 +1,4 @@
-This is stabs.info, produced by makeinfo version 4.8 from
+This is stabs.info, produced by makeinfo version 4.11 from
 /home/jingyu/projects/gcc/android-toolchainsrc/build/../gdb/gdb-6.6/gdb/doc/stabs.texinfo.
 
 INFO-DIR-SECTION Software development
@@ -133,7 +133,7 @@ XCOFF assembler uses `.stabx' (and some other directives such as
      .stabx "STRING",VALUE,TYPE,SDB-TYPE
 
    For `.stabn' and `.stabd', there is no STRING (the `n_strx' field is
-zero; see *Note Symbol Tables::).  For `.stabd', the VALUE field is
+zero; see *note Symbol Tables::).  For `.stabd', the VALUE field is
 implicit and has the value of the current file location.  For `.stabx',
 the SDB-TYPE field is unused for stabs and can always be set to zero.
 The OTHER field is almost always unused and can be set to zero.
@@ -174,7 +174,7 @@ altogether; apparently that is supported by most debuggers.
 that tells more specifically what kind of symbol the stab represents.
 If the SYMBOL-DESCRIPTOR is omitted, but type information follows, then
 the stab represents a local variable.  For a list of symbol
-descriptors, see *Note Symbol Descriptors::.  The `c' symbol descriptor
+descriptors, see *note Symbol Descriptors::.  The `c' symbol descriptor
 is an exception in that it is not followed by type information.  *Note
 Constants::.
 
@@ -195,7 +195,7 @@ type is about to be defined.  Any other values following the
 TYPE-DESCRIPTOR vary, depending on the TYPE-DESCRIPTOR.  *Note Type
 Descriptors::, for a list of TYPE-DESCRIPTOR values.  If a number
 follows the `=' then the number is a TYPE-REFERENCE.  For a full
-description of types, *Note Types::.
+description of types, *note Types::.
 
    A TYPE-NUMBER is often a single number.  The GNU and Sun tools
 additionally permit a TYPE-NUMBER to be a pair
@@ -205,7 +205,7 @@ base source file, 1 for the first included file, 2 for the next, and so
 on.  The FILETYPE-NUMBER is a number starting with 1 which is
 incremented for each new type defined in the file.  (Separating the
 file number and the type number permits the `N_BINCL' optimization to
-succeed more often; see *Note Include Files::).
+succeed more often; see *note Include Files::).
 
    There is an AIX extension for type attributes.  Following the `='
 are any number of type attributes.  Each one starts with `@' and ends
@@ -562,7 +562,7 @@ looking things up in the ELF symbols would probably be slow, I'm not
 sure how to find which symbol of that name is the right one, and this
 doesn't provide any way to deal with nested functions, it would
 probably be better to make the value of the stab an address relative to
-the start of the file, or just absolute.  See *Note ELF Linker
+the start of the file, or just absolute.  See *note ELF Linker
 Relocation:: for more information on linker relocation of stabs in ELF
 files.  For XCOFF, the stab uses the `C_FUN' storage class and the
 value of the stab is meaningless; the address of the function can be
@@ -835,7 +835,7 @@ variables use the `N_LSYM' stab type, or `C_LSYM' for XCOFF.
    The value of the stab is the offset of the variable within the local
 variables.  On most machines this is an offset from the frame pointer
 and is negative.  The location of the stab specifies which block it is
-defined in; see *Note Block Structure::.
+defined in; see *note Block Structure::.
 
    For example, the following C code:
 
@@ -852,8 +852,8 @@ defined in; see *Note Block Structure::.
      .stabn 192,0,0,LBB2             # 192 is N_LBRAC
      .stabn 224,0,0,LBE2             # 224 is N_RBRAC
 
-   See *Note Procedures:: for more information on the `N_FUN' stab, and
-*Note Block Structure:: for more information on the `N_LBRAC' and
+   See *note Procedures:: for more information on the `N_FUN' stab, and
+*note Block Structure:: for more information on the `N_LBRAC' and
 `N_RBRAC' stabs.
 
 
@@ -1667,7 +1667,7 @@ File: stabs.info,  Node: Miscellaneous Types,  Next: Cross-References,  Prev: Bu
      represented by `M-2;3', where `-2' is a reference to a character
      type (*note Negative Type Numbers::).  I'm not sure how this
      differs from an array.  This appears to be a Fortran feature.
-     LENGTH is a bound, like those in range types; see *Note
+     LENGTH is a bound, like those in range types; see *note
      Subranges::.
 
 `S TYPE-INFORMATION'
@@ -1695,7 +1695,7 @@ yet been defined.
 `s' for a structure tag, `u' for a union tag, or `e' for a enumerator
 tag, followed by the name of the tag, followed by `:'.  If the name
 contains `::' between a `<' and `>' pair (for C++ templates), such a
-`::' does not end the name--only a single `:' ends the name; see *Note
+`::' does not end the name--only a single `:' ends the name; see *note
 Nested Symbols::.
 
    For example, the following C declarations:
@@ -1757,7 +1757,7 @@ included a trailing semicolon (*note Arrays::).
 `J'
      There is no bound.
 
-   Subranges are also used for builtin types; see *Note Traditional
+   Subranges are also used for builtin types; see *note Traditional
 Builtin Types::.
 
 
@@ -1903,7 +1903,7 @@ dbx.
    There is no standard way to specify the size of an enumeration type;
 it is determined by the architecture (normally all enumerations types
 are 32 bits).  Type attributes can be used to specify an enumeration
-type of another size for debuggers which support them; see *Note String
+type of another size for debuggers which support them; see *note String
 Field::.
 
    Enumeration types are unusual in that they define symbols for the
@@ -1977,7 +1977,7 @@ is a colon followed by the name of the variable which each such field
 refers to.
 
    If the structure has methods (a C++ feature), they follow the
-non-method fields; see *Note Cplusplus::.
+non-method fields; see *note Cplusplus::.
 
 
 File: stabs.info,  Node: Typedefs,  Next: Unions,  Prev: Structures,  Up: Types
@@ -2488,8 +2488,8 @@ and the type number of the first base class defining the method.
 rather than one.  This is followed by a new type definition for the
 method.  This is a number followed by an equal sign and the type of the
 method.  Normally this will be a type declared using the `#' type
-descriptor; see *Note Method Type Descriptor::; static member functions
-are declared using the `f' type descriptor instead; see *Note Function
+descriptor; see *note Method Type Descriptor::; static member functions
+are declared using the `f' type descriptor instead; see *note Function
 Types::.
 
    The format of an overloaded operator method name differs from that of
@@ -3105,149 +3105,149 @@ full list of stab numbers, including stab types that are used in
 languages other than C.
 
 `0x20     N_GSYM'
-     Global symbol; see *Note Global Variables::.
+     Global symbol; see *note Global Variables::.
 
 `0x22     N_FNAME'
-     Function name (for BSD Fortran); see *Note Procedures::.
+     Function name (for BSD Fortran); see *note Procedures::.
 
 `0x24     N_FUN'
      Function name (*note Procedures::) or text segment variable (*note
      Statics::).
 
 `0x26 N_STSYM'
-     Data segment file-scope variable; see *Note Statics::.
+     Data segment file-scope variable; see *note Statics::.
 
 `0x28 N_LCSYM'
-     BSS segment file-scope variable; see *Note Statics::.
+     BSS segment file-scope variable; see *note Statics::.
 
 `0x2a N_MAIN'
-     Name of main routine; see *Note Main Program::.
+     Name of main routine; see *note Main Program::.
 
 `0x2c N_ROSYM'
-     Variable in `.rodata' section; see *Note Statics::.
+     Variable in `.rodata' section; see *note Statics::.
 
 `0x30     N_PC'
-     Global symbol (for Pascal); see *Note N_PC::.
+     Global symbol (for Pascal); see *note N_PC::.
 
 `0x32     N_NSYMS'
-     Number of symbols (according to Ultrix V4.0); see *Note N_NSYMS::.
+     Number of symbols (according to Ultrix V4.0); see *note N_NSYMS::.
 
 `0x34     N_NOMAP'
-     No DST map; see *Note N_NOMAP::.
+     No DST map; see *note N_NOMAP::.
 
 `0x36     N_MAC_DEFINE'
-     Name and body of a `#define'd macro; see *Note Macro define and
+     Name and body of a `#define'd macro; see *note Macro define and
      undefine::.
 
 `0x38 N_OBJ'
      Object file (Solaris2).
 
 `0x3a     N_MAC_UNDEF'
-     Name of an `#undef'ed macro; see *Note Macro define and undefine::.
+     Name of an `#undef'ed macro; see *note Macro define and undefine::.
 
 `0x3c N_OPT'
      Debugger options (Solaris2).
 
 `0x40     N_RSYM'
-     Register variable; see *Note Register Variables::.
+     Register variable; see *note Register Variables::.
 
 `0x42     N_M2C'
-     Modula-2 compilation unit; see *Note N_M2C::.
+     Modula-2 compilation unit; see *note N_M2C::.
 
 `0x44     N_SLINE'
-     Line number in text segment; see *Note Line Numbers::.
+     Line number in text segment; see *note Line Numbers::.
 
 `0x46     N_DSLINE'
-     Line number in data segment; see *Note Line Numbers::.
+     Line number in data segment; see *note Line Numbers::.
 
 `0x48     N_BSLINE'
-     Line number in bss segment; see *Note Line Numbers::.
+     Line number in bss segment; see *note Line Numbers::.
 
 `0x48     N_BROWS'
-     Sun source code browser, path to `.cb' file; see *Note N_BROWS::.
+     Sun source code browser, path to `.cb' file; see *note N_BROWS::.
 
 `0x4a     N_DEFD'
-     GNU Modula2 definition module dependency; see *Note N_DEFD::.
+     GNU Modula2 definition module dependency; see *note N_DEFD::.
 
 `0x4c N_FLINE'
      Function start/body/end line numbers (Solaris2).
 
 `0x50     N_EHDECL'
-     GNU C++ exception variable; see *Note N_EHDECL::.
+     GNU C++ exception variable; see *note N_EHDECL::.
 
 `0x50     N_MOD2'
-     Modula2 info "for imc" (according to Ultrix V4.0); see *Note
+     Modula2 info "for imc" (according to Ultrix V4.0); see *note
      N_MOD2::.
 
 `0x54     N_CATCH'
-     GNU C++ `catch' clause; see *Note N_CATCH::.
+     GNU C++ `catch' clause; see *note N_CATCH::.
 
 `0x60     N_SSYM'
-     Structure of union element; see *Note N_SSYM::.
+     Structure of union element; see *note N_SSYM::.
 
 `0x62 N_ENDM'
      Last stab for module (Solaris2).
 
 `0x64     N_SO'
-     Path and name of source file; see *Note Source Files::.
+     Path and name of source file; see *note Source Files::.
 
 `0x80 N_LSYM'
      Stack variable (*note Stack Variables::) or type (*note
      Typedefs::).
 
 `0x82     N_BINCL'
-     Beginning of an include file (Sun only); see *Note Include Files::.
+     Beginning of an include file (Sun only); see *note Include Files::.
 
 `0x84     N_SOL'
-     Name of include file; see *Note Include Files::.
+     Name of include file; see *note Include Files::.
 
 `0xa0     N_PSYM'
-     Parameter variable; see *Note Parameters::.
+     Parameter variable; see *note Parameters::.
 
 `0xa2     N_EINCL'
-     End of an include file; see *Note Include Files::.
+     End of an include file; see *note Include Files::.
 
 `0xa4     N_ENTRY'
-     Alternate entry point; see *Note Alternate Entry Points::.
+     Alternate entry point; see *note Alternate Entry Points::.
 
 `0xc0     N_LBRAC'
-     Beginning of a lexical block; see *Note Block Structure::.
+     Beginning of a lexical block; see *note Block Structure::.
 
 `0xc2     N_EXCL'
-     Place holder for a deleted include file; see *Note Include Files::.
+     Place holder for a deleted include file; see *note Include Files::.
 
 `0xc4     N_SCOPE'
-     Modula2 scope information (Sun linker); see *Note N_SCOPE::.
+     Modula2 scope information (Sun linker); see *note N_SCOPE::.
 
 `0xe0     N_RBRAC'
-     End of a lexical block; see *Note Block Structure::.
+     End of a lexical block; see *note Block Structure::.
 
 `0xe2     N_BCOMM'
-     Begin named common block; see *Note Common Blocks::.
+     Begin named common block; see *note Common Blocks::.
 
 `0xe4     N_ECOMM'
-     End named common block; see *Note Common Blocks::.
+     End named common block; see *note Common Blocks::.
 
 `0xe8     N_ECOML'
-     Member of a common block; see *Note Common Blocks::.
+     Member of a common block; see *note Common Blocks::.
 
 `0xea N_WITH'
      Pascal `with' statement: type,,0,0,offset (Solaris2).
 
 `0xf0     N_NBTEXT'
-     Gould non-base registers; see *Note Gould::.
+     Gould non-base registers; see *note Gould::.
 
 `0xf2     N_NBDATA'
-     Gould non-base registers; see *Note Gould::.
+     Gould non-base registers; see *note Gould::.
 
 `0xf4     N_NBBSS'
-     Gould non-base registers; see *Note Gould::.
+     Gould non-base registers; see *note Gould::.
 
 `0xf6     N_NBSTS'
-     Gould non-base registers; see *Note Gould::.
+     Gould non-base registers; see *note Gould::.
 
 `0xf8     N_NBLCS'
-     Gould non-base registers; see *Note Gould::.
+     Gould non-base registers; see *note Gould::.
 
 
 File: stabs.info,  Node: Symbol Descriptors,  Next: Type Descriptors,  Prev: Stab Types,  Up: Top
@@ -3262,108 +3262,108 @@ for more information about their use.
 `DIGIT'
 `('
 `-'
-     Variable on the stack; see *Note Stack Variables::.
+     Variable on the stack; see *note Stack Variables::.
 
 `:'
      C++ nested symbol; see *Note Nested Symbols::.
 
 `a'
-     Parameter passed by reference in register; see *Note Reference
+     Parameter passed by reference in register; see *note Reference
      Parameters::.
 
 `b'
-     Based variable; see *Note Based Variables::.
+     Based variable; see *note Based Variables::.
 
 `c'
-     Constant; see *Note Constants::.
+     Constant; see *note Constants::.
 
 `C'
-     Conformant array bound (Pascal, maybe other languages); *Note
+     Conformant array bound (Pascal, maybe other languages); *note
      Conformant Arrays::.  Name of a caught exception (GNU C++).  These
      can be distinguished because the latter uses `N_CATCH' and the
      former uses another symbol type.
 
 `d'
-     Floating point register variable; see *Note Register Variables::.
+     Floating point register variable; see *note Register Variables::.
 
 `D'
-     Parameter in floating point register; see *Note Register
+     Parameter in floating point register; see *note Register
      Parameters::.
 
 `f'
-     File scope function; see *Note Procedures::.
+     File scope function; see *note Procedures::.
 
 `F'
-     Global function; see *Note Procedures::.
+     Global function; see *note Procedures::.
 
 `G'
-     Global variable; see *Note Global Variables::.
+     Global variable; see *note Global Variables::.
 
 `i'
      *Note Register Parameters::.
 
 `I'
-     Internal (nested) procedure; see *Note Nested Procedures::.
+     Internal (nested) procedure; see *note Nested Procedures::.
 
 `J'
-     Internal (nested) function; see *Note Nested Procedures::.
+     Internal (nested) function; see *note Nested Procedures::.
 
 `L'
      Label name (documented by AIX, no further information known).
 
 `m'
-     Module; see *Note Procedures::.
+     Module; see *note Procedures::.
 
 `p'
-     Argument list parameter; see *Note Parameters::.
+     Argument list parameter; see *note Parameters::.
 
 `pP'
      *Note Parameters::.
 
 `pF'
-     Fortran Function parameter; see *Note Parameters::.
+     Fortran Function parameter; see *note Parameters::.
 
 `P'
      Unfortunately, three separate meanings have been independently
      invented for this symbol descriptor.  At least the GNU and Sun
      uses can be distinguished by the symbol type.  Global Procedure
-     (AIX) (symbol type used unknown); see *Note Procedures::.
-     Register parameter (GNU) (symbol type `N_PSYM'); see *Note
+     (AIX) (symbol type used unknown); see *note Procedures::.
+     Register parameter (GNU) (symbol type `N_PSYM'); see *note
      Parameters::.  Prototype of function referenced by this file (Sun
      `acc') (symbol type `N_FUN').
 
 `Q'
-     Static Procedure; see *Note Procedures::.
+     Static Procedure; see *note Procedures::.
 
 `R'
-     Register parameter; see *Note Register Parameters::.
+     Register parameter; see *note Register Parameters::.
 
 `r'
-     Register variable; see *Note Register Variables::.
+     Register variable; see *note Register Variables::.
 
 `S'
-     File scope variable; see *Note Statics::.
+     File scope variable; see *note Statics::.
 
 `s'
      Local variable (OS9000).
 
 `t'
-     Type name; see *Note Typedefs::.
+     Type name; see *note Typedefs::.
 
 `T'
-     Enumeration, structure, or union tag; see *Note Typedefs::.
+     Enumeration, structure, or union tag; see *note Typedefs::.
 
 `v'
-     Parameter passed by reference; see *Note Reference Parameters::.
+     Parameter passed by reference; see *note Reference Parameters::.
 
 `V'
-     Procedure scope static variable; see *Note Statics::.
+     Procedure scope static variable; see *note Statics::.
 
 `x'
-     Conformant array; see *Note Conformant Arrays::.
+     Conformant array; see *note Conformant Arrays::.
 
 `X'
-     Function return variable; see *Note Parameters::.
+     Function return variable; see *note Parameters::.
 
 
 File: stabs.info,  Node: Type Descriptors,  Next: Expanded Reference,  Prev: Symbol Descriptors,  Up: Top
@@ -3377,115 +3377,115 @@ an equals sign.  It specifies what kind of type is being defined.
 
 `DIGIT'
 `('
-     Type reference; see *Note String Field::.
+     Type reference; see *note String Field::.
 
 `-'
-     Reference to builtin type; see *Note Negative Type Numbers::.
+     Reference to builtin type; see *note Negative Type Numbers::.
 
 `#'
-     Method (C++); see *Note Method Type Descriptor::.
+     Method (C++); see *note Method Type Descriptor::.
 
 `*'
-     Pointer; see *Note Miscellaneous Types::.
+     Pointer; see *note Miscellaneous Types::.
 
 `&'
      Reference (C++).
 
 `@'
-     Type Attributes (AIX); see *Note String Field::.  Member (class
-     and variable) type (GNU C++); see *Note Member Type Descriptor::.
+     Type Attributes (AIX); see *note String Field::.  Member (class
+     and variable) type (GNU C++); see *note Member Type Descriptor::.
 
 `a'
-     Array; see *Note Arrays::.
+     Array; see *note Arrays::.
 
 `A'
-     Open array; see *Note Arrays::.
+     Open array; see *note Arrays::.
 
 `b'
-     Pascal space type (AIX); see *Note Miscellaneous Types::.  Builtin
-     integer type (Sun); see *Note Builtin Type Descriptors::.  Const
+     Pascal space type (AIX); see *note Miscellaneous Types::.  Builtin
+     integer type (Sun); see *note Builtin Type Descriptors::.  Const
      and volatile qualified type (OS9000).
 
 `B'
-     Volatile-qualified type; see *Note Miscellaneous Types::.
+     Volatile-qualified type; see *note Miscellaneous Types::.
 
 `c'
-     Complex builtin type (AIX); see *Note Builtin Type Descriptors::.
+     Complex builtin type (AIX); see *note Builtin Type Descriptors::.
      Const-qualified type (OS9000).
 
 `C'
      COBOL Picture type.  See AIX documentation for details.
 
 `d'
-     File type; see *Note Miscellaneous Types::.
+     File type; see *note Miscellaneous Types::.
 
 `D'
-     N-dimensional dynamic array; see *Note Arrays::.
+     N-dimensional dynamic array; see *note Arrays::.
 
 `e'
-     Enumeration type; see *Note Enumerations::.
+     Enumeration type; see *note Enumerations::.
 
 `E'
-     N-dimensional subarray; see *Note Arrays::.
+     N-dimensional subarray; see *note Arrays::.
 
 `f'
-     Function type; see *Note Function Types::.
+     Function type; see *note Function Types::.
 
 `F'
-     Pascal function parameter; see *Note Function Types::
+     Pascal function parameter; see *note Function Types::
 
 `g'
-     Builtin floating point type; see *Note Builtin Type Descriptors::.
+     Builtin floating point type; see *note Builtin Type Descriptors::.
 
 `G'
      COBOL Group.  See AIX documentation for details.
 
 `i'
-     Imported type (AIX); see *Note Cross-References::.
+     Imported type (AIX); see *note Cross-References::.
      Volatile-qualified type (OS9000).
 
 `k'
-     Const-qualified type; see *Note Miscellaneous Types::.
+     Const-qualified type; see *note Miscellaneous Types::.
 
 `K'
      COBOL File Descriptor.  See AIX documentation for details.
 
 `M'
-     Multiple instance type; see *Note Miscellaneous Types::.
+     Multiple instance type; see *note Miscellaneous Types::.
 
 `n'
-     String type; see *Note Strings::.
+     String type; see *note Strings::.
 
 `N'
-     Stringptr; see *Note Strings::.
+     Stringptr; see *note Strings::.
 
 `o'
-     Opaque type; see *Note Typedefs::.
+     Opaque type; see *note Typedefs::.
 
 `p'
-     Procedure; see *Note Function Types::.
+     Procedure; see *note Function Types::.
 
 `P'
-     Packed array; see *Note Arrays::.
+     Packed array; see *note Arrays::.
 
 `r'
-     Range type; see *Note Subranges::.
+     Range type; see *note Subranges::.
 
 `R'
-     Builtin floating type; see *Note Builtin Type Descriptors:: (Sun).
-     Pascal subroutine parameter; see *Note Function Types:: (AIX).
+     Builtin floating type; see *note Builtin Type Descriptors:: (Sun).
+     Pascal subroutine parameter; see *note Function Types:: (AIX).
      Detecting this conflict is possible with careful parsing (hint: a
      Pascal subroutine parameter type will always contain a comma, and
      a builtin type descriptor never will).
 
 `s'
-     Structure type; see *Note Structures::.
+     Structure type; see *note Structures::.
 
 `S'
-     Set type; see *Note Miscellaneous Types::.
+     Set type; see *note Miscellaneous Types::.
 
 `u'
-     Union; see *Note Unions::.
+     Union; see *note Unions::.
 
 `v'
      Variant record.  This is a Pascal and Modula-2 feature which is
@@ -3493,16 +3493,16 @@ an equals sign.  It specifies what kind of type is being defined.
      details.
 
 `w'
-     Wide character; see *Note Builtin Type Descriptors::.
+     Wide character; see *note Builtin Type Descriptors::.
 
 `x'
-     Cross-reference; see *Note Cross-References::.
+     Cross-reference; see *note Cross-References::.
 
 `Y'
      Used by IBM's xlC C++ compiler (for structures, I think).
 
 `z'
-     gstring; see *Note Strings::.
+     gstring; see *note Strings::.
 
 
 File: stabs.info,  Node: Expanded Reference,  Next: Questions,  Prev: Type Descriptors,  Up: Top
@@ -3511,7 +3511,7 @@ Appendix D Expanded Reference by Stab Type
 ******************************************
 
 For a full list of stab types, and cross-references to where they are
-described, see *Note Stab Types::.  This appendix just covers certain
+described, see *note Stab Types::.  This appendix just covers certain
 stabs which are not yet described in the main body of this document;
 eventually the information will all be in one place.
 
@@ -4426,98 +4426,98 @@ Symbol Types Index
 
 
 Tag Table:
-Node: Top937
-Node: Overview1984
-Node: Flow3399
-Node: Stabs Format4925
-Node: String Field6487
-Node: C Example11918
-Node: Assembly Code12463
-Node: Program Structure14434
-Node: Main Program15160
-Node: Source Files15721
-Node: Include Files18173
-Node: Line Numbers20838
-Node: Procedures22372
-Node: Nested Procedures28262
-Node: Block Structure29438
-Node: Alternate Entry Points30844
-Node: Constants31577
-Node: Variables34689
-Node: Stack Variables35377
-Node: Global Variables37078
-Node: Register Variables38234
-Node: Common Blocks39056
-Node: Statics40310
-Node: Based Variables42891
-Node: Parameters44276
-Node: Register Parameters45888
-Node: Local Variable Parameters48149
-Node: Reference Parameters51064
-Node: Conformant Arrays51684
-Node: Types52401
-Node: Builtin Types53348
-Node: Traditional Builtin Types54494
-Node: Traditional Integer Types54895
-Node: Traditional Other Types57203
-Node: Builtin Type Descriptors58117
-Node: Negative Type Numbers61617
-Node: Miscellaneous Types67972
-Node: Cross-References69858
-Node: Subranges71533
-Node: Arrays72772
-Node: Strings75997
-Node: Enumerations77059
-Node: Structures79444
-Node: Typedefs82151
-Node: Unions83475
-Node: Function Types85056
-Node: Macro define and undefine86638
-Node: Symbol Tables88215
-Node: Symbol Table Format88667
-Node: Transformations On Symbol Tables90115
-Node: Transformations On Static Variables91469
-Node: Transformations On Global Variables92205
-Node: Stab Section Transformations93448
-Node: Cplusplus94831
-Node: Class Names95414
-Node: Nested Symbols96159
-Node: Basic Cplusplus Types97005
-Node: Simple Classes98565
-Node: Class Instance102859
-Node: Methods103576
-Node: Method Type Descriptor105795
-Node: Member Type Descriptor106995
-Node: Protections107787
-Node: Method Modifiers110877
-Node: Virtual Methods112505
-Node: Inheritance116306
-Node: Virtual Base Classes120002
-Node: Static Members122246
-Node: Stab Types122716
-Node: Non-Stab Symbol Types123340
-Node: Stab Symbol Types124771
-Node: Symbol Descriptors128702
-Node: Type Descriptors131481
-Node: Expanded Reference134693
-Node: N_PC136111
-Node: N_NSYMS136479
-Node: N_NOMAP136720
-Node: N_M2C137026
-Node: N_BROWS137460
-Node: N_DEFD137743
-Node: N_EHDECL138200
-Node: N_MOD2138451
-Node: N_CATCH138689
-Node: N_SSYM139183
-Node: N_SCOPE139468
-Node: Gould139658
-Node: N_LENG140650
-Node: Questions140878
-Node: Stab Sections142522
-Node: Stab Section Basics143120
-Node: ELF Linker Relocation146461
-Node: GNU Free Documentation License149871
-Node: Symbol Types Index172305
+Node: Top938
+Node: Overview1985
+Node: Flow3400
+Node: Stabs Format4926
+Node: String Field6488
+Node: C Example11919
+Node: Assembly Code12464
+Node: Program Structure14435
+Node: Main Program15161
+Node: Source Files15722
+Node: Include Files18174
+Node: Line Numbers20839
+Node: Procedures22373
+Node: Nested Procedures28263
+Node: Block Structure29439
+Node: Alternate Entry Points30845
+Node: Constants31578
+Node: Variables34690
+Node: Stack Variables35378
+Node: Global Variables37079
+Node: Register Variables38235
+Node: Common Blocks39057
+Node: Statics40311
+Node: Based Variables42892
+Node: Parameters44277
+Node: Register Parameters45889
+Node: Local Variable Parameters48150
+Node: Reference Parameters51065
+Node: Conformant Arrays51685
+Node: Types52402
+Node: Builtin Types53349
+Node: Traditional Builtin Types54495
+Node: Traditional Integer Types54896
+Node: Traditional Other Types57204
+Node: Builtin Type Descriptors58118
+Node: Negative Type Numbers61618
+Node: Miscellaneous Types67973
+Node: Cross-References69859
+Node: Subranges71534
+Node: Arrays72773
+Node: Strings75998
+Node: Enumerations77060
+Node: Structures79445
+Node: Typedefs82152
+Node: Unions83476
+Node: Function Types85057
+Node: Macro define and undefine86639
+Node: Symbol Tables88216
+Node: Symbol Table Format88668
+Node: Transformations On Symbol Tables90116
+Node: Transformations On Static Variables91470
+Node: Transformations On Global Variables92206
+Node: Stab Section Transformations93449
+Node: Cplusplus94832
+Node: Class Names95415
+Node: Nested Symbols96160
+Node: Basic Cplusplus Types97006
+Node: Simple Classes98566
+Node: Class Instance102860
+Node: Methods103577
+Node: Method Type Descriptor105796
+Node: Member Type Descriptor106996
+Node: Protections107788
+Node: Method Modifiers110878
+Node: Virtual Methods112506
+Node: Inheritance116307
+Node: Virtual Base Classes120003
+Node: Static Members122247
+Node: Stab Types122717
+Node: Non-Stab Symbol Types123341
+Node: Stab Symbol Types124772
+Node: Symbol Descriptors128703
+Node: Type Descriptors131482
+Node: Expanded Reference134694
+Node: N_PC136112
+Node: N_NSYMS136480
+Node: N_NOMAP136721
+Node: N_M2C137027
+Node: N_BROWS137461
+Node: N_DEFD137744
+Node: N_EHDECL138201
+Node: N_MOD2138452
+Node: N_CATCH138690
+Node: N_SSYM139184
+Node: N_SCOPE139469
+Node: Gould139659
+Node: N_LENG140651
+Node: Questions140879
+Node: Stab Sections142523
+Node: Stab Section Basics143121
+Node: ELF Linker Relocation146462
+Node: GNU Free Documentation License149872
+Node: Symbol Types Index172306
 
 End Tag Table

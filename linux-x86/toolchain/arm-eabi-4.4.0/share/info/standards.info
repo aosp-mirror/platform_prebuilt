@@ -1,5 +1,4 @@
-This is standards.info, produced by makeinfo version 4.8 from
-/home/jingyu/projects/gcc/android-toolchainsrc/build/../gdb/gdb-6.6/etc/standards.texi.
+This is standards.info, produced by makeinfo version 4.11 from /home/jingyu/projects/gcc/android-toolchainsrc/build/../gdb/gdb-6.6/etc/standards.texi.
 
 START-INFO-DIR-ENTRY
 * Standards: (standards).        GNU coding standards.
@@ -2790,7 +2789,7 @@ the functions, variables, options, and important concepts that are part
 of the program.  One combined Index should do for a short manual, but
 sometimes for a complex package it is better to use multiple indices.
 The Texinfo manual includes advice on preparing good index entries, see
-*Note Making Index Entries: (texinfo)Index Entries, and see *Note
+*note Making Index Entries: (texinfo)Index Entries, and see *note
 Defining the Entries of an Index: (texinfo)Indexing Commands.
 
    Don't use Unix man pages as a model for how to write GNU
@@ -3713,8 +3712,8 @@ directories:
 
 `lispdir'
      The directory for installing any Emacs Lisp files in this package.
-     By default, it should be `/usr/local/share/emacs/site-lisp', but
-     it should be written as `$(prefix)/share/emacs/site-lisp'.
+     By default, it should be `/usr/local/share/emacs/site-lisp', but it
+     should be written as `$(prefix)/share/emacs/site-lisp'.
 
      If you are using Autoconf, write the default as `@lispdir@'.  In
      order to make `@lispdir@' work, you need the following lines in
@@ -4517,20 +4516,19 @@ Appendix B GNU Free Documentation License
      H. Include an unaltered copy of this License.
      I. Preserve the section entitled "History", and its title, and add
      to    it an item stating at least the title, year, new authors, and
-       publisher of the Modified Version as given on the Title Page.
-     If    there is no section entitled "History" in the Document,
-     create one    stating the title, year, authors, and publisher of
-     the Document as    given on its Title Page, then add an item
+       publisher of the Modified Version as given on the Title Page.  If
+       there is no section entitled "History" in the Document, create
+     one    stating the title, year, authors, and publisher of the
+     Document as    given on its Title Page, then add an item
      describing the Modified    Version as stated in the previous
      sentence.
      J. Preserve the network location, if any, given in the Document for
-       public access to a Transparent copy of the Document, and
-     likewise    the network locations given in the Document for
-     previous versions    it was based on.  These may be placed in the
-     "History" section.     You may omit a network location for a work
-     that was published at    least four years before the Document
-     itself, or if the original    publisher of the version it refers
-     to gives permission.
+       public access to a Transparent copy of the Document, and likewise
+       the network locations given in the Document for previous versions
+       it was based on.  These may be placed in the "History" section.
+       You may omit a network location for a work that was published at
+       least four years before the Document itself, or if the original
+      publisher of the version it refers to gives permission.
      K. In any section entitled "Acknowledgements" or "Dedications",
      preserve the section's title, and preserve in the section all the
       substance and tone of each of the contributor acknowledgements
@@ -4863,68 +4861,68 @@ Index
 
 
 Tag Table:
-Node: Top759
-Node: Preface1459
-Node: Legal Issues3679
-Node: Reading Non-Free Code4143
-Node: Contributions5871
-Node: Trademarks8025
-Node: Design Advice9088
-Node: Source Language9672
-Node: Compatibility11684
-Node: Using Extensions13312
-Node: Standard C14888
-Node: Conditional Compilation17291
-Node: Program Behavior18590
-Node: Semantics19509
-Node: Libraries24202
-Node: Errors25447
-Node: User Interfaces27228
-Node: Graphical Interfaces28833
-Node: Command-Line Interfaces29868
-Node: Option Table35939
-Node: Memory Usage50948
-Node: File Usage51973
-Node: Writing C52721
-Node: Formatting53571
-Node: Comments57634
-Node: Syntactic Conventions60936
-Node: Names64348
-Node: System Portability66557
-Node: CPU Portability68942
-Node: System Functions72198
-Node: Internationalization77395
-Node: Mmap80548
-Node: Documentation81258
-Node: GNU Manuals82363
-Node: Doc Strings and Manuals87420
-Node: Manual Structure Details88973
-Node: License for Manuals90391
-Node: Manual Credits91365
-Node: Printed Manuals91758
-Node: NEWS File92444
-Node: Change Logs93122
-Node: Change Log Concepts93876
-Node: Style of Change Logs95740
-Node: Simple Changes97775
-Node: Conditional Changes99019
-Node: Indicating the Part Changed100441
-Node: Man Pages100968
-Node: Reading other Manuals102592
-Node: Managing Releases103383
-Node: Configuration104146
-Node: Makefile Conventions111051
-Node: Makefile Basics111857
-Node: Utilities in Makefiles115031
-Node: Command Variables117176
-Node: Directory Variables120753
-Node: Standard Targets131647
-Ref: Standard Targets-Footnote-1142887
-Node: Install Command Categories142987
-Node: Releases147569
-Node: References151657
-Node: Copying This Manual153942
-Node: GNU Free Documentation License154178
-Node: Index173879
+Node: Top760
+Node: Preface1460
+Node: Legal Issues3680
+Node: Reading Non-Free Code4144
+Node: Contributions5872
+Node: Trademarks8026
+Node: Design Advice9089
+Node: Source Language9673
+Node: Compatibility11685
+Node: Using Extensions13313
+Node: Standard C14889
+Node: Conditional Compilation17292
+Node: Program Behavior18591
+Node: Semantics19510
+Node: Libraries24203
+Node: Errors25448
+Node: User Interfaces27229
+Node: Graphical Interfaces28834
+Node: Command-Line Interfaces29869
+Node: Option Table35940
+Node: Memory Usage50949
+Node: File Usage51974
+Node: Writing C52722
+Node: Formatting53572
+Node: Comments57635
+Node: Syntactic Conventions60937
+Node: Names64349
+Node: System Portability66558
+Node: CPU Portability68943
+Node: System Functions72199
+Node: Internationalization77396
+Node: Mmap80549
+Node: Documentation81259
+Node: GNU Manuals82364
+Node: Doc Strings and Manuals87421
+Node: Manual Structure Details88974
+Node: License for Manuals90392
+Node: Manual Credits91366
+Node: Printed Manuals91759
+Node: NEWS File92445
+Node: Change Logs93123
+Node: Change Log Concepts93877
+Node: Style of Change Logs95741
+Node: Simple Changes97776
+Node: Conditional Changes99020
+Node: Indicating the Part Changed100442
+Node: Man Pages100969
+Node: Reading other Manuals102593
+Node: Managing Releases103384
+Node: Configuration104147
+Node: Makefile Conventions111052
+Node: Makefile Basics111858
+Node: Utilities in Makefiles115032
+Node: Command Variables117177
+Node: Directory Variables120754
+Node: Standard Targets131648
+Ref: Standard Targets-Footnote-1142888
+Node: Install Command Categories142988
+Node: Releases147570
+Node: References151658
+Node: Copying This Manual153943
+Node: GNU Free Documentation License154179
+Node: Index173868
 
 End Tag Table
