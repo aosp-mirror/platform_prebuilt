@@ -16,7 +16,8 @@
 
 LOCAL_PATH:= $(call my-dir)
 
-ifeq ($(strip $(is_unbundled_app_build)),true)
+ifneq ($(TARGET_BUILD_APPS),)
+
 ##################################
 include $(CLEAR_VARS)
 
@@ -99,4 +100,4 @@ $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/dx | $(ACP)
 	$(hide) chmod 755 $@
 
 ##################################
-endif # is_unbundled_app_build
+endif # TARGET_BUILD_APPS
