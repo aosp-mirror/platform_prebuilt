@@ -1,6 +1,2 @@
-The objects in this prebuilt directory can be rebuilt
-using the source archive
-
-apache-ant-1.6.5-src.tar.gz
-
-hosted at <http://android.kernel.org/pub/>.
+The objects in this prebuilt directory are coming from
+http://archive.apache.org/dist/ant/binaries/apache-ant-1.7.0-bin.zip
