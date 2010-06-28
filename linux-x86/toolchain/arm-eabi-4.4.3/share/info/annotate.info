@@ -1,15 +1,25 @@
 This is annotate.info, produced by makeinfo version 4.11 from
-/home/jingyu/projects/gcc/android-toolchainsrc/build/../gdb/gdb-6.6/gdb/doc/annotate.texinfo.
+/home/jingyu/projects/gcc/android-toolchainsrc/build/../gdb/gdb-7.1.x/gdb/doc/annotate.texinfo.
 
 INFO-DIR-SECTION Software development
 START-INFO-DIR-ENTRY
 * Annotate: (annotate).                 The obsolete annotation interface.
 END-INFO-DIR-ENTRY
 
+   Copyright (C) 1994, 1995, 2000, 2001, 2003, 2004, 2005, 2007, 2008,
+2009, 2010 Free Software Foundation, Inc.
+
+   Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, with no Front-Cover Texts, and with no Back-Cover
+Texts.  A copy of the license is included in the section entitled "GNU
+Free Documentation License".
+
    This file documents GDB's obsolete annotations.
 
-   Copyright (C) 1994, 1995, 2000, 2001, 2003 Free Software Foundation,
-Inc.
+   Copyright (C) 1994, 1995, 2000, 2001, 2003, 2004, 2005, 2007, 2008,
+2009, 2010 Free Software Foundation, Inc.
 
    Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.1 or
@@ -43,6 +53,7 @@ implemented in older GDB versions.
 * Annotations for Running::
                         Whether the program is running, how it stopped, etc.
 * Source Annotations::  Annotations describing source code.
+* Multi-threaded Apps:: An annotation that reports multi-threadedness.
 
 * GNU Free Documentation License::
 
@@ -118,7 +129,7 @@ specific GDB commands provide specific information.  Any change to
 GDB's CLI output modifies or removes that information and,
 consequently, likely breaks the client.
 
-   Since the GDB/MI output is independant of the CLI, it does not have
+   Since the GDB/MI output is independent of the CLI, it does not have
 this problem.
 
 2.2 Scalability
@@ -161,8 +172,8 @@ The annotation mechanism was implemented by interspersing CLI print
 statements with various annotations.  As a consequence, any CLI output
 change can alter the annotation output.
 
-   Since the GDB/MI output is independant of the CLI, and the GDB/MI is
-increasingly implemented independant of the CLI code, its long term
+   Since the GDB/MI output is independent of the CLI, and the GDB/MI is
+increasingly implemented independent of the CLI code, its long term
 maintenance is much easier.
 
 
@@ -634,7 +645,7 @@ annotations describe how the program stopped.
      The program hit watchpoint number NUMBER.
 
 
-File: annotate.info,  Node: Source Annotations,  Next: GNU Free Documentation License,  Prev: Annotations for Running,  Up: Top
+File: annotate.info,  Node: Source Annotations,  Next: Multi-threaded Apps,  Prev: Annotations for Running,  Up: Top
 
 13 Displaying Source
 ********************
@@ -655,9 +666,27 @@ in the form `0x' followed by one or more lowercase hex digits (note
 that this does not depend on the language).
 
 
-File: annotate.info,  Node: GNU Free Documentation License,  Prev: Source Annotations,  Up: Top
+File: annotate.info,  Node: Multi-threaded Apps,  Next: GNU Free Documentation License,  Prev: Source Annotations,  Up: Top
 
-14 GNU Free Documentation License
+14 Multi-threaded Applications
+******************************
+
+The following annotations report thread related changes of state.
+
+`^Z^Znew-thread'
+     This annotation is issued once for each thread that is created
+     apart from the main thread, which is not reported.
+
+`^Z^Zthread-changed'
+     The selected thread has changed.  This may occur at the request of
+     the user with the `thread' command, or as a result of execution,
+     e.g., another thread hits a breakpoint.
+
+
+
+File: annotate.info,  Node: GNU Free Documentation License,  Prev: Multi-threaded Apps,  Up: Top
+
+15 GNU Free Documentation License
 *********************************
 
                       Version 1.2, November 2002
@@ -1055,7 +1084,7 @@ File: annotate.info,  Node: GNU Free Documentation License,  Prev: Source Annota
      you may choose any version ever published (not as a draft) by the
      Free Software Foundation.
 
-14.1 ADDENDUM: How to use this License for your documents
+15.1 ADDENDUM: How to use this License for your documents
 =========================================================
 
 To use this License in a document you have written, include a copy of
@@ -1089,20 +1118,21 @@ permit their use in free software.
 
 
 Tag Table:
-Node: Top824
-Node: Annotations Overview1923
-Node: Limitations3722
-Node: Migrating to GDB/MI6307
-Node: Server Prefix6690
-Node: Value Annotations7336
-Node: Frame Annotations10506
-Node: Displays14405
-Node: Prompting15436
-Node: Errors16939
-Node: Breakpoint Info17829
-Node: Invalidation19054
-Node: Annotations for Running19533
-Node: Source Annotations21046
-Node: GNU Free Documentation License22003
+Node: Top1359
+Node: Annotations Overview2529
+Node: Limitations4328
+Node: Migrating to GDB/MI6913
+Node: Server Prefix7296
+Node: Value Annotations7942
+Node: Frame Annotations11112
+Node: Displays15011
+Node: Prompting16042
+Node: Errors17545
+Node: Breakpoint Info18435
+Node: Invalidation19660
+Node: Annotations for Running20139
+Node: Source Annotations21652
+Node: Multi-threaded Apps22598
+Node: GNU Free Documentation License23207
 
 End Tag Table

@@ -1,16 +1,29 @@
 This is stabs.info, produced by makeinfo version 4.11 from
-/home/jingyu/projects/gcc/android-toolchainsrc/build/../gdb/gdb-6.6/gdb/doc/stabs.texinfo.
+/home/jingyu/projects/gcc/android-toolchainsrc/build/../gdb/gdb-7.1.x/gdb/doc/stabs.texinfo.
 
 INFO-DIR-SECTION Software development
 START-INFO-DIR-ENTRY
 * Stabs: (stabs).                 The "stabs" debugging information format.
 END-INFO-DIR-ENTRY
 
+   Copyright (C) 1992, 1993, 1994, 1995, 1997, 1998, 2000, 2001, 2002,
+2003, 2004, 2005, 2006, 2007, 2009, 2010 Free Software Foundation, Inc.
+Contributed by Cygnus Support.  Written by Julia Menapace, Jim Kingdon,
+and David MacKenzie.
+
+   Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, with no Front-Cover Texts, and with no Back-Cover
+Texts.  A copy of the license is included in the section entitled "GNU
+Free Documentation License".
+
    This document describes the stabs debugging symbol tables.
 
-   Copyright (C) 1992,1993,1994,1995,1997,1998,2000,2001    Free
-Software Foundation, Inc.  Contributed by Cygnus Support.  Written by
-Julia Menapace, Jim Kingdon, and David MacKenzie.
+   Copyright (C) 1992, 1993, 1994, 1995, 1997, 1998, 2000, 2001, 2002,
+2003, 2004, 2005, 2006, 2007, 2009, 2010 Free Software Foundation, Inc.
+Contributed by Cygnus Support.  Written by Julia Menapace, Jim Kingdon,
+and David MacKenzie.
 
    Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.1 or
@@ -989,7 +1002,7 @@ start of the relevant section for that compilation unit.  SunPRO has
 plans to have the linker stop relocating stabs; I suspect that their the
 debugger gets the address from the corresponding ELF (not stab) symbol.
 I'm not sure how to find which symbol of that name is the right one.
-The clean way to do all this would be to have a the value of a symbol
+The clean way to do all this would be to have the value of a symbol
 descriptor `S' symbol be an offset relative to the start of the file,
 just like everything else, but that introduces obvious compatibility
 problems.  For more information on linker stab relocation, *Note ELF
@@ -4426,98 +4439,98 @@ Symbol Types Index
 
 
 Tag Table:
-Node: Top938
-Node: Overview1985
-Node: Flow3400
-Node: Stabs Format4926
-Node: String Field6488
-Node: C Example11919
-Node: Assembly Code12464
-Node: Program Structure14435
-Node: Main Program15161
-Node: Source Files15722
-Node: Include Files18174
-Node: Line Numbers20839
-Node: Procedures22373
-Node: Nested Procedures28263
-Node: Block Structure29439
-Node: Alternate Entry Points30845
-Node: Constants31578
-Node: Variables34690
-Node: Stack Variables35378
-Node: Global Variables37079
-Node: Register Variables38235
-Node: Common Blocks39057
-Node: Statics40311
-Node: Based Variables42892
-Node: Parameters44277
-Node: Register Parameters45889
-Node: Local Variable Parameters48150
-Node: Reference Parameters51065
-Node: Conformant Arrays51685
-Node: Types52402
-Node: Builtin Types53349
-Node: Traditional Builtin Types54495
-Node: Traditional Integer Types54896
-Node: Traditional Other Types57204
-Node: Builtin Type Descriptors58118
-Node: Negative Type Numbers61618
-Node: Miscellaneous Types67973
-Node: Cross-References69859
-Node: Subranges71534
-Node: Arrays72773
-Node: Strings75998
-Node: Enumerations77060
-Node: Structures79445
-Node: Typedefs82152
-Node: Unions83476
-Node: Function Types85057
-Node: Macro define and undefine86639
-Node: Symbol Tables88216
-Node: Symbol Table Format88668
-Node: Transformations On Symbol Tables90116
-Node: Transformations On Static Variables91470
-Node: Transformations On Global Variables92206
-Node: Stab Section Transformations93449
-Node: Cplusplus94832
-Node: Class Names95415
-Node: Nested Symbols96160
-Node: Basic Cplusplus Types97006
-Node: Simple Classes98566
-Node: Class Instance102860
-Node: Methods103577
-Node: Method Type Descriptor105796
-Node: Member Type Descriptor106996
-Node: Protections107788
-Node: Method Modifiers110878
-Node: Virtual Methods112506
-Node: Inheritance116307
-Node: Virtual Base Classes120003
-Node: Static Members122247
-Node: Stab Types122717
-Node: Non-Stab Symbol Types123341
-Node: Stab Symbol Types124772
-Node: Symbol Descriptors128703
-Node: Type Descriptors131482
-Node: Expanded Reference134694
-Node: N_PC136112
-Node: N_NSYMS136480
-Node: N_NOMAP136721
-Node: N_M2C137027
-Node: N_BROWS137461
-Node: N_DEFD137744
-Node: N_EHDECL138201
-Node: N_MOD2138452
-Node: N_CATCH138690
-Node: N_SSYM139184
-Node: N_SCOPE139469
-Node: Gould139659
-Node: N_LENG140651
-Node: Questions140879
-Node: Stab Sections142523
-Node: Stab Section Basics143121
-Node: ELF Linker Relocation146462
-Node: GNU Free Documentation License149872
-Node: Symbol Types Index172306
+Node: Top1611
+Node: Overview2658
+Node: Flow4073
+Node: Stabs Format5599
+Node: String Field7161
+Node: C Example12592
+Node: Assembly Code13137
+Node: Program Structure15108
+Node: Main Program15834
+Node: Source Files16395
+Node: Include Files18847
+Node: Line Numbers21512
+Node: Procedures23046
+Node: Nested Procedures28936
+Node: Block Structure30112
+Node: Alternate Entry Points31518
+Node: Constants32251
+Node: Variables35363
+Node: Stack Variables36051
+Node: Global Variables37752
+Node: Register Variables38908
+Node: Common Blocks39730
+Node: Statics40984
+Node: Based Variables43563
+Node: Parameters44948
+Node: Register Parameters46560
+Node: Local Variable Parameters48821
+Node: Reference Parameters51736
+Node: Conformant Arrays52356
+Node: Types53073
+Node: Builtin Types54020
+Node: Traditional Builtin Types55166
+Node: Traditional Integer Types55567
+Node: Traditional Other Types57875
+Node: Builtin Type Descriptors58789
+Node: Negative Type Numbers62289
+Node: Miscellaneous Types68644
+Node: Cross-References70530
+Node: Subranges72205
+Node: Arrays73444
+Node: Strings76669
+Node: Enumerations77731
+Node: Structures80116
+Node: Typedefs82823
+Node: Unions84147
+Node: Function Types85728
+Node: Macro define and undefine87310
+Node: Symbol Tables88887
+Node: Symbol Table Format89339
+Node: Transformations On Symbol Tables90787
+Node: Transformations On Static Variables92141
+Node: Transformations On Global Variables92877
+Node: Stab Section Transformations94120
+Node: Cplusplus95503
+Node: Class Names96086
+Node: Nested Symbols96831
+Node: Basic Cplusplus Types97677
+Node: Simple Classes99237
+Node: Class Instance103531
+Node: Methods104248
+Node: Method Type Descriptor106467
+Node: Member Type Descriptor107667
+Node: Protections108459
+Node: Method Modifiers111549
+Node: Virtual Methods113177
+Node: Inheritance116978
+Node: Virtual Base Classes120674
+Node: Static Members122918
+Node: Stab Types123388
+Node: Non-Stab Symbol Types124012
+Node: Stab Symbol Types125443
+Node: Symbol Descriptors129374
+Node: Type Descriptors132153
+Node: Expanded Reference135365
+Node: N_PC136783
+Node: N_NSYMS137151
+Node: N_NOMAP137392
+Node: N_M2C137698
+Node: N_BROWS138132
+Node: N_DEFD138415
+Node: N_EHDECL138872
+Node: N_MOD2139123
+Node: N_CATCH139361
+Node: N_SSYM139855
+Node: N_SCOPE140140
+Node: Gould140330
+Node: N_LENG141322
+Node: Questions141550
+Node: Stab Sections143194
+Node: Stab Section Basics143792
+Node: ELF Linker Relocation147133
+Node: GNU Free Documentation License150543
+Node: Symbol Types Index172977
 
 End Tag Table
