@@ -1830,7 +1830,7 @@ extern rtx        gen_fixuns_truncsfsi2                 (rtx, rtx);
 extern rtx        gen_fixuns_truncdfsi2                 (rtx, rtx);
 extern rtx        gen_floatunssisf2                     (rtx, rtx);
 extern rtx        gen_floatunssidf2                     (rtx, rtx);
-extern rtx        gen_tls_load_dot_plus_four            (rtx, rtx, rtx);
+extern rtx        gen_tls_load_dot_plus_four            (rtx, rtx, rtx, rtx);
 extern rtx        gen_thumb2_casesi_internal            (rtx, rtx, rtx, rtx);
 extern rtx        gen_thumb2_casesi_internal_pic        (rtx, rtx, rtx, rtx);
 extern rtx        gen_thumb2_eh_return                  (rtx);
