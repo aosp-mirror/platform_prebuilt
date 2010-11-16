@@ -1,24 +1,7 @@
 # ARM V7 events
 # From Cortex A8 DDI (ARM DDI 0344B, revision r1p1) 
 #
-event:0x00 counters:1,2,3,4 um:zero minimum:500 name:PMNC_SW_INCR : Software increment of PMNC registers
-event:0x01 counters:1,2,3,4 um:zero minimum:500 name:IFETCH_MISS : Instruction fetch misses from cache or normal cacheable memory
-event:0x02 counters:1,2,3,4 um:zero minimum:500 name:ITLB_MISS : Instruction fetch misses from TLB
-event:0x03 counters:1,2,3,4 um:zero minimum:500 name:DCACHE_REFILL : Data R/W operation that causes a refill from cache or normal cacheable memory
-event:0x04 counters:1,2,3,4 um:zero minimum:500 name:DCACHE_ACCESS : Data R/W from cache
-event:0x05 counters:1,2,3,4 um:zero minimum:500 name:DTLB_REFILL : Data R/W that causes a TLB refill
-event:0x06 counters:1,2,3,4 um:zero minimum:500 name:DREAD : Data read architecturally executed (note: architecturally executed = for instructions that are unconditional or that pass the condition code)
-event:0x07 counters:1,2,3,4 um:zero minimum:500 name:DWRITE : Data write architecturally executed
-event:0x08 counters:1,2,3,4 um:zero minimum:500 name:INSTR_EXECUTED : All executed instructions
-event:0x09 counters:1,2,3,4 um:zero minimum:500 name:EXC_TAKEN : Exception taken
-event:0x0A counters:1,2,3,4 um:zero minimum:500 name:EXC_EXECUTED : Exception return architecturally executed
-event:0x0B counters:1,2,3,4 um:zero minimum:500 name:CID_WRITE : Instruction that writes to the Context ID Register architecturally executed
-event:0x0C counters:1,2,3,4 um:zero minimum:500 name:PC_WRITE : SW change of PC, architecturally executed (not by exceptions)
-event:0x0D counters:1,2,3,4 um:zero minimum:500 name:PC_IMM_BRANCH : Immediate branch instruction executed (taken or not)
-event:0x0E counters:1,2,3,4 um:zero minimum:500 name:PC_PROC_RETURN : Procedure return architecturally executed (not by exceptions)
-event:0x0F counters:1,2,3,4 um:zero minimum:500 name:UNALIGNED_ACCESS : Unaligned access architecturally executed
-event:0x10 counters:1,2,3,4 um:zero minimum:500 name:PC_BRANCH_MIS_PRED : Branch mispredicted or not predicted. Counts pipeline flushes because of misprediction
-event:0x12 counters:1,2,3,4 um:zero minimum:500 name:PC_BRANCH_MIS_USED : Branch or change in program flow that could have been predicted
+include:arm/armv7-common
 event:0x40 counters:1,2,3,4 um:zero minimum:500 name:WRITE_BUFFER_FULL : Any write buffer full cycle
 event:0x41 counters:1,2,3,4 um:zero minimum:500 name:L2_STORE_MERGED : Any store that is merged in L2 cache
 event:0x42 counters:1,2,3,4 um:zero minimum:500 name:L2_STORE_BUFF : Any bufferable store from load/store to L2 cache
@@ -49,5 +32,3 @@ event:0x5A counters:1,2,3,4 um:zero minimum:500 name:NEON_CYCLES : Number of cyc
 event:0x70 counters:1,2,3,4 um:zero minimum:500 name:PMU0_EVENTS : Number of events from external input source PMUEXTIN[0]
 event:0x71 counters:1,2,3,4 um:zero minimum:500 name:PMU1_EVENTS : Number of events from external input source PMUEXTIN[1]
 event:0x72 counters:1,2,3,4 um:zero minimum:500 name:PMU_EVENTS : Number of events from both external input sources PMUEXTIN[0] and PMUEXTIN[1]
-event:0xFF counters:0 um:zero minimum:500 name:CPU_CYCLES : Number of CPU cycles
-
