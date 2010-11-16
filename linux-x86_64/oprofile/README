@@ -1,0 +1,14 @@
+Built from external/oprofile, git commit 8cfa702f803c5ef6a2b062a489a1b2cf66b45b5e.
+
+Built on a Linux x86_64 box (MACHTYPE=x86_64-pc-linux-gnu).
+
+Build commands used to generate binaries:
+
+cd external/oprofile
+./configure
+make
+cp pp/opannotate ../../prebuilt/linux-x86_64/oprofile/bin/
+cp pp/oparchive ../../prebuilt/linux-x86_64/oprofile/bin/
+cp libabi/opimport ../../prebuilt/linux-x86_64/oprofile/bin/
+cp pp/opreport ../../prebuilt/linux-x86_64/oprofile/bin/
+
