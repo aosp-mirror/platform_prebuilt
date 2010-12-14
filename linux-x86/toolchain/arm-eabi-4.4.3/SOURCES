@@ -1,0 +1,55 @@
+Sources for this prebuilt toolchain can be downloaded from Android Opensource
+Project GIT repository git://android.git.kernel.org/toolchain.
+
+gcc/ synced to
+	commit 2f2d3b42b0ea0c4871518c7b6176bd2b55ae527d
+	Author: Jing Yu <jingyu@google.com>
+	Date:   Mon Dec 13 12:58:16 2010 -0800
+
+    And rollback the following two androideabi related patches.
+    commit a4d9421024ed3f70aede5b11f977d264eb69bf61
+    Author: Jing Yu <jingyu@google.com>
+    Date:   Tue Aug 10 10:08:15 2010 -0700
+
+    commit f01e65905acd1e2052e875130cb723a658765bc8
+    Author: Jing Yu <jingyu@google.com>
+    Date:   Thu Jul 22 14:39:44 2010 -0700
+
+binutils/ synced to
+	commit 8a5a8339de3149b7f99caf08e9cb72467d60cd01
+	Author: Jing Yu <jingyu@google.com>
+	Date:   Thu Nov 4 17:22:38 2010 -0700
+
+gdb/ synced to
+	commit b028dbaa736a574062136861a11e76a9ab6b4bb3
+	Author: Jing Yu <jingyu@google.com>
+	Date:   Mon Dec 13 14:44:59 2010 -0800
+
+gmp/ synced to
+	commit 9fb242a79dd122d7fbf867daf5620dba6927bd2e
+	Author: Jing Yu <jingyu@google.com>
+	Date:   Thu Nov 5 17:43:59 2009 -0800
+
+mpfr/ synced to
+	commit da6dfde986af1b56f0f41e9f5de61d093fa8af90
+	Author: Jing Yu <jingyu@google.com>
+	Date:   Thu Nov 5 17:50:13 2009 -0800
+
+build/ synced to
+	commit 4cc02faaa7e8828f9458b1828a6f85e7791ae2aa
+	Author: Jim Huang <jserv@0xlab.org>
+	Date:   Fri Aug 20 23:30:37 2010 +0800
+
+   And rollback the following 3 patches.
+   commit de263c26a7680529baca731c003bc58b68d72511
+   Author: Jing Yu <jingyu@google.com>
+   Date:   Thu Aug 12 15:52:15 2010 -0700
+
+   commit a80c0ec10d3832039c5d5a481f5f62172eddc929
+   Author: Jing Yu <jingyu@google.com>
+   Date:   Tue Aug 10 10:12:29 2010 -0700
+
+   commit f82379147a1d2c484dcc1bb47c4ecd90e40fa3e2
+   Author: Jing Yu <jingyu@google.com>
+   Date:   Thu Jul 22 14:27:24 2010 -0700
+

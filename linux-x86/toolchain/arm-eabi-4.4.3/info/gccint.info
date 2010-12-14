@@ -1,4 +1,4 @@
-This is doc/gccint.info, produced by makeinfo version 4.11 from
+This is doc/gccint.info, produced by makeinfo version 4.13 from
 /home/jingyu/projects/gcc/android-toolchainsrc/build/../gcc/gcc-4.4.3/gcc/doc/gccint.texi.
 
 Copyright (C) 1988, 1989, 1992, 1993, 1994, 1995, 1996, 1997, 1998,
@@ -34295,8 +34295,7 @@ helpful when you have a complicated expression.
               ggc_alloc (x->regno_pointer_align_length * sizeof (tree));
      and the `length' provides the length of the field.
 
-     This second use of `length' also works on global variables, like:
-       static GTY((length ("reg_base_value_size")))
+     This second use of `length' also works on global variables, like:   static GTY((length ("reg_base_value_size")))
          rtx *reg_base_value;
 
 `skip'
@@ -40944,9 +40943,9 @@ Concept Index
 * cfghooks.h:                            Maintaining the CFG.
                                                              (line    6)
 * cgraph_finalize_function:              Parsing pass.       (line   52)
-* chain_circular:                        GTY Options.        (line  196)
-* chain_next:                            GTY Options.        (line  196)
-* chain_prev:                            GTY Options.        (line  196)
+* chain_circular:                        GTY Options.        (line  195)
+* chain_next:                            GTY Options.        (line  195)
+* chain_prev:                            GTY Options.        (line  195)
 * change_address:                        Standard Names.     (line   47)
 * CHANGE_DYNAMIC_TYPE_EXPR:              Expression trees.   (line    6)
 * char <1>:                              Misc.               (line  685)
@@ -41244,7 +41243,7 @@ Concept Index
                                                              (line 1120)
 * def_optype_d:                          Manipulating GIMPLE statements.
                                                              (line   94)
-* default:                               GTY Options.        (line   82)
+* default:                               GTY Options.        (line   81)
 * default_file_start:                    File Framework.     (line    9)
 * DEFAULT_GDB_EXTENSIONS:                DBX Options.        (line   18)
 * DEFAULT_PCC_STRUCT_RETURN:             Aggregate Return.   (line   34)
@@ -41304,10 +41303,10 @@ Concept Index
                                                              (line    6)
 * delay slots, defining:                 Delay Slots.        (line    6)
 * DELAY_SLOTS_FOR_EPILOGUE:              Function Entry.     (line  163)
-* deletable:                             GTY Options.        (line  150)
+* deletable:                             GTY Options.        (line  149)
 * DELETE_IF_ORDINARY:                    Filesystem.         (line   79)
 * Dependent Patterns:                    Dependent Patterns. (line    6)
-* desc:                                  GTY Options.        (line   82)
+* desc:                                  GTY Options.        (line   81)
 * destructor:                            Function Basics.    (line    6)
 * destructors, output of:                Initialization.     (line    6)
 * deterministic finite state automaton:  Processor pipeline description.
@@ -42094,7 +42093,7 @@ Concept Index
 * IEEE 754-2008:                         Decimal float library routines.
                                                              (line    6)
 * IF_COND:                               Function Bodies.    (line    6)
-* if_marked:                             GTY Options.        (line  156)
+* if_marked:                             GTY Options.        (line  155)
 * IF_STMT:                               Function Bodies.    (line    6)
 * if_then_else:                          Comparisons.        (line   80)
 * if_then_else and attributes:           Expressions.        (line   32)
@@ -42368,7 +42367,7 @@ Concept Index
 * MALLOC_ABI_ALIGNMENT:                  Storage Layout.     (line  179)
 * Manipulating GIMPLE statements:        Manipulating GIMPLE statements.
                                                              (line    6)
-* mark_hook:                             GTY Options.        (line  171)
+* mark_hook:                             GTY Options.        (line  170)
 * marking roots:                         GGC Roots.          (line    6)
 * MASK_RETURN_ADDR:                      Exception Region Output.
                                                              (line   35)
@@ -42399,7 +42398,7 @@ Concept Index
 * MAX_STACK_ALIGNMENT:                   Storage Layout.     (line  209)
 * maxM3 instruction pattern:             Standard Names.     (line  234)
 * may_trap_p, tree_could_trap_p:         Edges.              (line  115)
-* maybe_undef:                           GTY Options.        (line  179)
+* maybe_undef:                           GTY Options.        (line  178)
 * mcount:                                Profiling.          (line   12)
 * MD_CAN_REDIRECT_BRANCH:                Misc.               (line  697)
 * MD_EXEC_PREFIX:                        Driver.             (line  330)
@@ -42538,7 +42537,7 @@ Concept Index
 * negation with unsigned saturation:     Arithmetic.         (line   81)
 * negM2 instruction pattern:             Standard Names.     (line  449)
 * nested functions, trampolines for:     Trampolines.        (line    6)
-* nested_ptr:                            GTY Options.        (line  186)
+* nested_ptr:                            GTY Options.        (line  185)
 * next_bb, prev_bb, FOR_EACH_BB:         Basic Blocks.       (line   10)
 * next_cc0_user:                         Jump Patterns.      (line   64)
 * NEXT_INSN:                             Insns.              (line   30)
@@ -42657,11 +42656,11 @@ Concept Index
 * p in constraint:                       Simple Constraints. (line  154)
 * PAD_VARARGS_DOWN:                      Register Arguments. (line  220)
 * parallel:                              Side Effects.       (line  204)
-* param_is:                              GTY Options.        (line  114)
+* param_is:                              GTY Options.        (line  113)
 * parameters, c++ abi:                   C++ ABI.            (line    6)
 * parameters, miscellaneous:             Misc.               (line    6)
 * parameters, precompiled headers:       PCH Target.         (line    6)
-* paramN_is:                             GTY Options.        (line  132)
+* paramN_is:                             GTY Options.        (line  131)
 * parity:                                Arithmetic.         (line  228)
 * parityM2 instruction pattern:          Standard Names.     (line  645)
 * PARM_BOUNDARY:                         Storage Layout.     (line  144)
@@ -42941,7 +42940,7 @@ Concept Index
 * reloading:                             RTL passes.         (line  182)
 * remainder:                             Arithmetic.         (line  131)
 * remainderM3 instruction pattern:       Standard Names.     (line  472)
-* reorder:                               GTY Options.        (line  210)
+* reorder:                               GTY Options.        (line  209)
 * representation of RTL:                 RTL.                (line    6)
 * reservation delays:                    Processor pipeline description.
                                                              (line    6)
@@ -43118,7 +43117,7 @@ Concept Index
 * sinM2 instruction pattern:             Standard Names.     (line  489)
 * SIZE_ASM_OP:                           Label Output.       (line   23)
 * SIZE_TYPE:                             Type Layout.        (line  168)
-* skip:                                  GTY Options.        (line   77)
+* skip:                                  GTY Options.        (line   76)
 * SLOW_BYTE_ACCESS:                      Costs.              (line   66)
 * SLOW_UNALIGNED_ACCESS:                 Costs.              (line   81)
 * SMALL_REGISTER_CLASSES:                Register Classes.   (line  433)
@@ -43128,7 +43127,7 @@ Concept Index
 * smulM3_highpart instruction pattern:   Standard Names.     (line  356)
 * soft float library:                    Soft float library routines.
                                                              (line    6)
-* special:                               GTY Options.        (line  230)
+* special:                               GTY Options.        (line  229)
 * special predicates:                    Predicates.         (line   31)
 * SPECS:                                 Target Fragment.    (line  108)
 * speed of instructions:                 Costs.              (line    6)
@@ -43318,7 +43317,7 @@ Concept Index
 * t-TARGET:                              Target Fragment.    (line    6)
 * table jump:                            Basic Blocks.       (line   57)
 * tablejump instruction pattern:         Standard Names.     (line 1102)
-* tag:                                   GTY Options.        (line   82)
+* tag:                                   GTY Options.        (line   81)
 * tagging insns:                         Tagging Insns.      (line    6)
 * tail calls:                            Tail Calls.         (line    6)
 * TAmode:                                Machine Modes.      (line  156)
@@ -43819,9 +43818,9 @@ Concept Index
 * USE_LOAD_PRE_INCREMENT:                Costs.              (line  170)
 * use_optype_d:                          Manipulating GIMPLE statements.
                                                              (line  101)
-* use_param:                             GTY Options.        (line  114)
-* use_paramN:                            GTY Options.        (line  132)
-* use_params:                            GTY Options.        (line  140)
+* use_param:                             GTY Options.        (line  113)
+* use_paramN:                            GTY Options.        (line  131)
+* use_params:                            GTY Options.        (line  139)
 * USE_SELECT_SECTION_FOR_FUNCTIONS:      Sections.           (line  185)
 * USE_STORE_POST_DECREMENT:              Costs.              (line  185)
 * USE_STORE_POST_INCREMENT:              Costs.              (line  180)
@@ -44282,16 +44281,16 @@ Node: Collect21514528
 Node: Header Dirs1517071
 Node: Type Information1518494
 Node: GTY Options1520785
-Node: GGC Roots1531465
-Node: Files1532185
-Node: Invoking the garbage collector1534935
-Node: Plugins1535988
-Node: Funding1546353
-Node: GNU Project1548840
-Node: Copying1549489
-Node: GNU Free Documentation License1587020
-Node: Contributors1609429
-Node: Option Index1645759
-Node: Concept Index1646344
+Node: GGC Roots1531460
+Node: Files1532180
+Node: Invoking the garbage collector1534930
+Node: Plugins1535983
+Node: Funding1546348
+Node: GNU Project1548835
+Node: Copying1549484
+Node: GNU Free Documentation License1587015
+Node: Contributors1609424
+Node: Option Index1645754
+Node: Concept Index1646339
 
 End Tag Table
