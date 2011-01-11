@@ -1129,7 +1129,6 @@
 #define HAVE_store_multiple (TARGET_32BIT)
 #define HAVE_movmemqi 1
 #define HAVE_cbranchsi4 (TARGET_THUMB1)
-#define HAVE_cbranchqi4 (TARGET_THUMB1)
 #define HAVE_cmpsi (TARGET_32BIT)
 #define HAVE_cmpsf (TARGET_32BIT && TARGET_HARD_FLOAT)
 #define HAVE_cmpdf (TARGET_32BIT && TARGET_HARD_FLOAT)
@@ -2770,7 +2769,6 @@ extern rtx        gen_load_multiple                     (rtx, rtx, rtx);
 extern rtx        gen_store_multiple                    (rtx, rtx, rtx);
 extern rtx        gen_movmemqi                          (rtx, rtx, rtx, rtx);
 extern rtx        gen_cbranchsi4                        (rtx, rtx, rtx, rtx);
-extern rtx        gen_cbranchqi4                        (rtx, rtx, rtx, rtx);
 extern rtx        gen_cmpsi                             (rtx, rtx);
 extern rtx        gen_cmpsf                             (rtx, rtx);
 extern rtx        gen_cmpdf                             (rtx, rtx);
