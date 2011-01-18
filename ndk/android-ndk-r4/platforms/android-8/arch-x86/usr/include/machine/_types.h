@@ -54,9 +54,6 @@ typedef long int       ssize_t;
 typedef long           ptrdiff_t;
 #endif
 
-#define _OFF_T_DEFINED_
-#define _SIZE_T_DEFINED_
-
 #include <linux/types.h>
 
 /* 7.18.1.1 Exact-width integer types */
