@@ -1,4 +1,4 @@
 The object in this prebuilt directory can be rebuilt from
-	platform/sdk/layoutlib_api/
+	platform/sdk/resources/
 
 From: http://android.git.kernel.org/?p=platform/sdk.git;a=commit;h=6685d3a8cb5fe1374e36358c1436a70c6bca1659
