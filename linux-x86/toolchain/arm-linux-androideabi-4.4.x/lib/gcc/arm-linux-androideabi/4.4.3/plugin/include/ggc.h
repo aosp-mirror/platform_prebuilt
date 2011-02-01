@@ -328,6 +328,4 @@ extern void *ggc_alloc_zone_stat (size_t, struct alloc_zone * MEM_STAT_DECL);
 
 #endif
 
-extern size_t ggc_total_allocated (void);
-
 #endif

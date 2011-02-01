@@ -20,7 +20,6 @@ extern int warn_cast_qual;
 extern int warn_char_subscripts;
 extern int warn_clobbered;
 extern int warn_conversion;
-extern int warn_conversion_null;
 extern int warn_coverage_mismatch;
 extern int warn_ctor_dtor_privacy;
 extern int warn_declaration_after_statement;
@@ -51,7 +50,6 @@ extern int warn_invalid_offsetof;
 extern int warn_logical_op;
 extern int warn_long_long;
 extern int warn_main;
-extern int warn_maybe_uninitialized;
 extern int warn_missing_braces;
 extern int warn_missing_declarations;
 extern int warn_missing_field_initializers;
@@ -64,6 +62,7 @@ extern int warn_nested_externs;
 extern int warn_nontemplate_friend;
 extern int warn_nonvdtor;
 extern int warn_nonnull;
+extern int warn_null_conversion;
 extern int warn_old_style_cast;
 extern int warn_old_style_declaration;
 extern int warn_old_style_definition;
@@ -91,7 +90,6 @@ extern int warn_return_type;
 extern int warn_ripa_opt_mismatch;
 extern int warn_selector;
 extern int warn_self_assign;
-extern int warn_self_assign_non_pod;
 extern int warn_sequence_point;
 extern int warn_shadow;
 extern int warn_shadow_compatible_local;
@@ -153,10 +151,8 @@ extern int flag_branch_target_load_optimize;
 extern int flag_branch_target_load_optimize2;
 extern int flag_btr_bb_exclusive;
 extern int flag_caller_saves;
-extern int flag_cgraph_section;
 extern int flag_check_data_deps;
 extern int flag_check_references;
-extern int flag_clone_hot_version_paths;
 extern int flag_no_common;
 extern int flag_conserve_stack;
 extern int flag_cprop_registers;
@@ -177,7 +173,6 @@ extern int flag_dump_noaddr;
 extern int flag_dump_unnumbered;
 extern int flag_dwarf2_cfi_asm;
 extern int flag_early_inlining;
-extern int flag_early_stack_alloc;
 extern int flag_eliminate_dwarf2_dups;
 extern int flag_debug_only_used_symbols;
 extern int flag_eliminate_unused_debug_types;
@@ -194,7 +189,6 @@ extern int flag_forward_propagate;
 extern int flag_friend_injection;
 extern int flag_no_function_cse;
 extern int flag_function_sections;
-extern int flag_float_value_profile_transformations;
 extern int flag_gcse;
 extern int flag_gcse_after_reload;
 extern int flag_gcse_las;
@@ -256,7 +250,6 @@ extern int flag_objc_gc;
 extern int flag_objc_sjlj_exceptions;
 extern int flag_omit_frame_pointer;
 extern int flag_openmp;
-extern int flag_optimize_locality;
 extern int flag_regmove;
 extern int flag_optimize_sibling_calls;
 extern int flag_optimize_sci;
@@ -266,8 +259,6 @@ extern int flag_peel_loops;
 extern int flag_no_peephole;
 extern int flag_peephole2;
 extern int flag_pessimistic_inline_stack_limit;
-extern const char *flag_pmu_profile_generate;
-extern const char *flag_pmu_profile_use;
 extern int post_ipa_mem_report;
 extern int pre_ipa_mem_report;
 extern int flag_predictive_commoning;
@@ -276,8 +267,6 @@ extern int profile_flag;
 extern int profile_arc_flag;
 extern int flag_profile_correction;
 extern int flag_profile_dump;
-extern int flag_profile_generate_sampling;
-extern int flag_profile_reusedist;
 extern int flag_profile_use;
 extern int flag_profile_values;
 extern int flag_reciprocal_math;
@@ -293,7 +282,6 @@ extern int flag_resched_modulo_sched;
 extern int flag_dyn_ipa;
 extern int flag_ripa_disallow_asm_modules;
 extern int flag_ripa_disallow_opt_mismatch;
-extern int flag_ripa_no_promote_always_inline;
 extern int flag_ripa_verbose;
 extern int flag_rounding_math;
 extern int flag_sample_profile;
@@ -442,7 +430,6 @@ struct cl_optimization GTY(())
   unsigned char flag_finite_math_only;
   unsigned char flag_float_store;
   unsigned char flag_forward_propagate;
-  unsigned char flag_float_value_profile_transformations;
   unsigned char flag_gcse;
   unsigned char flag_gcse_after_reload;
   unsigned char flag_gcse_las;
@@ -708,7 +695,6 @@ enum opt_code
   OPT_Wcondition_assign,                     /* -Wcondition-assign */
   OPT_Wconstructor_name,                     /* -Wconstructor-name */
   OPT_Wconversion,                           /* -Wconversion */
-  OPT_Wconversion_null,                      /* -Wconversion-null */
   OPT_Wcoverage_mismatch,                    /* -Wcoverage-mismatch */
   OPT_Wctor_dtor_privacy,                    /* -Wctor-dtor-privacy */
   OPT_Wdeclaration_after_statement,          /* -Wdeclaration-after-statement */
@@ -772,7 +758,6 @@ enum opt_code
   OPT_Wlong_long,                            /* -Wlong-long */
   OPT_Wmain,                                 /* -Wmain */
   OPT_Wmasked_catch_block,                   /* -Wmasked-catch-block */
-  OPT_Wmaybe_uninitialized,                  /* -Wmaybe-uninitialized */
   OPT_Wmissing_braces,                       /* -Wmissing-braces */
   OPT_Wmissing_declarations,                 /* -Wmissing-declarations */
   OPT_Wmissing_field_initializers,           /* -Wmissing-field-initializers */
@@ -791,6 +776,7 @@ enum opt_code
   OPT_Wnonnull,                              /* -Wnonnull */
   OPT_Wnormalized_,                          /* -Wnormalized= */
   OPT_Wnull,                                 /* -Wnull */
+  OPT_Wnull_conversion,                      /* -Wnull-conversion */
   OPT_Wold_style_cast,                       /* -Wold-style-cast */
   OPT_Wold_style_declaration,                /* -Wold-style-declaration */
   OPT_Wold_style_definition,                 /* -Wold-style-definition */
@@ -822,7 +808,6 @@ enum opt_code
   OPT_Wripa_opt_mismatch,                    /* -Wripa-opt-mismatch */
   OPT_Wselector,                             /* -Wselector */
   OPT_Wself_assign,                          /* -Wself-assign */
-  OPT_Wself_assign_non_pod,                  /* -Wself-assign-non-pod */
   OPT_Wsequence_point,                       /* -Wsequence-point */
   OPT_Wserial,                               /* -Wserial */
   OPT_Wshadow,                               /* -Wshadow */
@@ -950,13 +935,11 @@ enum opt_code
   OPT_fcall_saved_,                          /* -fcall-saved- */
   OPT_fcall_used_,                           /* -fcall-used- */
   OPT_fcaller_saves,                         /* -fcaller-saves */
-  OPT_fcgraph_section,                       /* -fcgraph-section */
   OPT_fcheck_array_temporaries,              /* -fcheck-array-temporaries */
   OPT_fcheck_data_deps,                      /* -fcheck-data-deps */
   OPT_fcheck_new,                            /* -fcheck-new */
   OPT_fcheck_references,                     /* -fcheck-references */
   OPT_fclasspath_,                           /* -fclasspath= */
-  OPT_fclone_hot_version_paths,              /* -fclone-hot-version-paths */
   OPT_fcommon,                               /* -fcommon */
   OPT_fcompile_resource_,                    /* -fcompile-resource= */
   OPT_fcond_mismatch,                        /* -fcond-mismatch */
@@ -1005,7 +988,6 @@ enum opt_code
   OPT_fdump_unnumbered,                      /* -fdump-unnumbered */
   OPT_fdwarf2_cfi_asm,                       /* -fdwarf2-cfi-asm */
   OPT_fearly_inlining,                       /* -fearly-inlining */
-  OPT_fearly_stack_alloc,                    /* -fearly-stack-alloc */
   OPT_felide_constructors,                   /* -felide-constructors */
   OPT_feliminate_dwarf2_dups,                /* -feliminate-dwarf2-dups */
   OPT_feliminate_unused_debug_symbols,       /* -feliminate-unused-debug-symbols */
@@ -1050,8 +1032,6 @@ enum opt_code
   OPT_ffriend_injection,                     /* -ffriend-injection */
   OPT_ffunction_cse,                         /* -ffunction-cse */
   OPT_ffunction_sections,                    /* -ffunction-sections */
-  OPT_ffvpt,                                 /* -ffvpt */
-  OPT_ffvpt_functions_,                      /* -ffvpt-functions= */
   OPT_fgcse,                                 /* -fgcse */
   OPT_fgcse_after_reload,                    /* -fgcse-after-reload */
   OPT_fgcse_las,                             /* -fgcse-las */
@@ -1160,7 +1140,6 @@ enum opt_code
   OPT_fomit_frame_pointer,                   /* -fomit-frame-pointer */
   OPT_fopenmp,                               /* -fopenmp */
   OPT_foperator_names,                       /* -foperator-names */
-  OPT_foptimize_locality,                    /* -foptimize-locality */
   OPT_foptimize_register_move,               /* -foptimize-register-move */
   OPT_foptimize_sibling_calls,               /* -foptimize-sibling-calls */
   OPT_foptimize_static_class_initialization, /* -foptimize-static-class-initialization */
@@ -1181,8 +1160,6 @@ enum opt_code
   OPT_fpie,                                  /* -fpie */
   OPT_fplugin_arg_,                          /* -fplugin-arg- */
   OPT_fplugin_,                              /* -fplugin= */
-  OPT_fpmu_profile_generate_,                /* -fpmu-profile-generate= */
-  OPT_fpmu_profile_use_,                     /* -fpmu-profile-use= */
   OPT_fpost_ipa_mem_report,                  /* -fpost-ipa-mem-report */
   OPT_fpre_ipa_mem_report,                   /* -fpre-ipa-mem-report */
   OPT_fpredictive_commoning,                 /* -fpredictive-commoning */
@@ -1194,9 +1171,7 @@ enum opt_code
   OPT_fprofile_dir_,                         /* -fprofile-dir= */
   OPT_fprofile_dump,                         /* -fprofile-dump */
   OPT_fprofile_generate,                     /* -fprofile-generate */
-  OPT_fprofile_generate_sampling,            /* -fprofile-generate-sampling */
   OPT_fprofile_generate_,                    /* -fprofile-generate= */
-  OPT_fprofile_reusedist,                    /* -fprofile-reusedist */
   OPT_fprofile_use,                          /* -fprofile-use */
   OPT_fprofile_use_,                         /* -fprofile-use= */
   OPT_fprofile_values,                       /* -fprofile-values */
@@ -1225,7 +1200,6 @@ enum opt_code
   OPT_fripa,                                 /* -fripa */
   OPT_fripa_disallow_asm_modules,            /* -fripa-disallow-asm-modules */
   OPT_fripa_disallow_opt_mismatch,           /* -fripa-disallow-opt-mismatch */
-  OPT_fripa_no_promote_always_inline_func,   /* -fripa-no-promote-always-inline-func */
   OPT_fripa_verbose,                         /* -fripa-verbose */
   OPT_frounding_math,                        /* -frounding-math */
   OPT_frtti,                                 /* -frtti */

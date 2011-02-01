@@ -7,7 +7,7 @@ SEARCH_DIR("=/usr/local/lib"); SEARCH_DIR("=/lib"); SEARCH_DIR("=/usr/lib");
 SECTIONS
 {
   /* Read-only sections, merged into text segment: */
-  . = SEGMENT_START("text-segment", 0) + SIZEOF_HEADERS;
+  . = 0 + SIZEOF_HEADERS;
   .note.gnu.build-id : { *(.note.gnu.build-id) }
   .hash           : { *(.hash) }
   .gnu.hash       : { *(.gnu.hash) }
@@ -40,31 +40,15 @@ SECTIONS
   .rela.got       : { *(.rela.got) }
   .rel.bss        : { *(.rel.bss .rel.bss.* .rel.gnu.linkonce.b.*) }
   .rela.bss       : { *(.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*) }
-  .rel.iplt       :
-    {
-      *(.rel.iplt)
-    }
-  .rela.iplt      :
-    {
-      *(.rela.iplt)
-    }
-  .rel.plt        :
-    {
-      *(.rel.plt)
-    }
-  .rela.plt       :
-    {
-      *(.rela.plt)
-    }
+  .rel.plt        : { *(.rel.plt) }
+  .rela.plt       : { *(.rela.plt) }
   .init           :
   {
     KEEP (*(.init))
   } =0
   .plt            : { *(.plt) }
-  .iplt           : { *(.iplt) }
   .text           :
   {
-    *(.text.unlikely .text.*_unlikely)
     *(.text .stub .text.* .gnu.linkonce.t.*)
     /* .gnu.warning sections are handled specially by elf32.em.  */
     *(.gnu.warning)
@@ -142,10 +126,10 @@ SECTIONS
   .data.rel.ro : { *(.data.rel.ro.local* .gnu.linkonce.d.rel.ro.local.*) *(.data.rel.ro* .gnu.linkonce.d.rel.ro.*) }
   .dynamic        : { *(.dynamic) }
   . = DATA_SEGMENT_RELRO_END (0, .);
-  .got            : { *(.got.plt) *(.igot.plt) *(.got) *(.igot) }
+  .got            : { *(.got.plt) *(.got) }
   .data           :
   {
-    PROVIDE (__data_start = .);
+    __data_start = . ;
     *(.data .data.* .gnu.linkonce.d.*)
     SORT(CONSTRUCTORS)
   }
@@ -209,5 +193,5 @@ SECTIONS
   .debug_ranges   0 : { *(.debug_ranges) }
   .gnu.attributes 0 : { KEEP (*(.gnu.attributes)) }
   .note.gnu.arm.ident 0 : { KEEP (*(.note.gnu.arm.ident)) }
-  /DISCARD/ : { *(.note.GNU-stack) *(.gnu_debuglink) *(.gnu.lto_*) }
+  /DISCARD/ : { *(.note.GNU-stack) *(.gnu_debuglink) }
 }
