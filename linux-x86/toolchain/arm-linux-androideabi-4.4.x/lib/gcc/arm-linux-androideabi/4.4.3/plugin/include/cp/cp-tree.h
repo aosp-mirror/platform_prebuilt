@@ -2258,6 +2258,24 @@ extern void decl_shadowed_for_var_insert (tree, tree);
 #define TI_ARGS(NODE) (TREE_VALUE (NODE))
 #define TI_PENDING_TEMPLATE_FLAG(NODE) TREE_LANG_FLAG_1 (NODE)
 
+/* For a given TREE_VEC containing a template argument list,
+   this property contains the number of arguments that are not
+   defaulted.  */
+#define NON_DEFAULT_TEMPLATE_ARGS_COUNT(NODE) TREE_CHAIN (TREE_VEC_CHECK (NODE))
+/* Below are the setter and getter of the NON_DEFAULT_TEMPLATE_ARGS_COUNT
+   property.  */
+#define SET_NON_DEFAULT_TEMPLATE_ARGS_COUNT(NODE, INT_VALUE) \
+  NON_DEFAULT_TEMPLATE_ARGS_COUNT(NODE) = build_int_cst (NULL_TREE, INT_VALUE)
+#ifdef ENABLE_CHECKING
+#define GET_NON_DEFAULT_TEMPLATE_ARGS_COUNT(NODE) \
+    int_cst_value (NON_DEFAULT_TEMPLATE_ARGS_COUNT (NODE))
+#else
+#define GET_NON_DEFAULT_TEMPLATE_ARGS_COUNT(NODE) \
+  NON_DEFAULT_TEMPLATE_ARGS_COUNT (NODE) \
+  ? int_cst_value (NON_DEFAULT_TEMPLATE_ARGS_COUNT (NODE)) \
+  : TREE_VEC_LENGTH (INNERMOST_TEMPLATE_ARGS (NODE))
+#endif
+
 /* We use TREE_VECs to hold template arguments.  If there is only one
    level of template arguments, then the TREE_VEC contains the
    arguments directly.  If there is more than one level of template
@@ -2268,7 +2286,13 @@ extern void decl_shadowed_for_var_insert (tree, tree);
 
    It is incorrect to ever form a template argument vector containing
    only one level of arguments, but which is a TREE_VEC containing as
-   its only entry the TREE_VEC for that level.  */
+   its only entry the TREE_VEC for that level.
+
+   For each TREE_VEC containing the template arguments for a single
+   level, it's possible to get or set the number of non defaulted
+   template arguments by using the accessor macros
+   GET_NON_DEFAULT_TEMPLATE_ARGS_COUNT or
+   SET_NON_DEFAULT_TEMPLATE_ARGS_COUNT.  */
 
 /* Nonzero if the template arguments is actually a vector of vectors,
    rather than just a vector.  */
@@ -3584,6 +3608,8 @@ typedef enum tsubst_flags_t {
 				    conversion.  */
   tf_no_access_control = 1 << 7, /* Do not perform access checks, even
 				    when issuing other errors.   */
+  /* Do not instantiate classes (used by count_non_default_template_args). */
+  tf_no_class_instantiations = 1 << 8,
   /* Convenient substitution flags combinations.  */
   tf_warning_or_error = tf_warning | tf_error
 } tsubst_flags_t;
@@ -3933,7 +3959,9 @@ enum overload_flags { NO_SPECIAL = 0, DTOR_FLAG, OP_FLAG, TYPENAME_FLAG };
    TFF_EXPR_IN_PARENS: parenthesize expressions.
    TFF_NO_FUNCTION_ARGUMENTS: don't show function arguments.
    TFF_UNQUALIFIED_NAME: do not print the qualifying scope of the
-       top-level entity.  */
+       top-level entity.
+   TFF_NO_OMIT_DEFAULT_TEMPLATE_ARGUMENTS: do not omit template arguments
+       identical to their defaults.  */
 
 #define TFF_PLAIN_IDENTIFIER			(0)
 #define TFF_SCOPE				(1)
@@ -3948,6 +3976,7 @@ enum overload_flags { NO_SPECIAL = 0, DTOR_FLAG, OP_FLAG, TYPENAME_FLAG };
 #define TFF_EXPR_IN_PARENS			(1 << 9)
 #define TFF_NO_FUNCTION_ARGUMENTS		(1 << 10)
 #define TFF_UNQUALIFIED_NAME			(1 << 11)
+#define TFF_NO_OMIT_DEFAULT_TEMPLATE_ARGUMENTS	(1 << 12)
 
 /* Returns the TEMPLATE_DECL associated to a TEMPLATE_TEMPLATE_PARM
    node.  */
@@ -4281,6 +4310,7 @@ extern tree cp_fold_obj_type_ref		(tree, tree);
 extern bool cp_decl_is_base_field               (tree);
 extern bool cp_decl_is_constructor              (tree);
 extern bool cp_decl_is_destructor               (tree);
+extern int cp_decl_is_const_member_func         (tree);
 extern void set_linkage_according_to_type	(tree, tree);
 extern void determine_key_method		(tree);
 extern void check_for_override			(tree, tree);

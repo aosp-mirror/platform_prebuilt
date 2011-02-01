@@ -42,7 +42,11 @@ see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
    provides part of the support for getting C++ file-scope static
    object constructed before entering `main'.  */
    
-#if defined HAVE_LD_PIE
+#if defined (HAVE_LD_PIE) && defined (ENABLE_CRTBEGINTS)
+#define LINUX_TARGET_STARTFILE_SPEC \
+  "%{!shared: %{pg|p|profile:gcrt1.o%s;pie:Scrt1.o%s;:crt1.o%s}} crti.o%s \
+   %{static:%{pie:crtbeginTS.o%s;:crtbeginT.o%s}} %{!static:%{shared|pie:crtbeginS.o%s;:crtbegin.o%s}}"
+#elif defined (HAVE_LD_PIE) && ! defined (ENABLE_CRTBEGINTS)
 #define LINUX_TARGET_STARTFILE_SPEC \
   "%{!shared: %{pg|p|profile:gcrt1.o%s;pie:Scrt1.o%s;:crt1.o%s}} \
    crti.o%s %{static:crtbeginT.o%s;shared|pie:crtbeginS.o%s;:crtbegin.o%s}"
@@ -96,8 +100,6 @@ see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
 	builtin_assert ("system=linux");			\
 	builtin_assert ("system=unix");				\
 	builtin_assert ("system=posix");			\
-        if (OPTION_ANDROID)                                     \
-          builtin_define ("__ANDROID__");                       \
     } while (0)
 
 #if defined(HAVE_LD_EH_FRAME_HDR)

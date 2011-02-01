@@ -42,13 +42,28 @@ SECTIONS
   .rela.got     0 : { *(.rela.got) }
   .rel.bss      0 : { *(.rel.bss) }
   .rela.bss     0 : { *(.rela.bss) }
-  .rel.plt      0 : { *(.rel.plt) }
-  .rela.plt     0 : { *(.rela.plt) }
+  .rel.iplt     0 :
+    {
+      *(.rel.iplt)
+    }
+  .rela.iplt    0 :
+    {
+      *(.rela.iplt)
+    }
+  .rel.plt      0 :
+    {
+      *(.rel.plt)
+    }
+  .rela.plt     0 :
+    {
+      *(.rela.plt)
+    }
   .init         0 :
   {
     KEEP (*(.init))
   } =0
   .plt          0 : { *(.plt) }
+  .iplt         0 : { *(.iplt) }
   .text         0 :
   {
     *(.text .stub)
@@ -90,7 +105,7 @@ SECTIONS
   }
   .jcr          0 : { KEEP (*(.jcr)) }
   .dynamic      0 : { *(.dynamic) }
-  .got          0 : { *(.got.plt) *(.got) }
+  .got          0 : { *(.got.plt) *(.igot.plt) *(.got) *(.igot) }
   .data         0 :
   {
     *(.data)

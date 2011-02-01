@@ -426,6 +426,8 @@ extern const REAL_VALUE_TYPE * dconst_sqrt2_ptr (void);
    from a given integer constant.  */
 REAL_VALUE_TYPE real_value_from_int_cst (const_tree, const_tree);
 
+bool real_from_native (tree, const unsigned char *, int, REAL_VALUE_TYPE *);
+
 /* Given a CONST_DOUBLE in FROM, store into TO the value it represents.  */
 #define REAL_VALUE_FROM_CONST_DOUBLE(to, from) \
   ((to) = *CONST_DOUBLE_REAL_VALUE (from))

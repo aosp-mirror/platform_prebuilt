@@ -873,6 +873,10 @@ struct gcc_target
     rtx (*function_value) (const_tree ret_type, const_tree fn_decl_or_type,
 			   bool outgoing);
 
+    /* Return the rtx for the result of a libcall of mode MODE,
+       calling the function FN_NAME.  */
+    rtx (*libcall_value) (enum machine_mode, rtx);
+
     /* Return an rtx for the argument pointer incoming to the
        current function.  */
     rtx (*internal_arg_pointer) (void);
@@ -1048,14 +1052,14 @@ struct gcc_target
 
     /* Function to detect if the specified insn loads a global variable's
        address from GOT. If so returns that symbol.  */
-    rtx (*loaded_global_var) (rtx, rtx *);
+    rtx (*loaded_global_var) (rtx, rtx *, rtx *);
 
     /* This function checks if it satisfy the target dependent conditions
        that we can simplify GOT accesses.  */
     bool (*can_simplify_got_access) (int, int);
 
     /* This function does the actual rewriting of GOT accesses.  */
-    void (*load_global_address) (rtx, rtx, rtx, rtx);
+    void (*load_global_address) (rtx, rtx, rtx, rtx, rtx);
   } got_access;
 
   /* For targets that need to mark extra registers as live on entry to

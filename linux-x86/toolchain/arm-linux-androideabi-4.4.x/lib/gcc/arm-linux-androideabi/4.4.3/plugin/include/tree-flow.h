@@ -760,6 +760,7 @@ extern const char *op_symbol_code (enum tree_code);
 extern var_ann_t create_var_ann (tree);
 extern function_ann_t create_function_ann (tree);
 extern void renumber_gimple_stmt_uids (void);
+extern void renumber_gimple_stmt_uids_in_blocks (basic_block *, int);
 extern tree_ann_common_t create_tree_common_ann (tree);
 extern void dump_dfa_stats (FILE *);
 extern void debug_dfa_stats (void);
@@ -879,8 +880,11 @@ extern void verify_ssa (bool);
 extern void delete_tree_ssa (void);
 extern void walk_use_def_chains (tree, walk_use_def_chains_fn, void *, bool);
 extern bool ssa_undefined_value_p (tree);
-extern void warn_uninit (tree, const char *, void *);
+extern void warn_uninit (enum opt_code, tree, const char *, void *);
 extern unsigned int warn_uninitialized_vars (bool);
+
+/* In tree-ssa-sccvn.c  */
+extern void fixup_vdef_ssa_val_refs (gimple);
 
 
 /* In tree-into-ssa.c  */
