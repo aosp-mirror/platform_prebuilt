@@ -20,23 +20,13 @@
 # (a.k.a. Hardy Heron) instead of the host system (which usually is 10.04,
 # a.k.a. Lucid Lynx)
 #
+# Use --help for complete usage information.
+#
+# WARNING: At this time, the generated toolchain binaries will *not* run
+#          with GLibc 2.7, only the machine code it generates.
+#
 
-# You will need a working NDK install or working directory (which is used
-# to download and patch the toolchain sources from android.git.kernel.org)
-#
-# Define the NDK variable in your environment before calling this script,
-# or it will complain loudly. For example, you can invoke it as:
-#
-#  export NDK=/path/to/ndk
-#  ./uild-hardy-toolchain.sh
-#
-# Then *wait* for a very long time (about 13minutes on an 8-core HP z600)
-# A package file will be generated in /tmp, its name dumped by the script
-# in case of success.
-#
-# There are no command-line options right now, modify the definitions under
-# the "CONFIGURATION" section below if you want to change stuff.
-#
+PROGNAME="`basename \"$0\"`"
 
 ###########################################################################
 ###########################################################################
@@ -58,32 +48,10 @@ case "$OS" in
         ;;
 esac
 
-# Set V to 1 to enable verbose mode
-V=${V:-0}
-
 # Location of temporary directory where everything will be downloaded
 # configured, built and installed before we generate the final
 # package archive
-ROOT_DIR=/tmp/gcc-hardy32
-mkdir -p $ROOT_DIR
-
-# Location where we download packages from the Ubuntu servers
-DOWNLOAD_DIR=$ROOT_DIR/download
-
-# Location of the Android NDK
-if [ -z "$NDK" ] ; then
-    echo "ERROR: Please define the NDK variable to point to a valid"
-    echo "       NDK directory (installation or git repository)."
-    echo "       This is needed to download the toolchain sources."
-    exit 1
-fi
-
-NDK_DOWNLOAD_TOOLCHAIN_SOURCES_SH="$NDK/build/tools/download-toolchain-sources.sh"
-if [ ! -f "$NDK_DOWNLOAD_TOOLCHAIN_SOURCES_SH" ] ; then\
-    echo "ERROR: Missing script: $NDK_DOWNLOAD_TOOLCHAIN_SOURCES_SH"
-    echo "Your NDK variable probably points to an invalid directory!"
-    exit 1
-fi
+WORK_DIR=/tmp/gcc32
 
 # Versions of various toolchain components, do not touch unless you know
 # what you're doing!
@@ -95,11 +63,11 @@ GCC_TARGET=i686-linux
 GMP_TARGET=i386-linux
 
 # Location where we will download the toolchain sources
-TOOLCHAIN_SRC_DIR=$ROOT_DIR/toolchain-src
+TOOLCHAIN_SRC_DIR=$WORK_DIR/toolchain-src
 
-# Location of original sysroot
-# You must create it with the "hardy-sysroot.sh" script
-ORG_SYSROOT_DIR=$ROOT_DIR/sysroot
+# Location of original sysroot. This is where we're going to extract all
+# binary Ubuntu packages.
+ORG_SYSROOT_DIR=$WORK_DIR/sysroot
 
 # Name of the final generated toolchain
 TOOLCHAIN_NAME=$GCC_TARGET-glibc2.7-$GCC_VERSION
@@ -107,8 +75,13 @@ TOOLCHAIN_NAME=$GCC_TARGET-glibc2.7-$GCC_VERSION
 # Name of the final toolchain binary tarball that this script will create
 TOOLCHAIN_ARCHIVE=/tmp/$TOOLCHAIN_NAME.tar.bz2
 
-# Location where we're going to install the toolchain
-INSTALL_DIR=$ROOT_DIR/$TOOLCHAIN_NAME
+# Location where we're going to install the toolchain during the build
+INSTALL_DIR=$WORK_DIR/$TOOLCHAIN_NAME
+
+# Location where we're going to install the final binaries
+# If empty, TOOLCHAIN_ARCHIVE will be generated
+PREFIX_DIR=
+
 
 # Location of the final sysroot. This must be a sub-directory of INSTALL_DIR
 # to ensure that the toolchain binaries are properly relocatable (i.e. can
@@ -116,11 +89,22 @@ INSTALL_DIR=$ROOT_DIR/$TOOLCHAIN_NAME
 SYSROOT_DIR=$INSTALL_DIR/sysroot
 
 # Try to parallelize the build for faster performance.
-NUM_CPUS=`cat /proc/cpuinfo | grep processor | wc -l`
-MAKE_FLAGS="-j$NUM_CPUS"
+JOBS=`cat /proc/cpuinfo | grep processor | wc -l`
+
+# The base URL of the Ubuntu mirror we're going to use.
+UBUNTU_MIRROR=http://mirrors.us.kernel.org
+
+# Ubuntu release name we want packages from. Can be a name or a number
+# (i.e. "hardy" or "8.04")
+UBUNTU_RELEASE=hardy
+
 
 # The list of packages we need to download from the Ubuntu servers and
 # extract into the original sysroot
+#
+# Call add_ubuntu_package <package-name> to add a package to the list,
+# which will be processed later.
+#
 UBUNTU_PACKAGES=
 
 add_ubuntu_package ()
@@ -131,35 +115,37 @@ add_ubuntu_package ()
 # The package files containing kernel headers for Hardy and the C
 # library headers and binaries
 add_ubuntu_package \
-    http://mirrors.us.kernel.org/ubuntu//pool/main/l/linux/linux-libc-dev_2.6.24-28.81_i386.deb \
-    http://security.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.7-10ubuntu7_i386.deb \
-    http://security.ubuntu.com/ubuntu/pool/main/g/glibc/libc6-dev_2.7-10ubuntu7_i386.deb
+    linux-libc-dev \
+    libc6 \
+    libc6-dev
 
 # The X11 headers and binaries (for the emulator)
 add_ubuntu_package \
-    http://mirrors.us.kernel.org/ubuntu//pool/main/libx/libx11/libx11-6_1.1.3-1ubuntu2_i386.deb \
-    http://mirrors.us.kernel.org/ubuntu//pool/main/libx/libx11/libx11-dev_1.1.3-1ubuntu2_i386.deb \
-    http://mirrors.us.kernel.org/ubuntu//pool/main/x/x11proto-core/x11proto-core-dev_7.0.11-1_all.deb \
-    http://mirrors.us.kernel.org/ubuntu//pool/main/x/x11proto-xext/x11proto-xext-dev_7.0.2-5ubuntu1_all.deb \
-    http://mirrors.us.kernel.org/ubuntu//pool/main/x/x11proto-input/x11proto-input-dev_1.4.2-1_all.deb \
-    http://mirrors.us.kernel.org/ubuntu//pool/main/x/x11proto-kb/x11proto-kb-dev_1.0.3-2ubuntu1_all.deb
+    libx11-6 \
+    libx11-dev \
+    x11proto-core-dev \
+    x11proto-xext-dev \
+    x11proto-input-dev \
+    x11proto-kb-dev
 
 # Audio libraries (required by the emulator)
 add_ubuntu_package \
-    http://mirrors.us.kernel.org/ubuntu//pool/main/a/alsa-lib/libasound2_1.0.15-3ubuntu4_i386.deb \
-    http://mirrors.us.kernel.org/ubuntu//pool/main/a/alsa-lib/libasound2-dev_1.0.15-3ubuntu4_i386.deb \
-    http://mirrors.us.kernel.org/ubuntu//pool/main/e/esound/libesd-alsa0_0.2.38-0ubuntu9_i386.deb \
-    http://mirrors.us.kernel.org/ubuntu//pool/main/e/esound/libesd0-dev_0.2.38-0ubuntu9_i386.deb \
-    http://security.ubuntu.com/ubuntu/pool/main/a/audiofile/libaudiofile-dev_0.2.6-7ubuntu1.8.04.1_i386.deb \
-    http://security.ubuntu.com/ubuntu/pool/main/p/pulseaudio/libpulse0_0.9.10-1ubuntu1.1_i386.deb \
-    http://security.ubuntu.com/ubuntu/pool/main/p/pulseaudio/libpulse-dev_0.9.10-1ubuntu1.1_i386.deb
+    libasound2 \
+    libasound2-dev \
+    libesd-alsa0 \
+    libesd0-dev \
+    libaudiofile-dev \
+    libpulse0 \
+    libpulse-dev
 
 # ZLib
 add_ubuntu_package \
-    http://mirrors.us.kernel.org/ubuntu//pool/main/z/zlib/zlib1g_1.2.3.3.dfsg-7ubuntu1_i386.deb \
-    http://mirrors.us.kernel.org/ubuntu//pool/main/z/zlib/zlib1g-dev_1.2.3.3.dfsg-7ubuntu1_i386.deb \
-    http://mirrors.us.kernel.org/ubuntu//pool/main/n/ncurses/libncurses5_5.6+20071124-1ubuntu2_i386.deb \
-    http://mirrors.us.kernel.org/ubuntu//pool/main/n/ncurses/libncurses5-dev_5.6+20071124-1ubuntu2_i386.deb
+    zlib1g \
+    zlib1g-dev \
+    libncurses5 \
+    libncurses5-dev
+
+
 
 ###########################################################################
 ###########################################################################
@@ -168,6 +154,159 @@ add_ubuntu_package \
 #####
 ###########################################################################
 ###########################################################################
+
+# Parse all options
+OPTION_HELP=no
+VERBOSE=no
+VERBOSE2=no
+NDK_ROOT=
+FORCE=no
+
+PARAMETERS=
+
+for opt do
+  optarg=`expr "x$opt" : 'x[^=]*=\(.*\)'`
+  case "$opt" in
+  --help|-h|-\?) OPTION_HELP=yes
+  ;;
+  --verbose)
+    if [ "$VERBOSE" = "yes" ] ; then
+        VERBOSE2=yes
+    else
+        VERBOSE=yes
+    fi
+  ;;
+  --force) FORCE="yes"
+  ;;
+  --ubuntu-mirror=*) UBUNTU_MIRROR="$optarg"
+  ;;
+  --ubuntu-release=*) UBUNTU_RELEASE="$optarg"
+  ;;
+  --prefix=*) PREFIX_DIR="$optarg"
+  ;;
+  --work-dir=*) WORK_DIR="$optarg"
+  ;;
+  --gcc-version=*) GCC_VERSION="$optarg"
+  ;;
+  --binutils-version=*) BINUTILS_VERSION="$optarg"
+  ;;
+  --gmp-version=*) GMP_VERSION="$optarg"
+  ;;
+  --mpfr-version=*) MPFR_VERSION="$optarg"
+  ;;
+  --ndk-dir=*) NDK_ROOT="$optarg"
+  ;;
+  --out-dir=*) OPTION_OUT_DIR="$optarg"
+  ;;
+  --cc=*) OPTION_CC="$optarg"
+  ;;
+  --jobs=*) JOBS="$optarg"
+  ;;
+  -j*) JOBS=`expr "x$opt" : 'x-j\(.*\)'`
+  ;;
+  -*)
+    echo "unknown option '$opt', use --help"
+    exit 1
+    ;;
+  *)
+    if [ -z "$PARAMETERS" ]; then
+        PARAMETERS="$opt"
+    else
+        PARAMETERS="$PARAMETERS $opt"
+    fi
+  esac
+done
+
+if [ "$OPTION_HELP" = "yes" ]; then
+    cat << EOF
+
+Usage: $PROGNAME [options] <path-to-toolchain-sources>
+
+This script is used to rebuild a 32-bit Linux host toolchain that targets
+GLibc 2.7 or higher. The machine code generated by this toolchain will run
+properly on Ubuntu 8.04 or higher.
+
+You need to a patch corresponding to the patched toolchain sources that
+are downloaded from android.git.toolchain.org/toolchain/. One way to do that
+is to use the NDK's dedicated script to do it, e.g.:
+
+    \$NDK/build/tools/download-toolchain-sources.sh /tmp/toolchain-src
+
+Then invoke this script as:
+
+    $PROGNAME /tmp/toolchain-src
+
+Alternatively, you can use --ndk-dir=<path> to specify the location of
+your NDK directory, and this script will directly download the toolchain
+sources for you.
+
+Note that this script will download various binary packages from Ubuntu
+servers in order to prepare a compatible 32-bit "sysroot".
+
+By default, it generates a package archive ($TOOLCHAIN_ARCHIVE) but you can,
+as an alternative, ask for direct installation with --prefix=<path>
+
+Options: [defaults in brackets after descriptions]
+EOF
+    echo "Standard options:"
+    echo "  --help                        Print this message"
+    echo "  --force                       Force-rebuild everything"
+    echo "  --prefix=PATH                 Installation path [$PREFIX_DIR]"
+    echo "  --ubuntu-mirror=URL           Ubuntu mirror URL [$UBUNTU_MIRROR]"
+    echo "  --ubuntu-release=NAME         Ubuntu release name [$UBUNTU_RELEASE]"
+    echo "  --work-dir=PATH               Temporary word directory [$WORK_DIR]"
+    echo "  --verbose                     Verbose output. Can be used twice."
+    echo "  --binutils-version=VERSION    Binutils version number [$BINUTILS_VERSION]"
+    echo "  --gcc-version=VERSION         GCC version number [$GCC_VERSION]."
+    echo "  --gmp-version=VERSION         GMP version number [$GMP_VERSION]."
+    echo "  --mpfr-version=VERSION        MPFR version numner [$MPFR_VERSION]."
+    echo "  --ndk-dir=PATH                Path to NDK (used to download toolchain sources)."
+    echo "  --jobs=COUNT                  Run COUNT build jobs in parallel [$JOBS]"
+    echo "  -j<COUNT>                     Same as --jobs=COUNT."
+    echo ""
+    exit 1
+fi
+
+if [ -z "$PARAMETERS" ] ; then
+    if [ -z "$NDK_ROOT" ]; then
+        echo "ERROR: Please provide the path to the toolchain sources, or use"
+        echo "the --ndk-dir=<path> option to point to an NDK root directory."
+        exit 1
+    fi
+    NDK_DOWNLOAD_TOOLCHAIN_SOURCES_SH="$NDK_ROOT/build/tools/download-toolchain-sources.sh"
+    if [ ! -f "$NDK_DOWNLOAD_TOOLCHAIN_SOURCES_SH" ]; then
+        echo "ERROR: Path does not point to valid NDK root: $NDK_ROOT"
+        exit 1
+    fi
+else
+    if [ -n "$NDK_ROOT" ]; then
+        echo "ERROR: You can't use both --ndk-dir=<path> and provide a toolchain sources path."
+        exit 1
+    fi
+    set_parameters () {
+        TOOLCHAIN_SRC_DIR="$1"
+        if [ ! -d "$TOOLCHAIN_SRC_DIR" ]; then
+            echo "ERROR: Not a directory: $1"
+            exit 1
+        fi
+        if [ ! -d "$TOOLCHAIN_SRC_DIR/build" ]; then
+            echo "ERROR: Missing directory: $1/build"
+            exit 1
+        fi
+    }
+
+    set_parameters $PARAMETERS
+fi
+
+# Determine Make flags
+MAKE_FLAGS="-j$JOBS"
+
+# Create the work directory
+mkdir -p $WORK_DIR
+
+# Location where we download packages from the Ubuntu servers
+DOWNLOAD_DIR=$WORK_DIR/download
+
 
 panic ()
 {
@@ -183,21 +322,39 @@ fail_panic ()
     fi
 }
 
-if [ "$V" != 0 ] ; then
+if [ "$VERBOSE" = "yes" ] ; then
     run () {
         echo "## COMMAND: $@"
         $@
     }
+    log () {
+        echo "$@"
+    }
+    if [ "$VERBOSE2" = "yes" ] ; then
+        log2 () {
+            echo "$@"
+        }
+    else
+        log2 () {
+            return
+        }
+    fi
 else
     run () {
         $@ >>$TMPLOG 2>&1
+    }
+    log () {
+        return
+    }
+    log2 () {
+        return
     }
 fi
 
 OLD_PATH="$PATH"
 OLD_LD_LIBRARY_PATH="$LD_LIBRARY_PATH"
 
-BUILD_DIR=$ROOT_DIR/build
+BUILD_DIR=$WORK_DIR/build
 mkdir -p $BUILD_DIR
 
 TMPLOG=$BUILD_DIR/build.log
@@ -211,7 +368,12 @@ BUILD_GCC_DIR=$BUILD_DIR/gcc
 TIMESTAMPS_DIR=$BUILD_DIR/timestamps
 mkdir -p $TIMESTAMPS_DIR
 
-if [ "$V" = 0 ] ; then
+if [ "$FORCE" = "yes" ] ; then
+    echo "Cleaning up timestamps (forcing the build)."
+    rm -f $TIMESTAMPS_DIR/*
+fi
+
+if [ "$VERBOSE" = "no" ] ; then
     echo "To follow build, run: tail -F $TMPLOG"
 fi
 
@@ -265,7 +427,7 @@ copy_directory ()
 
 find_program CMD_WGET wget
 find_program CMD_CURL curl
-find_program CMD_SCRP scp
+find_program CMD_SCP  scp
 
 # Download a file with either 'curl', 'wget' or 'scp'
 #
@@ -371,6 +533,75 @@ pack_archive ()
             panic "Unsupported archive format: $ARCHIVE"
             ;;
     esac
+}
+
+no_trailing_slash ()
+{
+    echo "$1" | sed -e 's!/$!!g'
+}
+
+# Load the Ubuntu packages file. This is a long text file that will list
+# each package for a given release.
+#
+# $1: Ubuntu mirror base URL (e.g. http://mirrors.us.kernel.org/)
+# $2: Release name
+#
+get_ubuntu_packages_list ()
+{
+    local RELEASE=$2
+    local BASE="`no_trailing_slash \"$1\"`"
+    local SRCFILE="$BASE/ubuntu/dists/$RELEASE/main/binary-i386/Packages.bz2"
+    local DSTFILE="$DOWNLOAD_DIR/Packages.bz2"
+    log "Trying to load $SRCFILE"
+    download_file "$SRCFILE" "$DSTFILE"
+    fail_panic "Could not download $SRCFILE"
+    (cd $DOWNLOAD_DIR && bunzip2 -f Packages.bz2)
+    fail_panic "Could not uncompress $DSTFILE"
+
+    # Write a small awk script used to extract filenames for a given package
+    cat > $DOWNLOAD_DIR/extract-filename.awk <<EOF
+BEGIN {
+    # escape special characters in package name
+    gsub("\\\\.","\\\\.",PKG)
+    gsub("\\\\+","\\\\+",PKG)
+    FILE = ""
+    PACKAGE = ""
+}
+
+\$1 == "Package:" {
+    if (\$2 == PKG) {
+        PACKAGE = \$2
+    } else {
+        PACKAGE = ""
+    }
+}
+
+\$1 == "Filename:" && PACKAGE == PKG {
+    FILE = \$2
+}
+
+END {
+    print FILE
+}
+EOF
+}
+
+# Convert an unversioned package name into a .deb package URL
+#
+# $1: Package name without version information (e.g. libc6-dev)
+# $2: Ubuntu mirror base URL
+#
+get_ubuntu_package_deb_url ()
+{
+    # The following is an awk command to parse the Packages file and extract
+    # the filename of a given package.
+    local BASE="`no_trailing_slash \"$1\"`"
+    local FILE=`awk -f "$DOWNLOAD_DIR/extract-filename.awk" -v PKG=$1 $DOWNLOAD_DIR/Packages`
+    if [ -z "$FILE" ]; then
+        log "Could not find filename for package $1"
+        exit 1
+    fi
+    echo "$2/ubuntu/$FILE"
 }
 
 # Does the host compiler generate 32-bit machine code?
@@ -666,15 +897,25 @@ cmd_download_toolchain_sources ()
     $NDK_DOWNLOAD_TOOLCHAIN_SOURCES_SH $TOOLCHAIN_SRC_DIR
 }
 
+task_define download_ubuntu_packages_list "Download Ubuntu packages list"
+cmd_download_ubuntu_packages_list ()
+{
+    mkdir -p $DOWNLOAD_DIR
+    get_ubuntu_packages_list "$UBUNTU_MIRROR" "$UBUNTU_RELEASE"
+}
+
 task_define download_packages "Download Ubuntu packages"
+task_depends download_packages download_ubuntu_packages_list
 cmd_download_packages ()
 {
     local PACKAGE
 
-    mkdir -p $DOWNLOAD_DIR &&
     for PACKAGE in $UBUNTU_PACKAGES; do
         echo "Downloading $PACKAGE"
-        download_file_to $PACKAGE $DOWNLOAD_DIR
+        local PKGURL=`get_ubuntu_package_deb_url $PACKAGE $UBUNTU_MIRROR`
+        echo "URL: $PKGURL"
+        download_file_to $PKGURL $DOWNLOAD_DIR
+        fail_panic "Could not download $PACKAGE"
     done
 }
 
@@ -685,7 +926,8 @@ cmd_build_sysroot ()
 {
     local PACKAGE
     for PACKAGE in $UBUNTU_PACKAGES; do
-        local SRC_PKG=$DOWNLOAD_DIR/`basename $PACKAGE`
+        local PKGURL=`get_ubuntu_package_deb_url $PACKAGE $UBUNTU_MIRROR`
+        local SRC_PKG=$DOWNLOAD_DIR/`basename $PKGURL`
         echo "Extracting $SRC_PKG"
         dpkg -x $SRC_PKG $ORG_SYSROOT_DIR/
     done
@@ -728,9 +970,17 @@ cmd_copy_sysroot ()
 }
 
 
+task_define prepare_toolchain_sources "Prepare toolchain sources."
+if [ -n "$NDK_ROOT" ]; then
+    task_depends prepare_toolchain_sources download_toolchain_sources
+fi
+cmd_prepare_toolchain_sources ()
+{
+    return
+}
 
 task_define configure_binutils "Configure binutils-$BINUTILS_VERSION"
-task_depends configure_binutils download_toolchain_sources copy_sysroot
+task_depends configure_binutils prepare_toolchain_sources copy_sysroot
 cmd_configure_binutils ()
 {
     OUT_DIR=$BUILD_BINUTILS_DIR
@@ -759,7 +1009,7 @@ cmd_install_binutils ()
 }
 
 task_define extract_gmp "Extract sources for gmp-$GMP_VERSION"
-task_depends extract_gmp download_toolchain_sources
+task_depends extract_gmp prepare_toolchain_sources
 cmd_extract_gmp ()
 {
     OUT_DIR=$BUILD_GMP_DIR
@@ -795,7 +1045,7 @@ cmd_install_gmp ()
 
 # Third, build mpfr
 task_define extract_mpfr "Extract sources from mpfr-$MPFR_VERSION"
-task_depends extract_mpfr download_toolchain_sources
+task_depends extract_mpfr prepare_toolchain_sources
 cmd_extract_mpfr ()
 {
     OUT_DIR=$BUILD_MPFR_DIR
@@ -835,7 +1085,7 @@ cmd_install_mpfr ()
 
 # Fourth, the compiler itself
 task_define configure_gcc "Configure gcc-$GCC_VERSION"
-task_depends configure_gcc download_toolchain_sources install_binutils install_gmp install_mpfr
+task_depends configure_gcc prepare_toolchain_sources install_binutils install_gmp install_mpfr
 cmd_configure_gcc ()
 {
     OUT_DIR=$BUILD_GCC_DIR
@@ -898,7 +1148,17 @@ cmd_package_toolchain ()
     pack_archive $TOOLCHAIN_ARCHIVE "`dirname $INSTALL_DIR`" "`basename $INSTALL_DIR`"
 }
 
-#do_task package_toolchain
-do_task package_toolchain
+task_define install_toolchain "Install final toolchain"
+task_depends install_toolchain cleanup_toolchain
+cmd_install_toolchain ()
+{
+    copy_directory "$INSTALL_DIR" "$PREFIX_DIR/$TOOLCHAIN_NAME"
+}
 
-echo "Done, see $TOOLCHAIN_ARCHIVE"
+if [ -n "$PREFIX_DIR" ]; then
+    do_task install_toolchain
+    echo "Done, see $PREFIX_DIR/$TOOLCHAIN_NAME"
+else
+    do_task package_toolchain
+    echo "Done, see $TOOLCHAIN_ARCHIVE"
+fi
