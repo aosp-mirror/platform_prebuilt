@@ -137,9 +137,11 @@ gcov [\fB\-v\fR|\fB\-\-version\fR] [\fB\-h\fR|\fB\-\-help\fR]
      [\fB\-a\fR|\fB\-\-all\-blocks\fR]
      [\fB\-b\fR|\fB\-\-branch\-probabilities\fR]
      [\fB\-c\fR|\fB\-\-branch\-counts\fR]
+     [\fB\-m\fR|\fB\-\-pmu\-profile\fR]
      [\fB\-n\fR|\fB\-\-no\-output\fR]
      [\fB\-l\fR|\fB\-\-long\-file\-names\fR]
      [\fB\-p\fR|\fB\-\-preserve\-paths\fR]
+     [\fB\-q\fR|\fB\-\-pmu_profile\-path\fR]
      [\fB\-f\fR|\fB\-\-function\-summaries\fR]
      [\fB\-o\fR|\fB\-\-object\-directory\fR \fIdirectory|file\fR] \fIsourcefiles\fR
      [\fB\-u\fR|\fB\-\-unconditional\-branches\fR]
@@ -244,6 +246,20 @@ be shown, unless the \fB\-u\fR option is given.
 .PD
 Write branch frequencies as the number of branches taken, rather than
 the percentage of branches taken.
+.IP "\fB\-m\fR" 4
+.IX Item "-m"
+.PD 0
+.IP "\fB\-\-pmu\-profile\fR" 4
+.IX Item "--pmu-profile"
+.PD
+Output the additional \s-1PMU\s0 profile information if available.
+.IP "\fB\-q\fR" 4
+.IX Item "-q"
+.PD 0
+.IP "\fB\-\-pmu_profile\-path\fR" 4
+.IX Item "--pmu_profile-path"
+.PD
+\&\s-1PMU\s0 profile path (default \fIpmuprofile.gcda\fR).
 .IP "\fB\-n\fR" 4
 .IX Item "-n"
 .PD 0

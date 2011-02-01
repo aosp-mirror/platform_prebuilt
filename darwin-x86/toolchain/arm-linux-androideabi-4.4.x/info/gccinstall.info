@@ -1,5 +1,5 @@
 This is doc/gccinstall.info, produced by makeinfo version 4.8 from
-/Volumes/project-jingyu/android_toolchain/build/../gcc/gcc-4.4.3/gcc/doc/install.texi.
+/Volumes/android/build-toolchain/android_toolchain_src/build/../gcc/gcc-4.4.3/gcc/doc/install.texi.
 
    Copyright (C) 1988, 1989, 1992, 1993, 1994, 1995, 1996, 1997, 1998,
 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008 Free
@@ -908,6 +908,11 @@ option.
 `--with-mode=MODE'
      Specify if the compiler should default to `-marm' or `-mthumb'.
      This option is only supported on ARM targets.
+
+`--with-fpmath=sse'
+     Specify if the compiler should default to `-msse2' and
+     `-mfpmath=sse'.  This option is only supported on i386 and x86-64
+     targets.
 
 `--with-divide=TYPE'
      Specify how the compiler should generate code for checking for
@@ -4207,84 +4212,84 @@ Concept Index
 
 
 Tag Table:
-Node: Top1983
-Node: Installing GCC2541
-Node: Prerequisites4056
-Node: Downloading the source13061
-Node: Configuration14982
-Ref: with-gnu-as29558
-Ref: with-as30456
-Ref: with-gnu-ld31869
-Node: Building69833
-Node: Testing82421
-Node: Final install90201
-Node: Binaries95431
-Node: Specific97404
-Ref: alpha-x-x97910
-Ref: alpha-dec-osf98399
-Ref: arc-x-elf101522
-Ref: arm-x-elf101622
-Ref: arm-x-coff101842
-Ref: arm-x-aout102044
-Ref: avr102166
-Ref: bfin102808
-Ref: cris103050
-Ref: crx103866
-Ref: dos104529
-Ref: x-x-freebsd104852
-Ref: h8300-hms107235
-Ref: hppa-hp-hpux107587
-Ref: hppa-hp-hpux10109958
-Ref: hppa-hp-hpux11110591
-Ref: x-x-linux-gnu116250
-Ref: ix86-x-linux116443
-Ref: ix86-x-solaris210116756
-Ref: ia64-x-linux117142
-Ref: ia64-x-hpux117912
-Ref: x-ibm-aix118467
-Ref: iq2000-x-elf124450
-Ref: m32c-x-elf124590
-Ref: m32r-x-elf124692
-Ref: m6811-elf124794
-Ref: m6812-elf124944
-Ref: m68k-x-x125094
-Ref: m68k-x-uclinux126099
-Ref: mips-x-x126462
-Ref: mips-sgi-irix5129139
-Ref: mips-sgi-irix6130087
-Ref: powerpc-x-x132894
-Ref: powerpc-x-darwin133099
-Ref: powerpc-x-elf133646
-Ref: powerpc-x-linux-gnu133731
-Ref: powerpc-x-netbsd133826
-Ref: powerpc-x-eabisim133914
-Ref: powerpc-x-eabi134040
-Ref: powerpcle-x-elf134116
-Ref: powerpcle-x-eabisim134208
-Ref: powerpcle-x-eabi134341
-Ref: s390-x-linux134424
-Ref: s390x-x-linux134496
-Ref: s390x-ibm-tpf134583
-Ref: x-x-solaris2134714
-Ref: sparc-sun-solaris2138591
-Ref: sparc-sun-solaris27141312
-Ref: sparc-x-linux143776
-Ref: sparc64-x-solaris2144001
-Ref: sparcv9-x-solaris2144646
-Ref: x-x-vxworks144731
-Ref: x86-64-x-x146253
-Ref: xtensa-x-elf146581
-Ref: xtensa-x-linux147252
-Ref: windows147593
-Ref: x-x-cygwin149548
-Ref: x-x-interix149818
-Ref: x-x-mingw32150184
-Ref: os2150410
-Ref: older150601
-Ref: elf152718
-Node: Old152976
-Node: Configurations156113
-Node: GNU Free Documentation License160095
-Node: Concept Index182511
+Node: Top1996
+Node: Installing GCC2554
+Node: Prerequisites4069
+Node: Downloading the source13074
+Node: Configuration14995
+Ref: with-gnu-as29571
+Ref: with-as30469
+Ref: with-gnu-ld31882
+Node: Building70012
+Node: Testing82600
+Node: Final install90380
+Node: Binaries95610
+Node: Specific97583
+Ref: alpha-x-x98089
+Ref: alpha-dec-osf98578
+Ref: arc-x-elf101701
+Ref: arm-x-elf101801
+Ref: arm-x-coff102021
+Ref: arm-x-aout102223
+Ref: avr102345
+Ref: bfin102987
+Ref: cris103229
+Ref: crx104045
+Ref: dos104708
+Ref: x-x-freebsd105031
+Ref: h8300-hms107414
+Ref: hppa-hp-hpux107766
+Ref: hppa-hp-hpux10110137
+Ref: hppa-hp-hpux11110770
+Ref: x-x-linux-gnu116429
+Ref: ix86-x-linux116622
+Ref: ix86-x-solaris210116935
+Ref: ia64-x-linux117321
+Ref: ia64-x-hpux118091
+Ref: x-ibm-aix118646
+Ref: iq2000-x-elf124629
+Ref: m32c-x-elf124769
+Ref: m32r-x-elf124871
+Ref: m6811-elf124973
+Ref: m6812-elf125123
+Ref: m68k-x-x125273
+Ref: m68k-x-uclinux126278
+Ref: mips-x-x126641
+Ref: mips-sgi-irix5129318
+Ref: mips-sgi-irix6130266
+Ref: powerpc-x-x133073
+Ref: powerpc-x-darwin133278
+Ref: powerpc-x-elf133825
+Ref: powerpc-x-linux-gnu133910
+Ref: powerpc-x-netbsd134005
+Ref: powerpc-x-eabisim134093
+Ref: powerpc-x-eabi134219
+Ref: powerpcle-x-elf134295
+Ref: powerpcle-x-eabisim134387
+Ref: powerpcle-x-eabi134520
+Ref: s390-x-linux134603
+Ref: s390x-x-linux134675
+Ref: s390x-ibm-tpf134762
+Ref: x-x-solaris2134893
+Ref: sparc-sun-solaris2138770
+Ref: sparc-sun-solaris27141491
+Ref: sparc-x-linux143955
+Ref: sparc64-x-solaris2144180
+Ref: sparcv9-x-solaris2144825
+Ref: x-x-vxworks144910
+Ref: x86-64-x-x146432
+Ref: xtensa-x-elf146760
+Ref: xtensa-x-linux147431
+Ref: windows147772
+Ref: x-x-cygwin149727
+Ref: x-x-interix149997
+Ref: x-x-mingw32150363
+Ref: os2150589
+Ref: older150780
+Ref: elf152897
+Node: Old153155
+Node: Configurations156292
+Node: GNU Free Documentation License160274
+Node: Concept Index182690
 
 End Tag Table

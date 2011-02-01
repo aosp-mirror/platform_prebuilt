@@ -190,6 +190,7 @@
 #define HAVE_floatunssisf2 (TARGET_32BIT && TARGET_HARD_FLOAT && TARGET_VFP)
 #define HAVE_floatunssidf2 (TARGET_32BIT && TARGET_HARD_FLOAT && TARGET_VFP)
 #define HAVE_tls_load_dot_plus_four (TARGET_THUMB2)
+#define HAVE_thumb2_zero_extendqisi2_v6 (TARGET_THUMB2 && arm_arch6)
 #define HAVE_thumb2_casesi_internal (TARGET_THUMB2 && !flag_pic)
 #define HAVE_thumb2_casesi_internal_pic (TARGET_THUMB2 && flag_pic)
 #define HAVE_thumb2_eh_return (TARGET_THUMB2)
@@ -1830,6 +1831,7 @@ extern rtx        gen_fixuns_truncdfsi2                 (rtx, rtx);
 extern rtx        gen_floatunssisf2                     (rtx, rtx);
 extern rtx        gen_floatunssidf2                     (rtx, rtx);
 extern rtx        gen_tls_load_dot_plus_four            (rtx, rtx, rtx, rtx);
+extern rtx        gen_thumb2_zero_extendqisi2_v6        (rtx, rtx);
 extern rtx        gen_thumb2_casesi_internal            (rtx, rtx, rtx, rtx);
 extern rtx        gen_thumb2_casesi_internal_pic        (rtx, rtx, rtx, rtx);
 extern rtx        gen_thumb2_eh_return                  (rtx);

@@ -263,16 +263,16 @@ in the following sections.
 \&\-Wno\-int\-to\-pointer\-cast \-Wno\-invalid\-offsetof 
 \&\-Winvalid\-pch \-Wlarger\-than=\fR\fIlen\fR  \fB\-Wunsafe\-loop\-optimizations 
 \&\-Wlogical\-op \-Wlong\-long 
-\&\-Wmain  \-Wmissing\-braces  \-Wmissing\-field\-initializers 
+\&\-Wmain \-Wmaybe\-uninitialized \-Wmissing\-braces  \-Wmissing\-field\-initializers 
 \&\-Wmissing\-format\-attribute  \-Wmissing\-include\-dirs 
 \&\-Wmissing\-noreturn  \-Wno\-mudflap 
-\&\-Wno\-multichar  \-Wnonnull  \-Wno\-overflow \-Wnull\-conversion 
+\&\-Wno\-multichar  \-Wnonnull  \-Wno\-overflow \-Wconversion\-null 
 \&\-Woverlength\-strings  \-Wpacked  \-Wpacked\-bitfield\-compat  \-Wpadded 
 \&\-Wparentheses  \-Wpedantic\-ms\-format \-Wno\-pedantic\-ms\-format 
 \&\-Wpointer\-arith  \-Wno\-pointer\-to\-int\-cast 
 \&\-Wreal\-conversion \-Wredundant\-decls 
-\&\-Wreturn\-type  \-Wripa\-opt\-mismatch \-Wself\-assign \-Wsequence\-point 
-\&\-Wshadow \-Wshadow\-compatible\-local \-Wshadow\-local 
+\&\-Wreturn\-type  \-Wripa\-opt\-mismatch \-Wself\-assign \-Wself\-assign\-non\-pod 
+\&\-Wsequence\-point \-Wshadow \-Wshadow\-compatible\-local \-Wshadow\-local 
 \&\-Wsign\-compare  \-Wsign\-conversion  \-Wstack\-protector 
 \&\-Wstrict\-aliasing \-Wstrict\-aliasing=n 
 \&\-Wstrict\-overflow \-Wstrict\-overflow=\fR\fIn\fR 
@@ -344,13 +344,15 @@ in the following sections.
 \&\-falign\-labels[=\fR\fIn\fR\fB] \-falign\-loops[=\fR\fIn\fR\fB] \-fassociative\-math 
 \&\-fauto\-inc\-dec \-fbranch\-probabilities \-fbranch\-target\-load\-optimize 
 \&\-fbranch\-target\-load\-optimize2 \-fbtr\-bb\-exclusive \-fcaller\-saves 
-\&\-fcheck\-data\-deps \-fconserve\-stack \-fcprop\-registers \-fcrossjumping 
+\&\-fcgraph\-section \-fcheck\-data\-deps 
+\&\-fconserve\-stack \-fcprop\-registers \-fcrossjumping 
 \&\-fcse\-follow\-jumps \-fcse\-skip\-blocks \-fcx\-fortran\-rules \-fcx\-limited\-range 
 \&\-fdata\-sections \-fdce \-fdce 
 \&\-fdelayed\-branch \-fdelete\-null\-pointer\-checks \-fdse \-fdse 
 \&\-fearly\-inlining \-fexpensive\-optimizations \-ffast\-math 
 \&\-ffinite\-math\-only \-ffloat\-store \-fforward\-propagate 
-\&\-ffunction\-sections \-fgcse \-fgcse\-after\-reload \-fgcse\-las \-fgcse\-lm 
+\&\-ffunction\-sections \-ffvpt \-ffvpt\-functions=\fR\fIffvptfunctions\fR \fB\-fgcse 
+\&\-fgcse\-after\-reload \-fgcse\-las \-fgcse\-lm 
 \&\-fgcse\-sm \-fif\-conversion \-fif\-conversion2 \-findirect\-inlining 
 \&\-finline\-functions \-finline\-functions\-called\-once \-finline\-limit=\fR\fIn\fR 
 \&\fB\-finline\-small\-functions \-fipa\-cp \-fipa\-cp\-clone \-fipa\-matrix\-reorg \-fipa\-pta  
@@ -370,14 +372,16 @@ in the following sections.
 \&\-fomit\-frame\-pointer \-foptimize\-register\-move \-foptimize\-sibling\-calls 
 \&\-fpeel\-loops \-fpredictive\-commoning \-fprefetch\-loop\-arrays 
 \&\-fprofile\-correction \-fprofile\-dir=\fR\fIpath\fR \fB\-fprofile\-generate 
-\&\-fprofile\-generate=\fR\fIpath\fR 
-\&\fB\-fprofile\-use \-fprofile\-use=\fR\fIpath\fR \fB\-fprofile\-values 
-\&\-freciprocal\-math \-fregmove \-frename\-registers \-freorder\-blocks 
+\&\-fprofile\-generate=\fR\fIpath\fR \fB\-fprofile\-generate\-sampling 
+\&\-fprofile\-use \-fprofile\-use=\fR\fIpath\fR \fB\-fprofile\-values 
+\&\-fpmu\-profile\-generate=\fR\fIpmuoption\fR 
+\&\fB\-fpmu\-profile\-use=\fR\fIpmuoption\fR 
+\&\fB\-freciprocal\-math \-fregmove \-frename\-registers \-freorder\-blocks 
 \&\-freorder\-blocks\-and\-partition \-freorder\-functions 
 \&\-frerun\-cse\-after\-loop \-freschedule\-modulo\-scheduled\-loops 
-\&\-fripa \-fripa\-disallow\-asm\-modules 
-\&\-fripa\-disallow\-opt\-mismatch \-fripa\-verbose \-frounding\-math 
-\&\-fsample\-profile \-fsample\-profile\-aggregate\-using 
+\&\-fripa \-fripa\-disallow\-asm\-modules \-fripa\-disallow\-opt\-mismatch 
+\&\-fripa\-no\-promote\-always\-inline\-func \-fripa\-verbose 
+\&\-frounding\-math \-fsample\-profile \-fsample\-profile\-aggregate\-using 
 \&\-fsample\-profile\-use\-entry \-fsched2\-use\-superblocks 
 \&\-fsched2\-use\-traces \-fsched\-spec\-load \-fsched\-spec\-load\-dangerous 
 \&\-fsched\-stalled\-insns\-dep[=\fR\fIn\fR\fB] \-fsched\-stalled\-insns[=\fR\fIn\fR\fB] 
@@ -587,17 +591,17 @@ in the following sections.
 \&\-mno\-wide\-multiply  \-mrtd  \-malign\-double 
 \&\-mpreferred\-stack\-boundary=\fR\fInum\fR
 \&\fB\-mincoming\-stack\-boundary=\fR\fInum\fR
-\&\fB\-mcld \-mcx16 \-msahf \-mrecip 
+\&\fB\-mcld \-mcx16 \-msahf \-mmovbe \-mrecip 
 \&\-mmmx  \-msse  \-msse2 \-msse3 \-mssse3 \-msse4.1 \-msse4.2 \-msse4 \-mavx 
 \&\-maes \-mpclmul 
-\&\-msse4a \-m3dnow \-mpopcnt \-mabm \-msse5 
+\&\-msse4a \-m3dnow \-mpopcnt \-mabm \-msse5 \-mlwp 
 \&\-mthreads  \-mno\-align\-stringops  \-minline\-all\-stringops 
 \&\-minline\-stringops\-dynamically \-minline\-compares 
 \&\-mstringop\-strategy=\fR\fIalg\fR \fB\-mpush\-args  \-maccumulate\-outgoing\-args 
 \&\-m128bit\-long\-double \-m96bit\-long\-double \-mregparm=\fR\fInum\fR \fB\-msseregparm 
 \&\-mveclibabi=\fR\fItype\fR \fB\-mpc32 \-mpc64 \-mpc80 \-mstackrealign 
 \&\-momit\-leaf\-frame\-pointer  \-mno\-red\-zone \-mno\-tls\-direct\-seg\-refs 
-\&\-mcmodel=\fR\fIcode-model\fR 
+\&\-mcmodel=\fR\fIcode-model\fR \fB\-mabi=\fR\fIname\fR 
 \&\fB\-m32  \-m64 \-mlarge\-data\-threshold=\fR\fInum\fR 
 \&\fB\-mfused\-madd \-mno\-fused\-madd \-msse2avx\fR
 .Sp
@@ -2588,7 +2592,8 @@ Options\fR and \fBObjective-C and Objective\-\*(C+ Dialect Options\fR.
 \&\-Wcomment  
 \&\-Wformat   
 \&\-Wmain\fR (only for C/ObjC and unless\fB \fR\fB\-ffreestanding\fR)  
-\&\fB\-Wmissing\-braces  
+\&\fB\-Wmaybe\-uninitialized 
+\&\-Wmissing\-braces  
 \&\-Wnonnull  
 \&\-Wparentheses  
 \&\-Wpointer\-sign  
@@ -2632,6 +2637,7 @@ name is still supported, but the newer name is more descriptive.)
 \&\-Wsign\-compare  
 \&\-Wtype\-limits  
 \&\-Wuninitialized  
+\&\-Wmaybe\-uninitialized 
 \&\-Wunused\-parameter\fR (only with\fB \fR\fB\-Wunused\fR\fB \fRor\fB \fR\fB\-Wall\fR)  \fB \fR
 .Sp
 The option \fB\-Wextra\fR also prints warning messages for the
@@ -2745,8 +2751,8 @@ included in \fB\-Wformat\-nonliteral\fR.)
 Enable \fB\-Wformat\fR plus format checks not included in
 \&\fB\-Wformat\fR.  Currently equivalent to \fB\-Wformat
 \&\-Wformat\-nonliteral \-Wformat\-security \-Wformat\-y2k\fR.
-.IP "\fB\-Wnonnull\fR (C and Objective-C only)" 4
-.IX Item "-Wnonnull (C and Objective-C only)"
+.IP "\fB\-Wnonnull\fR (C, \*(C+, Objective-C, and Objective\-\*(C+ only)" 4
+.IX Item "-Wnonnull (C, , Objective-C, and Objective- only)"
 Warn about passing a null pointer for arguments marked as
 requiring a non-null value by the \f(CW\*(C`nonnull\*(C'\fR function attribute.
 .Sp
@@ -2930,12 +2936,20 @@ warning and what will not:
 \&        }
 .Ve
 .Sp
+In \*(C+ it will not warn on self-assignment of non-POD variables unless
+\&\fB\-Wself\-assign\-non\-pod\fR is also enabled.
+.IP "\fB\-Wself\-assign\-non\-pod\fR" 4
+.IX Item "-Wself-assign-non-pod"
+Warn about self-assignment of non-POD variables. This is a \*(C+\-specific
+warning and only effective when \fB\-Wself\-assign\fR is enabled.
+.Sp
 There are cases where self-assignment might be intentional. For example,
-a \*(C+ programmers might write code to test whether an overloaded
+a \*(C+ programmer might write code to test whether an overloaded
 \&\f(CW\*(C`operator=\*(C'\fR works when the same object is assigned to itself.
-One way to work around the self-assign warning in such case is using
-the functional form \f(CW\*(C`object.operator=(object)\*(C'\fR instead of the
-assignment form \f(CW\*(C`object = object\*(C'\fR, as shown in the following example.
+One way to work around the self-assign warning in such cases when this flag
+is enabled is using the functional form \f(CW\*(C`object.operator=(object)\*(C'\fR
+instead of the assignment form \f(CW\*(C`object = object\*(C'\fR, as shown in the
+following example.
 .Sp
 .Vb 3
 \&        void test_func()
@@ -3061,9 +3075,14 @@ Note that there may be no warning about a variable that is used only
 to compute a value that itself is never used, because such
 computations may be deleted by data flow analysis before the warnings
 are printed.
-.Sp
-These warnings are made optional because \s-1GCC\s0 is not smart
-enough to see all the reasons why the code might be correct
+.IP "\fB\-Wmaybe\-uninitialized\fR" 4
+.IX Item "-Wmaybe-uninitialized"
+For an automatic variable, if there exists a path from the function
+entry to a use of the variable that is initialized, but there exist
+some other paths the variable is not initialized, the compiler will
+emit a warning if it can not prove the uninitialized paths do not
+happen at runtime. These warnings are made optional because \s-1GCC\s0 is 
+not smart enough to see all the reasons why the code might be correct
 despite appearing to have an error.  Here is one example of how
 this can happen:
 .Sp
@@ -3083,19 +3102,9 @@ this can happen:
 .Ve
 .Sp
 If the value of \f(CW\*(C`y\*(C'\fR is always 1, 2 or 3, then \f(CW\*(C`x\*(C'\fR is
-always initialized, but \s-1GCC\s0 doesn't know this.  Here is
-another common case:
-.Sp
-.Vb 6
-\&        {
-\&          int save_y;
-\&          if (change_y) save_y = y, y = new_y;
-\&          ...
-\&          if (change_y) y = save_y;
-\&        }
-.Ve
-.Sp
-This has no bug because \f(CW\*(C`save_y\*(C'\fR is used only if it is set.
+always initialized, but \s-1GCC\s0 doesn't know this. To suppress the
+warning, the user needs to provide a default case with \fIassert\fR\|(0) or
+similar code.
 .Sp
 This option also warns when a non-volatile automatic variable might be
 changed by a call to \f(CW\*(C`longjmp\*(C'\fR.  These warnings as well are possible
@@ -3482,8 +3491,8 @@ conversions to \f(CW\*(C`void\*(C'\fR, the same type, a base class or a referenc
 to them. Warnings about conversions between signed and unsigned
 integers are disabled by default in \*(C+ unless
 \&\fB\-Wsign\-conversion\fR is explicitly enabled.
-.IP "\fB\-Wnull\-conversion\fR" 4
-.IX Item "-Wnull-conversion"
+.IP "\fB\-Wconversion\-null\fR" 4
+.IX Item "-Wconversion-null"
 Warn about peculiar, but valid, conversions from/to \f(CW\*(C`NULL\*(C'\fR.
 This includes converting \f(CW\*(C`NULL\*(C'\fR to non-pointer type and
 converting the boolean value \f(CW\*(C`false\*(C'\fR to \f(CW\*(C`NULL\*(C'\fR. This warning
@@ -6291,6 +6300,18 @@ The following options are enabled: \f(CW\*(C`\-fprofile\-arcs\*(C'\fR, \f(CW\*(C
 .Sp
 If \fIpath\fR is specified, \s-1GCC\s0 will look at the \fIpath\fR to find
 the profile feedback data files. See \fB\-fprofile\-dir\fR.
+.IP "\fB\-fprofile\-generate\-sampling\fR" 4
+.IX Item "-fprofile-generate-sampling"
+Enable sampling for instrumented binaries.  Instead of recording every event,
+record only every N\-th event, where N (the sampling rate) can be set either
+at compile time using
+\&\fB\-\-param profile\-generate\-sampling\-rate=\fR\fIvalue\fR, or
+at execution start time through environment variable \fB\s-1GCOV_SAMPLING_RATE\s0\fR.
+.Sp
+At this time sampling applies only to branch counters.  A sampling rate of 100
+decreases instrumentated binary slowdown from up to 20x for heavily threaded
+applications down to around 2x.  \fB\-fprofile\-correction\fR is always
+needed with sampling.
 .IP "\fB\-fprofile\-use\fR" 4
 .IX Item "-fprofile-use"
 .PD 0
@@ -6310,6 +6331,30 @@ code.
 .Sp
 If \fIpath\fR is specified, \s-1GCC\s0 will look at the \fIpath\fR to find
 the profile feedback data files. See \fB\-fprofile\-dir\fR.
+.IP "\fB\-fpmu\-profile\-generate=\fR\fIpmuoption\fR" 4
+.IX Item "-fpmu-profile-generate=pmuoption"
+Enable performance monitoring unit (\s-1PMU\s0) profiling.  This collects
+hardware counter data corresponding to \fIpmuoption\fR.  Currently
+only \fIload-latency\fR and \fIbranch-mispredict\fR are supported
+using pfmon tool.  You must use \fB\-fpmu\-profile\-generate\fR both
+when compiling and when linking your program.  This \s-1PMU\s0 profile data
+may later be used by the compiler during optimizations as well can be
+displayed using coverage tool gcov. The params variable
+\&\*(L"pmu_profile_n_addresses\*(R" can be used to restrict \s-1PMU\s0 data collection
+to only this many addresses.
+.IP "\fB\-fpmu\-profile\-use=\fR\fIpmuoption\fR" 4
+.IX Item "-fpmu-profile-use=pmuoption"
+Enable performance monitoring unit (\s-1PMU\s0) profiling based
+optimizations.  Currently only \fIload-latency\fR and
+\&\fIbranch-mispredict\fR are supported.
+.IP "\fB\-fcgraph\-section\fR" 4
+.IX Item "-fcgraph-section"
+Emit call graph edge profile counts in .note.callgraph.text sections. This is
+used in conjunction with \fB\-fprofile\-use\fR. A new .note.callgraph.text
+section is created for each function. This section lists every callee and the
+number of times it is called. The params variable
+\&\*(L"note-cgraph-section-edge-threshold\*(R" can be used to only list edges above a
+certain threshold.
 .IP "\fB\-fripa\fR" 4
 .IX Item "-fripa"
 Perform dynamic inter-procedural analysis. This is used in conjunction with
@@ -6336,6 +6381,9 @@ ignored for this comparison.
 .IX Item "-fripa-verbose"
 Enable printing of verbose information about dynamic inter-procedural optimizations.
 This is used in conjunction with the \fB\-fripa\fR.
+.IP "\fB\-fripa\-no\-promote\-always\-inline\-func\fR" 4
+.IX Item "-fripa-no-promote-always-inline-func"
+Do not promote static functions with always inline attribute in \s-1LIPO\s0 compilation.
 .IP "\fB\-fsample\-profile\fR" 4
 .IX Item "-fsample-profile"
 .PD 0
@@ -6579,6 +6627,21 @@ With \fB\-fbranch\-probabilities\fR, it reads back the data gathered
 and actually performs the optimizations based on them.
 Currently the optimizations include specialization of division operation
 using the knowledge about the value of the denominator.
+.IP "\fB\-ffvpt\fR" 4
+.IX Item "-ffvpt"
+If combined with \fB\-fvpt and \-ffvpt_functions\fR, it instructs the
+compiler to add a code to gather information about math library calls.
+.Sp
+With \fB\-fbranch\-probabilities\fR, it reads back the data gathered
+and actually performs the optimizations based on them.
+Currently the optimizations include specialization of function calls
+using precalculated values of common inputs.
+.IP "\fB\-ffvpt\-functions=\fR\fIffvptfunctions\fR" 4
+.IX Item "-ffvpt-functions=ffvptfunctions"
+This options takes a comma separated list of math functions to be
+profiled/optimized by \fB\-ffvpt\fR. The special name \*(L"all\*(R" can be
+used to specify all supported math functions. Currently, exp, log,
+pow, and sqrt are supported.
 .IP "\fB\-frename\-registers\fR" 4
 .IX Item "-frename-registers"
 Attempt to avoid false dependencies in scheduled code by making use
@@ -6676,6 +6739,11 @@ If a guard check fails, an error message is printed and the program exits.
 .IP "\fB\-fstack\-protector\-all\fR" 4
 .IX Item "-fstack-protector-all"
 Like \fB\-fstack\-protector\fR except that all functions are protected.
+.Sp
+\&\s-1NOTE:\s0 When \-\-enable\-esp this option is enabled by default 
+for C, \*(C+, ObjC, ObjC++, if neither \fB\-fno\-stack\-protector\fR
+or \fB\-nostdlib\fR or \fB\-nodefaultlibs\fR or 
+\&\fB\-fstack\-protector\fR are found.
 .IP "\fB\-fsection\-anchors\fR" 4
 .IX Item "-fsection-anchors"
 Try to reduce the number of symbolic address calculations by using
@@ -7423,6 +7491,16 @@ statements in it.  If a block is large and has no profile samples
 attributed to it, it will be assigned a weight of 0 with high
 confidence.  This parameter is only useful when using
 \&\fB\-fsample\-profile\fR.
+.IP "\fBmax-lipo-mem\fR" 4
+.IX Item "max-lipo-mem"
+When importing auxiliary modules during profile-use, check current
+memory consumption after parsing each auxiliary module. If it exceeds
+this limit (specified in kb), don't import any more auxiliary modules.
+Specifying a value of 0 means don't enforce this limit. This parameter
+is only useful when using \fB\-fprofile\-use\fR and \fB\-fripa\fR.
+.IP "\fBprofile-generate-sampling-rate\fR" 4
+.IX Item "profile-generate-sampling-rate"
+Set the sampling rate with \fB\-fprofile\-generate\-sampling\fR.
 .RE
 .RS 4
 .RE
@@ -8261,6 +8339,12 @@ Produce a position independent executable on targets which support it.
 For predictable results, you must also specify the same set of options
 that were used to generate code (\fB\-fpie\fR, \fB\-fPIE\fR,
 or model suboptions) when you specify this option.
+.Sp
+\&\s-1NOTE:\s0 When \-\-enable\-esp this option is enabled by default
+for C, \*(C+, ObjC, ObjC++, if neither \fB\-fno\-pie\fR or \fB\-fno\-PIE\fR
+or \fB\-fno\-pic\fR or \fB\-fno\-PIC\fR or \fB\-nostdlib\fR or
+\&\fB\-nostartfiles\fR or \fB\-shared\fR or \fB\-pg\fR or \fB\-p\fR
+are found.
 .IP "\fB\-rdynamic\fR" 4
 .IX Item "-rdynamic"
 Pass the flag \fB\-export\-dynamic\fR to the \s-1ELF\s0 linker, on targets
@@ -8617,11 +8701,6 @@ library calls for floating-point operations.
 instructions, but still uses the soft-float calling conventions.  
 \&\fBhard\fR allows generation of floating-point instructions 
 and uses FPU-specific calling conventions.
-.Sp
-Using \fB\-mfloat\-abi=hard\fR with \s-1VFP\s0 coprocessors is not supported.
-Use \fB\-mfloat\-abi=softfp\fR with the appropriate \fB\-mfpu\fR option
-to allow the compiler to generate code that makes use of the hardware
-floating-point capabilities for these CPUs.
 .Sp
 The default depends on the specific target configuration.  Note that
 the hard-float and soft-float ABIs are not link-compatible; you must
@@ -10412,6 +10491,10 @@ Improved version of Intel Pentium4 \s-1CPU\s0 with 64\-bit extensions, \s-1MMX\s
 .IX Item "core2"
 Intel Core2 \s-1CPU\s0 with 64\-bit extensions, \s-1MMX\s0, \s-1SSE\s0, \s-1SSE2\s0, \s-1SSE3\s0 and \s-1SSSE3\s0
 instruction set support.
+.IP "\fIatom\fR" 4
+.IX Item "atom"
+Intel Atom \s-1CPU\s0 with 64\-bit extensions, \s-1MMX\s0, \s-1SSE\s0, \s-1SSE2\s0, \s-1SSE3\s0 and \s-1SSSE3\s0
+instruction set support.
 .IP "\fIk6\fR" 4
 .IX Item "k6"
 \&\s-1AMD\s0 K6 \s-1CPU\s0 with \s-1MMX\s0 instruction set support.
@@ -10780,6 +10863,10 @@ preferred alignment to \fB\-mpreferred\-stack\-boundary=2\fR.
 .IX Item "-msse5"
 .IP "\fB\-mno\-sse5\fR" 4
 .IX Item "-mno-sse5"
+.IP "\fB\-mlwp\fR" 4
+.IX Item "-mlwp"
+.IP "\fB\-mno\-lwp\fR" 4
+.IX Item "-mno-lwp"
 .IP "\fB\-m3dnow\fR" 4
 .IX Item "-m3dnow"
 .IP "\fB\-mno\-3dnow\fR" 4
@@ -10794,8 +10881,8 @@ preferred alignment to \fB\-mpreferred\-stack\-boundary=2\fR.
 .IX Item "-mno-abm"
 .PD
 These switches enable or disable the use of instructions in the \s-1MMX\s0,
-\&\s-1SSE\s0, \s-1SSE2\s0, \s-1SSE3\s0, \s-1SSSE3\s0, \s-1SSE4\s0.1, \s-1AVX\s0, \s-1AES\s0, \s-1PCLMUL\s0, \s-1SSE4A\s0, \s-1SSE5\s0, \s-1ABM\s0 or
-3DNow! extended instruction sets.
+\&\s-1SSE\s0, \s-1SSE2\s0, \s-1SSE3\s0, \s-1SSSE3\s0, \s-1SSE4\s0.1, \s-1AVX\s0, \s-1AES\s0, \s-1PCLMUL\s0, \s-1SSE4A\s0, \s-1SSE5\s0, \s-1LWP\s0,
+\&\s-1ABM\s0 or 3DNow! extended instruction sets.
 These extensions are also available as built-in functions: see
 \&\fBX86 Built-in Functions\fR, for details of the functions enabled and
 disabled by these switches.
@@ -10841,6 +10928,10 @@ by \s-1AMD64\s0 until introduction of Pentium 4 G1 step in December 2005.  \s-1L
 \&\s-1SAHF\s0 are load and store instructions, respectively, for certain status flags.
 In 64\-bit mode, \s-1SAHF\s0 instruction is used to optimize \f(CW\*(C`fmod\*(C'\fR, \f(CW\*(C`drem\*(C'\fR
 or \f(CW\*(C`remainder\*(C'\fR built-in functions: see \fBOther Builtins\fR for details.
+.IP "\fB\-mmovbe\fR" 4
+.IX Item "-mmovbe"
+This option will enable \s-1GCC\s0 to use movbe instruction to implement
+\&\f(CW\*(C`_\|_builtin_bswap32\*(C'\fR and \f(CW\*(C`_\|_builtin_bswap64\*(C'\fR.
 .IP "\fB\-mrecip\fR" 4
 .IX Item "-mrecip"
 This option will enable \s-1GCC\s0 to use \s-1RCPSS\s0 and \s-1RSQRTSS\s0 instructions (and their
@@ -10875,6 +10966,14 @@ function type when \fB\-mveclibabi=svml\fR is used and \f(CW\*(C`_\|_vrd2_sin\*(
 when \fB\-mveclibabi=acml\fR is used. Both \fB\-ftree\-vectorize\fR and
 \&\fB\-funsafe\-math\-optimizations\fR have to be enabled. A \s-1SVML\s0 or \s-1ACML\s0 \s-1ABI\s0
 compatible library will have to be specified at link time.
+.IP "\fB\-mabi=\fR\fIname\fR" 4
+.IX Item "-mabi=name"
+Generate code for the specified calling convention.  Permissible values
+are: \fBsysv\fR for the \s-1ABI\s0 used on GNU/Linux and other systems and
+\&\fBms\fR for the Microsoft \s-1ABI\s0.  The default is to use the Microsoft
+\&\s-1ABI\s0 when targeting Windows.  On all other systems, the default is the
+\&\s-1SYSV\s0 \s-1ABI\s0.  You can control this behavior for a specific function by
+using the function attribute \fBms_abi\fR/\fBsysv_abi\fR.
 .IP "\fB\-mpush\-args\fR" 4
 .IX Item "-mpush-args"
 .PD 0
@@ -15183,6 +15282,11 @@ used during linking.
 \&\fB\-fpie\fR and \fB\-fPIE\fR both define the macros
 \&\f(CW\*(C`_\|_pie_\|_\*(C'\fR and \f(CW\*(C`_\|_PIE_\|_\*(C'\fR.  The macros have the value 1
 for \fB\-fpie\fR and 2 for \fB\-fPIE\fR.
+.Sp
+\&\s-1NOTE:\s0 When \-\-enable\-esp this option is enabled by default
+for C, \*(C+, ObjC, ObjC++, if neither \fB\-fno\-pie\fR or \fB\-fno\-PIE\fR
+or \fB\-fno\-pic\fR or \fB\-fno\-PIC\fR or \fB\-nostdlib\fR or
+\&\fB\-nostartfiles\fR or \fB\-shared\fR are found.
 .IP "\fB\-fno\-jump\-tables\fR" 4
 .IX Item "-fno-jump-tables"
 Do not use jump tables for switch statements even where it would be

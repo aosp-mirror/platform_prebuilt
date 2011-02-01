@@ -477,6 +477,13 @@ struct lang_hooks
   /* Return true if DECL is a destructor.  */
   bool (*decl_is_destructor) (tree);
 
+  /* Return
+   1 if decl is a const member function,
+   2 if decl is not a const member function but has a const overload that
+     has identical parameter list,
+   0 otherwise.  */
+  int (*decl_is_const_member_func) (tree);
+
   /* Do language specific processing in the builtin function DECL  */
   tree (*builtin_function) (tree decl);
 
