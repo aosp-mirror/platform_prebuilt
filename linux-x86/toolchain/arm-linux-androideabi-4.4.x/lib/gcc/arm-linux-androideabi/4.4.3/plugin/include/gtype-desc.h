@@ -47,6 +47,7 @@ enum gt_types_enum {
  gt_ggc_e_8cp_lexer, 
  gt_ggc_e_10tree_check, 
  gt_ggc_e_22VEC_deferred_access_gc, 
+ gt_ggc_e_26VEC_pending_attribute_p_gc, 
  gt_ggc_e_17pending_attribute, 
  gt_ggc_e_16pending_template, 
  gt_ggc_e_21named_label_use_entry, 
@@ -123,6 +124,7 @@ enum gt_types_enum {
  gt_ggc_e_9loop_exit, 
  gt_ggc_e_13nb_iter_bound, 
  gt_ggc_e_24types_used_by_vars_entry, 
+ gt_ggc_e_20overlay_decl_mapping, 
  gt_ggc_e_17language_function, 
  gt_ggc_e_5loops, 
  gt_ggc_e_18control_flow_graph, 
@@ -221,6 +223,7 @@ enum gt_types_enum {
  gt_e_P11cgraph_edge4htab, 
  gt_e_P9loop_exit4htab, 
  gt_e_P24types_used_by_vars_entry4htab, 
+ gt_e_P20overlay_decl_mapping4htab, 
  gt_e_P9tree_node4htab, 
  gt_e_P13ehl_map_entry4htab, 
  gt_types_enum_last
@@ -331,6 +334,10 @@ extern void gt_ggc_mx_tree_check (void *);
   if (X != NULL) gt_ggc_mx_VEC_deferred_access_gc (X);\
   } while (0)
 extern void gt_ggc_mx_VEC_deferred_access_gc (void *);
+#define gt_ggc_m_26VEC_pending_attribute_p_gc(X) do { \
+  if (X != NULL) gt_ggc_mx_VEC_pending_attribute_p_gc (X);\
+  } while (0)
+extern void gt_ggc_mx_VEC_pending_attribute_p_gc (void *);
 #define gt_ggc_m_17pending_attribute(X) do { \
   if (X != NULL) gt_ggc_mx_pending_attribute (X);\
   } while (0)
@@ -635,6 +642,10 @@ extern void gt_ggc_mx_nb_iter_bound (void *);
   if (X != NULL) gt_ggc_mx_types_used_by_vars_entry (X);\
   } while (0)
 extern void gt_ggc_mx_types_used_by_vars_entry (void *);
+#define gt_ggc_m_20overlay_decl_mapping(X) do { \
+  if (X != NULL) gt_ggc_mx_overlay_decl_mapping (X);\
+  } while (0)
+extern void gt_ggc_mx_overlay_decl_mapping (void *);
 #define gt_ggc_m_17language_function(X) do { \
   if (X != NULL) gt_ggc_mx_language_function (X);\
   } while (0)
@@ -892,6 +903,7 @@ extern void gt_ggc_m_P15cgraph_mod_info4htab (void *);
 extern void gt_ggc_m_P11cgraph_edge4htab (void *);
 extern void gt_ggc_m_P9loop_exit4htab (void *);
 extern void gt_ggc_m_P24types_used_by_vars_entry4htab (void *);
+extern void gt_ggc_m_P20overlay_decl_mapping4htab (void *);
 extern void gt_ggc_m_P9tree_node4htab (void *);
 extern void gt_ggc_m_P13ehl_map_entry4htab (void *);
 
@@ -1000,6 +1012,10 @@ extern void gt_pch_nx_tree_check (void *);
   if (X != NULL) gt_pch_nx_VEC_deferred_access_gc (X);\
   } while (0)
 extern void gt_pch_nx_VEC_deferred_access_gc (void *);
+#define gt_pch_n_26VEC_pending_attribute_p_gc(X) do { \
+  if (X != NULL) gt_pch_nx_VEC_pending_attribute_p_gc (X);\
+  } while (0)
+extern void gt_pch_nx_VEC_pending_attribute_p_gc (void *);
 #define gt_pch_n_17pending_attribute(X) do { \
   if (X != NULL) gt_pch_nx_pending_attribute (X);\
   } while (0)
@@ -1304,6 +1320,10 @@ extern void gt_pch_nx_nb_iter_bound (void *);
   if (X != NULL) gt_pch_nx_types_used_by_vars_entry (X);\
   } while (0)
 extern void gt_pch_nx_types_used_by_vars_entry (void *);
+#define gt_pch_n_20overlay_decl_mapping(X) do { \
+  if (X != NULL) gt_pch_nx_overlay_decl_mapping (X);\
+  } while (0)
+extern void gt_pch_nx_overlay_decl_mapping (void *);
 #define gt_pch_n_17language_function(X) do { \
   if (X != NULL) gt_pch_nx_language_function (X);\
   } while (0)
@@ -1561,6 +1581,7 @@ extern void gt_pch_n_P15cgraph_mod_info4htab (void *);
 extern void gt_pch_n_P11cgraph_edge4htab (void *);
 extern void gt_pch_n_P9loop_exit4htab (void *);
 extern void gt_pch_n_P24types_used_by_vars_entry4htab (void *);
+extern void gt_pch_n_P20overlay_decl_mapping4htab (void *);
 extern void gt_pch_n_P9tree_node4htab (void *);
 extern void gt_pch_n_P13ehl_map_entry4htab (void *);
 
@@ -1616,6 +1637,8 @@ extern void gt_pch_p_8cp_lexer
 extern void gt_pch_p_10tree_check
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_22VEC_deferred_access_gc
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_26VEC_pending_attribute_p_gc
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_17pending_attribute
     (void *, void *, gt_pointer_operator, void *);
@@ -1768,6 +1791,8 @@ extern void gt_pch_p_9loop_exit
 extern void gt_pch_p_13nb_iter_bound
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_24types_used_by_vars_entry
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_20overlay_decl_mapping
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_17language_function
     (void *, void *, gt_pointer_operator, void *);
@@ -1963,6 +1988,8 @@ extern void gt_pch_p_P11cgraph_edge4htab
 extern void gt_pch_p_P9loop_exit4htab
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_P24types_used_by_vars_entry4htab
+    (void *, void *, gt_pointer_operator, void *);
+extern void gt_pch_p_P20overlay_decl_mapping4htab
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_P9tree_node4htab
     (void *, void *, gt_pointer_operator, void *);

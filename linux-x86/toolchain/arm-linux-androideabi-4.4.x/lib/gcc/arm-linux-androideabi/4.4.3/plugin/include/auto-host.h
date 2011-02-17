@@ -47,6 +47,12 @@
 #endif
 
 
+/* Define to 1 to enable crtbeginTS.o. */
+#ifndef USED_FOR_TARGET
+/* #undef ENABLE_CRTBEGINTS */
+#endif
+
+
 /* Define to 1 to specify that we are using the BID decimal floating point
    format instead of DPD */
 #ifndef USED_FOR_TARGET
@@ -63,6 +69,12 @@
 /* Define if you want more run-time sanity checks for dataflow. */
 #ifndef USED_FOR_TARGET
 /* #undef ENABLE_DF_CHECKING */
+#endif
+
+
+/* Define to 1 to enable esp. */
+#ifndef USED_FOR_TARGET
+/* #undef ENABLE_ESP */
 #endif
 
 
@@ -842,7 +854,7 @@
 
 /* Define 0/1 if your assembler supports CFI directives. */
 #ifndef USED_FOR_TARGET
-#define HAVE_GAS_CFI_DIRECTIVE 0
+#define HAVE_GAS_CFI_DIRECTIVE 1
 #endif
 
 
@@ -854,13 +866,13 @@
 
 /* Define if your assembler supports the .loc discriminator sub-directive. */
 #ifndef USED_FOR_TARGET
-/* #undef HAVE_GAS_DISCRIMINATOR */
+#define HAVE_GAS_DISCRIMINATOR 1
 #endif
 
 
 /* Define 0/1 if your assembler supports .cfi_sections. */
 #ifndef USED_FOR_TARGET
-#define HAVE_GAS_CFI_SECTIONS_DIRECTIVE 0
+#define HAVE_GAS_CFI_SECTIONS_DIRECTIVE 1
 #endif
 
 
@@ -969,13 +981,13 @@
 
 /* Define if using GNU as. */
 #ifndef USED_FOR_TARGET
-#define HAVE_GNU_AS 1
+#define HAVE_GNU_AS 0
 #endif
 
 
 /* Define if using GNU ld. */
 #ifndef USED_FOR_TARGET
-#define HAVE_GNU_LD 1
+#define HAVE_GNU_LD 0
 #endif
 
 
@@ -993,7 +1005,7 @@
 
 /* Define .init_array/.fini_array sections are available and working. */
 #ifndef USED_FOR_TARGET
-#define HAVE_INITFINI_ARRAY 1
+/* #undef HAVE_INITFINI_ARRAY */
 #endif
 
 

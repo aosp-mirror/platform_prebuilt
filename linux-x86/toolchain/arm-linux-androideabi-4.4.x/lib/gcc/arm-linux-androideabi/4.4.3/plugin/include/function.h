@@ -521,6 +521,10 @@ struct function GTY(())
   /* Used types hash table.  */
   htab_t GTY ((param_is (union tree_node))) used_types_hash;
 
+  /* Map between variables synthesized in stack_overlay to the original
+     variables. Used in RTL emission.*/
+  htab_t GTY ((param_is (struct overlay_decl_mapping))) union_decl_list_map;
+
   /* Last statement uid.  */
   int last_stmt_uid;
 

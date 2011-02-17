@@ -111,8 +111,9 @@ struct cgraph_global_info GTY(())
   /* Estimated size of the function after inlining.  */
   int insns;
 
-  /* Estimated growth after inlining.  INT_MIN if not computed.  */
-  int estimated_growth;
+  /* Estimated average per-callsite growth after inlining all calls to
+     this function.  INT_MIN if not computed.  */
+  int estimated_average_growth;
 
   /* Set iff the function has been inlined at least once.  */
   bool inlined;
@@ -176,6 +177,8 @@ struct cgraph_node GTY((chain_next ("%h.next"), chain_prev ("%h.previous")))
   /* Set when function must be output - it is externally visible
      or its address is taken.  */
   unsigned needed : 1;
+  /* Set when the address of the function has been taken.  */
+  unsigned address_taken : 1;
   /* Set when decl is an abstract function pointed to by the
      ABSTRACT_DECL_ORIGIN of a reachable function.  */
   unsigned abstract_and_needed : 1;
@@ -357,12 +360,15 @@ void cgraph_add_new_function (tree, bool);
 
 void dump_vcg_cgraph (FILE *, int, bool);
 
+bool hot_function_p (struct cgraph_node *);
+
 /* In cgraphunit.c  */
 void cgraph_finalize_function (tree, bool);
 void cgraph_mark_if_needed (tree);
 void cgraph_finalize_compilation_unit (void);
 void cgraph_optimize (void);
 void cgraph_mark_needed_node (struct cgraph_node *);
+void cgraph_mark_address_taken (struct cgraph_node *);
 void cgraph_mark_reachable_node (struct cgraph_node *);
 bool cgraph_inline_p (struct cgraph_edge *, const char **reason);
 bool cgraph_preserve_function_body_p (tree);
@@ -535,6 +541,8 @@ void free_hot_components (void);
 void dump_hot_components (FILE *);
 void verify_hot_components (void);
 bool cgraph_gate_ipa_early_inlining (void);
+
+void cgraph_remove_pid (struct cgraph_node *);
 
 /* Create a new static variable of type TYPE.  */
 tree add_new_static_var (tree type);

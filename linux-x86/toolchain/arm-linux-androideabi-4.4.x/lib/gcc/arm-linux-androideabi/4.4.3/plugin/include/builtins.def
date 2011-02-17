@@ -758,6 +758,9 @@ DEF_BUILTIN (BUILT_IN_EMUTLS_REGISTER_COMMON,
 	     true, true, true, ATTR_NOTHROW_LIST, false,
 	     !targetm.have_tls)
 
+/* Multiversioning builtin dispatch hook. */
+DEF_GCC_BUILTIN (BUILT_IN_DISPATCH, "dispatch", BT_FN_INT_PTR_FN_INT_PTR_PTR_VAR, ATTR_NULL)
+
 /* Synchronization Primitives.  */
 #include "sync-builtins.def"
 
