@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA+3//4XM\u003d",
+        "filename": "common/pc-bios/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1003981
+      },
+      "writtenOn": "2011-02-17T22:03:39Z",
+      "side": 1,
+      "message": "You don\u0027t need this.",
+      "revId": "17d6c8b64d8f0fc7b60fd850274eb88073f17110",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA+3//4XI\u003d",
+        "filename": "common/pc-bios/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1003981
+      },
+      "writtenOn": "2011-02-17T22:03:39Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "17d6c8b64d8f0fc7b60fd850274eb88073f17110",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
