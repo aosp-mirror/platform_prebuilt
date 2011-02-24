@@ -1,0 +1,4 @@
+The object in this prebuilt directory can be rebuilt from
+	platform/sdk/ninepatch/
+
+From: http://android.git.kernel.org/?p=platform/sdk.git;a=commit;h=c27acc39b25a1dee3fecd28601d57e9aebbc7cc0
