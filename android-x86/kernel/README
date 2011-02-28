@@ -1,7 +1,31 @@
-The file 'kernel' gets copied to the generic_x86 image. Replace it with
-the kernel from which you wish to boot. The same kernel is used for the
-installer_dvi image as well as for the boot kernel.
+These files are copied:
+	'kernel-qemu' gets copied to the full_x86 and generic_x86 images
+	'kernel-vbox' gets copied to the vbox_x86 images.
 
-The file 'kernel_config_VirtualBox' is a .config file for the Android
-2.6.32 kernel tree that can boot and run fairly well using VirtualBox.
+These binaries regenerated from
+	SHA1:   <TBS-git-sha1>
+	branch: origin/archive/android-gldfish-2.6.29 of
+	tree:   git://android.git.kernel.org/kernel/common.git
 
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
+
+Here's step by step instructions for doing the kernel builds:
+
+ # 1)  Pull the kernel repository
+       git clone git://android.git.kernel.org/kernel/common.git
+
+ # 2)  Checkout the SHA1
+       cd common
+       git checkout <TBS-git-sha1>
+
+ # 3)  Build and install the qemu kernel to the the prebuilt directory ($TOP/prebuilt)
+       i386 make MACH=x86 mrproper
+       i386 make MACH=x86 goldfish_defconfig
+       i386 make MACH=x86 -j$JOBS bzImage
+       cp arch/x86/boot/bzImage $TOP/prebuilt/android-x86/kernel/kernel-qemu
+
+ # 4)  Build and install the vbox kernel to the the prebuilt directory ($TOP/prebuilt)
+       i386 make MACH=x86 mrproper
+       i386 make MACH=x86 vbox_defconfig
+       i386 make MACH=x86 -j$JOBS bzImage
+       cp arch/x86/boot/bzImage $TOP/prebuilt/android-x86/kernel/kernel-vbox
