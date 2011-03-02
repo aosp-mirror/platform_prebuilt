@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA/H///l0\u003d",
+        "filename": "android-x86/kernel/README",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1003360
+      },
+      "writtenOn": "2011-03-02T17:17:14Z",
+      "side": 1,
+      "message": "TBD: I need to add some more info on how to pull this branch and the SHA1 for the head that I used.",
+      "revId": "c06fff71247428e6331f822c1cce42bd88a36578",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
