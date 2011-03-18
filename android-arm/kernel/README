@@ -4,7 +4,7 @@ They are built with the 'rebuild.sh' script contained here, usage is:
     ./rebuild.sh  /path/to/kernel/sources/
 
 The kernel sources must correspond to one of the android-goldfish-2.6.XX
-branches available from android.git.kernel.org/kernel/common.git. The script
+branches available from android.git.kernel.org/kernel/qemu.git. The script
 will complain if it cannot find the files corresponding to the virtual hardware
 architecture known as "goldfish".
 
