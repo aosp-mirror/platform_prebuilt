@@ -1,7 +1,7 @@
-This is binutils.info, produced by makeinfo version 4.13 from
-/tmp/android-toolchain-b6812184092efe7ea509f84d70b130b1/src/build/../binutils/binutils-2.20.1/binutils/doc/binutils.texi.
+This is binutils.info, produced by makeinfo version 4.8 from
+binutils.texi.
 
-Copyright (C) 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999,
+   Copyright (C) 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999,
 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Free
 Software Foundation, Inc.
 
@@ -44,7 +44,7 @@ Introduction
 ************
 
 This brief manual contains documentation for the GNU binary utilities
-(GNU Binutils) version 2.20.1:
+(GNU Binutils) version 2.20:
 
    This document is distributed under the terms of the GNU Free
 Documentation License version 1.3.  A copy of the license is included
@@ -545,7 +545,7 @@ object files are listed as arguments, `nm' assumes the file `a.out'.
           same name.  If the symbol is defined anywhere, the common
           symbols are treated as undefined references.  For more
           details on common symbols, see the discussion of -warn-common
-          in *note Linker options: (ld.info)Options.
+          in *Note Linker options: (ld.info)Options.
 
     `D'
     `d'
@@ -622,7 +622,7 @@ object files are listed as arguments, `nm' assumes the file `a.out'.
           this case, the next values printed are the stabs other field,
           the stabs desc field, and the stab type.  Stabs symbols are
           used to hold debugging information.  For more information,
-          see *note Stabs: (stabs.info)Top.
+          see *Note Stabs: (stabs.info)Top.
 
     `?'
           The symbol type is unknown, or object file format specific.
@@ -677,8 +677,8 @@ equivalent.
 
 `--plugin NAME'
      Load the plugin called NAME to add support for extra target types.
-     This option is only available if the toolchain has been built with
-     plugin support enabled.
+     This option is only available if the toolchain has been built
+     with plugin support enabled.
 
 `-l'
 `--line-numbers'
@@ -1806,7 +1806,7 @@ equivalent.  At least one option from the list
      ELF section.  In most other file formats, debugging symbol-table
      entries are interleaved with linkage symbols, and are visible in
      the `--syms' output.  For more information on stabs symbols, see
-     *note Stabs: (stabs.info)Top.
+     *Note Stabs: (stabs.info)Top.
 
 `--start-address=ADDRESS'
      Start displaying data at the specified address.  This affects the
@@ -2569,7 +2569,7 @@ file language used in header files, see the `linkers' section,
 `NLMLINK' in particular, of the `NLM Development and Tools Overview',
 which is part of the NLM Software Developer's Kit ("NLM SDK"),
 available from Novell, Inc.  `nlmconv' uses the GNU Binary File
-Descriptor library to read INFILE; see *note BFD: (ld.info)BFD, for
+Descriptor library to read INFILE; see *Note BFD: (ld.info)BFD, for
 more information.
 
    `nlmconv' can perform a link step.  In other words, you can list
@@ -2691,7 +2691,7 @@ Compiler.
      Specify the BFD format to use for a bin file as output.  This is a
      BFD target name; you can use the `--help' option to see a list of
      supported targets.  Normally `windmc' will use the default format,
-     which is the first one listed by the `--help' option.  *note
+     which is the first one listed by the `--help' option.  *Note
      Target Selection::.
 
 `-h PATH'
@@ -2843,7 +2843,7 @@ available to Windows.
      This is a BFD target name; you can use the `--help' option to see
      a list of supported targets.  Normally `windres' will use the
      default format, which is the first one listed by the `--help'
-     option.  *note Target Selection::.
+     option.  *Note Target Selection::.
 
 `--preprocessor PROGRAM'
      When `windres' reads an `rc' file, it runs it through the C
@@ -4342,7 +4342,7 @@ Binutils Index
 * creating thin archive:                 ar cmdline.          (line 190)
 * cxxfilt:                               c++filt.             (line  14)
 * dates in archive:                      ar cmdline.          (line 164)
-* debug symbols:                         objdump.             (line 363)
+* debug symbols:                         objdump.             (line 370)
 * debugging symbols:                     nm.                  (line 141)
 * deleting from archive:                 ar cmdline.          (line  26)
 * demangling C++ symbols:                c++filt.             (line   6)
@@ -4375,7 +4375,7 @@ Binutils Index
 * ELF version sections informations:     readelf.             (line 109)
 * endianness:                            objdump.             (line 135)
 * error on valid input:                  Bug Criteria.        (line  12)
-* external symbols:                      nm.                  (line 173)
+* external symbols:                      nm.                  (line 253)
 * extract from archive:                  ar cmdline.          (line 103)
 * fatal signal:                          Bug Criteria.        (line   9)
 * file name:                             nm.                  (line 135)
@@ -4392,14 +4392,14 @@ Binutils Index
 * name duplication in archive:           ar cmdline.          (line  97)
 * name length:                           ar.                  (line  18)
 * nm:                                    nm.                  (line   6)
-* nm compatibility:                      nm.                  (line 145)
+* nm compatibility:                      nm.                  (line 167)
 * nm format:                             nm.                  (line 145)
 * not writing archive index:             ar cmdline.          (line 183)
 * objdump:                               objdump.             (line   6)
 * object code format <1>:                addr2line.           (line  50)
 * object code format <2>:                strings.             (line  67)
-* object code format <3>:                size.                (line  84)
-* object code format <4>:                objdump.             (line  79)
+* object code format <3>:                objdump.             (line  79)
+* object code format <4>:                size.                (line  84)
 * object code format:                    nm.                  (line 244)
 * object file header:                    objdump.             (line 141)
 * object file information:               objdump.             (line   6)
@@ -4460,34 +4460,34 @@ Binutils Index
 
 
 Tag Table:
-Node: Top2034
-Node: ar3679
-Node: ar cmdline6484
-Node: ar scripts15527
-Node: nm21215
-Node: objcopy30689
-Node: objdump58930
-Node: ranlib79402
-Node: size80223
-Node: strings83228
-Node: strip85686
-Node: c++filt91637
-Ref: c++filt-Footnote-196482
-Node: addr2line96588
-Node: nlmconv99859
-Node: windmc102465
-Node: windres106112
-Node: dlltool112139
-Node: def file format124823
-Node: readelf126561
-Node: Common Options132567
-Node: Selecting the Target System133607
-Node: Target Selection134539
-Node: Architecture Selection136521
-Node: Reporting Bugs137349
-Node: Bug Criteria138128
-Node: Bug Reporting138681
-Node: GNU Free Documentation License145551
-Node: Binutils Index170730
+Node: Top1929
+Node: ar3572
+Node: ar cmdline6377
+Node: ar scripts15420
+Node: nm21108
+Node: objcopy30582
+Node: objdump58823
+Node: ranlib79295
+Node: size80116
+Node: strings83121
+Node: strip85579
+Node: c++filt91530
+Ref: c++filt-Footnote-196375
+Node: addr2line96481
+Node: nlmconv99752
+Node: windmc102358
+Node: windres106005
+Node: dlltool112032
+Node: def file format124716
+Node: readelf126454
+Node: Common Options132460
+Node: Selecting the Target System133500
+Node: Target Selection134432
+Node: Architecture Selection136414
+Node: Reporting Bugs137242
+Node: Bug Criteria138021
+Node: Bug Reporting138574
+Node: GNU Free Documentation License145444
+Node: Binutils Index170623
 
 End Tag Table
