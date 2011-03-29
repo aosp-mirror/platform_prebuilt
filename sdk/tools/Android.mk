@@ -63,6 +63,19 @@ include $(BUILD_PREBUILT)
 ##################################
 include $(CLEAR_VARS)
 
+LOCAL_MODULE := llvm-rs-cc
+LOCAL_SRC_FILES := $(HOST_OS)/llvm-rs-cc$(HOST_EXECUTABLE_SUFFIX)
+LOCAL_MODULE_CLASS := EXECUTABLES
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_SUFFIX := $(HOST_EXECUTABLE_SUFFIX)
+LOCAL_BUILT_MODULE_STEM := llvm-rs-cc$(HOST_EXECUTABLE_SUFFIX)
+LOCAL_IS_HOST_MODULE := true
+
+include $(BUILD_PREBUILT)
+
+##################################
+include $(CLEAR_VARS)
+
 LOCAL_MODULE := zipalign
 LOCAL_SRC_FILES := $(HOST_OS)/zipalign$(HOST_EXECUTABLE_SUFFIX)
 LOCAL_MODULE_CLASS := EXECUTABLES
