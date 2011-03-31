@@ -123,6 +123,10 @@ add_ubuntu_package \
 add_ubuntu_package \
     libx11-6 \
     libx11-dev \
+    libxcb-xlib0 \
+    libxcb1 \
+    libxau6 \
+    libxdmcp6 \
     x11proto-core-dev \
     x11proto-xext-dev \
     x11proto-input-dev \
@@ -161,6 +165,7 @@ VERBOSE=no
 VERBOSE2=no
 NDK_ROOT=
 FORCE=no
+ONLY_SYSROOT=no
 
 PARAMETERS=
 
@@ -203,6 +208,8 @@ for opt do
   --jobs=*) JOBS="$optarg"
   ;;
   -j*) JOBS=`expr "x$opt" : 'x-j\(.*\)'`
+  ;;
+  --only-sysroot) ONLY_SYSROOT=yes
   ;;
   -*)
     echo "unknown option '$opt', use --help"
@@ -254,7 +261,8 @@ EOF
     echo "  --prefix=PATH                 Installation path [$PREFIX_DIR]"
     echo "  --ubuntu-mirror=URL           Ubuntu mirror URL [$UBUNTU_MIRROR]"
     echo "  --ubuntu-release=NAME         Ubuntu release name [$UBUNTU_RELEASE]"
-    echo "  --work-dir=PATH               Temporary word directory [$WORK_DIR]"
+    echo "  --work-dir=PATH               Temporary work directory [$WORK_DIR]"
+    echo "  --only-sysroot                Only dowload and build sysroot packages"
     echo "  --verbose                     Verbose output. Can be used twice."
     echo "  --binutils-version=VERSION    Binutils version number [$BINUTILS_VERSION]"
     echo "  --gcc-version=VERSION         GCC version number [$GCC_VERSION]."
@@ -959,7 +967,7 @@ cmd_copy_sysroot ()
     for SL in $SYMLINKS; do
         # convert /lib/libfoo.so.<n> into 'libfoo.so.<n>' for the target
         local DST=`echo $SL | sed -e 's!^/lib/!!g'`
-        # convery libfoo.so.<n> into libfoo.so for the source
+        # convert libfoo.so.<n> into libfoo.so for the source
         local SRC=`echo $DST | sed -e 's!\.[0-9]*$!!g'`
         echo "Fixing symlink $SRC --> $DST"
         ln -sf $DST $SRC
@@ -1155,7 +1163,10 @@ cmd_install_toolchain ()
     copy_directory "$INSTALL_DIR" "$PREFIX_DIR/$TOOLCHAIN_NAME"
 }
 
-if [ -n "$PREFIX_DIR" ]; then
+if [ "$ONLY_SYSROOT" = "yes" ]; then
+    do_task copy_sysroot
+    echo "Done, see sysroot files in $SYSROOT_DIR"
+elif [ -n "$PREFIX_DIR" ]; then
     do_task install_toolchain
     echo "Done, see $PREFIX_DIR/$TOOLCHAIN_NAME"
 else
