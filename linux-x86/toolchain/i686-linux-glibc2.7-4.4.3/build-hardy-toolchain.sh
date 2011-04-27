@@ -132,6 +132,12 @@ add_ubuntu_package \
     x11proto-input-dev \
     x11proto-kb-dev
 
+# The OpenGL-related headers and libraries (for GLES emulation)
+add_ubuntu_package \
+    mesa-common-dev \
+    libgl1-mesa-dev \
+    libgl1-mesa-glx \
+
 # Audio libraries (required by the emulator)
 add_ubuntu_package \
     libasound2 \
@@ -971,6 +977,21 @@ cmd_copy_sysroot ()
         local SRC=`echo $DST | sed -e 's!\.[0-9]*$!!g'`
         echo "Fixing symlink $SRC --> $DST"
         ln -sf $DST $SRC
+    done
+
+    # Also deal with a few direct symlinks that don't use the /lib/ prefix
+    # we simply copy them. Useful for libGL.so -> libGL.so.1 for example.
+    SYMLINKS=`ls -l $SYSROOT_DIR/usr/lib | grep -v /lib/ | awk '{ print $11; }'`
+    cd $SYSROOT_DIR/usr/lib
+    for SL in $SYMLINKS; do
+        # convert /lib/libfoo.so.<n> into 'libfoo.so.<n>' for the target
+        local DST=`echo $SL`
+        # convert libfoo.so.<n> into libfoo.so for the source
+        local SRC=`echo $DST | sed -e 's!\.[0-9]*$!!g'`
+        if [ "$DST" != "$SRC" ]; then
+            echo "Copying symlink $SRC --> $DST"
+            ln -sf $DST $SRC
+        fi
     done
 
     patch_library $SYSROOT_DIR/usr/lib/libc.so
