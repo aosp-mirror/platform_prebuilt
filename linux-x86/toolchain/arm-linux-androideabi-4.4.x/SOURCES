@@ -1,0 +1,32 @@
+Sources for this prebuilt toolchain can be downloaded from Android Opensource
+Project GIT repository git://android.git.kernel.org/toolchain.
+
+gcc/ synced to
+	commit d9394eebf42aee6de56a970df3c56e67e5455545
+	Author: Doug Kwan <dougkwan@google.com>
+	Date:   Wed Mar 16 14:47:42 2011 -0700
+
+binutils/ synced to
+	commit a4316ba2b7698435a68e9826cabd87ae43dad182
+	Author: Doug Kwan <dougkwan@google.com>
+	Date:   Mon Feb 14 12:02:57 2011 -0800
+
+gdb/ synced to
+	commit 3954a66c7a6939e2c7bed362ec4df06b9f921bcf
+	Author: Jean-Baptiste Queru <jbq@google.com>
+	Date:   Tue Jan 4 14:52:40 2011 -0800
+
+gmp/ synced to
+	commit 9fb242a79dd122d7fbf867daf5620dba6927bd2e
+	Author: Jing Yu <jingyu@google.com>
+	Date:   Thu Nov 5 17:43:59 2009 -0800
+
+mpfr/ synced to
+	commit da6dfde986af1b56f0f41e9f5de61d093fa8af90
+	Author: Jing Yu <jingyu@google.com>
+	Date:   Thu Nov 5 17:50:13 2009 -0800
+
+build/ synced to
+	commit b57a44f739598a081d8efed906a523b98ec45fef
+	Author: Doug Kwan <dougkwan@google.com>
+	Date:   Wed Mar 23 11:53:17 2011 -0700
