@@ -1,12 +1,5 @@
 This directory contains the kernel images specific to the Android emulator.
-They are built with the 'rebuild.sh' script contained here, usage is:
+They are built with the 'external/qemu/distrib/build-kernel.sh' script.
 
-    ./rebuild.sh  /path/to/kernel/sources/
+See external/qemu/docs/ANDROID-KERNEL.TXT for more details.
 
-The kernel sources must correspond to one of the android-goldfish-2.6.XX
-branches available from android.git.kernel.org/kernel/qemu.git. The script
-will complain if it cannot find the files corresponding to the virtual hardware
-architecture known as "goldfish".
-
-See hw/goldfish_XXXX under the emulator sources for the corresponding virtual
-hardware emulation code.

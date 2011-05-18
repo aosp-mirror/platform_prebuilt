@@ -1,11 +1,5 @@
-The file 'kernel' gets copied to the generic_x86 image. Replace it with
-the kernel from which you wish to boot. The same kernel is used for the
-installer_dvi image as well as for the boot kernel.
+This directory contains the kernel images specific to the Android emulator.
+They are built with the 'external/qemu/distrib/build-kernel.sh' script.
 
-To rebuild the kernel, use external/qemu/distrib/build-kernel.sh
+See external/qemu/docs/ANDROID-KERNEL.TXT for more details.
 
-/path/to/build-kernel.sh --arch=x86                -> full_x86 image (for QEMU)
-/path/to/build-kernel.sh --arch=x86 --config=vbox  -> vbox_x86 image (for VirtualBox)
-
-The kernel sources are in android.git.kernel.org/kernel/qemu.git,
-in the android-goldfish-2.6.XX branch (where XX is the highest patch kernel version number).
