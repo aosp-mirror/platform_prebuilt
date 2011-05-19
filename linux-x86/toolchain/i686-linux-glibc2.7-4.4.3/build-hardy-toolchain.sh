@@ -137,6 +137,11 @@ add_ubuntu_package \
     mesa-common-dev \
     libgl1-mesa-dev \
     libgl1-mesa-glx \
+    libxxf86vm1 \
+    libxext6 \
+    libxdamage1 \
+    libxfixes3 \
+    libdrm2
 
 # Audio libraries (required by the emulator)
 add_ubuntu_package \
