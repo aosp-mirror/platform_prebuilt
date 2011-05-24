@@ -1,0 +1,4 @@
+The object in this prebuilt directory can be rebuilt from
+	platform/sdk/common/
+
+From: http://android.git.kernel.org/?p=platform/sdk.git;a=commit;h=1f72cb7cb032538b79e79d6fc7ff3905e9766ce1
