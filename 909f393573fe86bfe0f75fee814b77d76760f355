@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAABB3///o8\u003d",
+        "filename": "common/http-client/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001100
+      },
+      "writtenOn": "2011-06-03T06:09:58Z",
+      "side": 1,
+      "message": "2011",
+      "revId": "909f393573fe86bfe0f75fee814b77d76760f355",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABB3///o4\u003d",
+        "filename": "common/http-client/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001100
+      },
+      "writtenOn": "2011-06-03T06:09:58Z",
+      "side": 1,
+      "message": "tabs please (line #24 too)",
+      "revId": "909f393573fe86bfe0f75fee814b77d76760f355",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAABB3///o0\u003d",
+        "filename": "common/http-client/LICENSE.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001100
+      },
+      "writtenOn": "2011-06-03T06:09:58Z",
+      "side": 1,
+      "message": "No need for this file.\nInstead copy common/ant/MODULE_LICENSE_APACHE2 here. This file will act as a tag to the build server to provide the proper license.",
+      "revId": "909f393573fe86bfe0f75fee814b77d76760f355",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
