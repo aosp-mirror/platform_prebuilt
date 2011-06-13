@@ -1,1 +1,0 @@
-../../../../../../../platforms/android-3/arch-arm/usr/include/linux/netfilter_arp/arp_tables.h
