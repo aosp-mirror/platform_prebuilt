@@ -1,1 +1,0 @@
-../../../../../../platforms/android-3/arch-arm/usr/include/linux/thread_info.h
