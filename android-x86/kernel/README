@@ -2,6 +2,10 @@ The file 'kernel' gets copied to the generic_x86 image. Replace it with
 the kernel from which you wish to boot. The same kernel is used for the
 installer_dvi image as well as for the boot kernel.
 
-The file 'kernel_config_VirtualBox' is a .config file for the Android
-2.6.32 kernel tree that can boot and run fairly well using VirtualBox.
+To rebuild the kernel, use external/qemu/distrib/build-kernel.sh
 
+/path/to/build-kernel.sh --arch=x86                -> full_x86 image (for QEMU)
+/path/to/build-kernel.sh --arch=x86 --config=vbox  -> vbox_x86 image (for VirtualBox)
+
+The kernel sources are in android.git.kernel.org/kernel/qemu.git,
+in the android-goldfish-2.6.XX branch (where XX is the highest patch kernel version number).
