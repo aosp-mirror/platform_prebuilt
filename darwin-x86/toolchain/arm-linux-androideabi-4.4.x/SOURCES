@@ -12,9 +12,9 @@ binutils/ synced to
 	Date:   Tue May 24 17:27:46 2011 -0700
 
 gdb/ synced to
-	commit 3954a66c7a6939e2c7bed362ec4df06b9f921bcf
-	Author: Jean-Baptiste Queru <jbq@google.com>
-	Date:   Tue Jan 4 14:52:40 2011 -0800
+	commit 5f9d38fd85e779aa1fd17eb38d24f8ec994d9147
+	Author: Doug Kwan <dougkwan@google.com>
+	Date:   Wed Aug 31 15:31:16 2011 -0700
 
 gmp/ synced to
 	commit 9fb242a79dd122d7fbf867daf5620dba6927bd2e
