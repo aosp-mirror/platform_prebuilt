@@ -62,6 +62,13 @@ GCC_VERSION=4.4.3
 GCC_TARGET=i686-linux
 GMP_TARGET=i386-linux
 
+GIT_CMD=git
+GIT_DATE=
+GIT_BRANCH=master
+GIT_REFERENCE=
+GIT_BASE=
+GIT_BASE_DEFAULT=git://android.git.kernel.org/toolchain
+
 # Location where we will download the toolchain sources
 TOOLCHAIN_SRC_DIR=$WORK_DIR/toolchain-src
 
@@ -76,17 +83,22 @@ TOOLCHAIN_NAME=$GCC_TARGET-glibc2.7-$GCC_VERSION
 TOOLCHAIN_ARCHIVE=/tmp/$TOOLCHAIN_NAME.tar.bz2
 
 # Location where we're going to install the toolchain during the build
-INSTALL_DIR=$WORK_DIR/$TOOLCHAIN_NAME
+# This will depend on the phase of the build.
+install_dir () { echo "$WORK_DIR/$PHASE/$TOOLCHAIN_NAME"; }
+
+# A file that will contain details about all the sources used to generate
+# the final toolchain. This includes both SHA-1 for toolchain git repositories
+# and SHA-1 hashes for downloaded Ubuntu packages.
+SOURCES_LIST=$WORK_DIR/SOURCES
 
 # Location where we're going to install the final binaries
 # If empty, TOOLCHAIN_ARCHIVE will be generated
 PREFIX_DIR=
 
-
 # Location of the final sysroot. This must be a sub-directory of INSTALL_DIR
 # to ensure that the toolchain binaries are properly relocatable (i.e. can
 # be used when moved to another directory).
-SYSROOT_DIR=$INSTALL_DIR/sysroot
+sysroot_dir () { echo "$(install_dir)/sysroot"; }
 
 # Try to parallelize the build for faster performance.
 JOBS=`cat /proc/cpuinfo | grep processor | wc -l`
@@ -177,7 +189,7 @@ VERBOSE2=no
 NDK_ROOT=
 FORCE=no
 ONLY_SYSROOT=no
-
+BOOTSTRAP=
 PARAMETERS=
 
 for opt do
@@ -210,7 +222,15 @@ for opt do
   ;;
   --mpfr-version=*) MPFR_VERSION="$optarg"
   ;;
-  --ndk-dir=*) NDK_ROOT="$optarg"
+  --git=*) GIT_CMD=$optarg
+  ;;
+  --git-date=*) GIT_DATE=$optarg
+  ;;
+  --git-branch=*) GIT_BRANCH=$optarg
+  ;;
+  --git-base=*) GIT_BASE=$optarg
+  ;;
+  --git-reference=*) GIT_REFERENCE=$optarg
   ;;
   --out-dir=*) OPTION_OUT_DIR="$optarg"
   ;;
@@ -221,6 +241,8 @@ for opt do
   -j*) JOBS=`expr "x$opt" : 'x-j\(.*\)'`
   ;;
   --only-sysroot) ONLY_SYSROOT=yes
+  ;;
+  --bootstrap) BOOTSTRAP=yes
   ;;
   -*)
     echo "unknown option '$opt', use --help"
@@ -281,27 +303,46 @@ EOF
     echo "  --mpfr-version=VERSION        MPFR version numner [$MPFR_VERSION]."
     echo "  --ndk-dir=PATH                Path to NDK (used to download toolchain sources)."
     echo "  --jobs=COUNT                  Run COUNT build jobs in parallel [$JOBS]"
+    echo "  --git=<cmd>                   Use this version of the git tool [$GIT_CMD]"
+    echo "  --git-date=<date>             Specify specific git date when download sources [none]"
+    echo "  --git-branch=<name>           Specify which branch to use when downloading the sources [$GIT_BRANCH]"
+    echo "  --git-reference=<path>        Use a git reference repository"
+    echo "  --git-base=<url>              Use this git repository base [$GIT_BASE]"
     echo "  -j<COUNT>                     Same as --jobs=COUNT."
+    echo "  --bootstrap                   Bootstrap toolchain (i.e. compile it with itself)"
     echo ""
     exit 1
 fi
 
 if [ -z "$PARAMETERS" ] ; then
-    if [ -z "$NDK_ROOT" ]; then
-        echo "ERROR: Please provide the path to the toolchain sources, or use"
-        echo "the --ndk-dir=<path> option to point to an NDK root directory."
-        exit 1
-    fi
-    NDK_DOWNLOAD_TOOLCHAIN_SOURCES_SH="$NDK_ROOT/build/tools/download-toolchain-sources.sh"
-    if [ ! -f "$NDK_DOWNLOAD_TOOLCHAIN_SOURCES_SH" ]; then
-        echo "ERROR: Path does not point to valid NDK root: $NDK_ROOT"
+    if [ -n "$GIT_REFERENCE" ] ; then
+        if [ ! -d "$GIT_REFERENCE" -o ! -d "$GIT_REFERENCE/build" ]; then
+            echo "ERROR: Invalid reference repository directory path: $GIT_REFERENCE"
+            exit 1
+        fi
+        if [ -n "$GIT_BASE" ]; then
+            echo "Using git clone reference: $GIT_REFERENCE"
+        else
+            # If we have a reference without a base, use it as a download base instead.
+            GIT_BASE=$GIT_REFERENCE
+            GIT_REFERENCE=
+            echo "Using git clone base: $GIT_BASE"
+        fi
+    elif [ -z "$GIT_BASE" ]; then
+        echo "ERROR: You did not provide the path to the toolchain sources."
+        echo "       You can make this script download them for you by using"
+        echo "       the --git-base=<url> option, as in:"
+        echo ""
+        echo "          $0 --git-base=$GIT_BASE_DEFAULT"
+        echo ""
+        echo "       Alternatively, you can use --git-reference=<path> if you"
+        echo "       already have a copy of the source repositories."
+        echo ""
+        echo "       See --help for more git-related options."
+        echo ""
         exit 1
     fi
 else
-    if [ -n "$NDK_ROOT" ]; then
-        echo "ERROR: You can't use both --ndk-dir=<path> and provide a toolchain sources path."
-        exit 1
-    fi
     set_parameters () {
         TOOLCHAIN_SRC_DIR="$1"
         if [ ! -d "$TOOLCHAIN_SRC_DIR" ]; then
@@ -325,6 +366,9 @@ mkdir -p $WORK_DIR
 
 # Location where we download packages from the Ubuntu servers
 DOWNLOAD_DIR=$WORK_DIR/download
+
+# Empty the SOURCES file
+rm -f $SOURCES_LIST && touch $SOURCES_LIST
 
 
 panic ()
@@ -379,10 +423,10 @@ mkdir -p $BUILD_DIR
 TMPLOG=$BUILD_DIR/build.log
 rm -rf $TMPLOG && touch $TMPLOG
 
-BUILD_BINUTILS_DIR=$BUILD_DIR/binutils
-BUILD_GMP_DIR=$BUILD_DIR/gmp
-BUILD_MPFR_DIR=$BUILD_DIR/mpfr
-BUILD_GCC_DIR=$BUILD_DIR/gcc
+build_binutils_dir () { echo "$BUILD_DIR/$PHASE/binutils"; }
+build_gmp_dir () { echo "$BUILD_DIR/$PHASE/gmp"; }
+build_mpfr_dir () { echo "$BUILD_DIR/$PHASE/mpfr"; }
+build_gcc_dir () { echo "$BUILD_DIR/$PHASE/gcc"; }
 
 TIMESTAMPS_DIR=$BUILD_DIR/timestamps
 mkdir -p $TIMESTAMPS_DIR
@@ -674,8 +718,7 @@ compute_host_flags
 #
 var_value ()
 {
-    # find a better way to do that ?
-    eval echo "$`echo $1`"
+    eval echo \$$1
 }
 
 var_list_append ()
@@ -765,6 +808,21 @@ task_define ()
     task_set $TASK deps ""
 }
 
+# Variant of task define for dual tasks
+# This really defines two tasks named '<task>_1' and '<task>_2"
+# $1: Task base name
+# $2: Task description
+# $3: Optional: command name (will be cmd_$1 by default)
+task2_define ()
+{
+    local TASK="$1"
+    local DESCR="$2"
+    local COMMAND="${3:-cmd_$1}"
+
+    task_define "${TASK}_1" "$DESCR 1/2" "phase_1 $COMMAND"
+    task_define "${TASK}_2" "$DESCR 2/2" "phase_2 $COMMAND"
+}
+
 task_set ()
 {
     local TASK="$1"
@@ -801,6 +859,29 @@ task_depends ()
     local TASK="$1"
     shift;
     var_list_append TASK_${TASK}__deps $@
+}
+
+# $1: dual task name
+# $2+: other non-dual tasks this dual task depends on
+task2_depends1 ()
+{
+    local TASK="$1"
+    shift
+    var_list_append TASK_${TASK}_1__deps $@
+    var_list_append TASK_${TASK}_2__deps $@
+}
+
+# $1: dual task name
+# $2+: other dual tasks this dual task depends on
+task2_depends2 ()
+{
+    local TASK="$1"
+    local DEP
+    shift
+    for DEP; do
+        var_list_append TASK_${TASK}_1__deps ${DEP}_1
+        var_list_append TASK_${TASK}_2__deps ${DEP}_2
+    done
 }
 
 task_dump ()
@@ -897,10 +978,10 @@ do_task ()
     done
 
     echo "Running: $DESCR"
-    if [ "$V" != 0 ] ; then
-        eval `task_get_cmd $TASK`
+    if [ "$VERBOSE" = "yes" ] ; then
+        (eval `task_get_cmd $TASK`)
     else
-        eval `task_get_cmd $TASK` >> $TMPLOG 2>&1
+        (eval `task_get_cmd $TASK`) >> $TMPLOG 2>&1
     fi
     if [ $? != 0 ] ; then
         echo "ERROR: Cannot $DESCR"
@@ -910,10 +991,59 @@ do_task ()
     touch "$TIMESTAMPS_DIR/$TASK"
 }
 
-task_define download_toolchain_sources "Download toolchain sources from android.git.kernel.org"
+# This function is used to clone a source repository either from a given
+# git base or a git reference.
+# $1: project/subdir name
+# $2: path to SOURCES file
+toolchain_clone ()
+{
+    local GITFLAGS
+    GITFLAGS=
+    if [ "$GIT_REFERENCE" ]; then
+        GITFLAGS="$GITFLAGS --shared --reference $GIT_REFERENCE/$1"
+    fi
+    echo "cleaning up toolchain/$1"
+    rm -rf $1
+    fail_panic "Could not clean $(pwd)/$1"
+    echo "downloading sources for toolchain/$1"
+    if [ -d "$GIT_BASE/$1" ]; then
+        log "cloning $GIT_BASE/$1"
+        run $GIT_CMD clone $GITFLAGS $GIT_BASE/$1 $1
+    else
+        log "cloning $GITPREFIX/$1.git"
+        run $GIT_CMD clone $GITFLAGS $GIT_BASE/$1.git $1
+    fi
+    fail_panic "Could not clone $GIT_BASE/$1.git ?"
+    cd $1
+    if [ "$GIT_BRANCH" != "master" ] ; then
+        log "checking out $GIT_BRANCH branch of $1.git"
+        run $GIT_CMD checkout -b $GIT_BRANCH origin/$GIT_BRANCH
+        fail_panic "Could not checkout $1 ?"
+    fi
+    # If --git-date is used, or we have a default
+    if [ -n "$GIT_DATE" ] ; then
+        REVISION=`git rev-list -n 1 --until="$GIT_DATE" HEAD`
+        echo "Using sources for date '$GIT_DATE': toolchain/$1 revision $REVISION"
+        run $GIT_CMD checkout $REVISION
+        fail_panic "Could not checkout $1 ?"
+    fi
+    (printf "%-32s " "toolchain/$1.git: " && git log -1 --format=oneline) >> $2
+    cd ..
+}
+
+task_define download_toolchain_sources "Download toolchain sources from $GIT_BASE "
 cmd_download_toolchain_sources ()
 {
-    $NDK_DOWNLOAD_TOOLCHAIN_SOURCES_SH $TOOLCHAIN_SRC_DIR
+    local SUBDIRS="binutils build gcc gdb gmp gold mpfr"
+    (mkdir -p $TOOLCHAIN_SRC_DIR && cd $TOOLCHAIN_SRC_DIR &&
+    # Create a temporary SOURCES file for the toolchain sources only
+    # It's content will be copied to the final SOURCES file later.
+    SOURCES_LIST=$TOOLCHAIN_SRC_DIR/SOURCES
+    rm -f $SOURCES_LIST && touch $SOURCES_LIST
+    for SUB in $SUBDIRS; do
+        toolchain_clone $SUB $SOURCES_LIST
+    done
+    )
 }
 
 task_define download_ubuntu_packages_list "Download Ubuntu packages list"
@@ -921,6 +1051,7 @@ cmd_download_ubuntu_packages_list ()
 {
     mkdir -p $DOWNLOAD_DIR
     get_ubuntu_packages_list "$UBUNTU_MIRROR" "$UBUNTU_RELEASE"
+    fail_panic "Unable to download packages list, try --ubuntu-mirror=<url> to use another archive mirror"
 }
 
 task_define download_packages "Download Ubuntu packages"
@@ -929,12 +1060,18 @@ cmd_download_packages ()
 {
     local PACKAGE
 
+    rm -f $DOWNLOAD_DIR/SOURCES && touch $DOWNLOAD_DIR/SOURCES
     for PACKAGE in $UBUNTU_PACKAGES; do
         echo "Downloading $PACKAGE"
         local PKGURL=`get_ubuntu_package_deb_url $PACKAGE $UBUNTU_MIRROR`
         echo "URL: $PKGURL"
         download_file_to $PKGURL $DOWNLOAD_DIR
         fail_panic "Could not download $PACKAGE"
+    done
+    sha1sum $DOWNLOAD_DIR/*.deb | while read LINE; do
+        PACKAGE=$(basename $(echo $LINE | awk '{ print $2;}'))
+        SHA1=$(echo $LINE | awk '{ print $1; }')
+        printf "%-64s %s\n" $PACKAGE $SHA1 >> $DOWNLOAD_DIR/SOURCES
     done
 }
 
@@ -960,21 +1097,45 @@ patch_library ()
     sed -i -e "s! /lib/! !g" -e "s! /usr/lib/! !g" $1
 }
 
-task_define copy_sysroot "Fix and copy sysroot"
-task_depends copy_sysroot build_sysroot
+# Used to setup phase 1 the run a command
+phase_1 ()
+{
+    PHASE=1
+    $@
+}
+
+# Used to setup phase 2 then run a command
+phase_2 ()
+{
+    PHASE=1
+    BINPREFIX=$(install_dir)/bin/${GCC_TARGET}-
+    CC=${BINPREFIX}gcc
+    CXX=${BINPREFIX}g++
+    LD=${BINPREFIX}ld
+    AR=${BINPREFIX}ar
+    AS=${BINPREFIX}as
+    RANLIB=${BINPREFIX}ranlib
+    STRIP=${BINPREFIX}strip
+    export CC CXX LD AR AS RANLIB STRIP
+    PHASE=2
+    $@
+}
+
+task2_define copy_sysroot "Fix and copy sysroot"
+task2_depends1 copy_sysroot build_sysroot
 cmd_copy_sysroot ()
 {
     local SL
 
-    # Copy the content of $BUILD_DIR/lib to $SYSROOT_DIR/usr/lib
-    copy_directory $ORG_SYSROOT_DIR/lib $SYSROOT_DIR/usr/lib
-    copy_directory $ORG_SYSROOT_DIR/usr/lib $SYSROOT_DIR/usr/lib
-    copy_directory $ORG_SYSROOT_DIR/usr/include $SYSROOT_DIR/usr/include
+    # Copy the content of $BUILD_DIR/lib to $(sysroot_dir)/usr/lib
+    copy_directory $ORG_SYSROOT_DIR/lib $(sysroot_dir)/usr/lib
+    copy_directory $ORG_SYSROOT_DIR/usr/lib $(sysroot_dir)/usr/lib
+    copy_directory $ORG_SYSROOT_DIR/usr/include $(sysroot_dir)/usr/include
 
     # We need to fix the symlink like librt.so -> /lib/librt.so.1
-    # in $SYSROOT_DIR/usr/lib, they should point to librt.so.1 instead now.
-    SYMLINKS=`ls -l $SYSROOT_DIR/usr/lib | grep /lib/ | awk '{ print $11; }'`
-    cd $SYSROOT_DIR/usr/lib
+    # in $(sysroot_dir)/usr/lib, they should point to librt.so.1 instead now.
+    SYMLINKS=`ls -l $(sysroot_dir)/usr/lib | grep /lib/ | awk '{ print $10; }'`
+    cd $(sysroot_dir)/usr/lib
     for SL in $SYMLINKS; do
         # convert /lib/libfoo.so.<n> into 'libfoo.so.<n>' for the target
         local DST=`echo $SL | sed -e 's!^/lib/!!g'`
@@ -986,8 +1147,8 @@ cmd_copy_sysroot ()
 
     # Also deal with a few direct symlinks that don't use the /lib/ prefix
     # we simply copy them. Useful for libGL.so -> libGL.so.1 for example.
-    SYMLINKS=`ls -l $SYSROOT_DIR/usr/lib | grep -v /lib/ | awk '{ print $11; }'`
-    cd $SYSROOT_DIR/usr/lib
+    SYMLINKS=`ls -l $(sysroot_dir)/usr/lib | grep -v /lib/ | awk '{ print $10; }'`
+    cd $(sysroot_dir)/usr/lib
     for SL in $SYMLINKS; do
         # convert /lib/libfoo.so.<n> into 'libfoo.so.<n>' for the target
         local DST=`echo $SL`
@@ -999,13 +1160,12 @@ cmd_copy_sysroot ()
         fi
     done
 
-    patch_library $SYSROOT_DIR/usr/lib/libc.so
-    patch_library $SYSROOT_DIR/usr/lib/libpthread.so
+    patch_library $(sysroot_dir)/usr/lib/libc.so
+    patch_library $(sysroot_dir)/usr/lib/libpthread.so
 }
 
-
 task_define prepare_toolchain_sources "Prepare toolchain sources."
-if [ -n "$NDK_ROOT" ]; then
+if [ -n "$GIT_BASE" -o -n "$GIT_REFERENCE" ]; then
     task_depends prepare_toolchain_sources download_toolchain_sources
 fi
 cmd_prepare_toolchain_sources ()
@@ -1013,189 +1173,213 @@ cmd_prepare_toolchain_sources ()
     return
 }
 
-task_define configure_binutils "Configure binutils-$BINUTILS_VERSION"
-task_depends configure_binutils prepare_toolchain_sources copy_sysroot
+task2_define configure_binutils "Configure binutils-$BINUTILS_VERSION"
+task2_depends1 configure_binutils prepare_toolchain_sources
+task2_depends2 configure_binutils copy_sysroot
 cmd_configure_binutils ()
 {
-    OUT_DIR=$BUILD_BINUTILS_DIR
+    OUT_DIR=$(build_binutils_dir)
     mkdir -p $OUT_DIR && cd $OUT_DIR &&
     $TOOLCHAIN_SRC_DIR/binutils/binutils-$BINUTILS_VERSION/configure \
-        --prefix=$INSTALL_DIR \
-        --with-sysroot=$SYSROOT_DIR \
+        --prefix=$(install_dir) \
+        --with-sysroot=$(sysroot_dir) \
         --target=$GCC_TARGET
 }
 
-task_define build_binutils "Build binutils-$BINUTILS_VERSION"
-task_depends build_binutils configure_binutils
+task2_define build_binutils "Build binutils-$BINUTILS_VERSION"
+task2_depends2 build_binutils configure_binutils
 cmd_build_binutils ()
 {
-    cd $BUILD_BINUTILS_DIR &&
+    cd $(build_binutils_dir) &&
     make $MAKE_FLAGS
 }
 
-task_define install_binutils "Install binutils-$BINUTILS_VERSION"
-task_depends install_binutils build_binutils
-
+task2_define install_binutils "Install binutils-$BINUTILS_VERSION"
+task2_depends2 install_binutils build_binutils
 cmd_install_binutils ()
 {
-    cd $BUILD_BINUTILS_DIR &&
+    cd $(build_binutils_dir) &&
     make install
 }
 
-task_define extract_gmp "Extract sources for gmp-$GMP_VERSION"
-task_depends extract_gmp prepare_toolchain_sources
+task2_define extract_gmp "Extract sources for gmp-$GMP_VERSION"
+task2_depends1 extract_gmp prepare_toolchain_sources
 cmd_extract_gmp ()
 {
-    OUT_DIR=$BUILD_GMP_DIR
+    OUT_DIR=$(build_gmp_dir)
     mkdir -p $OUT_DIR && cd $OUT_DIR &&
     tar xjf $TOOLCHAIN_SRC_DIR/gmp/gmp-$GMP_VERSION.tar.bz2
 }
 
-task_define configure_gmp "Configure gmp-$GMP_VERSION"
-task_depends configure_gmp extract_gmp install_binutils
+task2_define configure_gmp "Configure gmp-$GMP_VERSION"
+task2_depends2 configure_gmp extract_gmp install_binutils
 cmd_configure_gmp ()
 {
     export ABI=32 &&
-    cd $BUILD_GMP_DIR && mkdir -p build && cd build &&
-    ../gmp-$GMP_VERSION/configure --prefix=$INSTALL_DIR --host=$GMP_TARGET --disable-shared
+    cd $(build_gmp_dir) && mkdir -p build && cd build &&
+    ../gmp-$GMP_VERSION/configure --prefix=$(install_dir) --host=$GMP_TARGET --disable-shared
 }
 
-task_define build_gmp "Build gmp-$GMP_VERSION"
-task_depends build_gmp configure_gmp
+task2_define build_gmp "Build gmp-$GMP_VERSION"
+task2_depends2 build_gmp configure_gmp
 cmd_build_gmp ()
 {
     export ABI=32 &&
-    cd $BUILD_GMP_DIR/build &&
+    cd $(build_gmp_dir)/build &&
     make $MAKE_FLAGS
 }
 
-task_define install_gmp "Install gmp-$GMP_VERSION"
-task_depends install_gmp build_gmp
+task2_define install_gmp "Install gmp-$GMP_VERSION"
+task2_depends2 install_gmp build_gmp
 cmd_install_gmp ()
 {
-    cd $BUILD_GMP_DIR/build &&
+    cd $(build_gmp_dir)/build &&
     make install
 }
 
 # Third, build mpfr
-task_define extract_mpfr "Extract sources from mpfr-$MPFR_VERSION"
-task_depends extract_mpfr prepare_toolchain_sources
+task2_define extract_mpfr "Extract sources from mpfr-$MPFR_VERSION"
+task2_depends1 extract_mpfr prepare_toolchain_sources
 cmd_extract_mpfr ()
 {
-    OUT_DIR=$BUILD_MPFR_DIR
+    OUT_DIR=$(build_mpfr_dir)
     mkdir -p $OUT_DIR && cd $OUT_DIR &&
     tar xjf $TOOLCHAIN_SRC_DIR/mpfr/mpfr-$MPFR_VERSION.tar.bz2
 }
 
-task_define configure_mpfr "Configure mpfr-$MPFR_VERSION"
-task_depends configure_mpfr extract_mpfr install_gmp
+task2_define configure_mpfr "Configure mpfr-$MPFR_VERSION"
+task2_depends2 configure_mpfr extract_mpfr install_gmp
 cmd_configure_mpfr ()
 {
-    cd $BUILD_MPFR_DIR && mkdir -p build && cd build &&
+    cd $(build_mpfr_dir) && mkdir -p build && cd build &&
     ../mpfr-$MPFR_VERSION/configure \
-        --prefix=$INSTALL_DIR \
+        --prefix=$(install_dir) \
         --host=$GMP_TARGET \
-        --with-gmp=$INSTALL_DIR \
-        --with-sysroot=$SYSROOT_DIR \
+        --with-gmp=$(install_dir) \
+        --with-sysroot=$(sysroot_dir) \
         --disable-shared
 }
 
-task_define build_mpfr "Build mpfr-$MPFR_VERSION"
-task_depends build_mpfr configure_mpfr
+task2_define build_mpfr "Build mpfr-$MPFR_VERSION"
+task2_depends2 build_mpfr configure_mpfr
 cmd_build_mpfr ()
 {
-    cd $BUILD_MPFR_DIR/build &&
+    cd $(build_mpfr_dir)/build &&
     make $MAKE_FLAGS
 }
 
-task_define install_mpfr "Install mpfr-$MPFR_VERSION"
-task_depends install_mpfr build_mpfr
+task2_define install_mpfr "Install mpfr-$MPFR_VERSION"
+task2_depends2 install_mpfr build_mpfr
 cmd_install_mpfr ()
 {
-    cd $BUILD_MPFR_DIR/build &&
+    cd $(build_mpfr_dir)/build &&
     make install
 }
 
 
 # Fourth, the compiler itself
-task_define configure_gcc "Configure gcc-$GCC_VERSION"
-task_depends configure_gcc prepare_toolchain_sources install_binutils install_gmp install_mpfr
+task2_define configure_gcc "Configure gcc-$GCC_VERSION"
+task2_depends1 configure_gcc prepare_toolchain_sources
+task2_depends2 configure_gcc install_binutils install_gmp install_mpfr
 cmd_configure_gcc ()
 {
-    OUT_DIR=$BUILD_GCC_DIR
+    OUT_DIR=$(build_gcc_dir)
     mkdir -p $OUT_DIR && cd $OUT_DIR &&
-    export PATH=$INSTALL_DIR/bin:$OLD_PATH &&
+    export PATH=$(install_dir)/bin:$OLD_PATH &&
     export CFLAGS="-m32" &&
     export CC_FOR_TARGET="$HOST_CC" &&
-    export LD_LIBRARY_PATH=$INSTALL_DIR/lib:$OLD_LD_LIBRARY_PATH &&
-    export LDFLAGS="-L$INSTALL_DIR/lib" &&
+    export LD_LIBRARY_PATH=$(install_dir)/lib:$OLD_LD_LIBRARY_PATH &&
+    export LDFLAGS="-L$(install_dir)/lib" &&
     $TOOLCHAIN_SRC_DIR/gcc/gcc-$GCC_VERSION/configure \
-        --prefix=$INSTALL_DIR \
-        --with-sysroot=$SYSROOT_DIR \
+        --prefix=$(install_dir) \
+        --with-sysroot=$(sysroot_dir) \
         --disable-nls \
-        --with-gmp=$INSTALL_DIR \
-        --with-mpfr=$INSTALL_DIR \
+        --with-gmp=$(install_dir) \
+        --with-mpfr=$(install_dir) \
         --target=$GCC_TARGET \
         --disable-plugin \
+        --disable-docs \
         --enable-languages=c,c++
 }
 
-task_define build_gcc "Build gcc-$GCC_VERSION"
-task_depends build_gcc configure_gcc
+task2_define build_gcc "Build gcc-$GCC_VERSION"
+task2_depends2 build_gcc configure_gcc
 cmd_build_gcc ()
 {
-    export PATH=$INSTALL_DIR/bin:$OLD_PATH &&
-    export LD_LIBRARY_PATH=$INSTALL_DIR/lib:$OLD_LD_LIBRARY_PATH &&
-    cd $BUILD_GCC_DIR &&
+    export PATH=$(install_dir)/bin:$OLD_PATH &&
+    export LD_LIBRARY_PATH=$(install_dir)/lib:$OLD_LD_LIBRARY_PATH &&
+    cd $(build_gcc_dir) &&
     make $MAKE_FLAGS
 }
 
-task_define install_gcc "Install gcc-$GCC_VERSION"
-task_depends install_gcc build_gcc
+task2_define install_gcc "Install gcc-$GCC_VERSION"
+task2_depends2 install_gcc build_gcc
 cmd_install_gcc ()
 {
-    export PATH=$INSTALL_DIR/bin:$OLD_PATH &&
-    export LD_LIBRARY_PATH=$INSTALL_DIR/lib:$OLD_LD_LIBRARY_PATH &&
-    cd $BUILD_GCC_DIR &&
+    export PATH=$(install_dir)/bin:$OLD_PATH &&
+    export LD_LIBRARY_PATH=$(install_dir)/lib:$OLD_LD_LIBRARY_PATH &&
+    cd $(build_gcc_dir) &&
     make install
 }
 
-task_define cleanup_toolchain "Cleanup toolchain"
-task_depends cleanup_toolchain install_gcc
+task2_define cleanup_toolchain "Cleanup toolchain"
+task2_depends2 cleanup_toolchain install_gcc
 cmd_cleanup_toolchain ()
 {
     # Remove un-needed directories and files
-    rm -rf $INSTALL_DIR/share
-    rm -rf $INSTALL_DIR/man
-    rm -rf $INSTALL_DIR/info
-    rm -rf $INSTALL_DIR/lib32
-    rm -rf $INSTALL_DIR/libexec/*/*/install-tools
+    rm -rf $(install_dir)/share
+    rm -rf $(install_dir)/man
+    rm -rf $(install_dir)/info
+    rm -rf $(install_dir)/lib32
+    rm -rf $(install_dir)/libexec/*/*/install-tools
 
-    (strip $INSTALL_DIR/bin/*)
+    (strip $(install_dir)/bin/*)
     true
 }
 
-task_define package_toolchain "Package final toolchain"
-task_depends package_toolchain cleanup_toolchain
+task2_define package_toolchain "Package final toolchain"
+task2_depends2 package_toolchain cleanup_toolchain
 cmd_package_toolchain ()
 {
-    pack_archive $TOOLCHAIN_ARCHIVE "`dirname $INSTALL_DIR`" "`basename $INSTALL_DIR`"
+    # Copy this script to the install directory
+    cp -f $0 $(install_dir)
+    fail_panic "Could not copy build script to install directory"
+
+    # Copy the SOURCES file as well
+    cp $DOWNLOAD_DIR/SOURCES $(install_dir)/PACKAGE_SOURCES &&
+    cp $TOOLCHAIN_SRC_DIR/SOURCES $(install_dir)/TOOLCHAIN_SOURCES
+    fail_panic "Could not copy SOURCES files to install directory"
+
+    # Package everything
+    pack_archive $TOOLCHAIN_ARCHIVE "`dirname $(install_dir)`" "`basename $(install_dir)`"
 }
 
-task_define install_toolchain "Install final toolchain"
-task_depends install_toolchain cleanup_toolchain
+task2_define install_toolchain "Install final toolchain"
+task2_depends2 install_toolchain cleanup_toolchain
 cmd_install_toolchain ()
 {
-    copy_directory "$INSTALL_DIR" "$PREFIX_DIR/$TOOLCHAIN_NAME"
+    copy_directory "$(install_dir)" "$PREFIX_DIR/$TOOLCHAIN_NAME"
+    cp -f $0 "$PREFIX_DIR/$TOOLCHAIN_NAME/"
 }
+
+# Get sure that the second toolchain depends on the first one
+task_depends configure_binutils_2 install_gcc_1
 
 if [ "$ONLY_SYSROOT" = "yes" ]; then
     do_task copy_sysroot
-    echo "Done, see sysroot files in $SYSROOT_DIR"
+    echo "Done, see sysroot files in $(sysroot_dir)"
 elif [ -n "$PREFIX_DIR" ]; then
-    do_task install_toolchain
+    if [ -z "$BOOTSTRAP" ]; then
+        do_task install_toolchain_1
+    else
+        do_task install_toolchain_2
+    fi
     echo "Done, see $PREFIX_DIR/$TOOLCHAIN_NAME"
 else
-    do_task package_toolchain
+    if [ -z "$BOOTSTRAP" ]; then
+        do_task package_toolchain_1
+    else
+        do_task package_toolchain_2
+    fi
     echo "Done, see $TOOLCHAIN_ARCHIVE"
 fi

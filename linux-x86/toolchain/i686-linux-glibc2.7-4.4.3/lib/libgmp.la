@@ -32,4 +32,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/tmp/gcc-hardy32/i686-linux-glibc2.7-4.4.3/lib'
+libdir='/tmp/gcc32/1/i686-linux-glibc2.7-4.4.3/lib'

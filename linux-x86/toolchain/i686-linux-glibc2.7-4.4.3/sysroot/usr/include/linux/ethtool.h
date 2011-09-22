@@ -12,7 +12,6 @@
 #ifndef _LINUX_ETHTOOL_H
 #define _LINUX_ETHTOOL_H
 
-#include <linux/types.h>
 
 /* This should work for both 32 and 64 bit userland. */
 struct ethtool_cmd {
