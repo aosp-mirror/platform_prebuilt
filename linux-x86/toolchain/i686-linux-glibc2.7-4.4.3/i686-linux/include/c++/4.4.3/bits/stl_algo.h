@@ -74,13 +74,12 @@ _GLIBCXX_BEGIN_NAMESPACE(std)
 #if __google_stl_debug_compare
   template<typename _Compare>
   struct _CheckedCompare {
-    // Mutable because some clients use non-const operator().
-    mutable _Compare _M_compare;
+    _Compare _M_compare;
 
     _CheckedCompare(const _Compare & __comp): _M_compare(__comp) { }
 
     template <typename _Tp>
-    bool operator()(const _Tp& __x, const _Tp& __y) const {
+    bool operator()(const _Tp& __x, const _Tp& __y) {
       if (_M_compare(__x, __x))
         __throw_runtime_error("strict weak ordering: (__x LT __x) != false");
       if (_M_compare(__y, __y))
@@ -96,7 +95,7 @@ _GLIBCXX_BEGIN_NAMESPACE(std)
     //   indexterm/internal/numericterms.cc
     // fails without this.
     template <typename _Tp1, typename _Tp2>
-    bool operator()(const _Tp1& __x, const _Tp2& __y) const {
+    bool operator()(const _Tp1& __x, const _Tp2& __y) {
       return _M_compare(__x, __y);
     }
   };
