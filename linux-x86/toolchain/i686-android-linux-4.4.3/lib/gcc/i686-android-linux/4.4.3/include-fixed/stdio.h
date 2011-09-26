@@ -2,7 +2,7 @@
 
     It has been auto-edited by fixincludes from:
 
-	"/tmp/i686-android-linux-4.4.3-20110303/ndk-install/toolchains/x86-4.4.3/prebuilt/linux-x86/sysroot/usr/include/stdio.h"
+	"/tmp/ndk-20110923/install/toolchains/x86-4.4.3/prebuilt/linux-x86/sysroot/usr/include/stdio.h"
 
     This had to be done to correct non-standard usages in the
     original, manufacturer supplied header file.  */
