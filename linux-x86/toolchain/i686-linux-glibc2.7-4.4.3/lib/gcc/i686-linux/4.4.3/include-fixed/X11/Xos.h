@@ -2,7 +2,7 @@
 
     It has been auto-edited by fixincludes from:
 
-	"/tmp/gcc-hardy32/i686-linux-glibc2.7-4.4.3/sysroot/usr/include/X11/Xos.h"
+	"/tmp/gcc32/1/i686-linux-glibc2.7-4.4.3/sysroot/usr/include/X11/Xos.h"
 
     This had to be done to correct non-standard usages in the
     original, manufacturer supplied header file.  */

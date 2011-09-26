@@ -17,7 +17,7 @@ old_library='libmpfr.a'
 inherited_linker_flags=''
 
 # Libraries that this one depends upon.
-dependency_libs=' -L/tmp/gcc-hardy32/i686-linux-glibc2.7-4.4.3/lib /tmp/gcc-hardy32/i686-linux-glibc2.7-4.4.3/lib/libgmp.la'
+dependency_libs=' -L/tmp/gcc32/1/i686-linux-glibc2.7-4.4.3/lib /tmp/gcc32/1/i686-linux-glibc2.7-4.4.3/lib/libgmp.la'
 
 # Names of additional weak libraries provided by this library
 weak_library_names=''
@@ -38,4 +38,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/tmp/gcc-hardy32/i686-linux-glibc2.7-4.4.3/lib'
+libdir='/tmp/gcc32/1/i686-linux-glibc2.7-4.4.3/lib'

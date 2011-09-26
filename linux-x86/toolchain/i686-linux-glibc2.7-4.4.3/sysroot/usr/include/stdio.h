@@ -492,7 +492,7 @@ extern int __isoc99_vsscanf (__const char *__restrict __s,
 			     __const char *__restrict __format,
 			     _G_va_list __arg) __THROW;
 #   define vfscanf __isoc99_vfscanf
-#   define vscanf __isoc99_vscanf
+#   define vscanf __isoc99_vsscanf
 #   define vsscanf __isoc99_vsscanf
 #  endif
 # endif
