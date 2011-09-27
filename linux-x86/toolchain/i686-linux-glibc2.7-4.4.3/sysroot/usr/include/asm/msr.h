@@ -14,7 +14,6 @@
 
 #ifndef __ASSEMBLY__
 #include <linux/errno.h>
-#include <asm/system.h>
 /*
  * Access to machine-specific registers (available on 586 and better only)
  * Note: the rd* operations modify the parameters directly (without using
@@ -65,17 +64,6 @@
 #define write_tsc(val1,val2) wrmsr(0x10, val1, val2)
 
 #define write_rdtscp_aux(val) wrmsr(0xc0000103, val, 0)
-
-static __inline__ unsigned long long native_read_tsc(void)
-{
-	unsigned long long val;
-
-	rdtsc_barrier();
-	rdtscll(val);
-	rdtsc_barrier();
-
-	return val;
-}
 
 #define rdpmc(counter,low,high) \
      __asm__ __volatile__("rdpmc" \
