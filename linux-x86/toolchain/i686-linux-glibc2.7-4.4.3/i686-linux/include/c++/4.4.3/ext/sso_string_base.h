@@ -84,7 +84,7 @@ _GLIBCXX_BEGIN_NAMESPACE(__gnu_cxx)
       {
 	if (!_M_is_local())
 	  _M_destroy(_M_allocated_capacity);
-#if __google_stl_debug_string
+#if __google_stl_debug_string_dangling
 	else {
           // Wipe local storage for destructed string with 0xCD.
           // This mimics what DebugAllocation does to free()d memory.
@@ -170,15 +170,29 @@ _GLIBCXX_BEGIN_NAMESPACE(__gnu_cxx)
       _M_leak() { }
 
       void
-      _M_set_length(size_type __n)
+      _M_set_length_no_wipe(size_type __n)
       {
 	_M_length(__n);
 	traits_type::assign(_M_data()[__n], _CharT());
       }
 
+      void
+      _M_set_length(size_type __n)
+      {
+#if __google_stl_debug_string_dangling
+	if (__n + 1 < _M_length())
+	  {
+	    // Wipe the storage with 0xCD.
+	    // Also wipes the old NUL terminator.
+	    __builtin_memset(_M_data() + __n + 1, 0xcd, _M_length() - __n);
+	  }
+#endif
+	  _M_set_length_no_wipe(__n);
+      }
+
       __sso_string_base()
       : _M_dataplus(_M_local_data)
-      { _M_set_length(0); }
+      { _M_set_length_no_wipe(0); }
 
       __sso_string_base(const _Alloc& __a);
 
@@ -235,6 +249,9 @@ _GLIBCXX_BEGIN_NAMESPACE(__gnu_cxx)
     __sso_string_base<_CharT, _Traits, _Alloc>::
     _M_swap(__sso_string_base& __rcs)
     {
+      if (this == &__rcs)
+	return;
+
       // _GLIBCXX_RESOLVE_LIB_DEFECTS
       // 431. Swapping containers with unequal allocators.
       std::__alloc_swap<_CharT_alloc_type>::_S_do_it(_M_get_allocator(),
@@ -334,7 +351,7 @@ _GLIBCXX_BEGIN_NAMESPACE(__gnu_cxx)
     __sso_string_base<_CharT, _Traits, _Alloc>::
     __sso_string_base(const _Alloc& __a)
     : _M_dataplus(__a, _M_local_data)
-    { _M_set_length(0); }
+    { _M_set_length_no_wipe(0); }
 
   template<typename _CharT, typename _Traits, typename _Alloc>
     __sso_string_base<_CharT, _Traits, _Alloc>::
@@ -409,7 +426,7 @@ _GLIBCXX_BEGIN_NAMESPACE(__gnu_cxx)
 		    // Allocate more space.
 		    __capacity = __len + 1;
 		    _CharT* __another = _M_create(__capacity, __len);
-		    _S_copy(__another, _M_data(), __len);
+		    this->_S_copy(__another, _M_data(), __len);
 		    _M_dispose();
 		    _M_data(__another);
 		    _M_capacity(__capacity);
@@ -424,7 +441,7 @@ _GLIBCXX_BEGIN_NAMESPACE(__gnu_cxx)
 	    __throw_exception_again;
 	  }
 
-	_M_set_length(__len);
+	_M_set_length_no_wipe(__len);
       }
 
   template<typename _CharT, typename _Traits, typename _Alloc>
@@ -449,14 +466,14 @@ _GLIBCXX_BEGIN_NAMESPACE(__gnu_cxx)
 
 	// Check for out_of_range and length_error exceptions.
 	__try
-	  { _S_copy_chars(_M_data(), __beg, __end); }
+	  { this->_S_copy_chars(_M_data(), __beg, __end); }
 	__catch(...)
 	  {
 	    _M_dispose();
 	    __throw_exception_again;
 	  }
 
-	_M_set_length(__dnew);
+	_M_set_length_no_wipe(__dnew);
       }
 
   template<typename _CharT, typename _Traits, typename _Alloc>
@@ -471,9 +488,9 @@ _GLIBCXX_BEGIN_NAMESPACE(__gnu_cxx)
 	}
 
       if (__n)
-	_S_assign(_M_data(), __n, __c);
+	this->_S_assign(_M_data(), __n, __c);
 
-      _M_set_length(__n);
+      _M_set_length_no_wipe(__n);
     }
 
   template<typename _CharT, typename _Traits, typename _Alloc>
@@ -496,7 +513,7 @@ _GLIBCXX_BEGIN_NAMESPACE(__gnu_cxx)
 	    }
 
 	  if (__rsize)
-	    _S_copy(_M_data(), __rcs._M_data(), __rsize);
+	    this->_S_copy(_M_data(), __rcs._M_data(), __rsize);
 
 	  _M_set_length(__rsize);
 	}
@@ -518,14 +535,14 @@ _GLIBCXX_BEGIN_NAMESPACE(__gnu_cxx)
 	      || __res > size_type(_S_local_capacity))
 	    {
 	      _CharT* __tmp = _M_create(__res, __capacity);
-	      _S_copy(__tmp, _M_data(), _M_length() + 1);
+	      this->_S_copy(__tmp, _M_data(), _M_length() + 1);
 	      _M_dispose();
 	      _M_data(__tmp);
 	      _M_capacity(__res);
 	    }
 	  else if (!_M_is_local())
 	    {
-	      _S_copy(_M_local_data, _M_data(), _M_length() + 1);
+	      this->_S_copy(_M_local_data, _M_data(), _M_length() + 1);
 	      _M_destroy(__capacity);
 	      _M_data(_M_local_data);
 	    }
@@ -544,11 +561,11 @@ _GLIBCXX_BEGIN_NAMESPACE(__gnu_cxx)
       _CharT* __r = _M_create(__new_capacity, _M_capacity());
 
       if (__pos)
-	_S_copy(__r, _M_data(), __pos);
+	this->_S_copy(__r, _M_data(), __pos);
       if (__s && __len2)
-	_S_copy(__r + __pos, __s, __len2);
+	this->_S_copy(__r + __pos, __s, __len2);
       if (__how_much)
-	_S_copy(__r + __pos + __len2,
+	this->_S_copy(__r + __pos + __len2,
 		_M_data() + __pos + __len1, __how_much);
       
       _M_dispose();
@@ -564,7 +581,7 @@ _GLIBCXX_BEGIN_NAMESPACE(__gnu_cxx)
       const size_type __how_much = _M_length() - __pos - __n;
 
       if (__how_much && __n)
-	_S_move(_M_data() + __pos, _M_data() + __pos + __n,
+	this->_S_move(_M_data() + __pos, _M_data() + __pos + __n,
 		__how_much);
 
       _M_set_length(_M_length() - __n);
