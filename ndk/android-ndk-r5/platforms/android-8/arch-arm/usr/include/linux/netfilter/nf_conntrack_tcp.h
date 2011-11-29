@@ -1,1 +1,0 @@
-../../../../../../../platforms/android-5/arch-arm/usr/include/linux/netfilter/nf_conntrack_tcp.h

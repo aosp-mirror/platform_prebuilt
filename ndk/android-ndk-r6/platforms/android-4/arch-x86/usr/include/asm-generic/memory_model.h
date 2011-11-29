@@ -1,1 +1,0 @@
-../../../../../../platforms/android-3/arch-x86/usr/include/asm-generic/memory_model.h

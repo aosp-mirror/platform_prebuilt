@@ -1,1 +1,0 @@
-../../../../../../platforms/android-4/arch-x86/usr/include/netinet/in_systm.h

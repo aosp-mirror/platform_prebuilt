@@ -1,1 +1,0 @@
-../../../../../../platforms/android-3/arch-arm/usr/include/asm/pgtable-hwdef.h

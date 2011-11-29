@@ -1,1 +1,0 @@
-../../../../../../platforms/android-4/arch-arm/usr/include/net/if_ieee1394.h
