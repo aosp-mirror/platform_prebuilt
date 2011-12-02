@@ -2,7 +2,7 @@
 
     It has been auto-edited by fixincludes from:
 
-	"/tmp/i686-android-linux-4.4.3-20110303/ndk-install/toolchains/x86-4.4.3/prebuilt/darwin-x86/sysroot/usr/include/sys/types.h"
+	"/tmp/ndk-digit/temp-install/toolchains/x86-4.4.3/prebuilt/darwin-x86/sysroot/usr/include/sys/types.h"
 
     This had to be done to correct non-standard usages in the
     original, manufacturer supplied header file.  */
