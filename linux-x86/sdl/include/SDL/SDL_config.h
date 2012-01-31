@@ -2,6 +2,11 @@
 #ifndef _SDL_config_h
 #define _SDL_config_h
 
+#include "SDL_platform.h"
+
+#define SDL_HAS_64BIT_TYPE 1
+#define SDL_BYTEORDER 1234
+
 #define HAVE_LIBC 1
 #if HAVE_LIBC
 
@@ -84,7 +89,7 @@
 #endif /* HAVE_LIBC */
 
 /* Allow disabling of core subsystems */
-/* #undef SDL_AUDIO_DISABLED */
+#define SDL_AUDIO_DISABLED 1
 #define SDL_CDROM_DISABLED 1
 /* #undef SDL_CPUINFO_DISABLED */
 /* #undef SDL_EVENTS_DISABLED */
@@ -94,13 +99,6 @@
 /* #undef SDL_THREADS_DISABLED */
 /* #undef SDL_TIMERS_DISABLED */
 /* #undef SDL_VIDEO_DISABLED */
-
-/* Enable various audio drivers */
-#define SDL_AUDIO_DRIVER_ALSA 1
-#define SDL_AUDIO_DRIVER_ALSA_DYNAMIC 1
-#define SDL_AUDIO_DRIVER_OSS 1
-#define SDL_AUDIO_DRIVER_ESD_DYNAMIC 1
-#define SDL_AUDIO_DRIVER_ESD 1
 
 /* Enable various shared object loading systems */
 #define SDL_LOADSO_DLOPEN 1
