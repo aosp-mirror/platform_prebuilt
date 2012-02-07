@@ -1,0 +1,11 @@
+Sources for this prebuilt toolchain can be downloaded from the
+GIT repository git://github.com/mipsgcc
+
+toolchain/binutils.git           fd6c41851d2462b66e71d89052a888ac55d95ee3 Binutils 2.20.51
+toolchain/build.git              1e7a3a400852eb65ecdea699e91b5f50c9d2a100 Initial build commit
+toolchain/gcc.git                74f7610d04509649f59df96569ca03672e471778 Remove soft-float from multilibs. sysroot setup in Android only contains hard-float libraries.
+toolchain/gdb.git                8039c23db633145acd29022c6a4e62ca5483f72b GDB 7.2.50 sources
+toolchain/gmp.git                3dd5944bf9fba10e3638f091043a1d93c6db5226 GMP 4.3.2
+toolchain/gold.git               e5e95d55bb33e3cfe505029e3682f0b28f10cd5d Add Dummy README file
+toolchain/mpfr.git               00d6c9efa2a4228ced9103395d48a74de42143e2 MPFR 2.4.2
+toolchain/mpc.git                4acf706da1a35f12ee6401202dfb4632357a485c MPC 0.8.1
