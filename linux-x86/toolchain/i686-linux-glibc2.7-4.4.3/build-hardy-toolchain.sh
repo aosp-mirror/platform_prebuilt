@@ -67,7 +67,7 @@ GIT_DATE=
 GIT_BRANCH=master
 GIT_REFERENCE=
 GIT_BASE=
-GIT_BASE_DEFAULT=git://android.git.kernel.org/toolchain
+GIT_BASE_DEFAULT=https://android.googlesource.com/toolchain
 
 # Location where we will download the toolchain sources
 TOOLCHAIN_SRC_DIR=$WORK_DIR/toolchain-src
