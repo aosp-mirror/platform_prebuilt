@@ -4,7 +4,7 @@ curdir=`dirname $0`
 prefix=`dirname $curdir`
 exec_prefix=${prefix}
 exec_prefix_set=no
-libdir=${exec_prefix}/lib
+libdir=${exec_prefix}/libs
 
 #usage="\
 #Usage: sdl-config [--prefix[=DIR]] [--exec-prefix[=DIR]] [--version] [--cflags] [--libs]"
@@ -46,7 +46,7 @@ while test $# -gt 0; do
       echo -I${prefix}/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT
       ;;
 #    --libs)
-#      echo -L${exec_prefix}/lib @SDL_RLD_FLAGS@ @SDL_LIBS@
+#      echo -L${exec_prefix}/libs @SDL_RLD_FLAGS@ @SDL_LIBS@
 #      ;;
 #    --static-libs)
     --libs|--static-libs)
