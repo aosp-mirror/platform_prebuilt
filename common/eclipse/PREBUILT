@@ -1,7 +1,2 @@
-The binary packages for Eclipse 3.6.2 which these binaries were
-extracted from can be found here:
-   http://www.eclipse.org/downloads/packages/release/helios/sr2
-
-The source code download instructions to build the binaries from
-source are provided here:
-   http://wiki.eclipse.org/CVS_Howto
+The objects in this prebuilt directory can be rebuilt
+using the source archive hosted at <http://android.kernel.org/pub/>.
