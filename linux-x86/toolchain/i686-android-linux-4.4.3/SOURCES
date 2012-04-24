@@ -1,7 +1,0 @@
-toolchain/binutils.git           a4316ba2b7698435a68e9826cabd87ae43dad182 Fix dangling pointer bug in gold's ICF.
-toolchain/build.git              2037ad5fa2969e0e77142548feb8cf54dc7b0a04 Allow canadian-cross builds of the GCC toolchains.
-toolchain/gcc.git                80934e7f7db429984fb56756a4cc893ba412b7b5 Synchronize internal and external version.  Merge the following patches:
-toolchain/gdb.git                3954a66c7a6939e2c7bed362ec4df06b9f921bcf Add gdb-6.4 sources back, for completeness.
-toolchain/gmp.git                9fb242a79dd122d7fbf867daf5620dba6927bd2e check in gmp sources for prebuilt toolchains in Eclair.
-toolchain/gold.git               8d401cf711539af5a2f78d12447341d774892618 Empty initial commit.
-toolchain/mpfr.git               da6dfde986af1b56f0f41e9f5de61d093fa8af90 check in mpfr sources for prebuilt toolchains in Eclair.
